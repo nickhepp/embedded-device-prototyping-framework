@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this._settingsPpg = new System.Windows.Forms.PropertyGrid();
             this._errorsTlp = new System.Windows.Forms.TableLayoutPanel();
+            this._errorsPbx = new System.Windows.Forms.PictureBox();
             this._errorsLbl = new System.Windows.Forms.Label();
             this._tlpBottomLeft = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@
             this._connectionStatusSsl = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this._errorsPbx = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._mainSpl)).BeginInit();
             this._mainSpl.Panel1.SuspendLayout();
             this._mainSpl.Panel2.SuspendLayout();
@@ -64,20 +64,20 @@
             this._leftSpl.SuspendLayout();
             this._topLeftTlp.SuspendLayout();
             this._errorsTlp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._errorsPbx)).BeginInit();
             this._tlpBottomLeft.SuspendLayout();
             this._consoleInputTlp.SuspendLayout();
             this._rightTlp.SuspendLayout();
             this._connectTlp.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._errorsPbx)).BeginInit();
             this.SuspendLayout();
             // 
             // _mainSpl
             // 
             this._mainSpl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this._mainSpl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._mainSpl.Location = new System.Drawing.Point(0, 42);
+            this._mainSpl.Location = new System.Drawing.Point(0, 24);
             this._mainSpl.Name = "_mainSpl";
             // 
             // _mainSpl.Panel1
@@ -87,7 +87,7 @@
             // _mainSpl.Panel2
             // 
             this._mainSpl.Panel2.Controls.Add(this._rightTlp);
-            this._mainSpl.Size = new System.Drawing.Size(1830, 915);
+            this._mainSpl.Size = new System.Drawing.Size(1830, 933);
             this._mainSpl.SplitterDistance = 1245;
             this._mainSpl.TabIndex = 0;
             // 
@@ -106,8 +106,8 @@
             // _leftSpl.Panel2
             // 
             this._leftSpl.Panel2.Controls.Add(this._tlpBottomLeft);
-            this._leftSpl.Size = new System.Drawing.Size(1245, 915);
-            this._leftSpl.SplitterDistance = 636;
+            this._leftSpl.Size = new System.Drawing.Size(1245, 933);
+            this._leftSpl.SplitterDistance = 648;
             this._leftSpl.TabIndex = 0;
             // 
             // _topLeftTlp
@@ -124,7 +124,7 @@
             this._topLeftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this._topLeftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._topLeftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 83F));
-            this._topLeftTlp.Size = new System.Drawing.Size(1243, 634);
+            this._topLeftTlp.Size = new System.Drawing.Size(1243, 646);
             this._topLeftTlp.TabIndex = 0;
             // 
             // label1
@@ -144,7 +144,7 @@
             this._settingsPpg.LineColor = System.Drawing.SystemColors.ControlDark;
             this._settingsPpg.Location = new System.Drawing.Point(3, 54);
             this._settingsPpg.Name = "_settingsPpg";
-            this._settingsPpg.Size = new System.Drawing.Size(1237, 494);
+            this._settingsPpg.Size = new System.Drawing.Size(1237, 506);
             this._settingsPpg.TabIndex = 1;
             this._settingsPpg.ToolbarVisible = false;
             this._settingsPpg.UseCompatibleTextRendering = true;
@@ -157,13 +157,25 @@
             this._errorsTlp.Controls.Add(this._errorsPbx, 0, 0);
             this._errorsTlp.Controls.Add(this._errorsLbl, 1, 0);
             this._errorsTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._errorsTlp.Location = new System.Drawing.Point(3, 554);
+            this._errorsTlp.Location = new System.Drawing.Point(3, 566);
             this._errorsTlp.Name = "_errorsTlp";
             this._errorsTlp.RowCount = 1;
             this._errorsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._errorsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 77F));
             this._errorsTlp.Size = new System.Drawing.Size(1237, 77);
             this._errorsTlp.TabIndex = 2;
+            // 
+            // _errorsPbx
+            // 
+            this._errorsPbx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._errorsPbx.Image = global::HostApp.Properties.Resources.warning_icon;
+            this._errorsPbx.Location = new System.Drawing.Point(0, 0);
+            this._errorsPbx.Margin = new System.Windows.Forms.Padding(0);
+            this._errorsPbx.Name = "_errorsPbx";
+            this._errorsPbx.Size = new System.Drawing.Size(88, 77);
+            this._errorsPbx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._errorsPbx.TabIndex = 0;
+            this._errorsPbx.TabStop = false;
             // 
             // _errorsLbl
             // 
@@ -192,7 +204,7 @@
             this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this._tlpBottomLeft.Size = new System.Drawing.Size(1243, 273);
+            this._tlpBottomLeft.Size = new System.Drawing.Size(1243, 279);
             this._tlpBottomLeft.TabIndex = 0;
             // 
             // label3
@@ -213,7 +225,7 @@
             this._deviceHistoryRtb.Location = new System.Drawing.Point(3, 50);
             this._deviceHistoryRtb.Name = "_deviceHistoryRtb";
             this._deviceHistoryRtb.ReadOnly = true;
-            this._deviceHistoryRtb.Size = new System.Drawing.Size(1237, 170);
+            this._deviceHistoryRtb.Size = new System.Drawing.Size(1237, 176);
             this._deviceHistoryRtb.TabIndex = 1;
             this._deviceHistoryRtb.Text = "";
             // 
@@ -225,7 +237,7 @@
             this._consoleInputTlp.Controls.Add(this.label4, 0, 0);
             this._consoleInputTlp.Controls.Add(this._inputTxt, 1, 0);
             this._consoleInputTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._consoleInputTlp.Location = new System.Drawing.Point(3, 226);
+            this._consoleInputTlp.Location = new System.Drawing.Point(3, 232);
             this._consoleInputTlp.Name = "_consoleInputTlp";
             this._consoleInputTlp.RowCount = 1;
             this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -267,14 +279,14 @@
             this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
             this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this._rightTlp.Size = new System.Drawing.Size(579, 913);
+            this._rightTlp.Size = new System.Drawing.Size(579, 931);
             this._rightTlp.TabIndex = 0;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 793);
+            this.label5.Location = new System.Drawing.Point(3, 811);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(229, 42);
             this.label5.TabIndex = 3;
@@ -298,7 +310,7 @@
             this._connectTlp.Controls.Add(this._openBtn, 0, 0);
             this._connectTlp.Controls.Add(this._closeBtn, 1, 0);
             this._connectTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._connectTlp.Location = new System.Drawing.Point(3, 840);
+            this._connectTlp.Location = new System.Drawing.Point(3, 858);
             this._connectTlp.Name = "_connectTlp";
             this._connectTlp.RowCount = 1;
             this._connectTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -340,7 +352,7 @@
             this._cmdsTlp.RowCount = 1;
             this._cmdsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._cmdsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 738F));
-            this._cmdsTlp.Size = new System.Drawing.Size(573, 738);
+            this._cmdsTlp.Size = new System.Drawing.Size(573, 756);
             this._cmdsTlp.TabIndex = 4;
             // 
             // statusStrip1
@@ -373,20 +385,14 @@
             this.windowsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1830, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1830, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // _errorsPbx
+            // windowsToolStripMenuItem
             // 
-            this._errorsPbx.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._errorsPbx.Location = new System.Drawing.Point(0, 0);
-            this._errorsPbx.Margin = new System.Windows.Forms.Padding(0);
-            this._errorsPbx.Name = "_errorsPbx";
-            this._errorsPbx.Size = new System.Drawing.Size(88, 77);
-            this._errorsPbx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this._errorsPbx.TabIndex = 0;
-            this._errorsPbx.TabStop = false;
+            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
             // 
             // MainForm
             // 
@@ -398,7 +404,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "ThinkerBridge Prototype Host App";
+            this.Text = "Prototype Host App";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this._mainSpl.Panel1.ResumeLayout(false);
             this._mainSpl.Panel2.ResumeLayout(false);
@@ -412,6 +418,7 @@
             this._topLeftTlp.PerformLayout();
             this._errorsTlp.ResumeLayout(false);
             this._errorsTlp.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._errorsPbx)).EndInit();
             this._tlpBottomLeft.ResumeLayout(false);
             this._tlpBottomLeft.PerformLayout();
             this._consoleInputTlp.ResumeLayout(false);
@@ -423,7 +430,6 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._errorsPbx)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

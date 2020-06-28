@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HostApp.Business;
 using HostApp.ComponentModel;
+using HostApp.UI.ChildUI;
 
 namespace HostApp.UI
 {
-    public class BaseKernelViewModel : BaseViewModel
+    public class BaseKernelViewModel : BaseViewModel, IChildViewModelProvider
     {
         private IBaseKernelDevice _baseKernelDevice;
         private IDeviceWithConnectionInfo _deviceWithConnectionInfo;
@@ -106,6 +107,10 @@ namespace HostApp.UI
         {
             _baseKernelDevice.ExecuteCommand("printRegisteredCommands");
         }
-        
+
+        public List<IChildViewModel> GetChildViewModels()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

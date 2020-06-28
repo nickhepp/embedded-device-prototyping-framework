@@ -36,6 +36,15 @@ namespace HostApp
             _vwMdl.DeviceOutputBuffer.ListChanged += DeviceOutputBufferListChanged;
 
 
+            if (_vwMdl is IChildViewModelProvider childVwMdlProvider)
+            {
+                this.IsMdiContainer = true;
+
+            }
+            //IChildViewModelProvider childVwMdlProvider
+
+
+
             _settingsPpg.SelectedObject = _vwMdl;
 
             _openBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(IViewModel.OpenButtonEnabled)));
