@@ -1,0 +1,29 @@
+digraph G {
+
+  /* change the fonts, set some default behavior */
+  graph [fontname = "helvetica"];
+  node [fontname = "helvetica", shape="oval"];
+  edge [fontname = "helvetica"];
+  graph [pad="0.4", ranksep="0.525", nodesep="0.75"];
+  rankdir="LR"
+
+  compound=true;
+  subgraph cluster0 
+  {
+    /* label of the whole cluster */
+    label = "Device Processing States"
+
+    /* edges */
+    rec_text -> post_process [label="received host app\rterminating string"]
+    rec_text -> rec_text [label="receiving data"]
+    post_process -> rec_text [label="send device\rterminating string"]
+    post_process -> post_process [label="sending data"]
+
+  }
+
+  /* nodes with long labels */
+  rec_text [label="Receiving Text"]
+  post_process [label="Post Processing"]
+
+}
+
