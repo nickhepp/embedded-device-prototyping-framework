@@ -10,7 +10,7 @@ namespace HostApp.UI
     public interface IChildViewModelProvider
     {
 
-        List<IChildViewModel> GetChildViewModels();
+        
 
     }
 }

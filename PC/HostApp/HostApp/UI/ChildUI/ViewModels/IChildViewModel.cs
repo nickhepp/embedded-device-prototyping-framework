@@ -17,11 +17,6 @@ namespace HostApp.UI.ChildUI
         /// </summary>
         Image ViewImage { get; }
 
-
-
-
-        IDevice Device { get; set; }
-
         /// <summary>
         /// Name of the view.
         /// </summary>

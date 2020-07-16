@@ -1,5 +1,6 @@
 ﻿using HostApp.Business;
 using HostApp.UI.ChildUI;
+using HostApp.UI.ChildUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace HostApp.UI.ViewModels
         {
             List<IChildViewModel> childViewModels = new List<IChildViewModel>
             {
-                new DeviceConnectionSettingsViewModel()
+                new ComPortConnectionSettingsViewModel()
             };
 
             return childViewModels;
