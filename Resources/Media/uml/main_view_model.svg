@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="26cm" height="12cm" viewBox="484 298 505 222" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="644.3" y="299" width="144.75" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="644.3" y="299" width="144.75" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="716.675" y="319">IMainViewModel</text>
+    <rect style="fill: #ffffff" x="644.3" y="327" width="144.75" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="644.3" y="327" width="144.75" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="647.3" y="340.2">+Device: IDevice</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="485.9" y="490" width="199.4" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="485.9" y="490" width="199.4" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="585.6" y="510">ISimpleMainViewModel</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="716.675,365.236 716.675,425.996 585.6,425.996 585.6,488.993 "/>
+    <polygon style="fill: #ffffff" points="724.675,365.236 716.675,349.236 708.675,365.236 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="724.675,365.236 716.675,349.236 708.675,365.236 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="789.9" y="490" width="198.2" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="789.9" y="490" width="198.2" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="889" y="510">IParentMainViewModel</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="716.675,366.242 716.675,427.003 889,427.003 889,490 "/>
+    <polygon style="fill: #ffffff" points="724.675,366.242 716.675,350.242 708.675,366.242 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="724.675,366.242 716.675,350.242 708.675,366.242 "/>
+  </g>
+</svg>

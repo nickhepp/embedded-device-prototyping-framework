@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,8 @@ namespace HostApp.UI.ChildUI
 
         public abstract string Name { get; }
 
-        
+        public Image ViewImage => throw new NotImplementedException();
+
         protected abstract void InternalDevice_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e);
 
         private void Device_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

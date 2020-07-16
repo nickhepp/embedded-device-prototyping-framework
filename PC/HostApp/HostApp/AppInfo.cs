@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HostApp.UI;
+using HostApp.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +22,22 @@ namespace HostApp
 
         public static string DeviceTypeName { get; set; }
 
-        static AppInfo()
+
+        public static IMainViewModel GetMainViewModel()
         {
-            ViewModelTypeName = "HostApp.UI.BaseViewModel, HostApp";
-            DeviceTypeName = "HostApp.Business.BaseDevice, HostApp";
+            IMainViewModel mainViewMdl = null;
+
+            // To use the simple view model uncomment this.
+            // If you want a simple UI that has everything in one view and wont be over complicated use this.
+            //mainViewMdl = new SimpleMainViewModel();
+
+            // To use the more robust view model that includes docking controls, use this view model.
+            mainViewMdl = new ParentMainViewModel();
+
+
+            return mainViewMdl;
         }
+
 
         public static void InitializeTypesWithBaseKernel()
         {
