@@ -1,6 +1,7 @@
 ﻿using HostApp.Business;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace HostApp.UI.ViewModels
 
 
         IDevice Device { get; set; }
+
+
+        BindingList<string> DeviceOutputBuffer { get; }
+
 
     }
 }

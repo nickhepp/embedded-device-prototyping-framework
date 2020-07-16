@@ -30,7 +30,7 @@ namespace HostApp.UI.Views
 
             _vwMdl = ViewModelFactory.GetViewModel();
             _vwMdl.PropertyChanged += _vwMdl_PropertyChanged;
-            _vwMdl.DeviceOutputBuffer.ListChanged += DeviceOutputBufferListChanged;
+            //_vwMdl.DeviceOutputBuffer.ListChanged += DeviceOutputBufferListChanged;
 
 
             _settingsPpg.SelectedObject = _vwMdl;

@@ -15,12 +15,11 @@ namespace HostApp.UI
     public class BaseViewModel : IViewModel, ICustomTypeDescriptor
     {
 
-        private IDevice _device;
+
 
         private Dictionary<string, Func<bool>> _propertyVisibilityHandlers = new Dictionary<string, Func<bool>>();
 
-        [Browsable(false)]
-        public List<ConsoleTokenHighlight> ConsoleTokenHighlights { get; set; } = new List<ConsoleTokenHighlight>();
+
 
 
         protected const string NoErrors = "";
@@ -38,107 +37,25 @@ namespace HostApp.UI
             }
         }
 
-        private bool _openButtonEnabled = true;
-        [Browsable(false)]
-        public bool OpenButtonEnabled
-        {
-            get 
-            {
-                return _openButtonEnabled;
-            }
-            private set
-            {
-                _openButtonEnabled = value;
-                RaiseNotifyPropertyChanged();
-            }
-        }
 
-        private bool _closeButtonEnabled = false;
-        [Browsable(false)]
-        public bool CloseButtonEnabled
-        {
-            get 
-            {
-                return _closeButtonEnabled;
-            }
-            private set
-            {
-                _closeButtonEnabled = value;
-                RaiseNotifyPropertyChanged();
-            }
-        }
 
         public virtual List<string> GetCommandNames()
         {
             return new List<string>();
         }
 
-        private ICommand _openCommand;
-        [Browsable(false)]
-        public System.Windows.Input.ICommand OpenCommand
-        {
-            get { return _openCommand; }
-            private set
-            {
-                _openCommand = value;
-            }
-        }
 
-        private ICommand _closeCommand;
-        [Browsable(false)]
-        public System.Windows.Input.ICommand CloseCommand
-        {
-            get { return _closeCommand; }
-            private set
-            {
-                _closeCommand = value;
-            }
-        }
 
-        [Browsable(false)]
-        public BindingList<string> DeviceOutputBuffer => _device.DeviceOutputBuffer;
+
 
 
         protected BaseViewModel()
         {
 
-            _device = DeviceFactory.GetDevice();
-            _device.PropertyChanged += DevicePropertyChanged;
-            OpenCommand = new RelayCommand(param => this.OpenButtonEnabled, OpenCommandHandler);
-            CloseCommand = new RelayCommand(param => this.CloseButtonEnabled, CloseCommandHandler);
-
-            this.ConsoleTokenHighlights.Add(new ConsoleTokenHighlight
-            {
-                BackgroundColor = Color.Red,
-                ForegroundColor = Color.White,
-                Token = BaseKernelDevice.DeviceOutputBufferErrorPrefix
-            });
 
         }
 
-        private void DevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(IDevice.IsOpen))
-            {
-                OpenButtonEnabled = !_device.IsOpen;
-                CloseButtonEnabled = _device.IsOpen;
-            }
-        }
 
-        private void OpenCommandHandler(object obj)
-        {
-            _device.Open();
-        }
-
-        private void CloseCommandHandler(object obj)
-        {
-            _device.Close();
-        }
-
-        protected IDevice GetDevice()
-        {
-            return _device;
-        }
 
 
         protected void RaiseNotifyPropertyChanged([CallerMemberName] string propertyName = null)

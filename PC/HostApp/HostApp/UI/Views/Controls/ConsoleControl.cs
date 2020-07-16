@@ -12,6 +12,9 @@ namespace HostApp.UI.Views.Controls
 {
     public partial class ConsoleControl : UserControl
     {
+
+
+
         public ConsoleControl()
         {
             InitializeComponent();

@@ -21,15 +21,17 @@ namespace UnitTestProject.UI.ViewModels.Controls
 
 
         [TestMethod]
-        public void InputTextEnabled_DeviceNull_False()
+        public void InputTextEnabled_DeviceNotOpen_CheckEnables()
         {
             //-- arrange
+            _mockDevice.SetupIsOpen(false);
             ConsoleControlViewModel ccViewMdl = new ConsoleControlViewModel();
 
             //-- act
             ccViewMdl.Device = _mockDevice.Object;
 
             //-- assert
+            Assert.IsFalse(ccViewMdl.InputTextEnabled);
 
         }
     }

@@ -119,11 +119,6 @@ namespace HostApp.UI.ChildUI
             Device.Close();
         }
 
-        //protected IDevice GetDevice()
-        //{
-        //    return Device;
-        //}
-
 
     }
 }

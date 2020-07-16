@@ -65,8 +65,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Devices\BaseKernelDeviceTest.cs" />
+    <Compile Include="Devices\MockDevice.cs" />
     <Compile Include="UI\ViewModelCommandExtractorTest.cs" />
-    <Compile Include="UI\ViewModels\Controls\UnitTest1.cs" />
+    <Compile Include="UI\ViewModels\Controls\ConsoleControlViewModelTest.cs" />
     <Compile Include="UI\ViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

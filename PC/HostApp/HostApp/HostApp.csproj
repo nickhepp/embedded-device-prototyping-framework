@@ -74,7 +74,7 @@
     <Compile Include="UI\BaseViewModel.cs" />
     <Compile Include="UI\ChildUI\ViewModels\BaseChildViewModel.cs" />
     <Compile Include="UI\ChildUI\ViewModels\BaseConnectionViewModel.cs" />
-    <Compile Include="UI\ChildUI\ViewModels\BaseDeviceViewModel.cs" />
+    <Compile Include="UI\ViewModels\BaseDeviceViewModel.cs" />
     <Compile Include="UI\ChildUI\ViewModels\ComPortConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ChildUI\ViewModels\DeviceConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ChildUI\ViewModels\IChildViewModel.cs" />
@@ -85,6 +85,8 @@
     <Compile Include="UI\IViewModel.cs" />
     <Compile Include="UI\ViewModelCommandExtractor.cs" />
     <Compile Include="UI\ViewModelFactory.cs" />
+    <Compile Include="UI\ViewModels\Controls\ConsoleControlViewModel.cs" />
+    <Compile Include="UI\ViewModels\IConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceProviderViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceViewModel.cs" />
     <Compile Include="UI\ViewModels\IParentMainViewModel.cs" />

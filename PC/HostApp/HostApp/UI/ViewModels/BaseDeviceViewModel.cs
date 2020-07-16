@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HostApp.UI.ChildUI.ViewModels
+namespace HostApp.UI.ViewModels
 {
     public abstract class BaseDeviceViewModel : BaseViewModel, IDeviceViewModel
     {
