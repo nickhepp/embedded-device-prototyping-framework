@@ -78,7 +78,6 @@
             this._mainSpl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this._mainSpl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainSpl.Location = new System.Drawing.Point(0, 24);
-            this._mainSpl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._mainSpl.Name = "_mainSpl";
             // 
             // _mainSpl.Panel1
@@ -88,8 +87,8 @@
             // _mainSpl.Panel2
             // 
             this._mainSpl.Panel2.Controls.Add(this._rightTlp);
-            this._mainSpl.Size = new System.Drawing.Size(1983, 1206);
-            this._mainSpl.SplitterDistance = 1349;
+            this._mainSpl.Size = new System.Drawing.Size(1830, 933);
+            this._mainSpl.SplitterDistance = 1245;
             this._mainSpl.TabIndex = 0;
             // 
             // _leftSpl
@@ -97,7 +96,6 @@
             this._leftSpl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this._leftSpl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._leftSpl.Location = new System.Drawing.Point(0, 0);
-            this._leftSpl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._leftSpl.Name = "_leftSpl";
             this._leftSpl.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -108,9 +106,8 @@
             // _leftSpl.Panel2
             // 
             this._leftSpl.Panel2.Controls.Add(this._tlpBottomLeft);
-            this._leftSpl.Size = new System.Drawing.Size(1349, 1206);
-            this._leftSpl.SplitterDistance = 837;
-            this._leftSpl.SplitterWidth = 5;
+            this._leftSpl.Size = new System.Drawing.Size(1245, 933);
+            this._leftSpl.SplitterDistance = 648;
             this._leftSpl.TabIndex = 0;
             // 
             // _topLeftTlp
@@ -122,19 +119,18 @@
             this._topLeftTlp.Controls.Add(this._errorsTlp, 0, 2);
             this._topLeftTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._topLeftTlp.Location = new System.Drawing.Point(0, 0);
-            this._topLeftTlp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._topLeftTlp.Name = "_topLeftTlp";
             this._topLeftTlp.RowCount = 3;
-            this._topLeftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this._topLeftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this._topLeftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._topLeftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 106F));
-            this._topLeftTlp.Size = new System.Drawing.Size(1347, 835);
+            this._topLeftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 83F));
+            this._topLeftTlp.Size = new System.Drawing.Size(1243, 646);
             this._topLeftTlp.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(172, 42);
@@ -144,12 +140,11 @@
             // _settingsPpg
             // 
             this._settingsPpg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._settingsPpg.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this._settingsPpg.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._settingsPpg.LineColor = System.Drawing.SystemColors.ControlDark;
-            this._settingsPpg.Location = new System.Drawing.Point(3, 69);
-            this._settingsPpg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._settingsPpg.Location = new System.Drawing.Point(3, 54);
             this._settingsPpg.Name = "_settingsPpg";
-            this._settingsPpg.Size = new System.Drawing.Size(1341, 656);
+            this._settingsPpg.Size = new System.Drawing.Size(1237, 506);
             this._settingsPpg.TabIndex = 1;
             this._settingsPpg.ToolbarVisible = false;
             this._settingsPpg.UseCompatibleTextRendering = true;
@@ -157,27 +152,27 @@
             // _errorsTlp
             // 
             this._errorsTlp.ColumnCount = 2;
-            this._errorsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
+            this._errorsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this._errorsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._errorsTlp.Controls.Add(this._errorsPbx, 0, 0);
             this._errorsTlp.Controls.Add(this._errorsLbl, 1, 0);
             this._errorsTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._errorsTlp.Location = new System.Drawing.Point(3, 733);
-            this._errorsTlp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._errorsTlp.Location = new System.Drawing.Point(3, 566);
             this._errorsTlp.Name = "_errorsTlp";
             this._errorsTlp.RowCount = 1;
             this._errorsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._errorsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 98F));
-            this._errorsTlp.Size = new System.Drawing.Size(1341, 98);
+            this._errorsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 77F));
+            this._errorsTlp.Size = new System.Drawing.Size(1237, 77);
             this._errorsTlp.TabIndex = 2;
             // 
             // _errorsPbx
             // 
             this._errorsPbx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._errorsPbx.Image = global::HostApp.Properties.Resources.warning_icon;
             this._errorsPbx.Location = new System.Drawing.Point(0, 0);
             this._errorsPbx.Margin = new System.Windows.Forms.Padding(0);
             this._errorsPbx.Name = "_errorsPbx";
-            this._errorsPbx.Size = new System.Drawing.Size(95, 98);
+            this._errorsPbx.Size = new System.Drawing.Size(88, 77);
             this._errorsPbx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this._errorsPbx.TabIndex = 0;
             this._errorsPbx.TabStop = false;
@@ -186,10 +181,10 @@
             // 
             this._errorsLbl.AutoSize = true;
             this._errorsLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._errorsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this._errorsLbl.Location = new System.Drawing.Point(98, 0);
+            this._errorsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this._errorsLbl.Location = new System.Drawing.Point(91, 0);
             this._errorsLbl.Name = "_errorsLbl";
-            this._errorsLbl.Size = new System.Drawing.Size(1240, 98);
+            this._errorsLbl.Size = new System.Drawing.Size(1143, 77);
             this._errorsLbl.TabIndex = 1;
             this._errorsLbl.Text = "_errorsLbl";
             this._errorsLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -198,25 +193,24 @@
             // 
             this._tlpBottomLeft.ColumnCount = 1;
             this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._tlpBottomLeft.Controls.Add(this.label3, 0, 0);
             this._tlpBottomLeft.Controls.Add(this._deviceHistoryRtb, 0, 1);
             this._tlpBottomLeft.Controls.Add(this._consoleInputTlp, 0, 2);
             this._tlpBottomLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this._tlpBottomLeft.Location = new System.Drawing.Point(0, 0);
-            this._tlpBottomLeft.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._tlpBottomLeft.Name = "_tlpBottomLeft";
             this._tlpBottomLeft.RowCount = 3;
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
-            this._tlpBottomLeft.Size = new System.Drawing.Size(1347, 362);
+            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this._tlpBottomLeft.Size = new System.Drawing.Size(1243, 279);
             this._tlpBottomLeft.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(174, 42);
@@ -227,30 +221,28 @@
             // 
             this._deviceHistoryRtb.BackColor = System.Drawing.Color.White;
             this._deviceHistoryRtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._deviceHistoryRtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this._deviceHistoryRtb.Location = new System.Drawing.Point(3, 64);
-            this._deviceHistoryRtb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._deviceHistoryRtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
+            this._deviceHistoryRtb.Location = new System.Drawing.Point(3, 50);
             this._deviceHistoryRtb.Name = "_deviceHistoryRtb";
             this._deviceHistoryRtb.ReadOnly = true;
-            this._deviceHistoryRtb.Size = new System.Drawing.Size(1341, 230);
+            this._deviceHistoryRtb.Size = new System.Drawing.Size(1237, 176);
             this._deviceHistoryRtb.TabIndex = 1;
             this._deviceHistoryRtb.Text = "";
             // 
             // _consoleInputTlp
             // 
             this._consoleInputTlp.ColumnCount = 2;
-            this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 79F));
             this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._consoleInputTlp.Controls.Add(this.label4, 0, 0);
             this._consoleInputTlp.Controls.Add(this._inputTxt, 1, 0);
             this._consoleInputTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._consoleInputTlp.Location = new System.Drawing.Point(3, 302);
-            this._consoleInputTlp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._consoleInputTlp.Location = new System.Drawing.Point(3, 232);
             this._consoleInputTlp.Name = "_consoleInputTlp";
             this._consoleInputTlp.RowCount = 1;
             this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            this._consoleInputTlp.Size = new System.Drawing.Size(1341, 56);
+            this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
+            this._consoleInputTlp.Size = new System.Drawing.Size(1237, 44);
             this._consoleInputTlp.TabIndex = 2;
             // 
             // label4
@@ -258,17 +250,16 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 32);
+            this.label4.Size = new System.Drawing.Size(65, 25);
             this.label4.TabIndex = 0;
             this.label4.Text = "Input:";
             // 
             // _inputTxt
             // 
             this._inputTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._inputTxt.Location = new System.Drawing.Point(89, 4);
-            this._inputTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._inputTxt.Location = new System.Drawing.Point(82, 3);
             this._inputTxt.Name = "_inputTxt";
-            this._inputTxt.Size = new System.Drawing.Size(1249, 39);
+            this._inputTxt.Size = new System.Drawing.Size(1152, 31);
             this._inputTxt.TabIndex = 1;
             // 
             // _rightTlp
@@ -281,22 +272,21 @@
             this._rightTlp.Controls.Add(this._cmdsTlp, 0, 1);
             this._rightTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._rightTlp.Location = new System.Drawing.Point(0, 0);
-            this._rightTlp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._rightTlp.Name = "_rightTlp";
             this._rightTlp.RowCount = 4;
-            this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
+            this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 97F));
-            this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this._rightTlp.Size = new System.Drawing.Size(628, 1204);
+            this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
+            this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this._rightTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this._rightTlp.Size = new System.Drawing.Size(579, 931);
             this._rightTlp.TabIndex = 0;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(3, 1051);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 811);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(229, 42);
             this.label5.TabIndex = 3;
@@ -305,7 +295,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(227, 42);
@@ -320,22 +310,20 @@
             this._connectTlp.Controls.Add(this._openBtn, 0, 0);
             this._connectTlp.Controls.Add(this._closeBtn, 1, 0);
             this._connectTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._connectTlp.Location = new System.Drawing.Point(3, 1111);
-            this._connectTlp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._connectTlp.Location = new System.Drawing.Point(3, 858);
             this._connectTlp.Name = "_connectTlp";
             this._connectTlp.RowCount = 1;
             this._connectTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._connectTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89F));
-            this._connectTlp.Size = new System.Drawing.Size(622, 89);
+            this._connectTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this._connectTlp.Size = new System.Drawing.Size(573, 70);
             this._connectTlp.TabIndex = 2;
             // 
             // _openBtn
             // 
             this._openBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._openBtn.Location = new System.Drawing.Point(3, 4);
-            this._openBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._openBtn.Location = new System.Drawing.Point(3, 3);
             this._openBtn.Name = "_openBtn";
-            this._openBtn.Size = new System.Drawing.Size(305, 81);
+            this._openBtn.Size = new System.Drawing.Size(280, 64);
             this._openBtn.TabIndex = 0;
             this._openBtn.Text = "Open";
             this._openBtn.UseVisualStyleBackColor = true;
@@ -344,10 +332,9 @@
             // _closeBtn
             // 
             this._closeBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._closeBtn.Location = new System.Drawing.Point(314, 4);
-            this._closeBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._closeBtn.Location = new System.Drawing.Point(289, 3);
             this._closeBtn.Name = "_closeBtn";
-            this._closeBtn.Size = new System.Drawing.Size(305, 81);
+            this._closeBtn.Size = new System.Drawing.Size(281, 64);
             this._closeBtn.TabIndex = 1;
             this._closeBtn.Text = "Close";
             this._closeBtn.UseVisualStyleBackColor = true;
@@ -357,16 +344,15 @@
             // 
             this._cmdsTlp.ColumnCount = 1;
             this._cmdsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._cmdsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this._cmdsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._cmdsTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._cmdsTlp.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this._cmdsTlp.Location = new System.Drawing.Point(3, 67);
-            this._cmdsTlp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._cmdsTlp.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
+            this._cmdsTlp.Location = new System.Drawing.Point(3, 52);
             this._cmdsTlp.Name = "_cmdsTlp";
             this._cmdsTlp.RowCount = 1;
             this._cmdsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._cmdsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 980F));
-            this._cmdsTlp.Size = new System.Drawing.Size(622, 980);
+            this._cmdsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 738F));
+            this._cmdsTlp.Size = new System.Drawing.Size(573, 756);
             this._cmdsTlp.TabIndex = 4;
             // 
             // statusStrip1
@@ -375,17 +361,16 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this._connectionStatusSsl});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1230);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 957);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 15, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1983, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1830, 37);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(83, 32);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(84, 32);
             this.toolStripStatusLabel1.Text = "Status:";
             // 
             // _connectionStatusSsl
@@ -400,26 +385,24 @@
             this.windowsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1983, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1830, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // windowsToolStripMenuItem
             // 
             this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(20, 18);
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1983, 1272);
+            this.ClientSize = new System.Drawing.Size(1830, 994);
             this.Controls.Add(this._mainSpl);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.Text = "Prototype Host App";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

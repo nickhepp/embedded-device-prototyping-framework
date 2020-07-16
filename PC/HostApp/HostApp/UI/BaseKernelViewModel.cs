@@ -11,7 +11,7 @@ using HostApp.UI.ChildUI;
 
 namespace HostApp.UI
 {
-    public class BaseKernelViewModel : BaseViewModel, IChildViewModelProvider
+    public class BaseKernelViewModel : BaseViewModel
     {
         private IBaseKernelDevice _baseKernelDevice;
         private IDeviceWithConnectionInfo _deviceWithConnectionInfo;
@@ -108,9 +108,6 @@ namespace HostApp.UI
             _baseKernelDevice.ExecuteCommand("printRegisteredCommands");
         }
 
-        public List<IChildViewModel> GetChildViewModels()
-        {
-            throw new NotImplementedException();
-        }
+   
     }
 }

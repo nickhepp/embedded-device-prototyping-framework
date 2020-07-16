@@ -6,5 +6,9 @@ namespace HostApp.UI.ViewModels
 {
     public interface IParentMainViewModel : IMainViewModel
     {
+
+
+        List<IChildViewModel> GetChildViewModels();
+
     }
 }

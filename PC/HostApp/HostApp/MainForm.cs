@@ -10,11 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
-
-//using WeifenLuo;
-
 using HostApp.UI;
-
 
 namespace HostApp
 {
@@ -22,8 +18,6 @@ namespace HostApp
     {
 
         private IViewModel _vwMdl;
-
-        //WeifenLuo.WinFormsUI.Docking.DockPanel _mainDockPanel;
 
 
         public MainForm()
@@ -46,10 +40,6 @@ namespace HostApp
             {
                 this.IsMdiContainer = true;
 
-                ////_mainDockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-                //_mainDockPanel.Dock = DockStyle.Fill;
-                //this.Controls.Clear();
-                //this.Controls.Add(_mainDockPanel);
             }
             //IChildViewModelProvider childVwMdlProvider
 
