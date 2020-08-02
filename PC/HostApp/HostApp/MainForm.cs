@@ -17,8 +17,6 @@ namespace HostApp
     public partial class MainForm : Form
     {
 
-        private IViewModel _vwMdl;
-
 
         public MainForm()
         {
@@ -31,8 +29,8 @@ namespace HostApp
             AppInfo.InitializeTypesWithBaseKernel();
 
 
-            _vwMdl = ViewModelFactory.GetViewModel();
-            _vwMdl.PropertyChanged += _vwMdl_PropertyChanged;
+            IMainViewModel mainVwMdl = ViewModelFactory.GetMainViewModel();
+  
             //_vwMdl.DeviceOutputBuffer.ListChanged += DeviceOutputBufferListChanged;
 
 

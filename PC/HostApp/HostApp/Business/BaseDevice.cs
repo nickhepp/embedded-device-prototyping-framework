@@ -60,6 +60,10 @@ namespace HostApp.Business
             }
             bool closed = InternalClose();
             IsOpen = (!closed);
+            if (DeviceClosed != null)
+            {
+                DeviceClosed(this, new EventArgs());
+            }
         }
 
 
@@ -102,10 +106,9 @@ namespace HostApp.Business
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Event that is raised when the device is opened.
-        /// </summary>
+
         public event EventHandler DeviceOpened;
+        public event EventHandler DeviceClosed;
     }
 
 }

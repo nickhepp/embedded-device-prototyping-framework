@@ -61,6 +61,7 @@
     <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Factories\ViewFactory.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,19 +85,20 @@
     <Compile Include="UI\IMainViewModel.cs" />
     <Compile Include="UI\IViewModel.cs" />
     <Compile Include="UI\ViewModelCommandExtractor.cs" />
-    <Compile Include="UI\ViewModelFactory.cs" />
-    <Compile Include="UI\ViewModels\Controls\ConsoleControlViewModel.cs" />
+    <Compile Include="Factories\ViewModelFactory.cs" />
+    <Compile Include="UI\ViewModels\ConsoleControlViewModel.cs" />
     <Compile Include="UI\ViewModels\IConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\IConsoleControlViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceProviderViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceViewModel.cs" />
     <Compile Include="UI\ViewModels\IParentMainViewModel.cs" />
     <Compile Include="UI\ViewModels\ISimpleMainViewModel.cs" />
     <Compile Include="UI\ViewModels\ParentMainViewModel.cs" />
     <Compile Include="UI\ViewModels\SimpleMainViewModel.cs" />
-    <Compile Include="UI\Views\Controls\ConsoleControl.cs">
+    <Compile Include="UI\Views\ConsoleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\Controls\ConsoleControl.Designer.cs">
+    <Compile Include="UI\Views\ConsoleControl.Designer.cs">
       <DependentUpon>ConsoleControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\IMainView.cs" />
@@ -125,7 +127,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\Views\Controls\ConsoleControl.resx">
+    <EmbeddedResource Include="UI\Views\ConsoleControl.resx">
       <DependentUpon>ConsoleControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Views\ParentMainView.resx">
@@ -151,6 +153,8 @@
     <Folder Include="Controls\" />
     <Folder Include="Entities\" />
     <Folder Include="UI\ChildUI\Views\" />
+    <Folder Include="UI\ViewModels\Controls\" />
+    <Folder Include="UI\Views\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\warning_icon.png" />

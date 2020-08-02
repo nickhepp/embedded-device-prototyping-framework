@@ -6,24 +6,78 @@ using HostApp.UI;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel;
+using HostApp.ComponentModel;
 
 namespace UnitTestProject.UI
 {
+
     [TestClass]
     public class ViewModelCommandExtractorTest
     {
+
+
+        public class TestViewModel : IViewModel
+        {
+
+            private ICommand _testViewModelCommand;
+            public ICommand TestViewModelCommand
+            {
+                get
+                {
+                    return _testViewModelCommand;
+                }
+            }
+
+            private ICommand _testAnotherViewModelCommand;
+
+
+            public ICommand TestAnotherViewModelCommand
+            {
+                get
+                {
+                    return _testAnotherViewModelCommand;
+                }
+            }
+
+            public int TestCommandHandlerCallCount { get; private set; } = 0;
+            public int TestAnotherCommandHandlerCallCount { get; private set; } = 0;
+
+            public TestViewModel()
+            {
+                _testViewModelCommand = new RelayCommand(param => true, TestCommandHandler);
+                _testAnotherViewModelCommand = new RelayCommand(param => true, TestAnotherCommandHandler);
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            private void TestCommandHandler(object arg)
+            {
+                TestCommandHandlerCallCount++;
+            }
+
+            private void TestAnotherCommandHandler(object arg)
+            {
+                TestAnotherCommandHandlerCallCount++;
+            }
+
+        }
+
+
         [TestMethod]
         public void TestGetCommands()
         {
-            AppInfo.ViewModelTypeName = "ThinkerBridgePrototypeHostApp.UI.FakeViewModel, ThinkerBridgePrototypeHostApp";
-            AppInfo.DeviceTypeName = "ThinkerBridgePrototypeHostApp.Business.BaseDevice, ThinkerBridgePrototypeHostApp";
+            //-- arrange
+            TestViewModel testVwMdl = new TestViewModel();
+            ViewModelCommandExtractor commandExtractor = new ViewModelCommandExtractor();
 
-            IViewModel vwMdl = ViewModelFactory.GetViewModel();
 
-            List<Tuple<string, ICommand>> cmdNameTuples = ViewModelCommandExtractor.GetCommands(vwMdl);
+            //-- act
+            List<Tuple<string, ICommand>> cmdNameTuples = commandExtractor.GetCommands(testVwMdl);
 
-            Assert.AreEqual(nameof(FakeViewModel.TestViewModelCommand), "TestViewModelCommand");
-            Assert.AreEqual(nameof(FakeViewModel.TestAnotherViewModelCommand), "TestAnotherViewModelCommand");
+            //-- assert
+            Assert.AreEqual(nameof(TestViewModel.TestViewModelCommand), "TestViewModelCommand");
+            Assert.AreEqual(nameof(TestViewModel.TestAnotherViewModelCommand), "TestAnotherViewModelCommand");
 
             string[] expectedCmds = {"Test", "Test Another"};
             Assert.AreEqual(expectedCmds.Length, cmdNameTuples.Count);

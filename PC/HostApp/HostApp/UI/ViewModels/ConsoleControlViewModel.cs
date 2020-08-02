@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HostApp.UI.ViewModels.Controls
 {
-    public class ConsoleControlViewModel : BaseDeviceViewModel
+    public class ConsoleControlViewModel : BaseDeviceViewModel, IConsoleControlViewModel
     {
 
 
@@ -42,20 +42,23 @@ namespace HostApp.UI.ViewModels.Controls
 
         private void SetInputTextEnabled()
         {
-
+            InputTextEnabled = Device.IsOpen;
         }
 
 
 
         protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.PropertyName == nameof(IDevice.IsOpen))
+            {
+                SetInputTextEnabled();
+            }
         }
 
         protected override void OnDeviceChanged(IDevice device)
         {
-            SetInputTextEnabled()
-            throw new NotImplementedException();
+            SetInputTextEnabled();
         }
+
     }
 }

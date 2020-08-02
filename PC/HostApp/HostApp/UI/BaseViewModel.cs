@@ -68,7 +68,7 @@ namespace HostApp.UI
 
         public void WriteTextToDevice(string cmdText)
         {
-            _device.Write(cmdText);
+            //_device.Write(cmdText);
 
         }
 

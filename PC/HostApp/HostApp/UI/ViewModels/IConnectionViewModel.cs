@@ -12,11 +12,8 @@ namespace HostApp.UI.ViewModels
     public interface IConnectionViewModel : IViewModel
     {
 
-        List<ConsoleTokenHighlight> ConsoleTokenHighlights { get; set; }
 
-        string ErrorMessages { get; set; }
 
-        BindingList<string> DeviceOutputBuffer { get; }
 
         bool OpenButtonEnabled { get; }
 
@@ -26,7 +23,6 @@ namespace HostApp.UI.ViewModels
 
         ICommand CloseCommand { get; }
 
-        void WriteTextToDevice(string cmdText);
 
 
     }

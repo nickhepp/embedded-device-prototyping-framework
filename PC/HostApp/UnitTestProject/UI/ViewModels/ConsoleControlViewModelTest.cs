@@ -19,12 +19,11 @@ namespace UnitTestProject.UI.ViewModels.Controls
             _mockDevice = new MockDevice();
         }
 
-
         [TestMethod]
-        public void InputTextEnabled_DeviceNotOpen_CheckEnables()
+        public void InputTextEnabled_DeviceNotOpen_NotEnabled()
         {
             //-- arrange
-            _mockDevice.SetupIsOpen(false);
+            _mockDevice.Object.Close();
             ConsoleControlViewModel ccViewMdl = new ConsoleControlViewModel();
 
             //-- act
@@ -32,7 +31,24 @@ namespace UnitTestProject.UI.ViewModels.Controls
 
             //-- assert
             Assert.IsFalse(ccViewMdl.InputTextEnabled);
-
         }
+
+        [TestMethod]
+        public void InputTextEnabled_DeviceOpen_Enabled()
+        {
+            //-- arrange
+            _mockDevice.Object.Open();
+            ConsoleControlViewModel ccViewMdl = new ConsoleControlViewModel();
+
+            //-- act
+            ccViewMdl.Device = _mockDevice.Object;
+
+            //-- assert
+            Assert.IsTrue(ccViewMdl.InputTextEnabled);
+        }
+
+
+
+
     }
 }

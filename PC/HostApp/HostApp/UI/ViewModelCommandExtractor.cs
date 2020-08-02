@@ -12,7 +12,7 @@ namespace HostApp.UI
     public class ViewModelCommandExtractor
     {
 
-        public static List<Tuple<string, ICommand>> GetCommands(IViewModel vwMdl)
+        public List<Tuple<string, ICommand>> GetCommands(IViewModel vwMdl)
         {
             List<Tuple<string, ICommand>> cmds = new List<Tuple<string, ICommand>>();
             // turn the methods in the form of "<Xyz>Command()" into buttons

@@ -1,6 +1,6 @@
-﻿namespace HostApp.UI.Views.Controls
+﻿namespace HostApp.UI.Views
 {
-    partial class ConsoleControl
+    partial class ConsoleControlView
     {
         /// <summary> 
         /// Required designer variable.
@@ -114,12 +114,12 @@
             this._inputTxt.Size = new System.Drawing.Size(924, 31);
             this._inputTxt.TabIndex = 1;
             // 
-            // ConsoleControl
+            // ConsoleControlView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this._tlpBottomLeft);
-            this.Name = "ConsoleControl";
+            this.Name = "ConsoleControlView";
             this.Size = new System.Drawing.Size(1015, 674);
             this._tlpBottomLeft.ResumeLayout(false);
             this._tlpBottomLeft.PerformLayout();

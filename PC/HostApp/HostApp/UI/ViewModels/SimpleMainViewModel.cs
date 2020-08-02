@@ -1,5 +1,6 @@
 ﻿using HostApp.Business;
 using HostApp.ComponentModel;
+using HostApp.UI.ViewModels.Controls;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -104,6 +105,48 @@ namespace HostApp.UI.ViewModels
         private void PrintRegisteredCommandsCommandHandler(object obj)
         {
             _baseKernelDevice.ExecuteCommand("printRegisteredCommands");
+        }
+
+        private ConnectionViewModel _connectionViewModel = null;
+        public IConnectionViewModel GetConnectionViewModel()
+        {
+            if (_connectionViewModel == null)
+            {
+                _connectionViewModel = new ConnectionViewModel();
+            }
+
+            return _connectionViewModel;
+        }
+
+        private ConsoleControlViewModel _consoleControlViewModel = null;
+        public IConsoleControlViewModel GetConsoleControlViewModel()
+        {
+            if (_consoleControlViewModel == null)
+            {
+                _consoleControlViewModel = new ConsoleControlViewModel();
+            }
+            return _consoleControlViewModel;
+        }
+
+
+        protected override void OnDeviceChanged(IDevice device)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        public class ConnectionViewModel : BaseConnectionViewModel
+        {
+            protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         //protected override void OnDeviceChanged(IDevice device)

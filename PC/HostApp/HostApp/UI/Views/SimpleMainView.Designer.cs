@@ -36,12 +36,6 @@
             this._errorsTlp = new System.Windows.Forms.TableLayoutPanel();
             this._errorsPbx = new System.Windows.Forms.PictureBox();
             this._errorsLbl = new System.Windows.Forms.Label();
-            this._tlpBottomLeft = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this._deviceHistoryRtb = new System.Windows.Forms.RichTextBox();
-            this._consoleInputTlp = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this._inputTxt = new System.Windows.Forms.TextBox();
             this._rightTlp = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,6 +43,7 @@
             this._openBtn = new System.Windows.Forms.Button();
             this._closeBtn = new System.Windows.Forms.Button();
             this._cmdsTlp = new System.Windows.Forms.TableLayoutPanel();
+            this._consolePnl = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this._mainSpl)).BeginInit();
             this._mainSpl.Panel1.SuspendLayout();
             this._mainSpl.Panel2.SuspendLayout();
@@ -60,8 +55,6 @@
             this._topLeftTlp.SuspendLayout();
             this._errorsTlp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._errorsPbx)).BeginInit();
-            this._tlpBottomLeft.SuspendLayout();
-            this._consoleInputTlp.SuspendLayout();
             this._rightTlp.SuspendLayout();
             this._connectTlp.SuspendLayout();
             this.SuspendLayout();
@@ -98,7 +91,7 @@
             // 
             // _leftSpl.Panel2
             // 
-            this._leftSpl.Panel2.Controls.Add(this._tlpBottomLeft);
+            this._leftSpl.Panel2.Controls.Add(this._consolePnl);
             this._leftSpl.Size = new System.Drawing.Size(1359, 1246);
             this._leftSpl.SplitterDistance = 864;
             this._leftSpl.TabIndex = 0;
@@ -181,79 +174,6 @@
             this._errorsLbl.TabIndex = 1;
             this._errorsLbl.Text = "_errorsLbl";
             this._errorsLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // _tlpBottomLeft
-            // 
-            this._tlpBottomLeft.ColumnCount = 1;
-            this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this._tlpBottomLeft.Controls.Add(this.label3, 0, 0);
-            this._tlpBottomLeft.Controls.Add(this._deviceHistoryRtb, 0, 1);
-            this._tlpBottomLeft.Controls.Add(this._consoleInputTlp, 0, 2);
-            this._tlpBottomLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._tlpBottomLeft.Location = new System.Drawing.Point(0, 0);
-            this._tlpBottomLeft.Name = "_tlpBottomLeft";
-            this._tlpBottomLeft.RowCount = 3;
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this._tlpBottomLeft.Size = new System.Drawing.Size(1357, 376);
-            this._tlpBottomLeft.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 42);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Console:";
-            // 
-            // _deviceHistoryRtb
-            // 
-            this._deviceHistoryRtb.BackColor = System.Drawing.Color.White;
-            this._deviceHistoryRtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._deviceHistoryRtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
-            this._deviceHistoryRtb.Location = new System.Drawing.Point(3, 50);
-            this._deviceHistoryRtb.Name = "_deviceHistoryRtb";
-            this._deviceHistoryRtb.ReadOnly = true;
-            this._deviceHistoryRtb.Size = new System.Drawing.Size(1351, 273);
-            this._deviceHistoryRtb.TabIndex = 1;
-            this._deviceHistoryRtb.Text = "";
-            // 
-            // _consoleInputTlp
-            // 
-            this._consoleInputTlp.ColumnCount = 2;
-            this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 79F));
-            this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._consoleInputTlp.Controls.Add(this.label4, 0, 0);
-            this._consoleInputTlp.Controls.Add(this._inputTxt, 1, 0);
-            this._consoleInputTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._consoleInputTlp.Location = new System.Drawing.Point(3, 329);
-            this._consoleInputTlp.Name = "_consoleInputTlp";
-            this._consoleInputTlp.RowCount = 1;
-            this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
-            this._consoleInputTlp.Size = new System.Drawing.Size(1351, 44);
-            this._consoleInputTlp.TabIndex = 2;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 25);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Input:";
-            // 
-            // _inputTxt
-            // 
-            this._inputTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._inputTxt.Location = new System.Drawing.Point(82, 3);
-            this._inputTxt.Name = "_inputTxt";
-            this._inputTxt.Size = new System.Drawing.Size(1266, 31);
-            this._inputTxt.TabIndex = 1;
             // 
             // _rightTlp
             // 
@@ -342,9 +262,17 @@
             this._cmdsTlp.Name = "_cmdsTlp";
             this._cmdsTlp.RowCount = 1;
             this._cmdsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._cmdsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 751F));
+            this._cmdsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1069F));
             this._cmdsTlp.Size = new System.Drawing.Size(628, 1069);
             this._cmdsTlp.TabIndex = 4;
+            // 
+            // _consolePnl
+            // 
+            this._consolePnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._consolePnl.Location = new System.Drawing.Point(0, 0);
+            this._consolePnl.Name = "_consolePnl";
+            this._consolePnl.Size = new System.Drawing.Size(1357, 376);
+            this._consolePnl.TabIndex = 0;
             // 
             // SimpleMainView
             // 
@@ -366,10 +294,6 @@
             this._errorsTlp.ResumeLayout(false);
             this._errorsTlp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._errorsPbx)).EndInit();
-            this._tlpBottomLeft.ResumeLayout(false);
-            this._tlpBottomLeft.PerformLayout();
-            this._consoleInputTlp.ResumeLayout(false);
-            this._consoleInputTlp.PerformLayout();
             this._rightTlp.ResumeLayout(false);
             this._rightTlp.PerformLayout();
             this._connectTlp.ResumeLayout(false);
@@ -387,12 +311,6 @@
         private System.Windows.Forms.TableLayoutPanel _errorsTlp;
         private System.Windows.Forms.PictureBox _errorsPbx;
         private System.Windows.Forms.Label _errorsLbl;
-        private System.Windows.Forms.TableLayoutPanel _tlpBottomLeft;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RichTextBox _deviceHistoryRtb;
-        private System.Windows.Forms.TableLayoutPanel _consoleInputTlp;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox _inputTxt;
         private System.Windows.Forms.TableLayoutPanel _rightTlp;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
@@ -400,5 +318,6 @@
         private System.Windows.Forms.Button _openBtn;
         private System.Windows.Forms.Button _closeBtn;
         private System.Windows.Forms.TableLayoutPanel _cmdsTlp;
+        private System.Windows.Forms.Panel _consolePnl;
     }
 }

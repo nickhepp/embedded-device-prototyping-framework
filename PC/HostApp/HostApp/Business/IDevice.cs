@@ -20,7 +20,15 @@ namespace HostApp.Business
 
         string Write(string cmdText);
 
+        /// <summary>
+        /// Event that is raised when the device is opened.
+        /// </summary>
         event EventHandler DeviceOpened;
+
+        /// <summary>
+        /// Event that is raised when the device is closed.
+        /// </summary>
+        event EventHandler DeviceClosed;
 
     }
 }
