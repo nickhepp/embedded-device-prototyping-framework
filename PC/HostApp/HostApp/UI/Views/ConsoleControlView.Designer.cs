@@ -53,7 +53,7 @@
             this._tlpBottomLeft.RowCount = 3;
             this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this._tlpBottomLeft.Size = new System.Drawing.Size(1015, 674);
             this._tlpBottomLeft.TabIndex = 1;
             // 
@@ -77,41 +77,47 @@
             this._deviceHistoryRtb.Location = new System.Drawing.Point(3, 50);
             this._deviceHistoryRtb.Name = "_deviceHistoryRtb";
             this._deviceHistoryRtb.ReadOnly = true;
-            this._deviceHistoryRtb.Size = new System.Drawing.Size(1009, 571);
+            this._deviceHistoryRtb.Size = new System.Drawing.Size(1009, 556);
             this._deviceHistoryRtb.TabIndex = 1;
             this._deviceHistoryRtb.Text = "$ This is test text";
             // 
             // _consoleInputTlp
             // 
             this._consoleInputTlp.ColumnCount = 2;
-            this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 79F));
+            this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._consoleInputTlp.Controls.Add(this.label4, 0, 0);
             this._consoleInputTlp.Controls.Add(this._inputTxt, 1, 0);
+            this._consoleInputTlp.Controls.Add(this.label4, 0, 0);
             this._consoleInputTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._consoleInputTlp.Location = new System.Drawing.Point(3, 627);
+            this._consoleInputTlp.Location = new System.Drawing.Point(3, 612);
             this._consoleInputTlp.Name = "_consoleInputTlp";
             this._consoleInputTlp.RowCount = 1;
             this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
-            this._consoleInputTlp.Size = new System.Drawing.Size(1009, 44);
+            this._consoleInputTlp.Size = new System.Drawing.Size(1009, 59);
             this._consoleInputTlp.TabIndex = 2;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
             this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 25);
+            this.label4.Size = new System.Drawing.Size(114, 59);
             this.label4.TabIndex = 0;
             this.label4.Text = "Input:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // _inputTxt
             // 
-            this._inputTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._inputTxt.Location = new System.Drawing.Point(82, 3);
+            this._inputTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._inputTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
+            this._inputTxt.Location = new System.Drawing.Point(123, 3);
             this._inputTxt.Name = "_inputTxt";
-            this._inputTxt.Size = new System.Drawing.Size(924, 31);
+            this._inputTxt.Size = new System.Drawing.Size(883, 49);
             this._inputTxt.TabIndex = 1;
             // 
             // ConsoleControlView

@@ -1,4 +1,4 @@
-﻿using HostApp.Business;
+﻿using Ecs.Edpf.Devices;
 using HostApp.ComponentModel;
 using HostApp.UI.ViewModels;
 using System;

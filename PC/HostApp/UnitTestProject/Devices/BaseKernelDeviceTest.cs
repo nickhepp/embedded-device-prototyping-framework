@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using HostApp.Business;
 
 namespace UnitTestProject.Devices
 {

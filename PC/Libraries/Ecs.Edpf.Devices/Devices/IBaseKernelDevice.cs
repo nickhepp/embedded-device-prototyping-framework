@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HostApp.Business
+namespace Ecs.Edpf.Devices
 {
-    interface IBaseKernelDevice
+    public interface IBaseKernelDevice
     {
 
         string ExecuteCommand(string cmdName);

@@ -1,2 +1,4 @@
 .vs/*
 packages/*
+HostApp.ManualTest/bin/*
+HostApp.ManualTest/obj/*

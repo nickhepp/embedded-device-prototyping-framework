@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using HostApp.Business;
+﻿using System.Windows.Input;
 
 namespace HostApp.UI.ViewModels
 {
     public interface IConnectionViewModel : IViewModel
     {
-
-
-
 
         bool OpenButtonEnabled { get; }
 
@@ -22,8 +12,6 @@ namespace HostApp.UI.ViewModels
         ICommand OpenCommand { get; }
 
         ICommand CloseCommand { get; }
-
-
 
     }
 }

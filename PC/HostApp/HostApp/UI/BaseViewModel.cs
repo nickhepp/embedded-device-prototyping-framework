@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using HostApp.Business;
 using HostApp.ComponentModel;
 
 namespace HostApp.UI

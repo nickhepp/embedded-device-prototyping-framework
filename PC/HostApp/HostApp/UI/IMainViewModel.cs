@@ -1,7 +1,4 @@
-﻿using HostApp.Business;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ecs.Edpf.Devices;
 
 namespace HostApp.UI
 {
@@ -12,8 +9,9 @@ namespace HostApp.UI
     public interface IMainViewModel
     {
 
-        IDevice Device { get; set; }
+        IDevice Device { get; }
 
+        IDeviceFactory DeviceFactory { get; set; }
 
     }
 }

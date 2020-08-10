@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HostApp.UI.ViewModels
 {
-    public interface IConsoleControlViewModel
+    public interface IConsoleControlViewModel : IViewModel
     {
         List<ConsoleTokenHighlight> ConsoleTokenHighlights { get; set; }
 

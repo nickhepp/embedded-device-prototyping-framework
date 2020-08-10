@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using HostApp.Business;
+using Ecs.Edpf.Devices;
 using HostApp.ComponentModel;
 using HostApp.UI.ChildUI.ViewModels;
 

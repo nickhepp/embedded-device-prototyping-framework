@@ -48,15 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppInfo.cs" />
-    <Compile Include="Business\BaseDevice.cs" />
-    <Compile Include="Business\BaseKernelDevice.cs" />
-    <Compile Include="Business\DeviceConnectionInfo.cs" />
-    <Compile Include="Business\DeviceFactory.cs" />
-    <Compile Include="Business\IBaseKernelDevice.cs" />
-    <Compile Include="Business\IDevice.cs" />
-    <Compile Include="Business\IDeviceWithConnectionInfo.cs" />
-    <Compile Include="Business\IDeviceWithTimeouts.cs" />
-    <Compile Include="Business\KernelDeviceUtility.cs" />
     <Compile Include="ComponentModel\RelayCommand.cs" />
     <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
     <Compile Include="Constants.cs" />
@@ -95,11 +86,11 @@
     <Compile Include="UI\ViewModels\ISimpleMainViewModel.cs" />
     <Compile Include="UI\ViewModels\ParentMainViewModel.cs" />
     <Compile Include="UI\ViewModels\SimpleMainViewModel.cs" />
-    <Compile Include="UI\Views\ConsoleControl.cs">
+    <Compile Include="UI\Views\ConsoleControlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\ConsoleControl.Designer.cs">
-      <DependentUpon>ConsoleControl.cs</DependentUpon>
+    <Compile Include="UI\Views\ConsoleControlView.Designer.cs">
+      <DependentUpon>ConsoleControlView.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\IMainView.cs" />
     <Compile Include="UI\Views\ParentMainView.cs">
@@ -127,8 +118,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\Views\ConsoleControl.resx">
-      <DependentUpon>ConsoleControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Views\ConsoleControlView.resx">
+      <DependentUpon>ConsoleControlView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Views\ParentMainView.resx">
       <DependentUpon>ParentMainView.cs</DependentUpon>
@@ -150,11 +141,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="Entities\" />
     <Folder Include="UI\ChildUI\Views\" />
-    <Folder Include="UI\ViewModels\Controls\" />
-    <Folder Include="UI\Views\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\warning_icon.png" />
@@ -163,6 +150,12 @@
     <PackageReference Include="DockPanelSuite">
       <Version>3.0.6</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj">
+      <Project>{0d051bf4-521d-4b1a-8b7f-8edc43d99bd0}</Project>
+      <Name>Ecs.Edpf.Devices</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

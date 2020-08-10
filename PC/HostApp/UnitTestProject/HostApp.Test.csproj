@@ -78,6 +78,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj">
+      <Project>{0D051BF4-521D-4B1A-8B7F-8EDC43D99BD0}</Project>
+      <Name>Ecs.Edpf.Devices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HostApp\HostApp.csproj">
       <Project>{f65fb57a-0889-4ce8-b6b1-6eca0f083c21}</Project>
       <Name>HostApp</Name>

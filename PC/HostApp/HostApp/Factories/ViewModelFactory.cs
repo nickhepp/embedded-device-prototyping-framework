@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Ecs.Edpf.Devices.Serial;
 using HostApp;
 using HostApp.UI;
 using HostApp.UI.ViewModels;
@@ -16,8 +16,12 @@ namespace HostApp.UI
 
         public static IMainViewModel GetMainViewModel()
         {
-            SimpleMainViewModel simpleMainViewModel = new SimpleMainViewModel();
-            return simpleMainViewModel;
+            IMainViewModel mainViewModel = new SimpleMainViewModel();
+            mainViewModel.DeviceFactory = new SerialPortDeviceFactory();
+
+
+
+            return mainViewModel;
         }
 
 

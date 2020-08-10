@@ -1,19 +1,13 @@
-﻿using HostApp.Business;
-using HostApp.UI.ChildUI.ViewModels;
-using System;
+﻿using Ecs.Edpf.Devices;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HostApp.UI.ViewModels.Controls
 {
     public class ConsoleControlViewModel : BaseDeviceViewModel, IConsoleControlViewModel
     {
 
-
-        [Browsable(false)]
         public List<ConsoleTokenHighlight> ConsoleTokenHighlights { get; set; } = new List<ConsoleTokenHighlight>();
 
 

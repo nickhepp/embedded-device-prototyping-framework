@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using HostApp.Business;
 using HostApp.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnitTestProject.Devices;

@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Ecs.Edpf.Devices.Connections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HostApp.Business
+namespace Ecs.Edpf.Connections.Serial
 {
-    public class DeviceConnectionInfo
+    public class SerialPortConnectionInfo : IConnectionInfo
     {
         public enum BaudRate
         {
-
-            BaudrateNONE = 0,
             Baudrate75	= 75,
             Baudrate150	= 150,
             Baudrate300	= 300,

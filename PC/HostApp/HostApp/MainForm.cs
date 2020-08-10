@@ -75,8 +75,6 @@ namespace HostApp
             //    btn.Click += cmdButtonClick;
             //}
 
-            //_inputTxt.KeyDown += InputTextKeyDown;
-
             //SetErrorMessageControls();
         }
 

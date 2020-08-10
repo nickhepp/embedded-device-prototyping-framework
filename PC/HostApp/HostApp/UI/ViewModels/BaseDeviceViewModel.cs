@@ -1,11 +1,6 @@
-﻿using HostApp.Business;
-using HostApp.UI.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+
+using Ecs.Edpf.Devices;
 
 namespace HostApp.UI.ViewModels
 {
