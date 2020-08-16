@@ -49,10 +49,6 @@ namespace HostApp.UI.Views
             _openBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _connectionViewModel, nameof(IConnectionViewModel.OpenButtonEnabled)));
             _closeBtn.DataBindings.Clear();
             _closeBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _connectionViewModel, nameof(IConnectionViewModel.CloseButtonEnabled)));
-
-            
-
-
         }
 
 

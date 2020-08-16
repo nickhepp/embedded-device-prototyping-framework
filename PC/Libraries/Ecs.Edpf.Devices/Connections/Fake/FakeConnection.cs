@@ -32,12 +32,16 @@ namespace Ecs.Edpf.Devices.Connections.Fake
 
         public (string text, bool endOfResponse) ReadToEndOfResponse()
         {
-            return ("", true);
+            string returnTxt = _writtenText + Environment.NewLine + $"echo {_writtenText}";
+            return (returnTxt, true);
         }
+
+
+        private string _writtenText;
 
         public void Write(string text)
         {
-            
+            _writtenText = text;
         }
     }
 }

@@ -22,6 +22,10 @@ namespace HostApp.UI.ViewModels
                 {
                     _device.PropertyChanged += DevicePropertyChanged;
                 }
+                if (DeviceOutputBufferChanged != null)
+                {
+                    DeviceOutputBufferChanged(this, new EventArgs());
+                }
                 OnDeviceChanged(_device);
             }
         }
@@ -38,25 +42,44 @@ namespace HostApp.UI.ViewModels
                 _deviceFactory = value;
                 if (_deviceFactory != null)
                 {
-                    _deviceFactory.DeviceCreated += DeviceFactory_DeviceCreated;
+                    _deviceFactory.DeviceCreated += DeviceFactoryDeviceCreated;
                 }
             }
         }
 
-        private void DeviceFactory_DeviceCreated(object sender, EventArgs e)
+        private void DeviceFactoryDeviceCreated(object sender, EventArgs e)
         {
             Device = _deviceFactory.Device;
             Device.PropertyChanged += DevicePropertyChanged;
+            DeviceOutputBuffer = Device.DeviceOutputBuffer;
         }
 
 
 
+
+
+        public event EventHandler DeviceOutputBufferChanged;
+
+        private BindingList<string> _deviceOutputBuffer = new BindingList<string>();
         [Browsable(false)]
-        public BindingList<string> DeviceOutputBuffer => _device.DeviceOutputBuffer;
+        public BindingList<string> DeviceOutputBuffer 
+        { 
+            get
+            {
+                return _deviceOutputBuffer;
+            }
+            private set
+            {
+                _deviceOutputBuffer = value;
+                if (DeviceOutputBufferChanged != null)
+                {
+                    DeviceOutputBufferChanged(this, new EventArgs());
+                }
+            }
+        }
+
 
         protected abstract void OnDeviceChanged(IDevice device);
-
-
 
         protected abstract void InternalDevicePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e);
 

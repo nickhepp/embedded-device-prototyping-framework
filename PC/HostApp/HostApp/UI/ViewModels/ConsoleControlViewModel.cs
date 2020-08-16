@@ -64,7 +64,10 @@ namespace HostApp.UI.ViewModels.Controls
 
         public void WriteTextToDevice(string cmdText)
         {
-            throw new System.NotImplementedException();
+            Device.Write(cmdText);
         }
+
+
+
     }
 }

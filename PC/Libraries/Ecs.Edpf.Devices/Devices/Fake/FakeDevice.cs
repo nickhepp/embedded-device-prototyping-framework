@@ -11,5 +11,9 @@ namespace Ecs.Edpf.Devices
         public FakeDevice(FakeConnectionInfo fakeConnectionInfo) : base(new FakeConnectionFactory(), fakeConnectionInfo)
         {
         }
+
+
+
+
     }
 }

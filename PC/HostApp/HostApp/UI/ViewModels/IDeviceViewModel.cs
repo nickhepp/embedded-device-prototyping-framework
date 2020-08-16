@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 using Ecs.Edpf.Devices;
 
@@ -14,9 +15,9 @@ namespace HostApp.UI.ViewModels
 
         IDevice Device { get; set; }
 
-
         BindingList<string> DeviceOutputBuffer { get; }
 
+        event EventHandler DeviceOutputBufferChanged;
 
     }
 }

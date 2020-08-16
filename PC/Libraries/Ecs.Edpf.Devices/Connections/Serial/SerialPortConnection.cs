@@ -79,7 +79,7 @@ namespace Ecs.Edpf.Devices.Connections.Serial
 
         public void Write(string text)
         {
-            throw new NotImplementedException();
+            _connection.WriteLine(text);
         }
 
     }
