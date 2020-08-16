@@ -32,8 +32,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this._deviceHistoryRtb = new System.Windows.Forms.RichTextBox();
             this._consoleInputTlp = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
             this._inputTxt = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this._tlpBottomLeft.SuspendLayout();
             this._consoleInputTlp.SuspendLayout();
             this.SuspendLayout();
@@ -93,9 +93,20 @@
             this._consoleInputTlp.Name = "_consoleInputTlp";
             this._consoleInputTlp.RowCount = 1;
             this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
+            this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this._consoleInputTlp.Size = new System.Drawing.Size(1009, 59);
             this._consoleInputTlp.TabIndex = 2;
+            // 
+            // _inputTxt
+            // 
+            this._inputTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._inputTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
+            this._inputTxt.Location = new System.Drawing.Point(123, 3);
+            this._inputTxt.Name = "_inputTxt";
+            this._inputTxt.Size = new System.Drawing.Size(883, 49);
+            this._inputTxt.TabIndex = 1;
             // 
             // label4
             // 
@@ -108,17 +119,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Input:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // _inputTxt
-            // 
-            this._inputTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._inputTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
-            this._inputTxt.Location = new System.Drawing.Point(123, 3);
-            this._inputTxt.Name = "_inputTxt";
-            this._inputTxt.Size = new System.Drawing.Size(883, 49);
-            this._inputTxt.TabIndex = 1;
             // 
             // ConsoleControlView
             // 

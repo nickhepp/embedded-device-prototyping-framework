@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace HostApp.UI.ViewModels
 {
-    public interface IConsoleControlViewModel : IViewModel
+    public interface IConsoleControlViewModel : IDeviceViewModel
     {
         List<ConsoleTokenHighlight> ConsoleTokenHighlights { get; set; }
 
         string ErrorMessages { get; set; }
-
-        BindingList<string> DeviceOutputBuffer { get; }
 
         void WriteTextToDevice(string cmdText);
 

@@ -26,32 +26,7 @@ namespace HostApp.UI.ChildUI.ViewModels
             }
         }
 
-        protected override bool CloseDeviceCommandCanExecute(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void CloseDeviceCommandHandler(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override IDevice GetDevice()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override bool OpenDeviceCommandCanExecute(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void OpenDeviceCommandHandler(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-
+      
         public class ComPortOptionsPropertyConverter : StringOptionsPropertyConverter
         {
             protected override List<string> GetOptions()

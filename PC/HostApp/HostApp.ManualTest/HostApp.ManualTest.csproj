@@ -85,8 +85,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="UI\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj">
+      <Project>{0D051BF4-521D-4B1A-8B7F-8EDC43D99BD0}</Project>
+      <Name>Ecs.Edpf.Devices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HostApp\HostApp.csproj">
       <Project>{F65FB57A-0889-4CE8-B6B1-6ECA0F083C21}</Project>
       <Name>HostApp</Name>

@@ -11,21 +11,27 @@ namespace Ecs.Edpf.Devices.Serial
 
 
         private SerialPortConnectionInfo _serialPortConnectionInfo;
+
+
+
         public IConnectionInfo ConnectionInfo => _serialPortConnectionInfo;
+
+        private SerialPortDevice _serialPortDevice;
+        public IDevice Device => throw new NotImplementedException();
 
         public SerialPortDeviceFactory()
         {
         }
 
+        public event EventHandler DeviceCreated;
 
-
-        public IDevice GetDevice()
+        public void CreateDevice()
         {
-            return new SerialPortDevice(_serialPortConnectionInfo);
-
-
+            _serialPortDevice = new SerialPortDevice(_serialPortConnectionInfo);
+            if (DeviceCreated != null)
+            {
+                DeviceCreated(this, new EventArgs());
+            }
         }
-
-
     }
 }

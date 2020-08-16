@@ -5,16 +5,16 @@ using System.Windows.Input;
 
 namespace HostApp.UI.ViewModels
 {
-    public interface IDeviceProviderViewModel
-    {
+    //public interface IDeviceProviderViewModel
+    //{
 
-        IDevice Device { get; }
+    //    IDevice Device { get; }
 
-        ICommand OpenDeviceCommand { get; }
+    //    ICommand OpenDeviceCommand { get; }
 
-        ICommand CloseDeviceCommand { get;  }
+    //    ICommand CloseDeviceCommand { get;  }
 
-        event EventHandler DeviceConnected;
+    //    event EventHandler DeviceConnected;
 
-    }
+    //}
 }

@@ -17,7 +17,7 @@ namespace HostApp.UI
         {
             List<IChildViewModel> childViewModels = new List<IChildViewModel>
             {
-                new ComPortConnectionSettingsViewModel()
+                //new ComPortConnectionSettingsViewModel()
             };
 
             return childViewModels;

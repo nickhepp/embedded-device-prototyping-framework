@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Ecs.Edpf.Devices;
 using HostApp.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnitTestProject.Devices;
@@ -15,10 +16,20 @@ namespace UnitTestProject.UI.ViewModels
 
         private class TestConnectionViewModel : BaseConnectionViewModel
         {
+            public override System.Drawing.Image ViewImage => null;
+
+            public override IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel => throw new NotImplementedException();
+
+            protected override IDeviceFactory GetDeviceFactory()
+            {
+                throw new NotImplementedException();
+            }
+
             protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
             {
             }
 
+     
         }
 
         [TestInitialize]

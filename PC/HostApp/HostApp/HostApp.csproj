@@ -64,12 +64,14 @@
     <Compile Include="UI\BaseKernelViewModel.cs" />
     <Compile Include="UI\BaseKernelWithChildrenViewModel.cs" />
     <Compile Include="UI\BaseViewModel.cs" />
-    <Compile Include="UI\ChildUI\ViewModels\BaseChildViewModel.cs" />
-    <Compile Include="UI\ChildUI\ViewModels\BaseConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\BaseChildViewModel.cs" />
+    <Compile Include="UI\ViewModels\BaseConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\FakeConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\Views\IChildView.cs" />
     <Compile Include="UI\ViewModels\BaseDeviceViewModel.cs" />
-    <Compile Include="UI\ChildUI\ViewModels\ComPortConnectionSettingsViewModel.cs" />
-    <Compile Include="UI\ChildUI\ViewModels\DeviceConnectionSettingsViewModel.cs" />
-    <Compile Include="UI\ChildUI\ViewModels\IChildViewModel.cs" />
+    <Compile Include="UI\ViewModels\ComPortConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\DeviceConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\IChildViewModel.cs" />
     <Compile Include="UI\ConsoleTokenHighlight.cs" />
     <Compile Include="UI\FakeViewModel.cs" />
     <Compile Include="UI\IChildViewModelProvider.cs" />
@@ -77,15 +79,23 @@
     <Compile Include="UI\IViewModel.cs" />
     <Compile Include="UI\ViewModelCommandExtractor.cs" />
     <Compile Include="Factories\ViewModelFactory.cs" />
+    <Compile Include="UI\ViewModels\Connections\FakeConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\ConsoleControlViewModel.cs" />
-    <Compile Include="UI\ViewModels\IConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\IConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\IConsoleControlViewModel.cs" />
+    <Compile Include="UI\ViewModels\IDeviceConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceProviderViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceViewModel.cs" />
     <Compile Include="UI\ViewModels\IParentMainViewModel.cs" />
     <Compile Include="UI\ViewModels\ISimpleMainViewModel.cs" />
     <Compile Include="UI\ViewModels\ParentMainViewModel.cs" />
     <Compile Include="UI\ViewModels\SimpleMainViewModel.cs" />
+    <Compile Include="UI\Views\ConnectionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ConnectionView.Designer.cs">
+      <DependentUpon>ConnectionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\ConsoleControlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +128,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Views\ConnectionView.resx">
+      <DependentUpon>ConnectionView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Views\ConsoleControlView.resx">
       <DependentUpon>ConsoleControlView.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,9 +153,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\ChildUI\Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\warning_icon.png" />
   </ItemGroup>

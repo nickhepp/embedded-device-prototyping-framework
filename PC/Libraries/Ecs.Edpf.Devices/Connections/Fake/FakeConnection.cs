@@ -6,13 +6,14 @@ namespace Ecs.Edpf.Devices.Connections.Fake
 {
     public class FakeConnection : IConnection
     {
-        public IConnectionInfo ConnectionInfo => throw new NotImplementedException();
+
+        private FakeConnectionInfo _fakeConnectionInfo;
+        public IConnectionInfo ConnectionInfo => _fakeConnectionInfo;
 
         public int CommandTimeout { get; set; }
 
         public void Close()
         {
-            throw new NotImplementedException();
         }
 
         public void Dispose()
@@ -21,21 +22,22 @@ namespace Ecs.Edpf.Devices.Connections.Fake
 
         public void Open(IConnectionInfo connectionInfo)
         {
+            _fakeConnectionInfo = connectionInfo as FakeConnectionInfo;
         }
 
         public string ReadToEndOfBuffer()
         {
-            throw new NotImplementedException();
+            return "";
         }
 
         public (string text, bool endOfResponse) ReadToEndOfResponse()
         {
-            throw new NotImplementedException();
+            return ("", true);
         }
 
         public void Write(string text)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

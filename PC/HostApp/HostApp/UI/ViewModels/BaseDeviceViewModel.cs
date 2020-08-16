@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 using Ecs.Edpf.Devices;
 
@@ -25,10 +26,38 @@ namespace HostApp.UI.ViewModels
             }
         }
 
+        private IDeviceFactory _deviceFactory;
+        public IDeviceFactory DeviceFactory
+        {
+            get
+            {
+                return _deviceFactory;
+            }
+            set
+            {
+                _deviceFactory = value;
+                if (_deviceFactory != null)
+                {
+                    _deviceFactory.DeviceCreated += DeviceFactory_DeviceCreated;
+                }
+            }
+        }
+
+        private void DeviceFactory_DeviceCreated(object sender, EventArgs e)
+        {
+            Device = _deviceFactory.Device;
+            Device.PropertyChanged += DevicePropertyChanged;
+        }
+
+
+
         [Browsable(false)]
         public BindingList<string> DeviceOutputBuffer => _device.DeviceOutputBuffer;
 
         protected abstract void OnDeviceChanged(IDevice device);
+
+
+
         protected abstract void InternalDevicePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e);
 
         private void DevicePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

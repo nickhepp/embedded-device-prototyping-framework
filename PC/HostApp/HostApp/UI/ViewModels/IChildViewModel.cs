@@ -1,10 +1,11 @@
-﻿using System.Drawing;
+﻿using HostApp.UI.ViewModels;
+using System.Drawing;
 
 
 namespace HostApp.UI.ChildUI
 {
 
-    public interface IChildViewModel
+    public interface IChildViewModel : IDeviceViewModel
     {
 
         /// <summary>

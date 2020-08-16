@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,11 +78,21 @@ namespace HostApp.UI.ViewModels
             }
         }
 
+        public abstract Image ViewImage { get; }
+
+        public string Name { get; }
+
+        public abstract IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel { get; }
+
         public BaseConnectionViewModel()
         {
             OpenCommand = new RelayCommand(param => this.OpenButtonEnabled, OpenCommandHandler);
             CloseCommand = new RelayCommand(param => this.CloseButtonEnabled, CloseCommandHandler);
+            DeviceFactory = GetDeviceFactory();
         }
+
+
+        protected abstract IDeviceFactory GetDeviceFactory();
 
         private void SetButtonEnables()
         {
@@ -101,6 +112,12 @@ namespace HostApp.UI.ViewModels
 
         private void OpenCommandHandler(object obj)
         {
+            DeviceFactory.CreateDevice();
+
+            // device is now set
+            Device.DeviceOpened += DeviceOpened;
+            Device.DeviceClosed += DeviceClosed;
+
             Device.Open();
             SetButtonEnables();
         }
@@ -113,8 +130,7 @@ namespace HostApp.UI.ViewModels
         protected override void OnDeviceChanged(IDevice device)
         {
             SetButtonEnables();
-            device.DeviceOpened += DeviceOpened;
-            device.DeviceClosed += DeviceClosed;
+
         }
 
         private void DeviceClosed(object sender, EventArgs e)
@@ -126,5 +142,14 @@ namespace HostApp.UI.ViewModels
         {
             SetButtonEnables();
         }
-    }
+
+
+
+
+
+
+
+
+
+}
 }

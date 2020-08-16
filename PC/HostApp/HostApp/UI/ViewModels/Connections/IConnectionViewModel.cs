@@ -1,9 +1,13 @@
-﻿using System.Windows.Input;
+﻿using HostApp.UI.ChildUI;
+using System.Windows.Input;
 
 namespace HostApp.UI.ViewModels
 {
-    public interface IConnectionViewModel : IViewModel
+    public interface IConnectionViewModel : IChildViewModel
     {
+
+
+        IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel { get; }
 
         bool OpenButtonEnabled { get; }
 

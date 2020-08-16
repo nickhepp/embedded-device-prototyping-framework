@@ -8,7 +8,7 @@ namespace Ecs.Edpf.Devices
 {
     public class FakeDevice : BaseKernelDevice
     {
-        public FakeDevice() : base(new FakeConnectionFactory(), new FakeConnectionInfo())
+        public FakeDevice(FakeConnectionInfo fakeConnectionInfo) : base(new FakeConnectionFactory(), fakeConnectionInfo)
         {
         }
     }

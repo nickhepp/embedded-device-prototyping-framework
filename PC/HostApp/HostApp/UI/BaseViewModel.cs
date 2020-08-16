@@ -14,48 +14,11 @@ namespace HostApp.UI
     public class BaseViewModel : IViewModel, ICustomTypeDescriptor
     {
 
-
-
         private Dictionary<string, Func<bool>> _propertyVisibilityHandlers = new Dictionary<string, Func<bool>>();
-
-
-
-
-        protected const string NoErrors = "";
-        private string _errorMessages = NoErrors;
-        [Browsable(false)]
-        public string ErrorMessages {
-            get
-            {
-                return _errorMessages;
-            }
-            set
-            {
-                _errorMessages = value;
-                RaiseNotifyPropertyChanged();
-            }
-        }
-
-
-
-        public virtual List<string> GetCommandNames()
-        {
-            return new List<string>();
-        }
-
-
-
-
-
 
         protected BaseViewModel()
         {
-
-
         }
-
-
-
 
         protected void RaiseNotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -65,15 +28,7 @@ namespace HostApp.UI
             }
         }
 
-        public void WriteTextToDevice(string cmdText)
-        {
-            //_device.Write(cmdText);
-
-        }
-
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-
 
         #region ICustomTypeDescriptor
 

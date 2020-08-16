@@ -25,10 +25,18 @@ namespace HostApp.UI.ViewModels.Controls
             }
         }
 
-
-
-
-
+        private string _errorMessages;
+        public string ErrorMessages
+        {
+            get
+            {
+                return _errorMessages;
+            }
+            set
+            {
+                _errorMessages = value;
+            }
+        }
 
         public ConsoleControlViewModel()
         {
@@ -54,5 +62,9 @@ namespace HostApp.UI.ViewModels.Controls
             SetInputTextEnabled();
         }
 
+        public void WriteTextToDevice(string cmdText)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

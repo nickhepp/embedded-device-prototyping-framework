@@ -4,6 +4,7 @@ using HostApp.ComponentModel;
 using HostApp.UI.ViewModels.Controls;
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Input;
 
@@ -144,20 +145,22 @@ namespace HostApp.UI.ViewModels
 
         public class ConnectionViewModel : BaseConnectionViewModel
         {
-            protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
+            public override Image ViewImage => throw new NotImplementedException();
+
+            public override IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel => throw new NotImplementedException();
+
+            protected override IDeviceFactory GetDeviceFactory()
             {
                 throw new NotImplementedException();
             }
+
+            protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+ 
+            }
+
+       
         }
 
-        //protected override void OnDeviceChanged(IDevice device)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
