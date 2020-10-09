@@ -1,0 +1,16 @@
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\obj\Debug\Ecs.Edpf.Devices.Test.csprojAssemblyReference.cache
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\obj\Debug\Ecs.Edpf.Devices.Test.csproj.CoreCompileInputs.cache
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Ecs.Edpf.Devices.Test.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Ecs.Edpf.Devices.Test.pdb
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Ecs.Edpf.Devices.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Ecs.Edpf.Devices.pdb
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\obj\Debug\Ecs.Edpf.Devices.Test.csproj.CopyComplete
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\obj\Debug\Ecs.Edpf.Devices.Test.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\obj\Debug\Ecs.Edpf.Devices.Test.pdb
