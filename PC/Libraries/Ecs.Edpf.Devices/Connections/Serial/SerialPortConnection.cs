@@ -24,20 +24,23 @@ namespace Ecs.Edpf.Devices.Connections.Serial
 
         public int CommandTimeout { get; set; } = Constants.DefaultTimeOut;
 
+        public int QueuedCharsToRead => _connection.BytesToRead;
+
+        public int MaxReadChunkSize => 1;
+
         public SerialPortConnection()
         {
         }
 
-
-
         public void Close()
         {
-            throw new NotImplementedException();
+            _connection.Close();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _connection.Dispose();
+            _connection = null;
         }
 
         public void Open(IConnectionInfo connectionInfo)
@@ -58,29 +61,16 @@ namespace Ecs.Edpf.Devices.Connections.Serial
             return returnLine;
         }
 
-        public (string text, bool endOfResponse) ReadToEndOfResponse()
-        {
-            string returnLine = "";
-            bool gotCmdRespLineEnding = false;
-            DateTime startRead = DateTime.Now;
-            while (!gotCmdRespLineEnding && DateTime.Now.Subtract(startRead).TotalMilliseconds < CommandTimeout)
-            {
-                int bytesToRead = _connection.BytesToRead;
-                if (bytesToRead > 0)
-                {
-                    int byteVal = _connection.ReadByte();
-                    returnLine = returnLine + ((char)byteVal).ToString();
-                    gotCmdRespLineEnding = returnLine.EndsWith(Constants.CommandResponseLineEnding);
-                }
-            }
 
-            return (returnLine, gotCmdRespLineEnding);
-        }
 
         public void Write(string text)
         {
-            _connection.WriteLine(text);
+            _connection.Write(text);
         }
 
+        public string ReadNextChunk(int maxReadSize)
+        {
+            return ((char)_connection.ReadByte()).ToString();
+        }
     }
 }

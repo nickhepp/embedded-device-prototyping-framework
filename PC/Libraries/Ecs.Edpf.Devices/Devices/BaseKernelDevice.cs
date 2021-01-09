@@ -1,6 +1,8 @@
 ﻿using Ecs.Edpf.Devices.Connections;
+using Ecs.Edpf.Devices.IO.Cmds;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO.Ports;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.Devices
 {
-    public class BaseKernelDevice : IDevice, IDisposable, IBaseKernelDevice
+    public abstract class BaseKernelDevice : IDevice, IDisposable, IBaseKernelDevice
     {
 
 
@@ -46,6 +48,19 @@ namespace Ecs.Edpf.Devices
 
         public IConnectionInfo ConnectionInfo { get; set; }
 
+        private ReadOnlyCollection<IDeviceCommand> _deviceCommands;
+        public ReadOnlyCollection<IDeviceCommand> DeviceCommands 
+        {
+            get
+            {
+                if (_deviceCommands == null)
+                {
+                    _deviceCommands = new ReadOnlyCollection<IDeviceCommand>(GetDeviceCommands());
+                }
+                return _deviceCommands;
+            }
+        }
+
         private IConnectionFactory _deviceConnectionFactory;
 
 
@@ -55,7 +70,7 @@ namespace Ecs.Edpf.Devices
             ConnectionInfo = connectionInfo;
         }
 
-
+        protected abstract List<IDeviceCommand> GetDeviceCommands();
 
         protected bool InternalOpen()
         {
@@ -84,7 +99,7 @@ namespace Ecs.Edpf.Devices
             }
             _connection.Write(cmdText + Constants.LineEnding);
 
-            (string text, bool endOfResponse) response = _connection.ReadToEndOfResponse();
+            (string text, bool endOfResponse) response = ReadToEndOfResponse();
             string returnLine;
             if (!response.endOfResponse)
             {
@@ -97,6 +112,29 @@ namespace Ecs.Edpf.Devices
 
             return returnLine;
         }
+
+        private (string text, bool endOfResponse) ReadToEndOfResponse()
+        {
+            StringBuilder returnLineBldr = new StringBuilder();
+            bool gotCmdRespLineEnding = false;
+            DateTime startRead = DateTime.Now;
+            string returnLine = "";
+            while (!gotCmdRespLineEnding && DateTime.Now.Subtract(startRead).TotalMilliseconds < CommandTimeout)
+            {
+                int queuedCharsToRead = _connection.QueuedCharsToRead;
+                if (queuedCharsToRead > 0)
+                {
+                    string chunk = _connection.ReadNextChunk(_connection.MaxReadChunkSize);
+                    returnLineBldr.Append(chunk);
+                    returnLine = returnLineBldr.ToString();
+                    gotCmdRespLineEnding = returnLine.EndsWith(Constants.CommandResponseLineEnding);
+                }
+            }
+
+            return (returnLine, gotCmdRespLineEnding);
+        }
+
+
 
         protected void InternalClose()
         {

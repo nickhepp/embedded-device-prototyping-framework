@@ -8,10 +8,9 @@ namespace Ecs.Edpf.Devices.IO.Cmds
 {
     public class PrintDeviceInfoCommand : BaseDeviceCommand
     {
-
-        // no params so empty list
-        private readonly ReadOnlyCollection<IParameter> _parameters = new ReadOnlyCollection<IParameter>(new List<IParameter>());
-        public override ReadOnlyCollection<IParameter> Parameters => _parameters;
+        public PrintDeviceInfoCommand() : base(new ReadOnlyCollection<IParameter>(new IParameter[] { }))
+        {
+        }
 
         public override string MethodName => "printDeviceInfo";
     }

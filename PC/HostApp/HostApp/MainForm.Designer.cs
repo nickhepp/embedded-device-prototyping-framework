@@ -28,9 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
- 
+            this.SuspendLayout();
+            // 
+            // MainForm
+            // 
+            this.ClientSize = new System.Drawing.Size(1664, 971);
+            this.Name = "MainForm";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

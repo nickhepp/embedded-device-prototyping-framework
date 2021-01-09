@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this._tlpBottomLeft = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
+            this._consoleLbl = new System.Windows.Forms.Label();
             this._deviceHistoryRtb = new System.Windows.Forms.RichTextBox();
             this._consoleInputTlp = new System.Windows.Forms.TableLayoutPanel();
             this._inputTxt = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this._inputLbl = new System.Windows.Forms.Label();
             this._tlpBottomLeft.SuspendLayout();
             this._consoleInputTlp.SuspendLayout();
             this.SuspendLayout();
@@ -44,7 +44,7 @@
             this._tlpBottomLeft.ColumnCount = 1;
             this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this._tlpBottomLeft.Controls.Add(this.label3, 0, 0);
+            this._tlpBottomLeft.Controls.Add(this._consoleLbl, 0, 0);
             this._tlpBottomLeft.Controls.Add(this._deviceHistoryRtb, 0, 1);
             this._tlpBottomLeft.Controls.Add(this._consoleInputTlp, 0, 2);
             this._tlpBottomLeft.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -57,16 +57,16 @@
             this._tlpBottomLeft.Size = new System.Drawing.Size(1015, 674);
             this._tlpBottomLeft.TabIndex = 1;
             // 
-            // label3
+            // _consoleLbl
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.White;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 42);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Console:";
+            this._consoleLbl.AutoSize = true;
+            this._consoleLbl.BackColor = System.Drawing.Color.White;
+            this._consoleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._consoleLbl.Location = new System.Drawing.Point(3, 0);
+            this._consoleLbl.Name = "_consoleLbl";
+            this._consoleLbl.Size = new System.Drawing.Size(174, 42);
+            this._consoleLbl.TabIndex = 0;
+            this._consoleLbl.Text = "Console:";
             // 
             // _deviceHistoryRtb
             // 
@@ -87,7 +87,7 @@
             this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._consoleInputTlp.Controls.Add(this._inputTxt, 1, 0);
-            this._consoleInputTlp.Controls.Add(this.label4, 0, 0);
+            this._consoleInputTlp.Controls.Add(this._inputLbl, 0, 0);
             this._consoleInputTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._consoleInputTlp.Location = new System.Drawing.Point(3, 612);
             this._consoleInputTlp.Name = "_consoleInputTlp";
@@ -108,17 +108,17 @@
             this._inputTxt.Size = new System.Drawing.Size(883, 49);
             this._inputTxt.TabIndex = 1;
             // 
-            // label4
+            // _inputLbl
             // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 59);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Input:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this._inputLbl.AutoSize = true;
+            this._inputLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._inputLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
+            this._inputLbl.Location = new System.Drawing.Point(3, 0);
+            this._inputLbl.Name = "_inputLbl";
+            this._inputLbl.Size = new System.Drawing.Size(114, 59);
+            this._inputLbl.TabIndex = 0;
+            this._inputLbl.Text = "Input:";
+            this._inputLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ConsoleControlView
             // 
@@ -138,10 +138,10 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel _tlpBottomLeft;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label _consoleLbl;
         private System.Windows.Forms.RichTextBox _deviceHistoryRtb;
         private System.Windows.Forms.TableLayoutPanel _consoleInputTlp;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label _inputLbl;
         private System.Windows.Forms.TextBox _inputTxt;
     }
 }

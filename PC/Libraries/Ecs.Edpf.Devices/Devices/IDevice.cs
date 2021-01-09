@@ -1,6 +1,8 @@
 ﻿using Ecs.Edpf.Devices.Connections;
+using Ecs.Edpf.Devices.IO.Cmds;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,10 @@ namespace Ecs.Edpf.Devices
 {
     public interface IDevice : INotifyPropertyChanged
     {
+
+
+        ReadOnlyCollection<IDeviceCommand> DeviceCommands { get; } 
+
 
         int CommandTimeout { get; set; }
 

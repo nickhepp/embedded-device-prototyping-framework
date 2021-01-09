@@ -1,5 +1,6 @@
 ﻿using HostApp.UI.ChildUI;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace HostApp.UI.ViewModels
 {
@@ -8,7 +9,20 @@ namespace HostApp.UI.ViewModels
 
         IDeviceCommandViewModel SelectedDeviceCommandViewModel { get; set; }
 
-        BindingList<IDeviceCommandViewModel> DeviceCommandViewModels { get; } 
+        BindingList<IDeviceCommandViewModel> DeviceCommandViewModels { get; }
+
+
+        string SelectedCommandExecuteButtonText { get; }
+
+        bool SelectedCommandExecuteButtonEnabled { get; }
+
+
+        ICommand SelectedCommand
+        {
+            get;
+        }
+
+
 
     }
 }

@@ -35,18 +35,36 @@
             this._leftTlp = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this._ctrlPnl = new System.Windows.Forms.Panel();
-            this._tabCtrl = new System.Windows.Forms.TabControl();
-            this._connectionTpg = new System.Windows.Forms.TabPage();
-            this._settingsTpg = new System.Windows.Forms.TabPage();
             this._settingsPpg = new System.Windows.Forms.PropertyGrid();
+            this._ctrlSpl = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this._connSettingsSpl = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this._deviceCmdsPnl = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this._connectionPnl = new System.Windows.Forms.Panel();
             this._mainTlp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._mainSpl)).BeginInit();
             this._mainSpl.Panel1.SuspendLayout();
             this._mainSpl.Panel2.SuspendLayout();
             this._mainSpl.SuspendLayout();
             this._leftTlp.SuspendLayout();
-            this._tabCtrl.SuspendLayout();
-            this._settingsTpg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._ctrlSpl)).BeginInit();
+            this._ctrlSpl.Panel1.SuspendLayout();
+            this._ctrlSpl.Panel2.SuspendLayout();
+            this._ctrlSpl.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._connSettingsSpl)).BeginInit();
+            this._connSettingsSpl.Panel1.SuspendLayout();
+            this._connSettingsSpl.Panel2.SuspendLayout();
+            this._connSettingsSpl.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // _mainTlp
@@ -94,11 +112,11 @@
             // 
             // _mainSpl.Panel1
             // 
-            this._mainSpl.Panel1.Controls.Add(this._leftTlp);
+            this._mainSpl.Panel1.Controls.Add(this._ctrlSpl);
             // 
             // _mainSpl.Panel2
             // 
-            this._mainSpl.Panel2.Controls.Add(this._tabCtrl);
+            this._mainSpl.Panel2.Controls.Add(this._connSettingsSpl);
             this._mainSpl.Size = new System.Drawing.Size(1797, 1082);
             this._mainSpl.SplitterDistance = 934;
             this._mainSpl.TabIndex = 2;
@@ -116,7 +134,7 @@
             this._leftTlp.RowCount = 2;
             this._leftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this._leftTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._leftTlp.Size = new System.Drawing.Size(930, 1078);
+            this._leftTlp.Size = new System.Drawing.Size(930, 481);
             this._leftTlp.TabIndex = 0;
             // 
             // label1
@@ -134,49 +152,156 @@
             this._ctrlPnl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._ctrlPnl.Location = new System.Drawing.Point(3, 44);
             this._ctrlPnl.Name = "_ctrlPnl";
-            this._ctrlPnl.Size = new System.Drawing.Size(924, 1031);
+            this._ctrlPnl.Size = new System.Drawing.Size(924, 434);
             this._ctrlPnl.TabIndex = 2;
-            // 
-            // _tabCtrl
-            // 
-            this._tabCtrl.Controls.Add(this._connectionTpg);
-            this._tabCtrl.Controls.Add(this._settingsTpg);
-            this._tabCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._tabCtrl.Location = new System.Drawing.Point(0, 0);
-            this._tabCtrl.Name = "_tabCtrl";
-            this._tabCtrl.SelectedIndex = 0;
-            this._tabCtrl.Size = new System.Drawing.Size(855, 1078);
-            this._tabCtrl.TabIndex = 2;
-            // 
-            // _connectionTpg
-            // 
-            this._connectionTpg.Location = new System.Drawing.Point(8, 39);
-            this._connectionTpg.Name = "_connectionTpg";
-            this._connectionTpg.Padding = new System.Windows.Forms.Padding(3);
-            this._connectionTpg.Size = new System.Drawing.Size(839, 1031);
-            this._connectionTpg.TabIndex = 0;
-            this._connectionTpg.Text = "Connection";
-            this._connectionTpg.UseVisualStyleBackColor = true;
-            // 
-            // _settingsTpg
-            // 
-            this._settingsTpg.Controls.Add(this._settingsPpg);
-            this._settingsTpg.Location = new System.Drawing.Point(8, 39);
-            this._settingsTpg.Name = "_settingsTpg";
-            this._settingsTpg.Padding = new System.Windows.Forms.Padding(3);
-            this._settingsTpg.Size = new System.Drawing.Size(839, 1031);
-            this._settingsTpg.TabIndex = 1;
-            this._settingsTpg.Text = "Control Settings";
-            this._settingsTpg.UseVisualStyleBackColor = true;
             // 
             // _settingsPpg
             // 
             this._settingsPpg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._settingsPpg.Location = new System.Drawing.Point(3, 3);
+            this._settingsPpg.Location = new System.Drawing.Point(0, 0);
             this._settingsPpg.Name = "_settingsPpg";
-            this._settingsPpg.Size = new System.Drawing.Size(833, 1025);
+            this._settingsPpg.Size = new System.Drawing.Size(924, 546);
             this._settingsPpg.TabIndex = 3;
             this._settingsPpg.ToolbarVisible = false;
+            // 
+            // _ctrlSpl
+            // 
+            this._ctrlSpl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._ctrlSpl.Location = new System.Drawing.Point(0, 0);
+            this._ctrlSpl.Name = "_ctrlSpl";
+            this._ctrlSpl.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // _ctrlSpl.Panel1
+            // 
+            this._ctrlSpl.Panel1.Controls.Add(this._leftTlp);
+            // 
+            // _ctrlSpl.Panel2
+            // 
+            this._ctrlSpl.Panel2.Controls.Add(this.tableLayoutPanel1);
+            this._ctrlSpl.Size = new System.Drawing.Size(930, 1078);
+            this._ctrlSpl.SplitterDistance = 481;
+            this._ctrlSpl.TabIndex = 1;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(930, 593);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(188, 25);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Control Settings:";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this._settingsPpg);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 44);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(924, 546);
+            this.panel1.TabIndex = 2;
+            // 
+            // _connSettingsSpl
+            // 
+            this._connSettingsSpl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._connSettingsSpl.Location = new System.Drawing.Point(0, 0);
+            this._connSettingsSpl.Name = "_connSettingsSpl";
+            this._connSettingsSpl.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // _connSettingsSpl.Panel1
+            // 
+            this._connSettingsSpl.Panel1.Controls.Add(this.tableLayoutPanel2);
+            // 
+            // _connSettingsSpl.Panel2
+            // 
+            this._connSettingsSpl.Panel2.Controls.Add(this.tableLayoutPanel3);
+            this._connSettingsSpl.Size = new System.Drawing.Size(855, 1078);
+            this._connSettingsSpl.SplitterDistance = 616;
+            this._connSettingsSpl.TabIndex = 3;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this._deviceCmdsPnl, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(855, 616);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(214, 25);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Device Commands:";
+            // 
+            // _deviceCmdsPnl
+            // 
+            this._deviceCmdsPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._deviceCmdsPnl.Location = new System.Drawing.Point(3, 44);
+            this._deviceCmdsPnl.Name = "_deviceCmdsPnl";
+            this._deviceCmdsPnl.Size = new System.Drawing.Size(849, 569);
+            this._deviceCmdsPnl.TabIndex = 2;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this._connectionPnl, 0, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(855, 458);
+            this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(138, 25);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Connection:";
+            // 
+            // _connectionPnl
+            // 
+            this._connectionPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._connectionPnl.Location = new System.Drawing.Point(3, 44);
+            this._connectionPnl.Name = "_connectionPnl";
+            this._connectionPnl.Size = new System.Drawing.Size(849, 411);
+            this._connectionPnl.TabIndex = 2;
             // 
             // MainTestForm
             // 
@@ -186,6 +311,7 @@
             this.Controls.Add(this._mainTlp);
             this.Name = "MainTestForm";
             this.Text = "Test Form";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this._mainTlp.ResumeLayout(false);
             this._mainTlp.PerformLayout();
             this._mainSpl.Panel1.ResumeLayout(false);
@@ -194,8 +320,21 @@
             this._mainSpl.ResumeLayout(false);
             this._leftTlp.ResumeLayout(false);
             this._leftTlp.PerformLayout();
-            this._tabCtrl.ResumeLayout(false);
-            this._settingsTpg.ResumeLayout(false);
+            this._ctrlSpl.Panel1.ResumeLayout(false);
+            this._ctrlSpl.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._ctrlSpl)).EndInit();
+            this._ctrlSpl.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this._connSettingsSpl.Panel1.ResumeLayout(false);
+            this._connSettingsSpl.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._connSettingsSpl)).EndInit();
+            this._connSettingsSpl.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -209,10 +348,18 @@
         private System.Windows.Forms.TableLayoutPanel _leftTlp;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel _ctrlPnl;
-        private System.Windows.Forms.TabControl _tabCtrl;
-        private System.Windows.Forms.TabPage _connectionTpg;
-        private System.Windows.Forms.TabPage _settingsTpg;
         private System.Windows.Forms.PropertyGrid _settingsPpg;
+        private System.Windows.Forms.SplitContainer _ctrlSpl;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.SplitContainer _connSettingsSpl;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel _deviceCmdsPnl;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel _connectionPnl;
     }
 }
 

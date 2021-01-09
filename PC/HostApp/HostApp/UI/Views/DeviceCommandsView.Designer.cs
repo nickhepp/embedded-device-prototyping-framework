@@ -66,8 +66,9 @@
             this._executeCmdBtn.Name = "_executeCmdBtn";
             this._executeCmdBtn.Size = new System.Drawing.Size(964, 115);
             this._executeCmdBtn.TabIndex = 1;
-            this._executeCmdBtn.Text = "button1";
+            this._executeCmdBtn.Text = "_executeCmdBtn";
             this._executeCmdBtn.UseVisualStyleBackColor = true;
+            this._executeCmdBtn.Click += new System.EventHandler(this._executeCmdBtn_Click);
             // 
             // DeviceCommandsView
             // 

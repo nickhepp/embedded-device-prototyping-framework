@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Ecs.Edpf.Devices.IO.Params
 {
-    public interface IParameter
+    public interface IParameter : INotifyPropertyChanged
     {
 
         /// <summary>
@@ -27,6 +28,10 @@ namespace Ecs.Edpf.Devices.IO.Params
         /// </summary>
         /// <returns></returns>
         string GetParameterText();
+
+        bool IsValid { get; }
+
+
 
     }
 }

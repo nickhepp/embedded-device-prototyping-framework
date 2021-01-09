@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace HostApp.UI.ViewModels
 {
@@ -20,7 +21,71 @@ namespace HostApp.UI.ViewModels
 
         public string Name => "Device Commands";
 
-        public IDeviceCommandViewModel SelectedDeviceCommandViewModel { get; set; }
+
+        private IDeviceCommandViewModel _selectedDeviceCommandViewModel;
+        public IDeviceCommandViewModel SelectedDeviceCommandViewModel
+        {
+            get
+            {
+                return _selectedDeviceCommandViewModel;
+            }
+            set
+            {
+                _selectedDeviceCommandViewModel = value;
+                RaiseNotifyPropertyChanged();
+                SelectedCommandExecuteButtonText = (value == null) ? "Open device to enable commands" : $"Execute '{_selectedDeviceCommandViewModel.MethodName}' command";
+            }
+        }
+
+        private ICommand _selectedCommand;
+        public ICommand SelectedCommand => throw new NotImplementedException();
+
+        private string _executeButtonText;
+        public string SelectedCommandExecuteButtonText
+        {
+            get
+            {
+                return _executeButtonText;
+            }
+            private set
+            {
+                _executeButtonText = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
+        private bool _selectedCommandExecuteButtonEnabled;
+        public bool SelectedCommandExecuteButtonEnabled
+        {
+            get
+            {
+                return _selectedCommandExecuteButtonEnabled;
+            }
+            private set
+            {
+                _selectedCommandExecuteButtonEnabled = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
+
+
+        public DeviceCommandsViewModel()
+        {
+            _selectedCommand = new HostApp.ComponentModel.RelayCommand(canExecute: SelectedCommandCanExecute, execute: SelectedCommandExecute);
+        }
+
+
+        private void SelectedCommandExecute(object obj)
+        {
+            _selectedDeviceCommandViewModel.Execute();
+        }
+
+
+        private bool SelectedCommandCanExecute(object obj)
+        {
+            return SelectedDeviceCommandViewModel != null && SelectedDeviceCommandViewModel.IsValid;
+        }
 
         protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {

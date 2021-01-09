@@ -49,12 +49,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IO\UInt8ParameterTest.cs" />
-    <Compile Include="IO\UInt16ParameterTest.cs" />
-    <Compile Include="IO\UInt32ParameterTest.cs" />
-    <Compile Include="IO\FloatParameterTest.cs" />
-    <Compile Include="IO\BoolParameterTest.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="IO\Cmds\BaseCommandTest.cs" />
+    <Compile Include="IO\Cmds\FakeDeviceCommand.cs" />
+    <Compile Include="IO\Params\UInt8ParameterTest.cs" />
+    <Compile Include="IO\Params\UInt16ParameterTest.cs" />
+    <Compile Include="IO\Params\UInt32ParameterTest.cs" />
+    <Compile Include="IO\Params\FloatParameterTest.cs" />
+    <Compile Include="IO\Params\BoolParameterTest.cs" />
+    <Compile Include="IO\Params\StringParameterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

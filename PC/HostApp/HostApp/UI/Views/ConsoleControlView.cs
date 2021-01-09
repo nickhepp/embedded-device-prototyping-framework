@@ -35,9 +35,14 @@ namespace HostApp.UI.Views
             _inputTxt.DataBindings.Add(new Binding(nameof(TextBox.Enabled), 
                 _consoleControlViewModel, 
                 nameof(IConsoleControlViewModel.InputTextEnabled)));
+            _inputLbl.DataBindings.Add(new Binding(nameof(Label.Enabled),
+                _consoleControlViewModel,
+                nameof(IConsoleControlViewModel.InputTextEnabled)));
+            _consoleLbl.DataBindings.Add(new Binding(nameof(Label.Enabled),
+                _consoleControlViewModel,
+                nameof(IConsoleControlViewModel.InputTextEnabled)));
 
             _inputTxt.KeyDown += InputTextKeyDown;
-
 
             _consoleControlViewModel.DeviceOutputBufferChanged += ConsoleControlViewModelDeviceOutputBufferChanged;
             ConsoleControlViewModelDeviceOutputBufferChanged(this, new System.EventArgs());

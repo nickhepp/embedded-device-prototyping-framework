@@ -12,6 +12,10 @@ namespace Ecs.Edpf.Devices.Connections.Fake
 
         public int CommandTimeout { get; set; }
 
+        public int QueuedCharsToRead => throw new NotImplementedException();
+
+        public int MaxReadChunkSize => throw new NotImplementedException();
+
         public void Close()
         {
         }
@@ -30,11 +34,6 @@ namespace Ecs.Edpf.Devices.Connections.Fake
             return "";
         }
 
-        public (string text, bool endOfResponse) ReadToEndOfResponse()
-        {
-            string returnTxt = _writtenText + Environment.NewLine + $"echo {_writtenText}";
-            return (returnTxt, true);
-        }
 
 
         private string _writtenText;
@@ -42,6 +41,11 @@ namespace Ecs.Edpf.Devices.Connections.Fake
         public void Write(string text)
         {
             _writtenText = text;
+        }
+
+        public string ReadNextChunk(int maxReadSize)
+        {
+            throw new NotImplementedException();
         }
     }
 }

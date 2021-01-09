@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Ecs.Edpf.Devices.IO.Params
 {
-    public abstract class BaseParameter<T> : IParameterBase<T>, IParameter
+    public abstract class BaseParameter<T> : IParameterBase<T>, IParameter, INotifyPropertyChanged
     {
 
 
@@ -20,7 +21,10 @@ namespace Ecs.Edpf.Devices.IO.Params
         public string FormatString => _formatStr;
 
         private T _val;
-        public T Value
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual T Value
         {
             get
             {
@@ -28,17 +32,26 @@ namespace Ecs.Edpf.Devices.IO.Params
             }
             set
             {
+                bool oldIsValid = IsValid;
                 _val = value;
+                if (IsValid != oldIsValid)
+                {
+                    RaiseNotifyPropertyChanged(nameof(IsValid));
+                }
+
             }
         }
+
+
+        public virtual bool IsValid => true;
 
         public string Name { get; }
 
         public BaseParameter(string name, int parameterIndex, T initialValue, string formatStr = "")
         {
-
+            Name = name;
             _parameterIndex = parameterIndex;
-            _val = initialValue;
+            SetValue(initialValue.ToString());
             _formatStr = formatStr;
         }
 
@@ -77,6 +90,16 @@ namespace Ecs.Edpf.Devices.IO.Params
         {
             return FormatString;
         }
+
+        protected void RaiseNotifyPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
+
         
     }
 }

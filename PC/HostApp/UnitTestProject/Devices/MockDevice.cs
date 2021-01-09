@@ -11,10 +11,6 @@ namespace UnitTestProject.Devices
     public class MockDevice : Mock<IDevice>
     {
 
-        private bool _isOpen = false;
-
-
-
         public MockDevice()
         {
             Setup(device => device.Open()).Returns(() => true).Callback(() =>

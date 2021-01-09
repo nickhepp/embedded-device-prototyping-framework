@@ -19,9 +19,6 @@ namespace HostApp.UI.Views
     public partial class ConnectionView : UserControl, IChildView
     {
 
-
-        public IDevice Device { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         private IConnectionViewModel _connectionViewModel;
         public IChildViewModel ViewModel {
             get
@@ -50,25 +47,7 @@ namespace HostApp.UI.Views
             _closeBtn.DataBindings.Clear();
             _closeBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _connectionViewModel, nameof(IConnectionViewModel.CloseButtonEnabled)));
         }
-
-
-        private void UpdateConnectionSettingsPpg()
-        {
-
-        }
-
-        private void SetDevice()
-        {
-            if (Device == null)
-            {
-                _settingsPpg.SelectedObject = null;
-            }
-            else
-            {
-
-            }
-        }
-
+ 
         private void OpenBtn_Click(object sender, EventArgs e)
         {
             _connectionViewModel.OpenCommand.Execute(null);

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Forms;
 using HostApp.UI.ChildUI.Views;
 using HostApp.UI.ChildUI;
@@ -25,6 +26,9 @@ namespace HostApp.UI.Views
             InitializeComponent();
 
             _commandsTab.Selected += CommandsTabSelected;
+
+
+
         }
 
         private void CommandsTabSelected(object sender, TabControlEventArgs e)
@@ -35,7 +39,6 @@ namespace HostApp.UI.Views
                 if (!_populatingTabs && (selectedDevCmdVwMdl != null))
                 {
                     _deviceCommandsViewModel.SelectedDeviceCommandViewModel = selectedDevCmdVwMdl;
-                    _executeCmdBtn.Text = $"Execute '{selectedDevCmdVwMdl.MethodName}' Command";
                 }
             }
         }
@@ -50,9 +53,16 @@ namespace HostApp.UI.Views
             {
                 _deviceCommandsViewModel = value as IDeviceCommandsViewModel;
 
+                _executeCmdBtn.DataBindings.Clear();
+                _executeCmdBtn.DataBindings.Clear();
+
                 if (_deviceCommandsViewModel != null)
                 {
                     _deviceCommandsViewModel.DeviceCommandViewModels.ListChanged += DeviceCommandViewModelsListChanged;
+
+                    _executeCmdBtn.DataBindings.Add(new Binding(nameof(Button.Text), _deviceCommandsViewModel, nameof(IDeviceCommandsViewModel.SelectedCommandExecuteButtonText)));
+                    _executeCmdBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _deviceCommandsViewModel, nameof(IDeviceCommandsViewModel.SelectedCommandExecuteButtonEnabled)));
+
                 }
 
             }
@@ -89,6 +99,9 @@ namespace HostApp.UI.Views
 
         }
 
-
+        private void _executeCmdBtn_Click(object sender, EventArgs e)
+        {
+            _deviceCommandsViewModel.SelectedCommand.Execute(null);
+        }
     }
 }

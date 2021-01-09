@@ -22,6 +22,8 @@ namespace HostApp.UI.ViewModels
 
         public string MethodName { get; }
 
+        public bool IsValid => _deviceCommand.IsValid;
+
         public DeviceCommandViewModel(IDeviceCommand deviceCommand)
         {
             _deviceCommand = deviceCommand;
@@ -50,7 +52,10 @@ namespace HostApp.UI.ViewModels
             return _pdColl;
         }
 
-
+        public void Execute()
+        {
+            throw new NotImplementedException();
+        }
 
         internal class CommandMethodNamePropertyDescriptor : PropertyDescriptor
         {

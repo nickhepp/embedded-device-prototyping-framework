@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 
 namespace Ecs.Edpf.Devices.IO.Cmds
 {
-    public interface IDeviceCommand
+    public interface IDeviceCommand : INotifyPropertyChanged
     {
 
         ReadOnlyCollection<IParameter> Parameters { get; }
@@ -14,6 +15,12 @@ namespace Ecs.Edpf.Devices.IO.Cmds
         string MethodName { get; }
 
         List<string> GetCommandTextLines();
+
+        /// <summary>
+        /// Gets whether the device is valid.
+        /// </summary>
+        bool IsValid { get; }
+
 
     }
 }

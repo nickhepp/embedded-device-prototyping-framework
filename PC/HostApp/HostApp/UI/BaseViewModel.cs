@@ -92,7 +92,7 @@ namespace HostApp.UI
             return TypeDescriptor.GetEvents(this, attributes, true);
         }
 
-        public PropertyDescriptorCollection GetProperties()
+        public virtual PropertyDescriptorCollection GetProperties()
         {
             PropertyDescriptorCollection pdColl = TypeDescriptor.GetProperties(this, true);
             List<PropertyDescriptor> pdDescs = new List<PropertyDescriptor>();

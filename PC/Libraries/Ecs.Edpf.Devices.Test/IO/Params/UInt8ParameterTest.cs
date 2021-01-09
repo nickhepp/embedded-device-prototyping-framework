@@ -3,7 +3,7 @@ using Ecs.Edpf.Devices.IO;
 using Ecs.Edpf.Devices.IO.Params;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Ecs.Edpf.Devices.Test.IO
+namespace Ecs.Edpf.Devices.Test.IO.Params
 {
     [TestClass]
     public class UInt8ParameterTest

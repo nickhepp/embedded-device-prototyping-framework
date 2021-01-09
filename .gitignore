@@ -52,3 +52,6 @@ Mkfile.old
 dkms.conf
 
 *.dia~
+
+PC/Libraries/Ecs.Edpf.Devices.Test/bin/*
+PC/Libraries/Ecs.Edpf.Devices.Test/obj/*

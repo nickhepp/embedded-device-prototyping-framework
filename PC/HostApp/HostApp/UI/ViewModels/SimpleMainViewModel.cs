@@ -63,8 +63,6 @@ namespace HostApp.UI.ViewModels
             }
         }
 
-        public IDeviceFactory DeviceFactory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         public SimpleMainViewModel() : base()
         {
             //_deviceWithConnectionInfo = Device as IDeviceWithConnectionInfo;

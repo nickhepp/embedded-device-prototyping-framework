@@ -15,6 +15,9 @@ namespace Ecs.Edpf.Devices.Connections
 
         int CommandTimeout { get; set; }
 
+        int QueuedCharsToRead { get; }
+
+        int MaxReadChunkSize { get; }
 
         void Open(IConnectionInfo connectionInfo);
 
@@ -23,21 +26,28 @@ namespace Ecs.Edpf.Devices.Connections
         /// </summary>
         void Close();
 
+
+        string ReadNextChunk(int maxReadSize);
+
+
         /// <summary>
         /// Reads the device until the read buffer is cleared.
         /// </summary>
         /// <returns></returns>
         string ReadToEndOfBuffer();
 
-        /// <summary>
-        /// Reads to the end of the device resoponse.
-        /// </summary>
-        /// <exception>Timeout has expired.</exception>
-        /// <returns></returns>
-        (string text, bool endOfResponse) ReadToEndOfResponse();
+        ///// <summary>
+        ///// Reads to the end of the device resoponse.
+        ///// </summary>
+        ///// <exception>Timeout has expired.</exception>
+        ///// <returns></returns>
+        //(string text, bool endOfResponse) ReadToEndOfResponse();
 
 
         void Write(string text);
+
+
+
 
 
     }

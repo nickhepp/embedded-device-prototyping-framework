@@ -21,7 +21,7 @@ namespace HostApp.ManualTest
 
         private MainTestViewModel _mainTestViewModel;
 
-        private FakeConnectionViewModel _fakeConnViewModel;
+        //private FakeConnectionViewModel _fakeConnViewModel;
 
 
         public class ViewConfigurationWrapper
@@ -54,13 +54,20 @@ namespace HostApp.ManualTest
             _ctrlSelectionCbx.SelectedIndexChanged += CtrlSelectionCbx_SelectedIndexChanged;
 
 
-            _fakeConnViewModel = new FakeConnectionViewModel();
+            //_fakeConnViewModel = new FakeConnectionViewModel();
             ConnectionView connView = new ConnectionView();
-            _connectionTpg.Controls.Add(connView);
+            _connectionPnl.Controls.Add(connView);
             connView.Dock = DockStyle.Fill;
-            connView.ViewModel = _fakeConnViewModel;
+            connView.ViewModel = _mainTestViewModel.ConnectionViewModel;
+
+            DeviceCommandsView deviceCommandsView = new DeviceCommandsView();
+            _deviceCmdsPnl.Controls.Add(deviceCommandsView);
+            deviceCommandsView.Dock = DockStyle.Fill;
+            deviceCommandsView.ViewModel = _mainTestViewModel.DeviceCommandsViewModel;
 
             _mainSpl.SplitterDistance = this.Width >> 1;
+            _connSettingsSpl.SplitterDistance = _connSettingsSpl.Parent.Height >> 1;
+            _ctrlSpl.SplitterDistance = _ctrlSpl.Parent.Height >> 1;
 
             // seed the first selection
             CtrlSelectionCbx_SelectedIndexChanged(this, new EventArgs());
@@ -77,7 +84,7 @@ namespace HostApp.ManualTest
 
             if (viewConfigWrapper.GetViewModel() is IDeviceViewModel deviceViewModel)
             {
-                deviceViewModel.DeviceFactory = _fakeConnViewModel.DeviceFactory;
+                deviceViewModel.DeviceFactory = _mainTestViewModel.ConnectionViewModel.DeviceFactory;
             }
 
             _ctrlPnl.Controls.Add(ctrl);
