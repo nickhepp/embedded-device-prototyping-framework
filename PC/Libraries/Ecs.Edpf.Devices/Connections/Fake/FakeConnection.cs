@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ecs.Edpf.Devices.IO.Cmds;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,15 +7,26 @@ namespace Ecs.Edpf.Devices.Connections.Fake
 {
     public class FakeConnection : IConnection
     {
+        private Dictionary<string, Action> _commands = new Dictionary<string, Action>();
+        private Dictionary<int, string> _parameters = new Dictionary<int, string>();
+        private StringBuilder _readBuffer = new StringBuilder();
 
         private FakeConnectionInfo _fakeConnectionInfo;
         public IConnectionInfo ConnectionInfo => _fakeConnectionInfo;
 
         public int CommandTimeout { get; set; }
 
-        public int QueuedCharsToRead => throw new NotImplementedException();
+        public int QueuedCharsToRead => _readBuffer.Length;
 
-        public int MaxReadChunkSize => throw new NotImplementedException();
+        public int MaxReadChunkSize => int.MaxValue;
+
+
+        public FakeConnection()
+        {
+            _commands[EchoCommand.EchoCommandMethodName] = ExecuteEchoCommand;
+            _commands[PrintDeviceInfoCommand.PrintDeviceInfoCommandMethodName] = ExecutePrintDeviceInfoCommand;
+        }
+
 
         public void Close()
         {
@@ -31,21 +43,103 @@ namespace Ecs.Edpf.Devices.Connections.Fake
 
         public string ReadToEndOfBuffer()
         {
-            return "";
+            string valToReturn = _readBuffer.ToString();
+            _readBuffer.Clear();
+            return valToReturn;
         }
-
-
-
-        private string _writtenText;
 
         public void Write(string text)
         {
-            _writtenText = text;
+            if (!text.EndsWith(Constants.LineEnding.ToString()))
+            {
+                throw new Exception("Line does not end with expected line ending.");
+            }
+  
+            int lineEndingIndex = text.IndexOf(Constants.LineEnding);
+            string textToProcess = text.Substring(0, lineEndingIndex);
+
+            // queue the value to be sent back
+            _readBuffer.Append(textToProcess);
+            _readBuffer.Append(Constants.LineEnding);
+
+            if (SetParameterValue(textToProcess))
+            {
+                // successfully read the parameter
+                _readBuffer.Append(Constants.CommandResponseLineEnding);
+            }
+            else if (ExecuteCommand(textToProcess))
+            {
+                // successfully executed the command
+                _readBuffer.Append(Constants.CommandResponseLineEnding);
+            }
+        }
+
+
+        private bool ExecuteCommand(string potentionalCommandLine)
+        {
+            bool retval = false;
+            if (potentionalCommandLine.StartsWith(Constants.CommandNamePrefix) && potentionalCommandLine.EndsWith(Constants.CommandNameEnding))
+            {
+                string potentialCmdName = potentionalCommandLine.Substring(Constants.CommandNamePrefix.Length,
+                    potentionalCommandLine.Length - (Constants.CommandNamePrefix.Length + Constants.CommandNameEnding.Length));
+                Action action = null;
+                if (_commands.TryGetValue(potentialCmdName, out action))
+                {
+                    action.Invoke();
+                    retval = true;
+                }
+
+            }
+            return retval;
+        }
+
+        private bool SetParameterValue(string potentionalParamLine)
+        {
+            bool retval = false;
+            if (potentionalParamLine.StartsWith(Constants.CommandParameterPrefix))
+            {
+                int endIndex = potentionalParamLine.IndexOf(Constants.CommandParameterSuffix);
+                if (endIndex != -1)
+                {
+                    string potentionalParam = potentionalParamLine.Substring(Constants.CommandParameterPrefix.Length, endIndex - Constants.CommandParameterPrefix.Length);
+                    int paramIndexToAssign;
+                    if (int.TryParse(potentionalParam, out paramIndexToAssign))
+                    {
+                        string paramVal = potentionalParamLine.Substring(endIndex + Constants.CommandParameterSuffix.Length);
+                        _parameters[paramIndexToAssign] = paramVal;
+                        retval = true;
+                    }
+                }
+            }
+
+            return retval;
+        }
+
+        private void ExecuteEchoCommand()
+        {
+            _readBuffer.AppendLine(_parameters[0]);
+        }
+
+        private void ExecutePrintDeviceInfoCommand()
+        {
+            _readBuffer.AppendLine("Test Device");
+            string version = "V" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            _readBuffer.AppendLine(version);
+            _readBuffer.AppendLine("cmd params count:999");
         }
 
         public string ReadNextChunk(int maxReadSize)
         {
-            throw new NotImplementedException();
+            int amtToRead = maxReadSize;
+            if (maxReadSize > _readBuffer.Length)
+            {
+                amtToRead = _readBuffer.Length;
+            }
+
+            string readAmt = _readBuffer.ToString().Substring(0, amtToRead);
+            _readBuffer = _readBuffer.Remove(0, amtToRead);
+            return readAmt;
         }
+
     }
 }

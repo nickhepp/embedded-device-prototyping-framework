@@ -8,12 +8,14 @@ namespace Ecs.Edpf.Devices.IO.Cmds
 {
     public class EchoCommand : BaseDeviceCommand
     {
-      
+
+        public const string EchoCommandMethodName = "echo";
+
         public EchoCommand() :  base(new ReadOnlyCollection<IParameter>(new IParameter[] { new StringParameter("echoVal", 0, "hello") }))
         {
         }
 
-        public override string MethodName => "echo";
+        public override string MethodName => EchoCommandMethodName;
 
 
     }

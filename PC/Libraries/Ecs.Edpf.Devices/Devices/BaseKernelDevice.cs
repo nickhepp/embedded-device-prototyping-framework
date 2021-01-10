@@ -149,7 +149,7 @@ namespace Ecs.Edpf.Devices
 
         protected virtual string InternalExecuteCommand(string cmdName)
         {
-            return Write($"cmd:{cmdName}()");
+            return Write($"{Constants.CommandNamePrefix}{cmdName}{Constants.CommandNameEnding}");
         }
 
         public string ExecuteCommand(string cmdName)
@@ -274,8 +274,6 @@ namespace Ecs.Edpf.Devices
                 Open();
             }
             string response = InternalWriteLine(cmdText);
-            // throw in some throttling
-            //System.Threading.Thread.Sleep(100);
             if (!string.IsNullOrEmpty(response))
             {
                 DeviceOutputBuffer.Add(response);
@@ -288,6 +286,15 @@ namespace Ecs.Edpf.Devices
             if (IsOpen)
             {
                 Close();
+            }
+        }
+
+        public void ExecuteCommand(IDeviceCommand cmd)
+        {
+            List<string> lines = cmd.GetCommandTextLines();
+            foreach (string line in lines)
+            {
+                Write(line);
             }
         }
 

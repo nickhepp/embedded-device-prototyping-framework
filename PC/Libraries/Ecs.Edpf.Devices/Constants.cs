@@ -7,6 +7,9 @@ namespace Ecs.Edpf.Devices
     public static class Constants
     {
 
+        public const string CommandNamePrefix = "cmd:";
+        public const string CommandNameEnding = "()";
+
         public const string CommandParameterPrefix = "p[";
         public const string CommandParameterSuffix = "]=";
 

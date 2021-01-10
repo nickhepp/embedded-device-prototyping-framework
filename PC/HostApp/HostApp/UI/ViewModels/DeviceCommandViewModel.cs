@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.Devices.IO.Cmds;
+﻿using Ecs.Edpf.Devices;
+using Ecs.Edpf.Devices.IO.Cmds;
 using Ecs.Edpf.Devices.IO.Params;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace HostApp.UI.ViewModels
     /// </summary>
     public class DeviceCommandViewModel : BaseViewModel, IDeviceCommandViewModel
     {
-
+        private IDevice _device;
         private IDeviceCommand _deviceCommand;
 
         private PropertyDescriptorCollection _pdColl;
@@ -24,9 +25,11 @@ namespace HostApp.UI.ViewModels
 
         public bool IsValid => _deviceCommand.IsValid;
 
-        public DeviceCommandViewModel(IDeviceCommand deviceCommand)
+        public DeviceCommandViewModel(IDevice device, IDeviceCommand deviceCommand)
         {
+            _device = device;
             _deviceCommand = deviceCommand;
+            _deviceCommand.PropertyChanged += DeviceCommandPropertyChanged;
 
             MethodName = deviceCommand.MethodName;
 
@@ -47,6 +50,14 @@ namespace HostApp.UI.ViewModels
             _pdColl = new PropertyDescriptorCollection(pdDescs.ToArray());
         }
 
+        private void DeviceCommandPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(IDeviceCommand.IsValid))
+            {
+                RaiseNotifyPropertyChanged(nameof(IsValid));
+            }
+        }
+
         public override PropertyDescriptorCollection GetProperties()
         {
             return _pdColl;
@@ -54,7 +65,7 @@ namespace HostApp.UI.ViewModels
 
         public void Execute()
         {
-            throw new NotImplementedException();
+            _device.ExecuteCommand(_deviceCommand);
         }
 
         internal class CommandMethodNamePropertyDescriptor : PropertyDescriptor

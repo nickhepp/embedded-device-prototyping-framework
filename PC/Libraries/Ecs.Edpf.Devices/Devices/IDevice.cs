@@ -32,6 +32,12 @@ namespace Ecs.Edpf.Devices
         string Write(string cmdText);
 
         /// <summary>
+        /// Executes the device command.
+        /// </summary>
+        /// <param name="cmd">Command to execute.</param>
+        void ExecuteCommand(IDeviceCommand cmd);
+
+        /// <summary>
         /// Event that is raised when the device is opened.
         /// </summary>
         event EventHandler DeviceOpened;

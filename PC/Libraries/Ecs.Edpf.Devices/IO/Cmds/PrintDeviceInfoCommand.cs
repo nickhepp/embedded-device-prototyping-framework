@@ -8,10 +8,13 @@ namespace Ecs.Edpf.Devices.IO.Cmds
 {
     public class PrintDeviceInfoCommand : BaseDeviceCommand
     {
+
+        public const string PrintDeviceInfoCommandMethodName = "printDeviceInfo";
+
         public PrintDeviceInfoCommand() : base(new ReadOnlyCollection<IParameter>(new IParameter[] { }))
         {
         }
 
-        public override string MethodName => "printDeviceInfo";
+        public override string MethodName => PrintDeviceInfoCommandMethodName;
     }
 }

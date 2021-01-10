@@ -11,7 +11,7 @@ namespace Ecs.Edpf.Devices.Test.IO.Cmds
         private int _fakeDevCmdIsValidPropertyChanged;
         private void FakeDevCmdPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            _fakeDevCmdIsValidPropertyChanged++;
         }
 
         [TestInitialize]
@@ -25,18 +25,17 @@ namespace Ecs.Edpf.Devices.Test.IO.Cmds
         [TestMethod]
         public void PropertyChanged_ParameterIsValidRaised_SelfIsRaised()
         {
+            //-- arrange
             _fakeDevCmdIsValidPropertyChanged = 0;
             FakeDeviceCommand fakeDevCmd = new FakeDeviceCommand();
-
             fakeDevCmd.PropertyChanged += FakeDevCmdPropertyChanged;
-
-
             StringParameter strParam = (StringParameter)fakeDevCmd.Parameters[1];
 
-            strParam.SetValue("");
+            //-- act
+            strParam.Value = null;
 
-
-
+            //-- assert
+            Assert.AreEqual(expected: 1, actual: _fakeDevCmdIsValidPropertyChanged);
         }
 
 

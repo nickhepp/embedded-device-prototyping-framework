@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Ecs.Edpf.Devices;
 using HostApp.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using UnitTestProject.Devices;
 
 namespace UnitTestProject.UI.ViewModels
@@ -16,13 +17,16 @@ namespace UnitTestProject.UI.ViewModels
 
         private class TestConnectionViewModel : BaseConnectionViewModel
         {
+
+            private Mock<IDeviceFactory> _mockDeviceFactory = new Mock<IDeviceFactory>();
+
             public override System.Drawing.Image ViewImage => null;
 
             public override IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel => throw new NotImplementedException();
 
             protected override IDeviceFactory GetDeviceFactory()
             {
-                throw new NotImplementedException();
+                return _mockDeviceFactory.Object;
             }
 
             protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
