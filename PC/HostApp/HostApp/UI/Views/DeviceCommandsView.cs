@@ -33,7 +33,7 @@ namespace HostApp.UI.Views
 
         private void CommandsTabSelected(object sender, TabControlEventArgs e)
         {
-            if (e.Action == TabControlAction.Selected)
+            if ((e.Action == TabControlAction.Selected) && (e.TabPage != null))
             {
                 IDeviceCommandViewModel selectedDevCmdVwMdl = e.TabPage.Tag as IDeviceCommandViewModel;
                 if (!_populatingTabs && (selectedDevCmdVwMdl != null))

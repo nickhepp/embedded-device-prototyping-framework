@@ -25,6 +25,7 @@ namespace HostApp.UI.Views
         public ConsoleControlView()
         {
             InitializeComponent();
+            _deviceHistoryRtb.Clear();
         }
 
 

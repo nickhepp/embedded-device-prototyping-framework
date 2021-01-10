@@ -271,7 +271,7 @@ namespace Ecs.Edpf.Devices
         {
             if (!IsOpen)
             {
-                Open();
+                throw new Exception("Cannot write to an opened device.");
             }
             string response = InternalWriteLine(cmdText);
             if (!string.IsNullOrEmpty(response))
@@ -300,11 +300,9 @@ namespace Ecs.Edpf.Devices
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
-
         public event EventHandler DeviceOpened;
+
         public event EventHandler DeviceClosed;
-
-
 
     }
 }
