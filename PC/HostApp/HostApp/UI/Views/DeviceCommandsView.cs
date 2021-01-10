@@ -24,11 +24,7 @@ namespace HostApp.UI.Views
         public DeviceCommandsView()
         {
             InitializeComponent();
-
             _commandsTab.Selected += CommandsTabSelected;
-
-
-
         }
 
         private void CommandsTabSelected(object sender, TabControlEventArgs e)
@@ -54,15 +50,12 @@ namespace HostApp.UI.Views
                 _deviceCommandsViewModel = value as IDeviceCommandsViewModel;
 
                 _executeCmdBtn.DataBindings.Clear();
-                _executeCmdBtn.DataBindings.Clear();
-
                 if (_deviceCommandsViewModel != null)
                 {
                     _deviceCommandsViewModel.DeviceCommandViewModels.ListChanged += DeviceCommandViewModelsListChanged;
 
                     _executeCmdBtn.DataBindings.Add(new Binding(nameof(Button.Text), _deviceCommandsViewModel, nameof(IDeviceCommandsViewModel.SelectedCommandExecuteButtonText)));
                     _executeCmdBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _deviceCommandsViewModel, nameof(IDeviceCommandsViewModel.SelectedCommandExecuteButtonEnabled)));
-
                 }
 
             }
