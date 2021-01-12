@@ -1,6 +1,6 @@
-﻿using HostApp.ManualTest.Business;
-using HostApp.UI.ViewModels;
-using HostApp.UI.ViewModels.Connections;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Connections;
+using HostApp.ManualTest.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;

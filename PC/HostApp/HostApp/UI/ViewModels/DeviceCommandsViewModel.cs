@@ -14,7 +14,7 @@ namespace HostApp.UI.ViewModels
     public class DeviceCommandsViewModel : BaseDeviceViewModel, IDeviceCommandsViewModel
     {
 
-        private IDevice _device;
+        //private IDevice _device;
 
         public BindingList<IDeviceCommandViewModel> DeviceCommandViewModels { get; } = new BindingList<IDeviceCommandViewModel>();
 

@@ -93,6 +93,10 @@
       <Project>{0D051BF4-521D-4B1A-8B7F-8EDC43D99BD0}</Project>
       <Name>Ecs.Edpf.Devices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.GUI\Ecs.Edpf.GUI.csproj">
+      <Project>{10F0C26D-DAC6-4CFB-A221-1F2C10843990}</Project>
+      <Name>Ecs.Edpf.GUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HostApp\HostApp.csproj">
       <Project>{F65FB57A-0889-4CE8-B6B1-6ECA0F083C21}</Project>
       <Name>HostApp</Name>

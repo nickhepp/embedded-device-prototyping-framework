@@ -1,4 +1,4 @@
-﻿using HostApp.UI.ChildUI;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;

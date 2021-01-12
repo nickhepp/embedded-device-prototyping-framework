@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ecs.Edpf.Devices.Serial;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using HostApp;
 using HostApp.UI;
 using HostApp.UI.ViewModels;
@@ -16,7 +17,7 @@ namespace HostApp.UI
 
         public static IMainViewModel GetMainViewModel()
         {
-            IMainViewModel mainViewModel = new SimpleMainViewModel();
+            IMainViewModel mainViewModel = null; // new SimpleMainViewModel();
             mainViewModel.DeviceFactory = new SerialPortDeviceFactory();
 
 

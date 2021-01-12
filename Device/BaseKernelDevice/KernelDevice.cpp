@@ -143,18 +143,14 @@ void printDeviceInfo()
 //  p[0] = index of param to execute
 //  p[p[0]] = value to echo
 //////////////////////////////////////////////////////////////////////
-void echoCommandParameter()
+void echoCommandParameters()
 {
     // read the parameter index
-    int paramIdx = atoi(cmd_params[0].param_value);
-    if ((paramIdx == 0)         // invalid value
-            || (paramIdx > CMD_PARAMS_COUNT)) 
+    //int paramIdx = atoi(cmd_params[0].param_value);
+    for (uint8_t paramIdx = 0; paramIdx < CMD_PARAMS_COUNT; paramIdx++)
     {
-        Serial.print(err_reading_param_msg);
-        return;
+        Serial.print(cmd_params[paramIdx].param_value);
     }
-
-    Serial.print(cmd_params[paramIdx].param_value);
 }
 
 
@@ -371,7 +367,7 @@ void KernelDevice::init()
     registerCommand("printDeviceInfo\0", printDeviceInfo);
     registerCommand("printRegisteredCommands\0", printRegisteredCommands);
     registerCommand("printCommandParams\0", printCommandParams);
-    registerCommand("echoCommandParameter\0", echoCommandParameter);
+    registerCommand("echoCommandParameters\0", echoCommandParameters);
     
     Serial.println();
     Serial.print(CMD_RESPONSE_LINE_ENDING);

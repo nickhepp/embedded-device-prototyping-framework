@@ -1,4 +1,5 @@
-﻿using HostApp.UI;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using HostApp.UI;
 using HostApp.UI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,16 +26,7 @@ namespace HostApp
 
         public static IMainViewModel GetMainViewModel()
         {
-            IMainViewModel mainViewMdl = null;
-
-            // To use the simple view model uncomment this.
-            // If you want a simple UI that has everything in one view and wont be over complicated use this.
-            //mainViewMdl = new SimpleMainViewModel();
-
-            // To use the more robust view model that includes docking controls, use this view model.
-            mainViewMdl = new ParentMainViewModel();
-
-
+            IMainViewModel mainViewMdl = new ParentMainViewModel();
             return mainViewMdl;
         }
 

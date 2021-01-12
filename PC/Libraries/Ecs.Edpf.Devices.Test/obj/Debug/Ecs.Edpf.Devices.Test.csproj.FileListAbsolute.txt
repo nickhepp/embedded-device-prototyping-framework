@@ -14,3 +14,11 @@ D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.T
 D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\obj\Debug\Ecs.Edpf.Devices.Test.csproj.CopyComplete
 D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\obj\Debug\Ecs.Edpf.Devices.Test.dll
 D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\obj\Debug\Ecs.Edpf.Devices.Test.pdb
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Castle.Core.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Moq.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Castle.Core.xml
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\Moq.xml
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices.Test\bin\Debug\System.Threading.Tasks.Extensions.xml

@@ -1,9 +1,7 @@
-﻿using HostApp.ManualTest.Business;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.Views;
+using HostApp.ManualTest.Business;
 using HostApp.ManualTest.UI.ViewModels;
-using HostApp.UI.ChildUI.ViewModels;
-using HostApp.UI.ViewModels;
-using HostApp.UI.ViewModels.Connections;
-using HostApp.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,9 +18,6 @@ namespace HostApp.ManualTest
     {
 
         private MainTestViewModel _mainTestViewModel;
-
-        //private FakeConnectionViewModel _fakeConnViewModel;
-
 
         public class ViewConfigurationWrapper
         {

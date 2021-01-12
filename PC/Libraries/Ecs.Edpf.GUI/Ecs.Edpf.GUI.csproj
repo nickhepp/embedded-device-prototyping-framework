@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{10F0C26D-DAC6-4CFB-A221-1F2C10843990}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ecs.Edpf.UI</RootNamespace>
+    <AssemblyName>Ecs.Edpf.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComponentModel\RelayCommand.cs" />
+    <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\ViewModels\BaseKernelViewModel.cs" />
+    <Compile Include="UI\ViewModels\BaseKernelWithChildrenViewModel.cs" />
+    <Compile Include="UI\ViewModels\BaseViewModel.cs" />
+    <Compile Include="UI\ConsoleTokenHighlight.cs" />
+    <Compile Include="UI\ViewModels\FakeViewModel.cs" />
+    <Compile Include="UI\IChildViewModelProvider.cs" />
+    <Compile Include="UI\ViewModels\IMainViewModel.cs" />
+    <Compile Include="UI\ViewModels\IViewModel.cs" />
+    <Compile Include="UI\ViewModels\BaseChildViewModel.cs" />
+    <Compile Include="UI\ViewModels\BaseConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\BaseDeviceViewModel.cs" />
+    <Compile Include="UI\ViewModels\ComPortConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\FakeConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\IConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\ConsoleControlViewModel.cs" />
+    <Compile Include="UI\ViewModels\DeviceCommandsViewModel.cs" />
+    <Compile Include="UI\ViewModels\DeviceCommandViewModel.cs" />
+    <Compile Include="UI\ViewModels\DeviceConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\FakeConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\IChildViewModel.cs" />
+    <Compile Include="UI\ViewModels\IConsoleControlViewModel.cs" />
+    <Compile Include="UI\ViewModels\IDeviceCommandsViewModel.cs" />
+    <Compile Include="UI\ViewModels\IDeviceCommandViewModel.cs" />
+    <Compile Include="UI\ViewModels\IDeviceConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\IDeviceViewModel.cs" />
+    <Compile Include="UI\Views\ConnectionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ConnectionView.Designer.cs">
+      <DependentUpon>ConnectionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\ConsoleControlView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ConsoleControlView.Designer.cs">
+      <DependentUpon>ConsoleControlView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\DeviceCommandsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Views\DeviceCommandsView.Designer.cs">
+      <DependentUpon>DeviceCommandsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\DeviceCommandView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Views\DeviceCommandView.Designer.cs">
+      <DependentUpon>DeviceCommandView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\IChildView.cs" />
+    <Compile Include="UI\Views\IMainView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Views\ConnectionView.resx">
+      <DependentUpon>ConnectionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Views\ConsoleControlView.resx">
+      <DependentUpon>ConsoleControlView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Views\DeviceCommandsView.resx">
+      <DependentUpon>DeviceCommandsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Views\DeviceCommandView.resx">
+      <DependentUpon>DeviceCommandView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj">
+      <Project>{0d051bf4-521d-4b1a-8b7f-8edc43d99bd0}</Project>
+      <Name>Ecs.Edpf.Devices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

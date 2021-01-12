@@ -1,4 +1,6 @@
-﻿using HostApp.UI.ViewModels;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.Views;
+using HostApp.UI.ViewModels;
 using System.Windows.Forms;
 
 
@@ -28,10 +30,6 @@ namespace HostApp.UI.Views
         public void SetMainViewModel(IMainViewModel mainViewModel)
         {
             _parentMainViewModel = (IParentMainViewModel)mainViewModel;
-
-            
-
-
 
         }
 

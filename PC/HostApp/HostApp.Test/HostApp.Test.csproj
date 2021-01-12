@@ -7,8 +7,8 @@
     <ProjectGuid>{A477D26F-A257-437B-AA8C-251CF5C578FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestProject</RootNamespace>
-    <AssemblyName>UnitTestProject</AssemblyName>
+    <RootNamespace>HostApp.Test</RootNamespace>
+    <AssemblyName>HostApp.Test</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -70,14 +70,6 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Devices\BaseKernelDeviceTest.cs" />
-    <Compile Include="Devices\MockDevice.cs" />
-    <Compile Include="UI\ViewModelCommandExtractorTest.cs" />
-    <Compile Include="UI\ViewModels\ConsoleControlViewModelTest.cs" />
-    <Compile Include="UI\ViewModels\BaseConnectionViewModelTest.cs" />
-    <Compile Include="UI\ViewModels\DeviceCommandsViewModelTest.cs" />
-    <Compile Include="UI\ViewModels\DeviceCommandViewModelTest.cs" />
-    <Compile Include="UI\ViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +87,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UI\ViewModels\Controls\" />
+    <Folder Include="Devices\" />
+    <Folder Include="UI\ViewModels\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

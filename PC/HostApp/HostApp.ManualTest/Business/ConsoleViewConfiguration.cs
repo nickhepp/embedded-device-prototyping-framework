@@ -1,12 +1,5 @@
-﻿using HostApp.UI;
-using HostApp.UI.ViewModels;
-using HostApp.UI.ViewModels.Controls;
-using HostApp.UI.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.Views;
 using System.Windows.Forms;
 
 namespace HostApp.ManualTest.Business
@@ -24,8 +17,6 @@ namespace HostApp.ManualTest.Business
         {
             _ccView = new ConsoleControlView();
             _ccViewModel = new ConsoleControlViewModel();
-
-            //ConsoleControlViewModel : BaseDeviceViewModel, IConsoleControlViewModel
 
             _ccView.ConsoleControlViewModel = _ccViewModel;
         }

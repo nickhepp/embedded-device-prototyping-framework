@@ -1,7 +1,7 @@
 ﻿using Ecs.Edpf.Devices;
 
-using HostApp.UI.ChildUI;
-using HostApp.UI.ChildUI.ViewModels;
+using Ecs.Edpf.GUI.UI;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 
