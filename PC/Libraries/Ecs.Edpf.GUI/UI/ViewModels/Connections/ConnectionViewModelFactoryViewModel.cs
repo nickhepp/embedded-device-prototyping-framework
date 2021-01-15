@@ -14,15 +14,14 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
     public class ConnectionViewModelFactoryViewModel : BaseDeviceViewModel, IConnectionViewModelFactoryViewModel
     {
 
+        private CompositeDeviceProvider _compositeDeviceProvider;
         public IDeviceProvider GlobalDeviceProvider => _compositeDeviceProvider;
 
 
-        private CompositeDeviceProvider _compositeDeviceProvider;
-
         private List<IConnectionViewModel> _connectionViewModels = new List<IConnectionViewModel>
         {
+            new SerialPortConnectionViewModel(),
             new FakeConnectionViewModel(),
-            new SerialPortConnectionViewModel()
         };
 
         public Image ViewImage => throw new NotImplementedException();
