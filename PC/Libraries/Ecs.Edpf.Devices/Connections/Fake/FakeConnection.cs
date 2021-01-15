@@ -23,8 +23,14 @@ namespace Ecs.Edpf.Devices.Connections.Fake
 
         public FakeConnection()
         {
-            _commands[EchoCommand.EchoCommandMethodName] = ExecuteEchoCommand;
-            _commands[PrintDeviceInfoCommand.PrintDeviceInfoCommandMethodName] = ExecutePrintDeviceInfoCommand;
+            _commands[GetCommandParametersCommand.GetCommandParametersCommandMethodName] = ExecuteGetCommandParametersCommand;
+            _commands[GetDeviceInfoCommand.GetDeviceInfoCommandMethodName] = ExecuteGetDeviceInfoCommand;
+            _commands[GetRegisteredCommandsCommand.GetRegisteredCommandsCommandMethodName] = ExecuteGetRegisteredCommandsCommand;
+
+            for (int pIdx = 0; pIdx < FakeDevice.FakeDeviceParameterCount; pIdx++)
+            {
+                _parameters[pIdx] = String.Empty;
+            }
         }
 
 
@@ -72,6 +78,11 @@ namespace Ecs.Edpf.Devices.Connections.Fake
                 // successfully executed the command
                 _readBuffer.Append(Constants.CommandResponseLineEnding);
             }
+            else
+            {
+                // unidentified response
+                _readBuffer.Append(Constants.CommandResponseLineEnding);
+            }
         }
 
 
@@ -115,17 +126,28 @@ namespace Ecs.Edpf.Devices.Connections.Fake
             return retval;
         }
 
-        private void ExecuteEchoCommand()
+        private void ExecuteGetCommandParametersCommand()
         {
-            _readBuffer.AppendLine(_parameters[0]);
+            for (int pIdx = 0; pIdx < FakeDevice.FakeDeviceParameterCount; pIdx++)
+            {
+                _readBuffer.AppendLine($"p[{pIdx}]={_parameters[pIdx]}");
+            }
         }
 
-        private void ExecutePrintDeviceInfoCommand()
+        private void ExecuteGetDeviceInfoCommand()
         {
             _readBuffer.AppendLine("Test Device");
             string version = "V" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             _readBuffer.AppendLine(version);
             _readBuffer.AppendLine("cmd params count:999");
+        }
+
+        private void ExecuteGetRegisteredCommandsCommand()
+        {
+            foreach (string commandName in _commands.Keys)
+            {
+                _readBuffer.AppendLine(commandName);
+            }
         }
 
         public string ReadNextChunk(int maxReadSize)

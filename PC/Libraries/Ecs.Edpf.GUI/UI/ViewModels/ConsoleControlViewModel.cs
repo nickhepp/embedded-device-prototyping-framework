@@ -1,14 +1,34 @@
 ﻿using Ecs.Edpf.Devices;
 using System.Collections.Generic;
 using System.ComponentModel;
-
+using System.Drawing;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
     public class ConsoleControlViewModel : BaseDeviceViewModel, IConsoleControlViewModel
     {
 
-        public List<ConsoleTokenHighlight> ConsoleTokenHighlights { get; set; } = new List<ConsoleTokenHighlight>();
+        public List<ConsoleTokenHighlight> ConsoleTokenHighlights { get; set; } = new List<ConsoleTokenHighlight>
+        {
+            new ConsoleTokenHighlight
+            {
+                BackgroundColor = Color.Red,
+                ForegroundColor = Color.Black,
+                Token = "ERR:"
+            },
+            new ConsoleTokenHighlight
+            {
+                BackgroundColor = Color.Yellow,
+                ForegroundColor = Color.Black,
+                Token = "WARN:"
+            },
+            new ConsoleTokenHighlight
+            {
+                BackgroundColor = Color.Green,
+                ForegroundColor = Color.Black,
+                Token = "PASS:"
+            }
+        };
 
 
         private bool _inputTextEnabled = false;

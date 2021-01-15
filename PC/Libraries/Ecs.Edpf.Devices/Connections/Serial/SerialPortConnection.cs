@@ -47,6 +47,7 @@ namespace Ecs.Edpf.Devices.Connections.Serial
         {
             _connectionInfo = connectionInfo as SerialPortConnectionInfo;
             _connection = new System.IO.Ports.SerialPort(_connectionInfo.DevicePort, (int)_connectionInfo.DeviceBaudRate);
+            _connection.Open();
         }
 
         public string ReadToEndOfBuffer()

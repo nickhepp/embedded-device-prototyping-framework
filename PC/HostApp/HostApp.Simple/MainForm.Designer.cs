@@ -30,12 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1595, 1064);
-            this.Name = "Form1";
+            this.ClientSize = new System.Drawing.Size(1759, 1136);
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
 

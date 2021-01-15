@@ -49,11 +49,16 @@ namespace HostApp.ManualTest
             _ctrlSelectionCbx.SelectedIndexChanged += CtrlSelectionCbx_SelectedIndexChanged;
 
 
-            //_fakeConnViewModel = new FakeConnectionViewModel();
-            ConnectionView connView = new ConnectionView();
-            _connectionPnl.Controls.Add(connView);
-            connView.Dock = DockStyle.Fill;
-            connView.ViewModel = _mainTestViewModel.ConnectionViewModel;
+            //ConnectionView connView = new ConnectionView();
+            //_connectionPnl.Controls.Add(connView);
+            //connView.Dock = DockStyle.Fill;
+            //connView.ViewModel = _mainTestViewModel.ConnectionViewModel;
+
+            ConnectionsView connsView = new ConnectionsView();
+            _connectionPnl.Controls.Add(connsView);
+            connsView.Dock = DockStyle.Fill;
+            connsView.ViewModel = _mainTestViewModel.ConnectionViewModelFactoryViewModel;
+
 
             DeviceCommandsView deviceCommandsView = new DeviceCommandsView();
             _deviceCmdsPnl.Controls.Add(deviceCommandsView);
@@ -79,7 +84,7 @@ namespace HostApp.ManualTest
 
             if (viewConfigWrapper.GetViewModel() is IDeviceViewModel deviceViewModel)
             {
-                deviceViewModel.DeviceFactory = _mainTestViewModel.ConnectionViewModel.DeviceFactory;
+                deviceViewModel.DeviceProvider = _mainTestViewModel.ConnectionViewModelFactoryViewModel.GlobalDeviceProvider;
             }
 
             _ctrlPnl.Controls.Add(ctrl);

@@ -13,20 +13,21 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 {
     public class FakeConnectionViewModel : BaseConnectionViewModel
     {
+
+        public override string Name => "Fake Connection";
+
         public override Image ViewImage => throw new NotImplementedException();
 
         private FakeConnectionSettingsViewModel _fakeConnSettingsViewModel = new FakeConnectionSettingsViewModel();
         public override IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel => _fakeConnSettingsViewModel;
 
-        //private FakeDeviceFactory _fakeDeviceFactory = new FakeDeviceFactory();
-        //public override IDeviceFactory DeviceFactory { get => _fakeDeviceFactory; }
 
         public FakeConnectionViewModel()
         {
 
         }
 
-        protected override IDeviceFactory GetDeviceFactory()
+        public override IDeviceFactory GetDeviceFactory()
         {
             return new FakeDeviceFactory();
         }

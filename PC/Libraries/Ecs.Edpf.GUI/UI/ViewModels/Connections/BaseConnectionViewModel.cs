@@ -10,10 +10,13 @@ using Ecs.Edpf.Devices;
 using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 
-namespace Ecs.Edpf.GUI.UI.ViewModels
+namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 {
     public abstract class BaseConnectionViewModel : BaseDeviceViewModel, IConnectionViewModel
     {
+
+        private IDeviceFactory _deviceFactory;
+
         private bool _isOpened = false;
         public bool IsOpened {
             get
@@ -80,7 +83,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         public abstract Image ViewImage { get; }
 
-        public string Name { get; }
+        public virtual string Name { get; }
 
         public abstract IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel { get; }
 
@@ -88,11 +91,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         {
             OpenCommand = new RelayCommand(param => this.OpenButtonEnabled, OpenCommandHandler);
             CloseCommand = new RelayCommand(param => this.CloseButtonEnabled, CloseCommandHandler);
-            DeviceFactory = GetDeviceFactory();
+            _deviceFactory = GetDeviceFactory();
         }
 
 
-        protected abstract IDeviceFactory GetDeviceFactory();
+        public abstract IDeviceFactory GetDeviceFactory();
 
         private void SetButtonEnables()
         {
@@ -112,7 +115,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private void OpenCommandHandler(object obj)
         {
-            DeviceFactory.CreateDevice();
+            _deviceFactory.CreateDevice();
+            Device = _deviceFactory.Device;
 
             // device is now set
             Device.DeviceOpened += DeviceOpened;

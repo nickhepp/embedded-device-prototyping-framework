@@ -1,4 +1,4 @@
-﻿namespace HostApp.UI.Views
+﻿namespace HostApp.Simple.UI.Views
 {
     partial class SimpleMainView
     {

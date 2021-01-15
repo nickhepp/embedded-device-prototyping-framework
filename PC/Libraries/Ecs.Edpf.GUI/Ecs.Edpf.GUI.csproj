@@ -7,8 +7,8 @@
     <ProjectGuid>{10F0C26D-DAC6-4CFB-A221-1F2C10843990}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ecs.Edpf.UI</RootNamespace>
-    <AssemblyName>Ecs.Edpf.UI</AssemblyName>
+    <RootNamespace>Ecs.Edpf.GUI</RootNamespace>
+    <AssemblyName>Ecs.Edpf.GUI</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -52,27 +52,38 @@
     <Compile Include="UI\ViewModels\BaseKernelWithChildrenViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseViewModel.cs" />
     <Compile Include="UI\ConsoleTokenHighlight.cs" />
+    <Compile Include="UI\ViewModels\Connections\SerialPortConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\ConnectionViewModelFactoryViewModel.cs" />
     <Compile Include="UI\ViewModels\FakeViewModel.cs" />
     <Compile Include="UI\IChildViewModelProvider.cs" />
+    <Compile Include="UI\ViewModels\Connections\IConnectionViewModelFactoryViewModel.cs" />
+    <Compile Include="UI\ViewModels\IDeviceFactoryFactoryViewModel.cs" />
+    <Compile Include="UI\ViewModels\IDeviceFactoryVideoModel.cs" />
     <Compile Include="UI\ViewModels\IMainViewModel.cs" />
     <Compile Include="UI\ViewModels\IViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseChildViewModel.cs" />
-    <Compile Include="UI\ViewModels\BaseConnectionViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\BaseConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseDeviceViewModel.cs" />
-    <Compile Include="UI\ViewModels\ComPortConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\SerialPortConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\FakeConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\IConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\ConsoleControlViewModel.cs" />
     <Compile Include="UI\ViewModels\DeviceCommandsViewModel.cs" />
     <Compile Include="UI\ViewModels\DeviceCommandViewModel.cs" />
-    <Compile Include="UI\ViewModels\DeviceConnectionSettingsViewModel.cs" />
-    <Compile Include="UI\ViewModels\FakeConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\DeviceConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\FakeConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ViewModels\IChildViewModel.cs" />
     <Compile Include="UI\ViewModels\IConsoleControlViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceCommandsViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceCommandViewModel.cs" />
-    <Compile Include="UI\ViewModels\IDeviceConnectionSettingsViewModel.cs" />
+    <Compile Include="UI\ViewModels\Connections\IDeviceConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceViewModel.cs" />
+    <Compile Include="UI\Views\ConnectionsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ConnectionsView.Designer.cs">
+      <DependentUpon>ConnectionsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\ConnectionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +112,9 @@
     <Compile Include="UI\Views\IMainView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\Views\ConnectionsView.resx">
+      <DependentUpon>ConnectionsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Views\ConnectionView.resx">
       <DependentUpon>ConnectionView.cs</DependentUpon>
     </EmbeddedResource>

@@ -11,7 +11,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
     public interface IDeviceViewModel : IViewModel
     {
 
-        IDeviceFactory DeviceFactory { get; set; }
+        IDeviceProvider DeviceProvider { get; set; }
 
         IDevice Device { get; set; }
 

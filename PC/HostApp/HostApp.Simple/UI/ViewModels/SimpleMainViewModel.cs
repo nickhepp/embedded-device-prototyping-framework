@@ -1,7 +1,9 @@
 ﻿
 using Ecs.Edpf.Devices;
+using Ecs.Edpf.Devices.Connections;
 using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -93,8 +95,8 @@ namespace HostApp.Simple.UI.ViewModels
             //RegisterPropertyVisibilityHandlers(new[] { nameof(ConnectionInfo), nameof(CommandTimeout) }, () => !Device.IsOpen);
             //RegisterPropertyVisibilityHandler(nameof(ReadOnlyDeviceConnectionInfo), () => Device.IsOpen);
 
-            PrintCommandParamsViewModelCommand = new RelayCommand(param => true, PrintCommandParamsCommandHandler);
-            PrintRegisteredCommandsViewModelCommand = new RelayCommand(param => true, PrintRegisteredCommandsCommandHandler);
+            //PrintCommandParamsViewModelCommand = new RelayCommand(param => true, PrintCommandParamsCommandHandler);
+            //PrintRegisteredCommandsViewModelCommand = new RelayCommand(param => true, PrintRegisteredCommandsCommandHandler);
         }
 
         private void PrintCommandParamsCommandHandler(object obj)
@@ -139,7 +141,10 @@ namespace HostApp.Simple.UI.ViewModels
             throw new NotImplementedException();
         }
 
-
+        //IConnectionViewModel ISimpleMainViewModel.GetConnectionViewModel()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public class ConnectionViewModel : BaseConnectionViewModel
         {

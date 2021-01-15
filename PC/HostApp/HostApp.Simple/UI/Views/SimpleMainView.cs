@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using Ecs.Edpf.GUI.UI.Views;
 using HostApp.Simple.UI.ViewModels;
 
-namespace HostApp.UI.Views
+namespace HostApp.Simple.UI.Views
 {
     public partial class SimpleMainView : UserControl, IMainView
     {
@@ -24,28 +25,28 @@ namespace HostApp.UI.Views
         {
             InitializeComponent();
 
-            //this.Load += MainForm_Load;
+            this.Load += MainFormLoad;
 
  
 
-            //AppInfo.InitializeTypesWithBaseKernel();
+            ////AppInfo.InitializeTypesWithBaseKernel();
 
 
-            //_vwMdl = ViewModelFactory.GetViewModel();
+            //_vwMdl = new SimpleMainViewModel();
             //_vwMdl.PropertyChanged += _vwMdl_PropertyChanged;
             ////_vwMdl.DeviceOutputBuffer.ListChanged += DeviceOutputBufferListChanged;
 
 
             //_settingsPpg.SelectedObject = _vwMdl;
 
-            //_openBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(IViewModel.OpenButtonEnabled)));
-            //_closeBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(IViewModel.CloseButtonEnabled)));
-            //_errorsLbl.DataBindings.Add(new Binding(nameof(Label.Text), _vwMdl, nameof(IViewModel.ErrorMessages)));
+            //_openBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(ISimpleMainViewModel.OpenButtonEnabled)));
+            //_closeBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(ISimpleMainViewModel.CloseButtonEnabled)));
+            //_errorsLbl.DataBindings.Add(new Binding(nameof(Label.Text), _vwMdl, nameof(ISimpleMainViewModel.ErrorMessages)));
 
             //// direct input text is only enabled when
-            //_inputTxt.DataBindings.Add(new Binding(nameof(TextBox.Enabled), _vwMdl, nameof(IViewModel.CloseButtonEnabled)));
+            //_inputTxt.DataBindings.Add(new Binding(nameof(TextBox.Enabled), _vwMdl, nameof(ISimpleMainViewModel.CloseButtonEnabled)));
 
-            //List<Tuple<string, ICommand>> cmdNameTuples = ViewModelCommandExtractor.GetCommands(_vwMdl);
+            ////List<Tuple<string, ICommand>> cmdNameTuples = ViewModelCommandExtractor.GetCommands(_vwMdl);
 
             //// turn the methods in the form of "<Xyz>Command()" into buttons
             //_cmdsTlp.RowStyles.Clear();
@@ -58,7 +59,7 @@ namespace HostApp.UI.Views
             //    _cmdsTlp.Controls.Add(btn);
 
             //    // only enable commands if we have an open connection
-            //    btn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(IViewModel.CloseButtonEnabled)));
+            //    btn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(ISimpleMainViewModel.CloseButtonEnabled)));
 
             //    btn.Dock = DockStyle.Fill;
             //    btn.Tag = cmdNameTuple;
@@ -70,10 +71,10 @@ namespace HostApp.UI.Views
 
             //_inputTxt.KeyDown += InputTextKeyDown;
 
-            //SetErrorMessageControls();
+            SetErrorMessageControls();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void MainFormLoad(object sender, EventArgs e)
         {
             _mainSpl.SplitterDistance = (int)(this.Width * 0.75);
             _leftSpl.SplitterDistance = (int)(this.Height * 0.75);
@@ -159,15 +160,6 @@ namespace HostApp.UI.Views
 
 
 
-
-            //            private ISimpleMainViewModel _vwMdl;
-            //private IConnectionViewModel _connVwMdl;
-
-
-
-
-
-            throw new NotImplementedException();
         }
     }
 }

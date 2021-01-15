@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\ConnectionsViewConfiguration.cs" />
     <Compile Include="Business\ConsoleViewConfiguration.cs" />
     <Compile Include="Business\ViewConfiguration.cs" />
     <Compile Include="Business\ViewConfigurationFactory.cs" />

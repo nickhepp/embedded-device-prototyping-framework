@@ -28,7 +28,7 @@ namespace Ecs.Edpf.Connections.Serial
 
         public BaudRate DeviceBaudRate { get; set; } = BaudRate.Baudrate115200;
 
-        public string DevicePort { get; set; } = "COM1";
+        public string DevicePort { get; set; } = System.IO.Ports.SerialPort.GetPortNames().FirstOrDefault();
 
         public override string ToString()
         {

@@ -1,22 +1,20 @@
 ﻿using Ecs.Edpf.Devices.Connections;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ecs.Edpf.Devices
 {
 
-    public interface IDeviceFactory
+    public interface IDeviceFactory : IDeviceProvider
     {
 
         IConnectionInfo ConnectionInfo { get; }
 
-        IDevice Device { get; }
+        //IDevice Device { get; }
+
+        //event EventHandler DeviceCreated;
 
         void CreateDevice();
 
 
-        event EventHandler DeviceCreated;
 
     }
 

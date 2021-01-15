@@ -16,6 +16,9 @@ namespace Ecs.Edpf.Devices
     {
 
 
+        public abstract int ParameterCount { get; }
+
+
         private bool _isOpen = false;
         public bool IsOpen
         {
@@ -170,6 +173,12 @@ namespace Ecs.Edpf.Devices
 
         public void SetCommandParameter(int idx, string paramValue)
         {
+            // TODO: test setting the parameter count
+            if (idx < 0 || ParameterCount <= idx)
+            {
+                throw new ArgumentException($"Parameter index {idx} is invalid.  The valid range is [{0}, {ParameterCount - 1}]");
+            }
+
             InternalSetCommandParameter(idx, paramValue);
         }
 

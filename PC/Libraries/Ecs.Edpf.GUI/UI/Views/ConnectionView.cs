@@ -13,6 +13,7 @@ using Ecs.Edpf.GUI.UI.Views;
 using Ecs.Edpf.Devices;
 using Ecs.Edpf.GUI.UI;
 using Ecs.Edpf.Devices.Connections;
+using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 
 namespace Ecs.Edpf.GUI.UI.Views
 {

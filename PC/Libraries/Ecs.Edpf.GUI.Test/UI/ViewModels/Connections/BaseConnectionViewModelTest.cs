@@ -3,10 +3,11 @@ using System.ComponentModel;
 using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.Test.Devices;
 using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace UnitTestProject.UI.ViewModels
+namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 {
     [TestClass]
     public class BaseConnectionViewModelTest
@@ -24,7 +25,7 @@ namespace UnitTestProject.UI.ViewModels
 
             public override IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel => throw new NotImplementedException();
 
-            protected override IDeviceFactory GetDeviceFactory()
+            public override IDeviceFactory GetDeviceFactory()
             {
                 return _mockDeviceFactory.Object;
             }

@@ -1,4 +1,5 @@
 ﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using System;
 using System.Collections.Generic;
 using System.Text;

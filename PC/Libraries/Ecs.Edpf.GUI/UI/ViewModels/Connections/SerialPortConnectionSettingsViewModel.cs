@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.Devices;
+﻿using Ecs.Edpf.Connections.Serial;
+using Ecs.Edpf.Devices;
 using Ecs.Edpf.GUI.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -9,24 +10,30 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
-    public class ComPortConnectionSettingsViewModel : DeviceConnectionSettingsViewModel
+    public class SerialPortConnectionSettingsViewModel : DeviceConnectionSettingsViewModel
     {
-
-        private string _comPort = "";
         [TypeConverter(typeof(ComPortOptionsPropertyConverter))]
         public string ComPort
         {
             get
             {
-                return _comPort;
+                return _serialPortConnectionInfo.DevicePort;
             }
             set
             {
-                _comPort = value;
+                _serialPortConnectionInfo.DevicePort = value;
             }
         }
 
-      
+        private SerialPortConnectionInfo _serialPortConnectionInfo;
+
+
+        public SerialPortConnectionSettingsViewModel(SerialPortConnectionInfo serialPortConnectionInfo)
+        {
+            _serialPortConnectionInfo = serialPortConnectionInfo;
+        }
+
+
         public class ComPortOptionsPropertyConverter : StringOptionsPropertyConverter
         {
             protected override List<string> GetOptions()

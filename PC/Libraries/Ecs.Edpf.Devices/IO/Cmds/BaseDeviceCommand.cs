@@ -18,6 +18,11 @@ namespace Ecs.Edpf.Devices.IO.Cmds
         public abstract string MethodName { get; }
 
 
+        public BaseDeviceCommand()
+        {
+            Parameters = new ReadOnlyCollection<IParameter>(new List<IParameter>());
+        }
+
         public BaseDeviceCommand(ReadOnlyCollection<IParameter> parameters)
         {
             Parameters = parameters;

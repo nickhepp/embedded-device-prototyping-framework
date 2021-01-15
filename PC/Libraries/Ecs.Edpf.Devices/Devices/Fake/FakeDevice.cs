@@ -10,20 +10,33 @@ namespace Ecs.Edpf.Devices
 {
     public class FakeDevice : BaseKernelDevice
     {
+
+        public const int FakeDeviceParameterCount = 5;
+
+        public override int ParameterCount => FakeDeviceParameterCount;
+
+
         public FakeDevice(FakeConnectionInfo fakeConnectionInfo) : base(new FakeConnectionFactory(), fakeConnectionInfo)
         {
             // create the commands
-            _echoCommand = new EchoCommand();
-            _printDeviceInfoCommand = new PrintDeviceInfoCommand();
-            _deviceCommands = new List<IDeviceCommand>(new IDeviceCommand[] { _printDeviceInfoCommand, _echoCommand });
-
-
+            _getDeviceInfoCommand = new GetDeviceInfoCommand();
+            _getRegisteredCommandsCommand = new GetRegisteredCommandsCommand();
+            _getCommandParametersCommand = new GetCommandParametersCommand();
+            _deviceCommands = new List<IDeviceCommand>(new IDeviceCommand[] 
+                { 
+                    _getDeviceInfoCommand,
+                    _getRegisteredCommandsCommand,
+                    _getCommandParametersCommand
+                });
         }
 
-        private readonly EchoCommand _echoCommand;
-        private readonly PrintDeviceInfoCommand _printDeviceInfoCommand;
+
+        private readonly GetDeviceInfoCommand _getDeviceInfoCommand;
+        private readonly GetRegisteredCommandsCommand _getRegisteredCommandsCommand;
+        private readonly GetCommandParametersCommand _getCommandParametersCommand;
 
         private readonly List<IDeviceCommand> _deviceCommands;
+
 
         protected override List<IDeviceCommand> GetDeviceCommands()
         {

@@ -1,11 +1,13 @@
-﻿using Ecs.Edpf.GUI.UI;
+﻿using Ecs.Edpf.Devices;
+using Ecs.Edpf.GUI.UI;
 using System.Windows.Input;
 
-namespace Ecs.Edpf.GUI.UI.ViewModels
+namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 {
     public interface IConnectionViewModel : IChildViewModel
     {
 
+        IDeviceFactory GetDeviceFactory();
 
         IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel { get; }
 

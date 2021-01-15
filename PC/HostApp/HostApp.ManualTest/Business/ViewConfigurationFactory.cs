@@ -11,7 +11,8 @@ namespace HostApp.ManualTest.Business
 
         private List<ViewConfiguration> _viewConfigs = new List<ViewConfiguration>
         {
-            new ConsoleViewConfiguration()
+            new ConsoleViewConfiguration(),
+            //new ConnectionsViewConfiguration()
         };
 
         public List<ViewConfiguration> GetViewConfigurations()

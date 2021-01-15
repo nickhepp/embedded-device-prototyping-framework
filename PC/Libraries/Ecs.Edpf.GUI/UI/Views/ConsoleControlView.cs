@@ -28,6 +28,11 @@ namespace Ecs.Edpf.GUI.UI.Views
             _deviceHistoryRtb.Clear();
         }
 
+        private void _deviceHistoryRtb_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            _inputTxt.Focus();
+            
+        }
 
         private void SetBindings()
         {

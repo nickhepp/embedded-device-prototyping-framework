@@ -77,7 +77,7 @@ namespace HostApp.Simple.Test
             Assert.AreEqual(nameof(TestViewModel.TestViewModelCommand), "TestViewModelCommand");
             Assert.AreEqual(nameof(TestViewModel.TestAnotherViewModelCommand), "TestAnotherViewModelCommand");
 
-            string[] expectedCmds = {"Test", "Test Another"};
+            string[] expectedCmds = { "Test", "Test Another" };
             Assert.AreEqual(expectedCmds.Length, cmdNameTuples.Count);
 
             Assert.IsTrue(cmdNameTuples.Any(param => param.Item1 == "Test"));

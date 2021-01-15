@@ -11,13 +11,22 @@ namespace Ecs.Edpf.Devices.Serial
 {
     public class SerialPortDevice : BaseKernelDevice
     {
+
+        public override int ParameterCount => 4;
+
+
+        private List<IDeviceCommand> _commands;
+
         public SerialPortDevice(SerialPortConnectionInfo connectionInfo) : base(new SerialPortConnectionFactory(), connectionInfo)
         {
+            _commands = DefaultCommandFactory.GetDeviceCommands();
+
         }
 
         protected override List<IDeviceCommand> GetDeviceCommands()
         {
-            throw new NotImplementedException();
+            return _commands;
         }
+
     }
 }

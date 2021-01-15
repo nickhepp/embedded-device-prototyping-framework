@@ -2,6 +2,7 @@
 using System.ComponentModel;
 
 using Ecs.Edpf.Devices;
+using Ecs.Edpf.Devices.Devices;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
@@ -30,26 +31,26 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
-        private IDeviceFactory _deviceFactory;
-        public IDeviceFactory DeviceFactory
+        private IDeviceProvider _deviceProvider;
+        public IDeviceProvider DeviceProvider
         {
             get
             {
-                return _deviceFactory;
+                return _deviceProvider;
             }
             set
             {
-                _deviceFactory = value;
-                if (_deviceFactory != null)
+                _deviceProvider = value;
+                if (_deviceProvider != null)
                 {
-                    _deviceFactory.DeviceCreated += DeviceFactoryDeviceCreated;
+                    _deviceProvider.DeviceCreated += DeviceProviderDeviceCreated;
                 }
             }
         }
 
-        private void DeviceFactoryDeviceCreated(object sender, EventArgs e)
+        private void DeviceProviderDeviceCreated(object sender, EventArgs e)
         {
-            Device = _deviceFactory.Device;
+            Device = _deviceProvider.Device;
             Device.PropertyChanged += DevicePropertyChanged;
             DeviceOutputBuffer = Device.DeviceOutputBuffer;
         }

@@ -14,8 +14,9 @@ namespace HostApp.ManualTest.UI.ViewModels
 
         public ViewConfigurationFactory ViewConfigurationFactory { get; } = new ViewConfigurationFactory();
 
+        //public IConnectionViewModel ConnectionViewModel { get; }
 
-        public IConnectionViewModel ConnectionViewModel { get; }
+        public IConnectionViewModelFactoryViewModel ConnectionViewModelFactoryViewModel { get; }
 
 
         public IDeviceCommandsViewModel DeviceCommandsViewModel { get; }
@@ -26,12 +27,9 @@ namespace HostApp.ManualTest.UI.ViewModels
 
         public MainTestViewModel()
         {
-
-            ConnectionViewModel = new FakeConnectionViewModel();
-
+            ConnectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel();
             DeviceCommandsViewModel = new DeviceCommandsViewModel();
-            DeviceCommandsViewModel.DeviceFactory = ConnectionViewModel.DeviceFactory;
-
+            DeviceCommandsViewModel.DeviceProvider = ConnectionViewModelFactoryViewModel.GlobalDeviceProvider;
         }
 
 

@@ -123,7 +123,7 @@ struct cmd cmds[CMDS_COUNT];
 //////////////////////////////////////////////////////////////////////
 //  Prints device info.
 //////////////////////////////////////////////////////////////////////
-void printDeviceInfo()
+void getDeviceInfo()
 {
     Serial.println(DEVICE_NAME);
     Serial.print(F("V"));
@@ -136,21 +136,6 @@ void printDeviceInfo()
     Serial.println(VERSION_REVISION);
     Serial.print(F("cmd params count:"));
     Serial.print(CMD_PARAMS_COUNT);
-}
-
-//////////////////////////////////////////////////////////////////////
-//  Echos the command parameter.
-//  p[0] = index of param to execute
-//  p[p[0]] = value to echo
-//////////////////////////////////////////////////////////////////////
-void echoCommandParameters()
-{
-    // read the parameter index
-    //int paramIdx = atoi(cmd_params[0].param_value);
-    for (uint8_t paramIdx = 0; paramIdx < CMD_PARAMS_COUNT; paramIdx++)
-    {
-        Serial.print(cmd_params[paramIdx].param_value);
-    }
 }
 
 
@@ -177,7 +162,7 @@ void echoCommandParameters()
 //////////////////////////////////////////////////////////////////////
 //  Prints the commands that have been registered.
 //////////////////////////////////////////////////////////////////////
-void printRegisteredCommands()
+void getRegisteredCommands()
 {
     for (int k = 0; k < CMDS_COUNT; k++)
     {
@@ -192,9 +177,8 @@ void printRegisteredCommands()
 //////////////////////////////////////////////////////////////////////
 //  Prints the command parameters.
 //////////////////////////////////////////////////////////////////////
-void printCommandParams()
+void getCommandParameters()
 {
-    Serial.println(F("Command params:"));
     for (int k = 0; k < CMD_PARAMS_COUNT; k++)
     {
         Serial.print(CMD_PARAM_PREFIX);
@@ -364,10 +348,9 @@ void KernelDevice::init()
     Serial.begin(115200);  
     // give the device time to catch up before reading
 
-    registerCommand("printDeviceInfo\0", printDeviceInfo);
-    registerCommand("printRegisteredCommands\0", printRegisteredCommands);
-    registerCommand("printCommandParams\0", printCommandParams);
-    registerCommand("echoCommandParameters\0", echoCommandParameters);
+    registerCommand("getDeviceInfo\0", getDeviceInfo);
+    registerCommand("getRegisteredCommands\0", getRegisteredCommands);
+    registerCommand("getCommandParameters\0", getCommandParameters);
     
     Serial.println();
     Serial.print(CMD_RESPONSE_LINE_ENDING);
@@ -378,7 +361,3 @@ void KernelDevice::loopAction()
 {
     readCharacters();
 }
-
-
-
-
