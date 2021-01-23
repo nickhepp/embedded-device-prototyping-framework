@@ -8,10 +8,6 @@ namespace Ecs.Edpf.Devices
 
         IConnectionInfo ConnectionInfo { get; }
 
-        //IDevice Device { get; }
-
-        //event EventHandler DeviceCreated;
-
         void CreateDevice();
 
 

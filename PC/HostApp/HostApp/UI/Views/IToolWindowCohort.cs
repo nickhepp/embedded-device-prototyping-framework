@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace HostApp.UI.Views
 
 
         Bitmap Image { get; }
+
+
+        IViewModel ViewModel { get; }
 
 
     }

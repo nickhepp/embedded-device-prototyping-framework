@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ecs.Edpf.Devices.Devices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
-    public interface IConsoleViewModel : IDeviceViewModel
+    public interface IConsoleViewModel : IDeviceViewModel, IDeviceProviderListener
     {
 
         string SelectedPreviousCommand { get; }

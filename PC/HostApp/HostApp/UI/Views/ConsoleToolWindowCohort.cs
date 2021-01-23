@@ -17,15 +17,17 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
+
+        private IConsoleViewModel _consoleViewModel = new ConsoleViewModel();
+        public IViewModel ViewModel => _consoleViewModel;
+
         public ConsoleToolWindowCohort()
         {
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                IConsoleViewModel consoleViewModel = new ConsoleViewModel();
-
                 ConsoleView consoleView = new ConsoleView
                 {
-                    ConsoleViewModel = consoleViewModel
+                    ConsoleViewModel = _consoleViewModel
                 };
 
                 ToolWindow toolWindow = new ToolWindow();

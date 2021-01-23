@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.UI.ViewModels;
+﻿using Ecs.Edpf.Devices.Devices;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using HostApp.ManualTest.Business;
 using System;
@@ -29,7 +30,7 @@ namespace HostApp.ManualTest.UI.ViewModels
         {
             ConnectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel();
             DeviceCommandsViewModel = new DeviceCommandsViewModel();
-            DeviceCommandsViewModel.DeviceProvider = ConnectionViewModelFactoryViewModel.GlobalDeviceProvider;
+            ((IDeviceProviderListener)DeviceCommandsViewModel).DeviceProvider = ConnectionViewModelFactoryViewModel.GlobalDeviceProvider;
         }
 
 

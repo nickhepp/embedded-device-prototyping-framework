@@ -9,9 +9,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
     public interface IMainViewModel
     {
 
-        //IDevice Device { get; }
-
-        //IDeviceFactory DeviceFactory { get; set; }
 
     }
 }

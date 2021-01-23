@@ -18,14 +18,19 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
+        private IDeviceCommandsViewModel _deviceCommandsViewModel;
+        public IViewModel ViewModel => _deviceCommandsViewModel;
+
+
         public DeviceCommandsToolWindowCohort()
         {
+            _deviceCommandsViewModel = new DeviceCommandsViewModel();
             _toolWindow = new Lazy<ToolWindow>(() => 
             {
-                IDeviceCommandsViewModel deviceCommandsViewModel = new DeviceCommandsViewModel();
+                
                 DeviceCommandsView deviceCommandsView = new DeviceCommandsView
                 {
-                    ViewModel = deviceCommandsViewModel
+                    ViewModel = _deviceCommandsViewModel
                 };
 
                 ToolWindow toolWindow = new ToolWindow();

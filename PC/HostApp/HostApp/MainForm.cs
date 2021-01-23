@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Ecs.Edpf.GUI.UI.ViewModels;
+using HostApp.Devices;
 using HostApp.UI;
 using HostApp.UI.ViewModels;
 using HostApp.UI.Views;
@@ -54,8 +55,12 @@ namespace HostApp
          
             _dockPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
 
+            IDeviceProviderRegistry deviceProviderRegistry = new DeviceProviderRegistry();
+
+            ToolWindowCohortFactory toolWindowCohortFactory = new ToolWindowCohortFactory(deviceProviderRegistry);
+            deviceProviderRegistry.SynchronizeRegistry();
+
             _toolWindows = new List<ToolWindow>();
-            ToolWindowCohortFactory toolWindowCohortFactory = new ToolWindowCohortFactory();
             foreach (IToolWindowCohort toolWindowCohort in toolWindowCohortFactory.GetToolWindowCohorts())
             {
                 ToolStripMenuItem tsm = new ToolStripMenuItem(toolWindowCohort.Name);

@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.UI.ViewModels.Connections;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,20 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
+
+        private IConnectionViewModelFactoryViewModel _connectionViewModelFactoryViewModel;
+
+        public IViewModel ViewModel => _connectionViewModelFactoryViewModel;
+
+
         public ConnectionsToolWindowCohort()
         {
+            _connectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel();
+
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                IConnectionViewModelFactoryViewModel connectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel();
                 ConnectionsView connectionsView = new ConnectionsView();
-                connectionsView.ViewModel = connectionViewModelFactoryViewModel;
-
+                connectionsView.ViewModel = _connectionViewModelFactoryViewModel;
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.Initialize(connectionsView, this.Name);
                 return toolWindow;

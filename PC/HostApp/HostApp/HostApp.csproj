@@ -50,6 +50,8 @@
     <Compile Include="AppInfo.cs" />
     <Compile Include="ComponentModel\RelayCommand.cs" />
     <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
+    <Compile Include="Devices\DeviceProviderRegistry.cs" />
+    <Compile Include="Devices\IDeviceProviderRegistry.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
