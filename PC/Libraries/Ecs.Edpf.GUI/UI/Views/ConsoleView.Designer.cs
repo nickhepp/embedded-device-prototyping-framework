@@ -1,6 +1,6 @@
 ﻿namespace Ecs.Edpf.GUI.UI.Views
 {
-    partial class ConsoleControlView
+    partial class ConsoleView
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,34 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this._tlpBottomLeft = new System.Windows.Forms.TableLayoutPanel();
+            this._mainTlp = new System.Windows.Forms.TableLayoutPanel();
             this._consoleLbl = new System.Windows.Forms.Label();
             this._deviceHistoryRtb = new System.Windows.Forms.RichTextBox();
             this._consoleInputTlp = new System.Windows.Forms.TableLayoutPanel();
             this._inputTxt = new System.Windows.Forms.TextBox();
             this._inputLbl = new System.Windows.Forms.Label();
-            this._tlpBottomLeft.SuspendLayout();
+            this._previousCommandsPnl = new System.Windows.Forms.Panel();
+            this._mainTlp.SuspendLayout();
             this._consoleInputTlp.SuspendLayout();
             this.SuspendLayout();
             // 
-            // _tlpBottomLeft
+            // _mainTlp
             // 
-            this._tlpBottomLeft.BackColor = System.Drawing.Color.White;
-            this._tlpBottomLeft.ColumnCount = 1;
-            this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._tlpBottomLeft.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this._tlpBottomLeft.Controls.Add(this._consoleLbl, 0, 0);
-            this._tlpBottomLeft.Controls.Add(this._deviceHistoryRtb, 0, 1);
-            this._tlpBottomLeft.Controls.Add(this._consoleInputTlp, 0, 2);
-            this._tlpBottomLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._tlpBottomLeft.Location = new System.Drawing.Point(0, 0);
-            this._tlpBottomLeft.Name = "_tlpBottomLeft";
-            this._tlpBottomLeft.RowCount = 3;
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._tlpBottomLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this._tlpBottomLeft.Size = new System.Drawing.Size(1015, 674);
-            this._tlpBottomLeft.TabIndex = 1;
+            this._mainTlp.BackColor = System.Drawing.Color.White;
+            this._mainTlp.ColumnCount = 1;
+            this._mainTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this._mainTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this._mainTlp.Controls.Add(this._consoleLbl, 0, 0);
+            this._mainTlp.Controls.Add(this._deviceHistoryRtb, 0, 1);
+            this._mainTlp.Controls.Add(this._consoleInputTlp, 0, 2);
+            this._mainTlp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._mainTlp.Location = new System.Drawing.Point(0, 0);
+            this._mainTlp.Name = "_mainTlp";
+            this._mainTlp.RowCount = 3;
+            this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this._mainTlp.Size = new System.Drawing.Size(1015, 674);
+            this._mainTlp.TabIndex = 1;
             // 
             // _consoleLbl
             // 
@@ -83,17 +84,18 @@
             // 
             // _consoleInputTlp
             // 
-            this._consoleInputTlp.ColumnCount = 2;
+            this._consoleInputTlp.ColumnCount = 3;
             this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this._consoleInputTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this._consoleInputTlp.Controls.Add(this._inputTxt, 1, 0);
             this._consoleInputTlp.Controls.Add(this._inputLbl, 0, 0);
+            this._consoleInputTlp.Controls.Add(this._previousCommandsPnl, 2, 0);
             this._consoleInputTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._consoleInputTlp.Location = new System.Drawing.Point(3, 612);
             this._consoleInputTlp.Name = "_consoleInputTlp";
             this._consoleInputTlp.RowCount = 1;
             this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this._consoleInputTlp.Size = new System.Drawing.Size(1009, 59);
             this._consoleInputTlp.TabIndex = 2;
             // 
@@ -105,7 +107,7 @@
             this._inputTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
             this._inputTxt.Location = new System.Drawing.Point(123, 3);
             this._inputTxt.Name = "_inputTxt";
-            this._inputTxt.Size = new System.Drawing.Size(883, 49);
+            this._inputTxt.Size = new System.Drawing.Size(816, 49);
             this._inputTxt.TabIndex = 1;
             // 
             // _inputLbl
@@ -120,15 +122,22 @@
             this._inputLbl.Text = "Input:";
             this._inputLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // ConsoleControlView
+            // _previousCommandsPnl
+            // 
+            this._previousCommandsPnl.Location = new System.Drawing.Point(945, 3);
+            this._previousCommandsPnl.Name = "_previousCommandsPnl";
+            this._previousCommandsPnl.Size = new System.Drawing.Size(61, 53);
+            this._previousCommandsPnl.TabIndex = 2;
+            // 
+            // ConsoleView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this._tlpBottomLeft);
-            this.Name = "ConsoleControlView";
+            this.Controls.Add(this._mainTlp);
+            this.Name = "ConsoleView";
             this.Size = new System.Drawing.Size(1015, 674);
-            this._tlpBottomLeft.ResumeLayout(false);
-            this._tlpBottomLeft.PerformLayout();
+            this._mainTlp.ResumeLayout(false);
+            this._mainTlp.PerformLayout();
             this._consoleInputTlp.ResumeLayout(false);
             this._consoleInputTlp.PerformLayout();
             this.ResumeLayout(false);
@@ -137,11 +146,12 @@
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel _tlpBottomLeft;
+        private System.Windows.Forms.TableLayoutPanel _mainTlp;
         private System.Windows.Forms.Label _consoleLbl;
         private System.Windows.Forms.RichTextBox _deviceHistoryRtb;
         private System.Windows.Forms.TableLayoutPanel _consoleInputTlp;
         private System.Windows.Forms.Label _inputLbl;
         private System.Windows.Forms.TextBox _inputTxt;
+        private System.Windows.Forms.Panel _previousCommandsPnl;
     }
 }

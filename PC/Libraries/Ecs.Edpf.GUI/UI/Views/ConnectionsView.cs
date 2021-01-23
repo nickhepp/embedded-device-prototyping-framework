@@ -40,14 +40,8 @@ namespace Ecs.Edpf.GUI.UI.Views
                         _connectionsTbctrl.TabPages.Add(tabPage);
                     }
                 }
-
-
-                //UpdateConnectionViewModelBindings();
-                //_settingsPpg.SelectedObject = _connectionViewModel?.DeviceConnectionSettingsViewModel;
             }
         }
-
-        //IChildViewModel IChildView.ViewModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public ConnectionsView()
         {

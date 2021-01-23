@@ -21,6 +21,9 @@ namespace Ecs.Edpf.Devices
 
         IConnectionInfo ConnectionInfo { get; }
 
+        BindingList<string> DeviceInputBuffer { get; }
+
+
         BindingList<string> DeviceOutputBuffer { get; }
 
         bool IsOpen { get; }

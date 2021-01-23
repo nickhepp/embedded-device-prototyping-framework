@@ -24,7 +24,7 @@ namespace UnitTestProject.UI.ViewModels.Controls
         {
             //-- arrange
             _mockDevice.Object.Close();
-            ConsoleControlViewModel ccViewMdl = new ConsoleControlViewModel();
+            ConsoleViewModel ccViewMdl = new ConsoleViewModel();
 
             //-- act
             ccViewMdl.Device = _mockDevice.Object;
@@ -38,7 +38,7 @@ namespace UnitTestProject.UI.ViewModels.Controls
         {
             //-- arrange
             _mockDevice.Object.Open();
-            ConsoleControlViewModel ccViewMdl = new ConsoleControlViewModel();
+            ConsoleViewModel ccViewMdl = new ConsoleViewModel();
 
             //-- act
             ccViewMdl.Device = _mockDevice.Object;

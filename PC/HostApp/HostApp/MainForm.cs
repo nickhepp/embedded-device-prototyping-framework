@@ -13,6 +13,7 @@ using System.Windows.Input;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using HostApp.UI;
 using HostApp.UI.ViewModels;
+using HostApp.UI.Views;
 
 namespace HostApp
 {
@@ -21,6 +22,8 @@ namespace HostApp
 
         private WeifenLuo.WinFormsUI.Docking.DockPanel _dockPanel;
         private IHostAppMainViewModel _hostAppMainViewModel;
+        private List<ToolWindow> _toolWindows;
+
 
         public MainForm()
         {
@@ -31,20 +34,46 @@ namespace HostApp
             this.Text = $"{this.Text} V{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
 
 
-            _hostAppMainViewModel = new HostAppMainViewModel();
 
-            _dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.Controls.Add(_dockPanel);
-            _dockPanel.Dock = DockStyle.Fill;
 
-  
+
         }
+
+    
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //_mainSpl.SplitterDistance = (int)(this.Width * 0.75);
-            //_leftSpl.SplitterDistance = (int)(this.Height * 0.75);
+            this.IsMdiContainer = true;
+
+            _hostAppMainViewModel = new HostAppMainViewModel();
+
+            _dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            _mainPnl.Controls.Add(_dockPanel);
+            _dockPanel.Dock = DockStyle.Fill;
+
+         
+            _dockPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
+
+            _toolWindows = new List<ToolWindow>();
+            ToolWindowCohortFactory toolWindowCohortFactory = new ToolWindowCohortFactory();
+            foreach (IToolWindowCohort toolWindowCohort in toolWindowCohortFactory.GetToolWindowCohorts())
+            {
+                ToolStripMenuItem tsm = new ToolStripMenuItem(toolWindowCohort.Name);
+                tsm.Tag = toolWindowCohort.GetToolWindow();
+                tsm.Click += ToolWindowMenuItemClick;
+                _toolsTsm.DropDownItems.Add(tsm);
+            }
         }
+
+        private void ToolWindowMenuItemClick(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsm = (ToolStripMenuItem)sender;
+            ToolWindow toolWindow = (ToolWindow)tsm.Tag;
+            //toolWindow.MdiParent = this;
+ 
+            toolWindow.Show(_dockPanel);
+        }
+
 
         private void _exitTsm_Click(object sender, EventArgs e)
         {

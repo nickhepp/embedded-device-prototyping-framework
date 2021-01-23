@@ -40,6 +40,8 @@ namespace Ecs.Edpf.Devices
         private readonly BindingList<string> _deviceOutputBuffer = new BindingList<string>();
         public BindingList<string> DeviceOutputBuffer => _deviceOutputBuffer;
 
+        private readonly BindingList<string> _deviceInputBuffer = new BindingList<string>();
+        public BindingList<string> DeviceInputBuffer => _deviceInputBuffer;
 
 
         private int _commandTimeout = 5 * 1000;
@@ -66,6 +68,8 @@ namespace Ecs.Edpf.Devices
                 return _deviceCommands;
             }
         }
+
+
 
         private IConnectionFactory _deviceConnectionFactory;
 
@@ -286,6 +290,7 @@ namespace Ecs.Edpf.Devices
             {
                 throw new Exception("Cannot write to an opened device.");
             }
+            _deviceInputBuffer.Add(cmdText);
             string response = InternalWriteLine(cmdText);
             if (!string.IsNullOrEmpty(response))
             {

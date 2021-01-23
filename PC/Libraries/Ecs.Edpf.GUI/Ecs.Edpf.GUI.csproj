@@ -57,8 +57,6 @@
     <Compile Include="UI\ViewModels\FakeViewModel.cs" />
     <Compile Include="UI\IChildViewModelProvider.cs" />
     <Compile Include="UI\ViewModels\Connections\IConnectionViewModelFactoryViewModel.cs" />
-    <Compile Include="UI\ViewModels\IDeviceFactoryFactoryViewModel.cs" />
-    <Compile Include="UI\ViewModels\IDeviceFactoryVideoModel.cs" />
     <Compile Include="UI\ViewModels\IMainViewModel.cs" />
     <Compile Include="UI\ViewModels\IViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseChildViewModel.cs" />
@@ -67,13 +65,13 @@
     <Compile Include="UI\ViewModels\Connections\SerialPortConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\FakeConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\IConnectionViewModel.cs" />
-    <Compile Include="UI\ViewModels\ConsoleControlViewModel.cs" />
+    <Compile Include="UI\ViewModels\ConsoleViewModel.cs" />
     <Compile Include="UI\ViewModels\DeviceCommandsViewModel.cs" />
     <Compile Include="UI\ViewModels\DeviceCommandViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\DeviceConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\FakeConnectionSettingsViewModel.cs" />
     <Compile Include="UI\ViewModels\IChildViewModel.cs" />
-    <Compile Include="UI\ViewModels\IConsoleControlViewModel.cs" />
+    <Compile Include="UI\ViewModels\IConsoleViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceCommandsViewModel.cs" />
     <Compile Include="UI\ViewModels\IDeviceCommandViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\IDeviceConnectionSettingsViewModel.cs" />
@@ -90,11 +88,11 @@
     <Compile Include="UI\Views\ConnectionView.Designer.cs">
       <DependentUpon>ConnectionView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\ConsoleControlView.cs">
+    <Compile Include="UI\Views\ConsoleView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\ConsoleControlView.Designer.cs">
-      <DependentUpon>ConsoleControlView.cs</DependentUpon>
+    <Compile Include="UI\Views\ConsoleView.Designer.cs">
+      <DependentUpon>ConsoleView.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\DeviceCommandsView.cs">
       <SubType>UserControl</SubType>
@@ -110,6 +108,9 @@
     </Compile>
     <Compile Include="UI\Views\IChildView.cs" />
     <Compile Include="UI\Views\IMainView.cs" />
+    <Compile Include="UI\Views\ProgressBarWithMarker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\Views\ConnectionsView.resx">
@@ -118,14 +119,17 @@
     <EmbeddedResource Include="UI\Views\ConnectionView.resx">
       <DependentUpon>ConnectionView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\ConsoleControlView.resx">
-      <DependentUpon>ConsoleControlView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Views\ConsoleView.resx">
+      <DependentUpon>ConsoleView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Views\DeviceCommandsView.resx">
       <DependentUpon>DeviceCommandsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Views\DeviceCommandView.resx">
       <DependentUpon>DeviceCommandView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Views\ProgressBarWithMarker.resx">
+      <DependentUpon>ProgressBarWithMarker.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

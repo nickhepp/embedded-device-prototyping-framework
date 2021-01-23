@@ -7,16 +7,27 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
-    public interface IConsoleControlViewModel : IDeviceViewModel
+    public interface IConsoleViewModel : IDeviceViewModel
     {
+
+        string SelectedPreviousCommand { get; }
+
+        int MaxPreviousCommandCount { get; }
+
+        int PreviousCommandCount { get; }
+
+        int? SelectedPreviousCommandIndex { get; }
+
         List<ConsoleTokenHighlight> ConsoleTokenHighlights { get; set; }
 
         string ErrorMessages { get; set; }
 
         void WriteTextToDevice(string cmdText);
 
-
         bool InputTextEnabled { get; }
 
+        void SelectUpPreviousCommand(string currentText);
+
+        void SelectDownPreviousCommand();
     }
 }

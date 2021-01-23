@@ -8,17 +8,16 @@ namespace HostApp.ManualTest.Business
     {
         public override string ViewName => "Console";
 
-        private ConsoleControlView _ccView;
+        private ConsoleView _ccView;
 
-        private IConsoleControlViewModel _ccViewModel;
+        private IConsoleViewModel _ccViewModel;
 
 
         public ConsoleViewConfiguration()
         {
-            _ccView = new ConsoleControlView();
-            _ccViewModel = new ConsoleControlViewModel();
-
-            _ccView.ConsoleControlViewModel = _ccViewModel;
+            _ccView = new ConsoleView();
+            _ccViewModel = new ConsoleViewModel();
+            _ccView.ConsoleViewModel = _ccViewModel;
         }
 
         public override Control GetControl()

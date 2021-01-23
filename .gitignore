@@ -56,3 +56,5 @@ dkms.conf
 PC/Libraries/Ecs.Edpf.Devices.Test/bin/*
 PC/Libraries/Ecs.Edpf.Devices.Test/obj/*
 PC/Libraries/Ecs.Edpf.Devices/obj/*
+PC/HostApp/HostApp/ToRemove/*
+PC/Libraries/Ecs.Edpf.GUI/ToRemove/*
