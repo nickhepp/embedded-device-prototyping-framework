@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HostApp.UI.ViewModels
 {
-    public interface IParentMainViewModel : IMainViewModel
+    public interface IHostAppMainViewModel : IMainViewModel
     {
 
 

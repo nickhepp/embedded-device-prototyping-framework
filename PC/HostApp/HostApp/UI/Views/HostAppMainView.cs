@@ -9,15 +9,15 @@ using WeifenLuo;
 
 namespace HostApp.UI.Views
 {
-    public partial class ParentMainView : UserControl, IMainView
+    public partial class HostAppMainView : UserControl, IMainView
     {
 
         private WeifenLuo.WinFormsUI.Docking.DockPanel _dockPanel;
 
 
-        private IParentMainViewModel _parentMainViewModel;
+        private IHostAppMainViewModel _hostAppMainViewModel;
 
-        public ParentMainView()
+        public HostAppMainView()
         {
             InitializeComponent();
 
@@ -29,14 +29,12 @@ namespace HostApp.UI.Views
 
         public void SetMainViewModel(IMainViewModel mainViewModel)
         {
-            _parentMainViewModel = (IParentMainViewModel)mainViewModel;
-
+            _hostAppMainViewModel = (IHostAppMainViewModel)mainViewModel;
         }
 
-
-
-
-
-
+        private void _exitTsm_Click(object sender, System.EventArgs e)
+        {
+            
+        }
     }
 }

@@ -6,3 +6,4 @@ D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices\o
 D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices\obj\Debug\netstandard2.0\Ecs.Edpf.Devices.dll
 D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices\obj\Debug\netstandard2.0\Ecs.Edpf.Devices.pdb
 D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices\obj\Debug\netstandard2.0\Ecs.Edpf.Devices.csproj.CoreCompileInputs.cache
+D:\git_src\embedded-device-prototyping-framework\PC\Libraries\Ecs.Edpf.Devices\obj\Debug\netstandard2.0\Ecs.Edpf.Devices.csprojAssemblyReference.cache

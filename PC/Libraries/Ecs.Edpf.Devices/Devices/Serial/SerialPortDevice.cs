@@ -12,6 +12,8 @@ namespace Ecs.Edpf.Devices.Serial
     public class SerialPortDevice : BaseKernelDevice
     {
 
+        public override bool SupportsEmbeddedCodeGeneration => true;
+
         public override int ParameterCount => 4;
 
 

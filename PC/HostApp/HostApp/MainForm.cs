@@ -12,12 +12,15 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using HostApp.UI;
+using HostApp.UI.ViewModels;
 
 namespace HostApp
 {
     public partial class MainForm : Form
     {
 
+        private WeifenLuo.WinFormsUI.Docking.DockPanel _dockPanel;
+        private IHostAppMainViewModel _hostAppMainViewModel;
 
         public MainForm()
         {
@@ -27,56 +30,14 @@ namespace HostApp
 
             this.Text = $"{this.Text} V{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
 
-            AppInfo.InitializeTypesWithBaseKernel();
 
+            _hostAppMainViewModel = new HostAppMainViewModel();
 
-            IMainViewModel mainVwMdl = ViewModelFactory.GetMainViewModel();
+            _dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.Controls.Add(_dockPanel);
+            _dockPanel.Dock = DockStyle.Fill;
+
   
-            //_vwMdl.DeviceOutputBuffer.ListChanged += DeviceOutputBufferListChanged;
-
-
-            //if (_vwMdl is IChildViewModelProvider childVwMdlProvider)
-            //{
-            //    this.IsMdiContainer = true;
-
-            //}
-            ////IChildViewModelProvider childVwMdlProvider
-
-
-
-            //_settingsPpg.SelectedObject = _vwMdl;
-
-            //_openBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(IViewModel.OpenButtonEnabled)));
-            //_closeBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(IViewModel.CloseButtonEnabled)));
-            //_errorsLbl.DataBindings.Add(new Binding(nameof(Label.Text), _vwMdl, nameof(IViewModel.ErrorMessages)));
-
-            //// direct input text is only enabled when
-            //_inputTxt.DataBindings.Add(new Binding(nameof(TextBox.Enabled), _vwMdl, nameof(IViewModel.CloseButtonEnabled)));
-
-            //List<Tuple<string, ICommand>> cmdNameTuples = ViewModelCommandExtractor.GetCommands(_vwMdl);
-
-            //// turn the methods in the form of "<Xyz>Command()" into buttons
-            //_cmdsTlp.RowStyles.Clear();
-            //float percentHeight = (cmdNameTuples.Count > 0) ? 100.0f / cmdNameTuples.Count : 0f;
-            //foreach (Tuple<string, ICommand> cmdNameTuple in cmdNameTuples)
-            //{
-            //    int idx = _cmdsTlp.RowStyles.Add(new RowStyle(SizeType.Percent, percentHeight));
-
-            //    Button btn = new Button();
-            //    _cmdsTlp.Controls.Add(btn);
-
-            //    // only enable commands if we have an open connection
-            //    btn.DataBindings.Add(new Binding(nameof(Button.Enabled), _vwMdl, nameof(IViewModel.CloseButtonEnabled)));
-
-            //    btn.Dock = DockStyle.Fill;
-            //    btn.Tag = cmdNameTuple;
-
-            //    // split the caps into differnt words
-            //    btn.Text = cmdNameTuple.Item1;
-            //    btn.Click += cmdButtonClick;
-            //}
-
-            //SetErrorMessageControls();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -85,6 +46,9 @@ namespace HostApp
             //_leftSpl.SplitterDistance = (int)(this.Height * 0.75);
         }
 
-
+        private void _exitTsm_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

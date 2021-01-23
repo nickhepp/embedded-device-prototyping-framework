@@ -16,6 +16,9 @@ namespace Ecs.Edpf.Devices
     {
 
 
+        public virtual bool SupportsEmbeddedCodeGeneration { get; } = false;
+
+
         public abstract int ParameterCount { get; }
 
 
@@ -259,6 +262,7 @@ namespace Ecs.Edpf.Devices
             {
                 throw new Exception("Device is not open.");
             }
+            _connection.Close();
             IsOpen = false;
             if (DeviceClosed != null)
             {
