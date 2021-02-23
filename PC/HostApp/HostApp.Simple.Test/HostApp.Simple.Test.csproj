@@ -50,10 +50,6 @@
       <Project>{10F0C26D-DAC6-4CFB-A221-1F2C10843990}</Project>
       <Name>Ecs.Edpf.GUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HostApp.Simple\HostApp.Simple.csproj">
-      <Project>{8f2f85e9-0e65-436c-b1df-c8939caf7bd1}</Project>
-      <Name>HostApp.Simple</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter">

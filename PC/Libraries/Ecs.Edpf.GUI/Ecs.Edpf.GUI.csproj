@@ -48,6 +48,9 @@
     <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\ISettingsResource.cs" />
+    <Compile Include="Settings\ISettingsResourceStore.cs" />
+    <Compile Include="Settings\SettingsResourceStore.cs" />
     <Compile Include="UI\ViewModels\BaseKernelViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseKernelWithChildrenViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseViewModel.cs" />

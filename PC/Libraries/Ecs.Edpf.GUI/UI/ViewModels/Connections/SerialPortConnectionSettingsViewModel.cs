@@ -12,6 +12,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 {
     public class SerialPortConnectionSettingsViewModel : DeviceConnectionSettingsViewModel
     {
+        const string SerailSettingsCategory = "Serial Settings";
+
+        [Category(SerailSettingsCategory)]
         [TypeConverter(typeof(ComPortOptionsPropertyConverter))]
         public string ComPort
         {

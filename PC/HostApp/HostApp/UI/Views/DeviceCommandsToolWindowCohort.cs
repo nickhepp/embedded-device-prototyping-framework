@@ -46,5 +46,8 @@ namespace HostApp.UI.Views
         {
             return _toolWindow.Value;
         }
+
+ 
+
     }
 }

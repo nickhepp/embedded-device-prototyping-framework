@@ -42,5 +42,16 @@ namespace HostApp.UI.Views
             return _toolWindow.Value;
         }
 
+        //public ToolWindowDefaultState GetToolWindowDefaultState()
+        //{
+        //    return new ToolWindowDefaultState
+        //    {
+        //        DockState = WeifenLuo.WinFormsUI.Docking.DockState.Document
+        //    };
+        //}
+
+
+
+
     }
 }
