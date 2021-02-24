@@ -48,6 +48,7 @@
     <Compile Include="UI\ViewModels\ConsoleControlViewModelTest.cs" />
     <Compile Include="UI\ViewModels\DeviceCommandsViewModelTest.cs" />
     <Compile Include="UI\ViewModels\DeviceCommandViewModelTest.cs" />
+    <Compile Include="UI\ViewModels\DeviceTextMacroViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Moq">

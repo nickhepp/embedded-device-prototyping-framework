@@ -11,8 +11,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
     public interface IConnectionViewModelFactoryViewModel : IChildViewModel, IGlobalDeviceProvider
     {
 
-        //IDeviceProvider GlobalDeviceProvider { get; }
-
         List<IConnectionViewModel> ConnectionViewModels { get; }
 
 

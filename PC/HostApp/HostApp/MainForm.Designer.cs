@@ -60,7 +60,7 @@
             // _exitTsm
             // 
             this._exitTsm.Name = "_exitTsm";
-            this._exitTsm.Size = new System.Drawing.Size(359, 44);
+            this._exitTsm.Size = new System.Drawing.Size(186, 44);
             this._exitTsm.Text = "Exit";
             this._exitTsm.Click += new System.EventHandler(this._exitTsm_Click);
             // 
@@ -85,6 +85,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

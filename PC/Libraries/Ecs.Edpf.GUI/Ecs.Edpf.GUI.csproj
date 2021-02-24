@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\HostApp\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,6 +60,7 @@
     <Compile Include="UI\ConsoleTokenHighlight.cs" />
     <Compile Include="UI\ViewModels\Connections\SerialPortConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\ConnectionViewModelFactoryViewModel.cs" />
+    <Compile Include="UI\ViewModels\DeviceTextMacroViewModel.cs" />
     <Compile Include="UI\ViewModels\FakeViewModel.cs" />
     <Compile Include="UI\IChildViewModelProvider.cs" />
     <Compile Include="UI\ViewModels\Connections\IConnectionViewModelFactoryViewModel.cs" />
@@ -140,6 +144,9 @@
       <Project>{0d051bf4-521d-4b1a-8b7f-8edc43d99bd0}</Project>
       <Name>Ecs.Edpf.Devices</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

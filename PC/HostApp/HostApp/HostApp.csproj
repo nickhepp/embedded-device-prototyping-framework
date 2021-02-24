@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppInfo.cs" />
-    <Compile Include="Business\MainViewSettings.cs" />
     <Compile Include="ComponentModel\RelayCommand.cs" />
     <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
     <Compile Include="Devices\DeviceProviderRegistry.cs" />
@@ -84,6 +83,12 @@
     <Compile Include="UI\Views\DeviceCommandsToolWindowCohort.cs" />
     <Compile Include="UI\Views\IToolWindowCohort.cs" />
     <Compile Include="UI\Views\IToolWindowCohortFactory.cs" />
+    <Compile Include="UI\Views\SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Views\SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\ToolWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +109,9 @@
     <EmbeddedResource Include="ToRemove\HostAppMainView.resx">
       <DependentUpon>HostAppMainView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Views\SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -121,6 +129,7 @@
     <Folder Include="ToRemove\Factories\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\logo.png" />
     <Content Include="Resources\warning_icon.png" />
   </ItemGroup>
   <ItemGroup>
