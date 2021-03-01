@@ -64,6 +64,7 @@
     <Compile Include="UI\ViewModels\BaseKernelWithChildrenViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseViewModel.cs" />
     <Compile Include="UI\ConsoleTokenHighlight.cs" />
+    <Compile Include="UI\ViewModels\ChartingViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\SerialPortConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\ConnectionViewModelFactoryViewModel.cs" />
     <Compile Include="UI\ViewModels\DeviceTextMacroViewModel.cs" />

@@ -48,16 +48,16 @@
             this._shareTsm});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(2740, 96);
+            this.menuStrip1.Size = new System.Drawing.Size(1370, 48);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // _mainPnl
             // 
             this._mainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._mainPnl.Location = new System.Drawing.Point(0, 192);
+            this._mainPnl.Location = new System.Drawing.Point(0, 48);
             this._mainPnl.Name = "_mainPnl";
-            this._mainPnl.Size = new System.Drawing.Size(2740, 1306);
+            this._mainPnl.Size = new System.Drawing.Size(1370, 701);
             this._mainPnl.TabIndex = 1;
             // 
             // _fileTsm
@@ -66,7 +66,7 @@
             this._exitTsm});
             this._fileTsm.Image = global::HostApp.Properties.Resources.file;
             this._fileTsm.Name = "_fileTsm";
-            this._fileTsm.Size = new System.Drawing.Size(104, 88);
+            this._fileTsm.Size = new System.Drawing.Size(104, 40);
             this._fileTsm.Text = "File";
             // 
             // _exitTsm
@@ -80,14 +80,14 @@
             // 
             this._toolsTsm.Image = global::HostApp.Properties.Resources.construction;
             this._toolsTsm.Name = "_toolsTsm";
-            this._toolsTsm.Size = new System.Drawing.Size(122, 88);
+            this._toolsTsm.Size = new System.Drawing.Size(122, 40);
             this._toolsTsm.Text = "Tools";
             // 
             // _shareTsm
             // 
             this._shareTsm.Image = global::HostApp.Properties.Resources.share_alt;
             this._shareTsm.Name = "_shareTsm";
-            this._shareTsm.Size = new System.Drawing.Size(127, 88);
+            this._shareTsm.Size = new System.Drawing.Size(127, 40);
             this._shareTsm.Text = "Share";
             // 
             // MainForm
