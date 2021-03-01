@@ -61,6 +61,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Settings\DockPanelSettingsResource.cs" />
     <Compile Include="UI\Settings\IRecentSettingsList.cs" />
     <Compile Include="UI\Settings\IRecentSettingsListFactory.cs" />
@@ -78,6 +83,8 @@
     <Compile Include="ToRemove\HostAppMainView.Designer.cs">
       <DependentUpon>HostAppMainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ViewModels\ToolBoxViewModel.cs" />
+    <Compile Include="UI\Views\ChartingToolWindowCohort.cs" />
     <Compile Include="UI\Views\ConnectionsToolWindowCohort.cs" />
     <Compile Include="UI\Views\ConsoleToolWindowCohort.cs" />
     <Compile Include="UI\Views\DeviceCommandsToolWindowCohort.cs" />
@@ -89,6 +96,13 @@
     <Compile Include="UI\Views\SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\ToolBoxView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ToolBoxView.Designer.cs">
+      <DependentUpon>ToolBoxView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\ToolBoxWindowCohort.cs" />
     <Compile Include="UI\Views\ToolWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,19 +112,17 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="ToRemove\HostAppMainView.resx">
       <DependentUpon>HostAppMainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Views\SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Views\ToolBoxView.resx">
+      <DependentUpon>ToolBoxView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -130,6 +142,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo.png" />
+    <None Include="Resources\cmd_icon.png" />
+    <None Include="Resources\construction.png" />
+    <None Include="Resources\terminal.png" />
+    <None Include="Resources\share-alt.png" />
+    <None Include="Resources\file.png" />
     <Content Include="Resources\warning_icon.png" />
   </ItemGroup>
   <ItemGroup>

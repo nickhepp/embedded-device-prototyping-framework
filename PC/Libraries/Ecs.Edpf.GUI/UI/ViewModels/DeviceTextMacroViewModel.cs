@@ -35,6 +35,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
+
+
+
         public DeviceTextMacroViewModel()
         {
             _toggleLoopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(canExecute: ToggleLoopCommandCanExecute, execute: ToggleLoopCommandExecute);
@@ -45,7 +48,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private bool OneShotCommandCanExecute(object obj)
         {
-            return (_deviceTextMacro?.DeviceTextLines.Count > 0);
+            return (_deviceTextMacro?.DeviceTextLines.Count > 0) && (Device != null);
         }
 
         private void OneShotCommandExecute(object obj)
@@ -70,21 +73,35 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             DeviceTextMacro = new DeviceTextMacro();
         }
 
+        // settings names
         private const string DeviceTextMacroSettingsName = "DeviceTextMacro";
+
         public void ApplySettings(Dictionary<string, string> settings)
         {
-            if (settings.ContainsKey(DeviceTextMacroSettingsName))
+            try
             {
-                DeviceTextMacro = Newtonsoft.Json.JsonConvert.DeserializeObject<DeviceTextMacro>(settings.[DeviceTextMacroSettingsName]);
+                if (settings.ContainsKey(DeviceTextMacroSettingsName))
+                {
+                    DeviceTextMacro = Newtonsoft.Json.JsonConvert.DeserializeObject<DeviceTextMacro>(settings[DeviceTextMacroSettingsName]);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
             }
 
-
-            throw new NotImplementedException();
         }
 
         public Dictionary<string, string> GetSettings()
         {
-            throw new NotImplementedException();
+            string deviceTextMacroStr = Newtonsoft.Json.JsonConvert.SerializeObject(DeviceTextMacro);
+            Dictionary<string, string> settings = new Dictionary<string, string>
+            {
+                { DeviceTextMacroSettingsName, deviceTextMacroStr }
+            };
+
+            return settings;
         }
 
         protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -120,7 +137,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             protected override void OnDoWork(DoWorkEventArgs e)
             {
 
-                e.Cancel
+                //e.Cancel
 
                 base.OnDoWork(e);
             }

@@ -13,7 +13,7 @@ namespace HostApp.UI.Views
     {
         public string Name => "Console";
 
-        public Bitmap Image => throw new NotImplementedException();
+        public Bitmap Image => HostApp.Properties.Resources.terminal;
 
         private Lazy<ToolWindow> _toolWindow;
 
@@ -29,10 +29,16 @@ namespace HostApp.UI.Views
                 {
                     ConsoleViewModel = _consoleViewModel
                 };
+                consoleView.ShowConsoleHeader = false;
 
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
                 toolWindow.Initialize(consoleView, this.Name);
+
+                IntPtr terminalIcon = HostApp.Properties.Resources.terminal.GetHicon();
+                Icon cmdIcon = Icon.FromHandle(terminalIcon);
+                toolWindow.Icon = cmdIcon;
+                toolWindow.ShowIcon = true;
                 return toolWindow;
             });
         }

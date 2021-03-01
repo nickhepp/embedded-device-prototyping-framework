@@ -31,6 +31,11 @@ namespace HostApp.UI.Views
                };
 
 
+            ToolBoxWindowCohort toolBoxWindowCohort = new ToolBoxWindowCohort(_cohorts);
+            _cohorts.Add(toolBoxWindowCohort);
+
+
+
             foreach (IToolWindowCohort cohort in _cohorts)
             {
                 if (cohort.ViewModel is IDeviceProviderListener deviceProviderListener)
@@ -73,12 +78,20 @@ namespace HostApp.UI.Views
                 prevConsoleCohort = consoleCohort;
             }
 
-            // device commands are top right
+            // tool box is top right
+            List<ToolBoxWindowCohort> toolBoxWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(ToolBoxWindowCohort)).
+                Select(cohort => cohort as ToolBoxWindowCohort).ToList();
+            foreach (ToolBoxWindowCohort toolBoxWindowCohort in toolBoxWindowCohorts)
+            {
+                toolBoxWindowCohort.GetToolWindow().Show(dockPanel, DockState.DockRight);
+            }
+
+            // device commands are bottom right
             List<DeviceCommandsToolWindowCohort> deviceCommandsToolWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(DeviceCommandsToolWindowCohort)).
                 Select(cohort => cohort as DeviceCommandsToolWindowCohort).ToList();
             foreach (DeviceCommandsToolWindowCohort deviceCommandsToolWindowCohort in deviceCommandsToolWindowCohorts)
             {
-                deviceCommandsToolWindowCohort.GetToolWindow().Show(dockPanel, DockState.DockRight);
+                deviceCommandsToolWindowCohort.GetToolWindow().Show(toolBoxWindowCohorts.Last().GetToolWindow().Pane, DockAlignment.Bottom, 0.67);
             }
 
             // device connections are bottom right
@@ -88,6 +101,7 @@ namespace HostApp.UI.Views
             {
                 connectionsToolWindowCohort.GetToolWindow().Show(deviceCommandsToolWindowCohorts.Last().GetToolWindow().Pane, DockAlignment.Bottom, 0.5);
             }
+
 
 
         }

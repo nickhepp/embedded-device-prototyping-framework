@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this._mainPnl = new System.Windows.Forms.Panel();
             this._fileTsm = new System.Windows.Forms.ToolStripMenuItem();
             this._exitTsm = new System.Windows.Forms.ToolStripMenuItem();
             this._toolsTsm = new System.Windows.Forms.ToolStripMenuItem();
-            this._mainPnl = new System.Windows.Forms.Panel();
+            this._shareTsm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,19 +44,29 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._fileTsm,
-            this._toolsTsm});
+            this._toolsTsm,
+            this._shareTsm});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1664, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(2740, 96);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // _mainPnl
+            // 
+            this._mainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._mainPnl.Location = new System.Drawing.Point(0, 192);
+            this._mainPnl.Name = "_mainPnl";
+            this._mainPnl.Size = new System.Drawing.Size(2740, 1306);
+            this._mainPnl.TabIndex = 1;
             // 
             // _fileTsm
             // 
             this._fileTsm.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._exitTsm});
+            this._fileTsm.Image = global::HostApp.Properties.Resources.file;
             this._fileTsm.Name = "_fileTsm";
-            this._fileTsm.Size = new System.Drawing.Size(72, 36);
+            this._fileTsm.Size = new System.Drawing.Size(104, 88);
             this._fileTsm.Text = "File";
             // 
             // _exitTsm
@@ -66,23 +78,24 @@
             // 
             // _toolsTsm
             // 
+            this._toolsTsm.Image = global::HostApp.Properties.Resources.construction;
             this._toolsTsm.Name = "_toolsTsm";
-            this._toolsTsm.Size = new System.Drawing.Size(90, 36);
+            this._toolsTsm.Size = new System.Drawing.Size(122, 88);
             this._toolsTsm.Text = "Tools";
             // 
-            // _mainPnl
+            // _shareTsm
             // 
-            this._mainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._mainPnl.Location = new System.Drawing.Point(0, 40);
-            this._mainPnl.Name = "_mainPnl";
-            this._mainPnl.Size = new System.Drawing.Size(1664, 931);
-            this._mainPnl.TabIndex = 1;
+            this._shareTsm.Image = global::HostApp.Properties.Resources.share_alt;
+            this._shareTsm.Name = "_shareTsm";
+            this._shareTsm.Size = new System.Drawing.Size(127, 88);
+            this._shareTsm.Text = "Share";
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(1664, 971);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this._mainPnl);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -100,6 +113,7 @@
         private System.Windows.Forms.ToolStripMenuItem _exitTsm;
         private System.Windows.Forms.ToolStripMenuItem _toolsTsm;
         private System.Windows.Forms.Panel _mainPnl;
+        private System.Windows.Forms.ToolStripMenuItem _shareTsm;
     }
 }
 

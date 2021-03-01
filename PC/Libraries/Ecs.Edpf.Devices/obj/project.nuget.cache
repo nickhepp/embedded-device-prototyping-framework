@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Y7fCu/M1kIsYY1NFOyS3M7M2QTVAaW+O8ln16Y5MUPLrXkSsHvBUbbAyKXH7LM+uF4MMQ8CTaSb/78lA/XT82A==",
+  "dgSpecHash": "t8J68NqEC/himKmQknIBUoW9043ePsOh/xIme6iuQ4Kqff75Nnt2mpSnaAD7DTyvlwonjv/dRwlpfuu+rdhjyA==",
   "success": true,
   "projectFilePath": "D:\\git_src\\embedded-device-prototyping-framework\\PC\\Libraries\\Ecs.Edpf.Devices\\Ecs.Edpf.Devices.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\nick\\.nuget\\packages\\log4net\\2.0.12\\log4net.2.0.12.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
@@ -13,11 +14,14 @@
     "C:\\Users\\nick\\.nuget\\packages\\runtime.native.system.io.ports\\5.0.0\\runtime.native.system.io.ports.5.0.0.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\5.0.0-rtm.20519.4\\runtime.osx-x64.runtime.native.system.io.ports.5.0.0-rtm.20519.4.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\nick\\.nuget\\packages\\system.configuration.configurationmanager\\4.5.0\\system.configuration.configurationmanager.4.5.0.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\system.io.ports\\5.0.0\\system.io.ports.5.0.0.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.3\\system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\nick\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.5.0\\system.security.cryptography.protecteddata.4.5.0.nupkg.sha512",
+    "C:\\Users\\nick\\.nuget\\packages\\system.security.permissions\\4.5.0\\system.security.permissions.4.5.0.nupkg.sha512",
     "C:\\Users\\nick\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512"
   ],
   "logs": []

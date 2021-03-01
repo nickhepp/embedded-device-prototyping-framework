@@ -59,13 +59,12 @@ namespace HostApp
             this.IsMdiContainer = true;
 
             _hostAppMainViewModel = new HostAppMainViewModel();
-
   
             _dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             _mainPnl.Controls.Add(_dockPanel);
             _dockPanel.Dock = DockStyle.Fill;
+            _dockPanel.ShowDocumentIcon = true;
 
-         
             _dockPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
 
             IDeviceProviderRegistry deviceProviderRegistry = new DeviceProviderRegistry();
@@ -81,6 +80,10 @@ namespace HostApp
             {
                 ToolStripMenuItem tsm = new ToolStripMenuItem(toolWindowCohort.Name);
                 ToolWindow toolWindow = toolWindowCohort.GetToolWindow();
+                if (toolWindowCohort.Image != null)
+                {
+                    tsm.Image = toolWindowCohort.Image;
+                }
                 dockContents[toolWindow.GetType().ToString()] = toolWindowCohort;
                 tsm.Tag = toolWindow;
                 tsm.Click += ToolWindowMenuItemClick;

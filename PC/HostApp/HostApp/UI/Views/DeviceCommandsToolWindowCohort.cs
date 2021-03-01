@@ -13,7 +13,7 @@ namespace HostApp.UI.Views
     {
         public string Name => "Device Commands";
 
-        public Bitmap Image => throw new NotImplementedException();
+        public Bitmap Image => null;
 
 
         private Lazy<ToolWindow> _toolWindow;
