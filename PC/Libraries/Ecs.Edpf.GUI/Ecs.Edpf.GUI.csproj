@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentModel\DeviceSignal.cs" />
+    <Compile Include="ComponentModel\DeviceState.cs" />
+    <Compile Include="ComponentModel\DeviceStateMachine.cs" />
     <Compile Include="ComponentModel\RelayCommand.cs" />
     <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -71,6 +74,7 @@
     <Compile Include="UI\ViewModels\FakeViewModel.cs" />
     <Compile Include="UI\IChildViewModelProvider.cs" />
     <Compile Include="UI\ViewModels\Connections\IConnectionViewModelFactoryViewModel.cs" />
+    <Compile Include="UI\ViewModels\IChartingViewModel.cs" />
     <Compile Include="UI\ViewModels\IMainViewModel.cs" />
     <Compile Include="UI\ViewModels\IViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseChildViewModel.cs" />
@@ -128,6 +132,12 @@
     </Compile>
     <Compile Include="UI\Views\IChildView.cs" />
     <Compile Include="UI\Views\IMainView.cs" />
+    <Compile Include="UI\Views\DeviceTextMacroView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Views\DeviceTextMacroView.Designer.cs">
+      <DependentUpon>DeviceTextMacroView.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\ProgressBarWithMarker.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +165,9 @@
     <EmbeddedResource Include="UI\Views\DeviceCommandView.resx">
       <DependentUpon>DeviceCommandView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Views\DeviceTextMacroView.resx">
+      <DependentUpon>DeviceTextMacroView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Views\ProgressBarWithMarker.resx">
       <DependentUpon>ProgressBarWithMarker.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,6 +186,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\baseline_cable_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\repeat_one.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\record.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

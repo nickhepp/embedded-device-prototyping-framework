@@ -13,7 +13,26 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 {
     public class DeviceTextMacroViewModel : BaseDeviceViewModel, ISettingsResource
     {
+
+
         public string ResourceName => "DeviceTextMacro";
+
+        private string _recordPauseButtonText = "Record";
+        public string RecordPauseButtonText
+        {
+            get
+            {
+                return _recordPauseButtonText;
+            }
+            private set
+            {
+                _recordPauseButtonText = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
+        private ICommand _recordPauseCommand;
+        public ICommand RecordPauseCommand => _recordPauseCommand;
 
         private ICommand _toggleLoopCommand;
         public ICommand ToggleLoopCommand => _toggleLoopCommand;
@@ -40,15 +59,38 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         public DeviceTextMacroViewModel()
         {
-            _toggleLoopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(canExecute: ToggleLoopCommandCanExecute, execute: ToggleLoopCommandExecute);
+            _toggleLoopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
+                canExecute: ToggleLoopCommandCanExecute, 
+                execute: ToggleLoopCommandExecute);
 
-            _oneShotCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(canExecute: OneShotCommandCanExecute, execute: OneShotCommandExecute);
+            _oneShotCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
+                canExecute: OneShotCommandCanExecute, 
+                execute: OneShotCommandExecute);
 
+            _recordPauseCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
+                canExecute: RecordPauseCommandCanExecute,
+                execute: RecordPauseCommandExecute);
+        }
+
+        protected override void OnDeviceStateChanged()
+        {
+            
+        }
+
+        private void RecordPauseCommandExecute(object obj)
+        {
+
+        }
+
+        private bool RecordPauseCommandCanExecute(object obj)
+        {
+            return false;
         }
 
         private bool OneShotCommandCanExecute(object obj)
         {
-            return (_deviceTextMacro?.DeviceTextLines.Count > 0) && (Device != null);
+            return false;
+            //return (_deviceTextMacro?.DeviceTextLines.Count > 0) && (Device != null);
         }
 
         private void OneShotCommandExecute(object obj)
@@ -88,7 +130,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
             catch (Exception ex)
             {
-
+                ex = ex;
+                //throw new Exception(ex, "Add logging.");
             }
 
         }

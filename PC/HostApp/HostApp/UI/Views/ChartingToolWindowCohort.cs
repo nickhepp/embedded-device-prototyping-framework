@@ -1,4 +1,5 @@
 ﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,29 +13,28 @@ namespace HostApp.UI.Views
     {
         public string Name => "Charting";
 
-        public Bitmap Image => Ecs.Edpf.GUI.Properties.Resources.baseline_cable_black;
+        public Bitmap Image => HostApp.Properties.Resources.charts;
 
         private Lazy<ToolWindow> _toolWindow;
 
+        private IChartingViewModel _chartingViewModel = new ChartingViewModel();
 
-        private IConnectionViewModelFactoryViewModel _connectionViewModelFactoryViewModel;
-
-        public IViewModel ViewModel => _connectionViewModelFactoryViewModel;
+        public IViewModel ViewModel => _chartingViewModel;
 
 
         public ChartingToolWindowCohort()
         {
-            _connectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel();
 
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                ConnectionsView connectionsView = new ConnectionsView();
-                connectionsView.ViewModel = _connectionViewModelFactoryViewModel;
+                ChartingView chartingView = new ChartingView();
+                chartingView.ChartingViewModel = _chartingViewModel;
                 ToolWindow toolWindow = new ToolWindow();
-                toolWindow.Initialize(connectionsView, this.Name);
-                IntPtr Hicon = Ecs.Edpf.GUI.Properties.Resources.baseline_cable_black.GetHicon();
-                Icon cmdIcon = Icon.FromHandle(Hicon);
-                toolWindow.Icon = cmdIcon;
+                toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
+                toolWindow.Initialize(chartingView, this.Name);
+                IntPtr chartIconPtr = HostApp.Properties.Resources.charts.GetHicon();
+                Icon chartIcon = Icon.FromHandle(chartIconPtr);
+                toolWindow.Icon = chartIcon;
 
                 return toolWindow;
             });

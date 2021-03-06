@@ -27,7 +27,8 @@ namespace HostApp.UI.Views
             _cohorts = new List<IToolWindowCohort> {
                     new ConsoleToolWindowCohort(),
                     new DeviceCommandsToolWindowCohort(),
-                    new ConnectionsToolWindowCohort()
+                    new ConnectionsToolWindowCohort(),
+                    new ChartingToolWindowCohort()
                };
 
 
@@ -63,20 +64,30 @@ namespace HostApp.UI.Views
             List<ConsoleToolWindowCohort> consoleCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(ConsoleToolWindowCohort)).
                 Select(cohort => cohort as ConsoleToolWindowCohort).ToList();
 
+            List<ChartingToolWindowCohort> chartingCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(ChartingToolWindowCohort)).
+                Select(cohort => cohort as ChartingToolWindowCohort).ToList();
+            foreach (ChartingToolWindowCohort chartingCohort in chartingCohorts)
+            {
+                //chartingCohort.GetToolWindow().Show(prevConsoleCohort.GetToolWindow().Pane);
+                chartingCohort.GetToolWindow().Show(dockPanel, DockState.Document);
+            }
+
             // console windows start off as documents
             ConsoleToolWindowCohort prevConsoleCohort = null;
             foreach (ConsoleToolWindowCohort consoleCohort in consoleCohorts)
             {
-                if (prevConsoleCohort == null)
-                {
+                //if (prevConsoleCohort == null)
+                //{
                     consoleCohort.GetToolWindow().Show(dockPanel, DockState.Document);
-                }
-                else
-                {
-                    consoleCohort.GetToolWindow().Show(prevConsoleCohort.GetToolWindow().Pane);
-                }
+                //}
+                //else
+                //{
+                //    consoleCohort.GetToolWindow().Show(prevConsoleCohort.GetToolWindow().Pane);
+                //}
                 prevConsoleCohort = consoleCohort;
             }
+
+
 
             // tool box is top right
             List<ToolBoxWindowCohort> toolBoxWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(ToolBoxWindowCohort)).

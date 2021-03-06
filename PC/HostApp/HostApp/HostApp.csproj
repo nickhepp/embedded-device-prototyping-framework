@@ -147,6 +147,8 @@
     <None Include="Resources\terminal.png" />
     <None Include="Resources\share-alt.png" />
     <None Include="Resources\file.png" />
+    <None Include="Resources\charts.png" />
+    <None Include="Resources\repeat.png" />
     <Content Include="Resources\warning_icon.png" />
   </ItemGroup>
   <ItemGroup>

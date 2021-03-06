@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
-    public class ChartingViewModel : BaseDeviceViewModel
+    public class ChartingViewModel : BaseDeviceViewModel, IChartingViewModel
     {
         protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {

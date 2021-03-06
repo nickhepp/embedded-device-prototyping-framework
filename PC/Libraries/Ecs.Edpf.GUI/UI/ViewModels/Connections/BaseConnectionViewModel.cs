@@ -92,8 +92,19 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             OpenCommand = new RelayCommand(param => this.OpenButtonEnabled, OpenCommandHandler);
             CloseCommand = new RelayCommand(param => this.CloseButtonEnabled, CloseCommandHandler);
             _deviceFactory = GetDeviceFactory();
+            _deviceStateMachine = new DeviceStateMachine();
+            _deviceStateMachine.DeviceStateChanged += DeviceStateMachineDeviceStateChanged;
         }
 
+        private void DeviceStateMachineDeviceStateChanged(object sender, EventArgs e)
+        {
+            OnDeviceStateChanged();
+        }
+
+        protected virtual void OnDeviceStateChanged()
+        {
+
+        }
 
         public abstract IDeviceFactory GetDeviceFactory();
 

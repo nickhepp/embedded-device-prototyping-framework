@@ -3,11 +3,15 @@ using System.ComponentModel;
 
 using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.Devices;
+using Ecs.Edpf.GUI.ComponentModel;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
     public abstract class BaseDeviceViewModel : BaseViewModel, IDeviceViewModel
     {
+
+        private DeviceStateMachine _deviceStateMachine;
+        protected DeviceState DeviceState => _deviceStateMachine.DeviceState;
 
         private IDevice _device;
 
@@ -22,6 +26,19 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 if (_device != null)
                 {
                     _device.PropertyChanged += DevicePropertyChanged;
+                    _deviceStateMachine.SendSignal(DeviceSignal.DeviceAssigned);
+                    _device.DeviceClosed += DeviceClosed;
+                    _device.DeviceOpened += DeviceOpened;
+                }
+                else
+                {
+                    if (_device != null)
+                    {
+                        //_device.DeviceClosed 
+                    }
+
+
+                    _deviceStateMachine.SendSignal(DeviceSignal.DeviceCleared);
                 }
                 if (DeviceOutputBufferChanged != null)
                 {
@@ -30,6 +47,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 OnDeviceChanged(_device);
             }
         }
+
 
         private IDeviceProvider _deviceProvider;
         public IDeviceProvider DeviceProvider
@@ -47,16 +65,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 }
             }
         }
-
-        private void DeviceProviderDeviceCreated(object sender, EventArgs e)
-        {
-            Device = _deviceProvider.Device;
-            Device.PropertyChanged += DevicePropertyChanged;
-            DeviceOutputBuffer = Device.DeviceOutputBuffer;
-        }
-
-
-
 
 
         public event EventHandler DeviceOutputBufferChanged;
@@ -78,6 +86,44 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 }
             }
         }
+
+
+        public BaseDeviceViewModel()
+        {
+            _deviceStateMachine = new DeviceStateMachine();
+            _deviceStateMachine.DeviceStateChanged += DeviceStateMachineDeviceStateChanged;
+        }
+
+
+        private void DeviceOpened(object sender, EventArgs e)
+        {
+            _deviceStateMachine.SendSignal(DeviceSignal.DeviceOpened);
+        }
+
+        private void DeviceClosed(object sender, EventArgs e)
+        {
+            _deviceStateMachine.SendSignal(DeviceSignal.DeviceClosed);
+        }
+
+        private void DeviceProviderDeviceCreated(object sender, EventArgs e)
+        {
+            Device = _deviceProvider.Device;
+            Device.PropertyChanged += DevicePropertyChanged;
+            DeviceOutputBuffer = Device.DeviceOutputBuffer;
+
+        }
+
+
+        private void DeviceStateMachineDeviceStateChanged(object sender, EventArgs e)
+        {
+            OnDeviceStateChanged();
+        }
+
+        protected virtual void OnDeviceStateChanged()
+        {
+
+        }
+
 
 
         protected abstract void OnDeviceChanged(IDevice device);
