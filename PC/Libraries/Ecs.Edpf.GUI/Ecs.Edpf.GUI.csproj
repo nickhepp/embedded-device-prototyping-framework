@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\HostApp\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,6 +48,12 @@
     <Compile Include="ComponentModel\DeviceSignal.cs" />
     <Compile Include="ComponentModel\DeviceState.cs" />
     <Compile Include="ComponentModel\DeviceStateMachine.cs" />
+    <Compile Include="ComponentModel\DeviceTextMacroSignal.cs" />
+    <Compile Include="ComponentModel\DeviceTextMacroState.cs" />
+    <Compile Include="ComponentModel\DeviceTextMacroStateMachine.cs" />
+    <Compile Include="ComponentModel\IDeviceStateMachine.cs" />
+    <Compile Include="ComponentModel\IDeviceTextMacroStateMachine.cs" />
+    <Compile Include="ComponentModel\IRelayCommand.cs" />
     <Compile Include="ComponentModel\RelayCommand.cs" />
     <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -75,9 +78,9 @@
     <Compile Include="UI\IChildViewModelProvider.cs" />
     <Compile Include="UI\ViewModels\Connections\IConnectionViewModelFactoryViewModel.cs" />
     <Compile Include="UI\ViewModels\IChartingViewModel.cs" />
+    <Compile Include="UI\ViewModels\IDeviceTextMacroViewModel.cs" />
     <Compile Include="UI\ViewModels\IMainViewModel.cs" />
     <Compile Include="UI\ViewModels\IViewModel.cs" />
-    <Compile Include="UI\ViewModels\BaseChildViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\BaseConnectionViewModel.cs" />
     <Compile Include="UI\ViewModels\BaseDeviceViewModel.cs" />
     <Compile Include="UI\ViewModels\Connections\SerialPortConnectionSettingsViewModel.cs" />
@@ -179,9 +182,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\cmd_icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +198,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\record.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

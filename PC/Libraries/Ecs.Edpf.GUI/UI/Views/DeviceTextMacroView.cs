@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ecs.Edpf.GUI.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,8 +14,7 @@ namespace Ecs.Edpf.GUI.UI.Views
     public partial class DeviceTextMacroView : UserControl
     {
 
-
-
+        public IDeviceTextMacroViewModel DeviceTextMacroViewModel { get; set; }
 
         public DeviceTextMacroView()
         {

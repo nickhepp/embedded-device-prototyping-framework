@@ -87,22 +87,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 
         public abstract IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel { get; }
 
-        public BaseConnectionViewModel()
+        public BaseConnectionViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
             OpenCommand = new RelayCommand(param => this.OpenButtonEnabled, OpenCommandHandler);
             CloseCommand = new RelayCommand(param => this.CloseButtonEnabled, CloseCommandHandler);
             _deviceFactory = GetDeviceFactory();
-            _deviceStateMachine = new DeviceStateMachine();
-            _deviceStateMachine.DeviceStateChanged += DeviceStateMachineDeviceStateChanged;
-        }
-
-        private void DeviceStateMachineDeviceStateChanged(object sender, EventArgs e)
-        {
-            OnDeviceStateChanged();
-        }
-
-        protected virtual void OnDeviceStateChanged()
-        {
 
         }
 

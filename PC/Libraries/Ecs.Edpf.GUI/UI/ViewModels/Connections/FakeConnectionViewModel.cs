@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.Devices.Fake;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         public override IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel => _fakeConnSettingsViewModel;
 
 
-        public FakeConnectionViewModel()
+        public FakeConnectionViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
 
         }

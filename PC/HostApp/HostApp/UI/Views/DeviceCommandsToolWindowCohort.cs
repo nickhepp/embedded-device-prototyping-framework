@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.UI.ViewModels;
+﻿using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace HostApp.UI.Views
 
         public DeviceCommandsToolWindowCohort()
         {
-            _deviceCommandsViewModel = new DeviceCommandsViewModel();
+            _deviceCommandsViewModel = new DeviceCommandsViewModel(new DeviceStateMachine());
             _toolWindow = new Lazy<ToolWindow>(() => 
             {
                 

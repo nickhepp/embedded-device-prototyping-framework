@@ -10,7 +10,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
     public abstract class BaseDeviceViewModel : BaseViewModel, IDeviceViewModel
     {
 
-        private DeviceStateMachine _deviceStateMachine;
+        private IDeviceStateMachine _deviceStateMachine;
         protected DeviceState DeviceState => _deviceStateMachine.DeviceState;
 
         private IDevice _device;
@@ -88,9 +88,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         }
 
 
-        public BaseDeviceViewModel()
+        public BaseDeviceViewModel(IDeviceStateMachine deviceStateMachine)
         {
-            _deviceStateMachine = new DeviceStateMachine();
+            _deviceStateMachine = deviceStateMachine;
             _deviceStateMachine.DeviceStateChanged += DeviceStateMachineDeviceStateChanged;
         }
 

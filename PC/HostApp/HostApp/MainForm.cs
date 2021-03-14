@@ -129,7 +129,7 @@ namespace HostApp
                 _timer.Enabled = false;
                 _showSplash = false;
             };
-            _timer.Interval = 4000;
+            _timer.Interval = 8000;
             _timer.Enabled = true;
         }
 

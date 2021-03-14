@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.IO.Cmds;
+using Ecs.Edpf.GUI.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,7 +73,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
-        public DeviceCommandsViewModel()
+        public DeviceCommandsViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
             _selectedCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(canExecute: SelectedCommandCanExecute, execute: SelectedCommandExecute);
         }

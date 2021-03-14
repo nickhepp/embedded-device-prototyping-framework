@@ -1,4 +1,5 @@
 ﻿using Ecs.Edpf.Devices;
+using Ecs.Edpf.GUI.ComponentModel;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -94,7 +95,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
-        public ConsoleViewModel()
+        public ConsoleViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
         }
 

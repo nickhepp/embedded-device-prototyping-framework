@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.Test.Devices;
+using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.Test.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,7 +14,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
     [TestClass]
     public class BaseConnectionViewModelTest
     {
-
+        private MockDeviceStateMachine _mockDeviceStateMachine = new MockDeviceStateMachine();
         private MockDevice _mockDevice;
         private TestConnectionViewModel _testConnVwMdl;
 
@@ -22,6 +24,12 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             private Mock<IDeviceFactory> _mockDeviceFactory = new Mock<IDeviceFactory>();
 
             public override System.Drawing.Image ViewImage => null;
+
+            public TestConnectionViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
+            {
+
+            }
+
 
             public override IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel => throw new NotImplementedException();
 
@@ -41,7 +49,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         public void InitializeTest()
         {
             _mockDevice = new MockDevice();
-            _testConnVwMdl = new TestConnectionViewModel();
+            _testConnVwMdl = new TestConnectionViewModel(_mockDeviceStateMachine.Object);
         }
 
 

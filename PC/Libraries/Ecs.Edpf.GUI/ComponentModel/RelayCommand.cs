@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Ecs.Edpf.GUI.ComponentModel
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand : ICommand, IRelayCommand
     {
         private Predicate<object> _canExecute;
         private Action<object> _execute;
@@ -18,6 +18,16 @@ namespace Ecs.Edpf.GUI.ComponentModel
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public event EventHandler CommandCanExecuteChanged;
+
+        public void RaiseCommandCanExecuteChanged()
+        {
+            if (CommandCanExecuteChanged != null)
+            {
+                CommandCanExecuteChanged(this, new EventArgs());
+            }
         }
 
         public bool CanExecute(object parameter)

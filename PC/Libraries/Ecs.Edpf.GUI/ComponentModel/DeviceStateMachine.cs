@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.ComponentModel
 {
-    public class DeviceStateMachine 
+    public class DeviceStateMachine : IDeviceStateMachine
     {
 
         private DeviceState _deviceState = DeviceState.NoDevice;
@@ -23,9 +23,14 @@ namespace Ecs.Edpf.GUI.ComponentModel
                 _deviceState = value;
                 if (changed && (DeviceStateChanged != null))
                 {
+                    OnDeviceStateChanged();
                     DeviceStateChanged(this, new EventArgs());
                 }
             }
+        }
+
+        protected virtual void OnDeviceStateChanged()
+        {
 
         }
 
@@ -39,7 +44,7 @@ namespace Ecs.Edpf.GUI.ComponentModel
             switch (_deviceState)
             {
                 case DeviceState.NoDevice:
-                    if (signal == DeviceSignal.DeviceSet)
+                    if (signal == DeviceSignal.DeviceAssigned)
                     {
                         DeviceState = DeviceState.AssignedDevice;
                     }
@@ -78,7 +83,6 @@ namespace Ecs.Edpf.GUI.ComponentModel
                         ThrowUnexpectedSendSignalArgs(signal);
                     }
                     break;
-
 
                 default:
                     throw new NotImplementedException($"Device state {_deviceState} is not handled.");

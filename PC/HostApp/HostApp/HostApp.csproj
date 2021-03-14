@@ -88,6 +88,7 @@
     <Compile Include="UI\Views\ConnectionsToolWindowCohort.cs" />
     <Compile Include="UI\Views\ConsoleToolWindowCohort.cs" />
     <Compile Include="UI\Views\DeviceCommandsToolWindowCohort.cs" />
+    <Compile Include="UI\Views\DeviceTextMacroToolWindowCohort.cs" />
     <Compile Include="UI\Views\IToolWindowCohort.cs" />
     <Compile Include="UI\Views\IToolWindowCohortFactory.cs" />
     <Compile Include="UI\Views\SplashScreen.cs">
@@ -149,6 +150,7 @@
     <None Include="Resources\file.png" />
     <None Include="Resources\charts.png" />
     <None Include="Resources\repeat.png" />
+    <None Include="Resources\baseline_cable_black.png" />
     <Content Include="Resources\warning_icon.png" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.Devices;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 
         private List<IConnectionViewModel> _connectionViewModels = new List<IConnectionViewModel>
         {
-            new SerialPortConnectionViewModel(),
-            new FakeConnectionViewModel(),
+            new SerialPortConnectionViewModel(new DeviceStateMachine()),
+            new FakeConnectionViewModel(new DeviceStateMachine()),
         };
 
         public Image ViewImage => throw new NotImplementedException();
@@ -31,7 +32,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 
         public List<IConnectionViewModel> ConnectionViewModels => _connectionViewModels;
 
-        public ConnectionViewModelFactoryViewModel()
+        public ConnectionViewModelFactoryViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
             _compositeDeviceProvider = new CompositeDeviceProvider(_connectionViewModels.Select(connVwMdl => connVwMdl.GetDeviceFactory()));
         }

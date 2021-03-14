@@ -1,6 +1,7 @@
 ﻿using Ecs.Edpf.Connections.Serial;
 using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.Serial;
+using Ecs.Edpf.GUI.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 
         private SerialPortDeviceFactory _serialPortDeviceFactory = new SerialPortDeviceFactory();
 
-        public SerialPortConnectionViewModel()
+        public SerialPortConnectionViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
             _serialPortConnectionSettingsViewModel = new SerialPortConnectionSettingsViewModel((SerialPortConnectionInfo)_serialPortDeviceFactory.ConnectionInfo);
         }

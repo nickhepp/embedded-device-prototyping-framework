@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "t8J68NqEC/himKmQknIBUoW9043ePsOh/xIme6iuQ4Kqff75Nnt2mpSnaAD7DTyvlwonjv/dRwlpfuu+rdhjyA==",
+  "dgSpecHash": "xzkC2Y5pkQOWs7tKKD2QVPfcBxDCEe38k4dm9Z9BGSdiVBhRDOexO5sjzyieHM8hYVc6Ap1WPq6MaTxiLhVQBw==",
   "success": true,
   "projectFilePath": "D:\\git_src\\embedded-device-prototyping-framework\\PC\\Libraries\\Ecs.Edpf.Devices\\Ecs.Edpf.Devices.csproj",
   "expectedPackageFiles": [

@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.UI.ViewModels;
+﻿using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
@@ -15,7 +16,7 @@ namespace HostApp.UI.Views
     {
         public string Name => "Connections";
 
-        public Bitmap Image => Ecs.Edpf.GUI.Properties.Resources.baseline_cable_black;
+        public Bitmap Image => HostApp.Properties.Resources.baseline_cable_black;
 
         private Lazy<ToolWindow> _toolWindow;
 
@@ -27,7 +28,7 @@ namespace HostApp.UI.Views
 
         public ConnectionsToolWindowCohort()
         {
-            _connectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel();
+            _connectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel(new DeviceStateMachine());
 
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
@@ -35,7 +36,7 @@ namespace HostApp.UI.Views
                 connectionsView.ViewModel = _connectionViewModelFactoryViewModel;
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.Initialize(connectionsView, this.Name);
-                IntPtr Hicon = Ecs.Edpf.GUI.Properties.Resources.baseline_cable_black.GetHicon();
+                IntPtr Hicon = HostApp.Properties.Resources.baseline_cable_black.GetHicon();
                 Icon cmdIcon = Icon.FromHandle(Hicon);
                 toolWindow.Icon = cmdIcon;
 

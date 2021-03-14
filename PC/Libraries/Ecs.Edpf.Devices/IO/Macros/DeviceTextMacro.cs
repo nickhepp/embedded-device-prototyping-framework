@@ -10,6 +10,13 @@ namespace Ecs.Edpf.Devices.IO.Macros
         public bool Loop { get; set; }
 
         public List<DeviceTextLine> DeviceTextLines { get; set; } = new List<DeviceTextLine>();
-    
+
+        public DeviceTextMacro Copy()
+        {
+
+
+
+            throw new NotImplementedException();
+        }
     }
 }

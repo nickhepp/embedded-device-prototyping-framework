@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.UI.ViewModels;
+﻿using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace HostApp.UI.Views
         private Lazy<ToolWindow> _toolWindow;
 
 
-        private IConsoleViewModel _consoleViewModel = new ConsoleViewModel();
+        private IConsoleViewModel _consoleViewModel = new ConsoleViewModel(new DeviceStateMachine());
         public IViewModel ViewModel => _consoleViewModel;
 
         public ConsoleToolWindowCohort()

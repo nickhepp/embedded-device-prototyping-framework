@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.UI.ViewModels;
+﻿using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
-        private IChartingViewModel _chartingViewModel = new ChartingViewModel();
+        private IChartingViewModel _chartingViewModel = new ChartingViewModel(new DeviceStateMachine());
 
         public IViewModel ViewModel => _chartingViewModel;
 

@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.IO.Macros;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.Settings;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,12 @@ using System.Windows.Input;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
-    public class DeviceTextMacroViewModel : BaseDeviceViewModel, ISettingsResource
+    public class DeviceTextMacroViewModel : BaseDeviceViewModel, ISettingsResource, IDeviceTextMacroViewModel
     {
+        private DeviceTextMacroBackgroundWorker _oneShotBgWorker = null;
+        private DeviceTextMacroBackgroundWorker _loopBgWorker = null;
 
+        private IDeviceTextMacroStateMachine _deviceTextMacroStateMachine;
 
         public string ResourceName => "DeviceTextMacro";
 
@@ -31,18 +35,18 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
-        private ICommand _recordPauseCommand;
-        public ICommand RecordPauseCommand => _recordPauseCommand;
+        private RelayCommand _recordPauseCommand;
+        public IRelayCommand RecordPauseCommand => _recordPauseCommand;
 
-        private ICommand _toggleLoopCommand;
-        public ICommand ToggleLoopCommand => _toggleLoopCommand;
+        private RelayCommand _toggleLoopCommand;
+        public IRelayCommand ToggleLoopCommand => _toggleLoopCommand;
 
-        private ICommand _oneShotCommand;
-        public ICommand OneShotCommand => _oneShotCommand;
+        private RelayCommand _oneShotCommand;
+        public IRelayCommand OneShotCommand => _oneShotCommand;
 
         private DeviceTextMacro _deviceTextMacro;
-        public DeviceTextMacro DeviceTextMacro 
-         {
+        public DeviceTextMacro DeviceTextMacro
+        {
             get
             {
                 return _deviceTextMacro;
@@ -57,25 +61,34 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
 
 
-        public DeviceTextMacroViewModel()
+        public DeviceTextMacroViewModel(
+            IDeviceTextMacroStateMachine deviceTextMacroStateMachine) :
+            base(deviceTextMacroStateMachine)
         {
             _toggleLoopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
-                canExecute: ToggleLoopCommandCanExecute, 
+                canExecute: ToggleLoopCommandCanExecute,
                 execute: ToggleLoopCommandExecute);
 
             _oneShotCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
-                canExecute: OneShotCommandCanExecute, 
+                canExecute: OneShotCommandCanExecute,
                 execute: OneShotCommandExecute);
 
             _recordPauseCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
                 canExecute: RecordPauseCommandCanExecute,
                 execute: RecordPauseCommandExecute);
+
+            _deviceTextMacroStateMachine = deviceTextMacroStateMachine;
+            _deviceTextMacroStateMachine.DeviceTextMacroStateChanged += DeviceTextMacroStateMachine_DeviceTextMacroStateChanged;
         }
 
-        protected override void OnDeviceStateChanged()
+        private void DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(object sender, EventArgs e)
         {
-            
+            _toggleLoopCommand.RaiseCommandCanExecuteChanged();
+            _recordPauseCommand.RaiseCommandCanExecuteChanged();
+            _oneShotCommand.RaiseCommandCanExecuteChanged();
         }
+
+
 
         private void RecordPauseCommandExecute(object obj)
         {
@@ -84,17 +97,28 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private bool RecordPauseCommandCanExecute(object obj)
         {
-            return false;
+            return (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro);
         }
 
         private bool OneShotCommandCanExecute(object obj)
         {
-            return false;
-            //return (_deviceTextMacro?.DeviceTextLines.Count > 0) && (Device != null);
+            return ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice) &&
+                (_deviceTextMacro?.DeviceTextLines.Count > 0));
         }
 
         private void OneShotCommandExecute(object obj)
         {
+            // set the next state
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroOneShotting);
+
+            // make a copy so we dont have to worry about changes from one thread to the other
+            DeviceTextMacro deviceTextMacro = DeviceTextMacro.Copy();
+            _oneShotBgWorker = new DeviceTextMacroBackgroundWorker(deviceTextMacro);
+
+
+            //            private DeviceTextMacroBackgroundWorker _oneShotBgWorker = null;
+            //private DeviceTextMacroBackgroundWorker _loopBgWorker = null;
+
 
         }
 
@@ -152,10 +176,10 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             throw new NotImplementedException();
         }
 
-        
+
         protected override void OnDeviceChanged(IDevice device)
         {
-            
+
 
         }
 
