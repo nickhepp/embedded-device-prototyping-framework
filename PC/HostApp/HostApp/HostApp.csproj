@@ -1,185 +1,90 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F65FB57A-0889-4CE8-B6B1-6ECA0F083C21}</ProjectGuid>
+    <TargetFramework>net48</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HostApp</RootNamespace>
-    <AssemblyName>HostApp</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AppInfo.cs" />
-    <Compile Include="ComponentModel\RelayCommand.cs" />
-    <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
-    <Compile Include="Devices\DeviceProviderRegistry.cs" />
-    <Compile Include="Devices\IDeviceProviderRegistry.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Settings\DockPanelSettingsResource.cs" />
-    <Compile Include="UI\Settings\IRecentSettingsList.cs" />
-    <Compile Include="UI\Settings\IRecentSettingsListFactory.cs" />
-    <Compile Include="UI\Settings\ISettingsManager.cs" />
-    <Compile Include="UI\Settings\RecentSettingsListFactory.cs" />
-    <Compile Include="UI\Settings\ResourceSettingsPayload.cs" />
-    <Compile Include="UI\Settings\Settings.cs" />
-    <Compile Include="UI\Settings\SettingsManager.cs" />
-    <Compile Include="UI\Settings\RecentSettingsList.cs" />
-    <Compile Include="UI\ViewModels\IHostAppMainViewModel.cs" />
-    <Compile Include="UI\ViewModels\HostAppMainViewModel.cs" />
-    <Compile Include="ToRemove\HostAppMainView.cs">
+    <Compile Update="ToRemove\HostAppMainView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ToRemove\HostAppMainView.Designer.cs">
-      <DependentUpon>HostAppMainView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ViewModels\ToolBoxViewModel.cs" />
-    <Compile Include="UI\Views\ChartingToolWindowCohort.cs" />
-    <Compile Include="UI\Views\ConnectionsToolWindowCohort.cs" />
-    <Compile Include="UI\Views\ConsoleToolWindowCohort.cs" />
-    <Compile Include="UI\Views\DeviceCommandsToolWindowCohort.cs" />
-    <Compile Include="UI\Views\DeviceTextMacroToolWindowCohort.cs" />
-    <Compile Include="UI\Views\IToolWindowCohort.cs" />
-    <Compile Include="UI\Views\IToolWindowCohortFactory.cs" />
-    <Compile Include="UI\Views\SplashScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Views\SplashScreen.Designer.cs">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\ToolBoxView.cs">
+    <Compile Update="UI\Views\ToolBoxView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\ToolBoxView.Designer.cs">
-      <DependentUpon>ToolBoxView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\ToolBoxWindowCohort.cs" />
-    <Compile Include="UI\Views\ToolWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Views\ToolWindowCohortFactory.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ToRemove\HostAppMainView.resx">
-      <DependentUpon>HostAppMainView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\SplashScreen.resx">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\ToolBoxView.resx">
-      <DependentUpon>ToolBoxView.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ToRemove\Factories\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logo.png" />
-    <None Include="Resources\cmd_icon.png" />
-    <None Include="Resources\construction.png" />
-    <None Include="Resources\terminal.png" />
-    <None Include="Resources\share-alt.png" />
-    <None Include="Resources\file.png" />
-    <None Include="Resources\charts.png" />
-    <None Include="Resources\repeat.png" />
-    <None Include="Resources\baseline_cable_black.png" />
     <Content Include="Resources\warning_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DockPanelSuite">
       <Version>3.0.6</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="Ninject">
       <Version>3.3.4</Version>
     </PackageReference>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj">
-      <Project>{0d051bf4-521d-4b1a-8b7f-8edc43d99bd0}</Project>
-      <Name>Ecs.Edpf.Devices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.GUI\Ecs.Edpf.GUI.csproj">
-      <Project>{10f0c26d-dac6-4cfb-a221-1f2c10843990}</Project>
-      <Name>Ecs.Edpf.GUI</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj" />
+    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.GUI\Ecs.Edpf.GUI.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <Compile Remove="ToRemove\BaseChildViewModel.cs" />
+    <Compile Remove="ToRemove\BaseConnectionViewModel.cs" />
+    <Compile Remove="ToRemove\BaseDeviceViewModel.cs" />
+    <Compile Remove="ToRemove\BaseKernelViewModel.cs" />
+    <Compile Remove="ToRemove\BaseKernelWithChildrenViewModel.cs" />
+    <Compile Remove="ToRemove\BaseViewModel.cs" />
+    <Compile Remove="ToRemove\ComPortConnectionSettingsViewModel.cs" />
+    <Compile Remove="ToRemove\Connections\FakeConnectionViewModel.cs" />
+    <Compile Remove="ToRemove\Connections\IConnectionViewModel.cs" />
+    <Compile Remove="ToRemove\ConnectionView.cs" />
+    <Compile Remove="ToRemove\ConnectionView.Designer.cs" />
+    <Compile Remove="ToRemove\ConsoleControlView.cs" />
+    <Compile Remove="ToRemove\ConsoleControlView.Designer.cs" />
+    <Compile Remove="ToRemove\ConsoleControlViewModel.cs" />
+    <Compile Remove="ToRemove\ConsoleTokenHighlight.cs" />
+    <Compile Remove="ToRemove\Constants.cs" />
+    <Compile Remove="ToRemove\DeviceCommandsView.cs" />
+    <Compile Remove="ToRemove\DeviceCommandsView.Designer.cs" />
+    <Compile Remove="ToRemove\DeviceCommandsViewModel.cs" />
+    <Compile Remove="ToRemove\DeviceCommandView.cs" />
+    <Compile Remove="ToRemove\DeviceCommandView.Designer.cs" />
+    <Compile Remove="ToRemove\DeviceCommandViewModel.cs" />
+    <Compile Remove="ToRemove\DeviceConnectionSettingsViewModel.cs" />
+    <Compile Remove="ToRemove\FakeConnectionSettingsViewModel.cs" />
+    <Compile Remove="ToRemove\FakeViewModel.cs" />
+    <Compile Remove="ToRemove\IChildView.cs" />
+    <Compile Remove="ToRemove\IChildViewModel.cs" />
+    <Compile Remove="ToRemove\IChildViewModelProvider.cs" />
+    <Compile Remove="ToRemove\IConsoleControlViewModel.cs" />
+    <Compile Remove="ToRemove\IDeviceCommandsViewModel.cs" />
+    <Compile Remove="ToRemove\IDeviceCommandViewModel.cs" />
+    <Compile Remove="ToRemove\IDeviceConnectionSettingsViewModel.cs" />
+    <Compile Remove="ToRemove\IDeviceProviderViewModel.cs" />
+    <Compile Remove="ToRemove\IDeviceViewModel.cs" />
+    <Compile Remove="ToRemove\IMainView.cs" />
+    <Compile Remove="ToRemove\IMainViewModel.cs" />
+    <Compile Remove="ToRemove\ISimpleMainViewModel.cs" />
+    <Compile Remove="ToRemove\IViewModel.cs" />
+    <Compile Remove="ToRemove\SimpleMainView.cs" />
+    <Compile Remove="ToRemove\SimpleMainView.Designer.cs" />
+    <Compile Remove="ToRemove\SimpleMainViewModel.cs" />
+    <Compile Remove="ToRemove\ViewModelCommandExtractor.cs" />
+    <EmbeddedResource Remove="ToRemove\ConnectionView.resx" />
+    <EmbeddedResource Remove="ToRemove\ConsoleControlView.resx" />
+    <EmbeddedResource Remove="ToRemove\DeviceCommandsView.resx" />
+    <EmbeddedResource Remove="ToRemove\DeviceCommandView.resx" />
+    <EmbeddedResource Remove="ToRemove\SimpleMainView.resx" />
+  </ItemGroup>
 </Project>

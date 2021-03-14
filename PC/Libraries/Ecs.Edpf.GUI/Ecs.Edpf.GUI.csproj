@@ -1,208 +1,53 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{10F0C26D-DAC6-4CFB-A221-1F2C10843990}</ProjectGuid>
+    <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ecs.Edpf.GUI</RootNamespace>
-    <AssemblyName>Ecs.Edpf.GUI</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Forms.DataVisualization.Design" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComponentModel\DeviceSignal.cs" />
-    <Compile Include="ComponentModel\DeviceState.cs" />
-    <Compile Include="ComponentModel\DeviceStateMachine.cs" />
-    <Compile Include="ComponentModel\DeviceTextMacroSignal.cs" />
-    <Compile Include="ComponentModel\DeviceTextMacroState.cs" />
-    <Compile Include="ComponentModel\DeviceTextMacroStateMachine.cs" />
-    <Compile Include="ComponentModel\IDeviceStateMachine.cs" />
-    <Compile Include="ComponentModel\IDeviceTextMacroStateMachine.cs" />
-    <Compile Include="ComponentModel\IRelayCommand.cs" />
-    <Compile Include="ComponentModel\RelayCommand.cs" />
-    <Compile Include="ComponentModel\StringOptionsPropertyConverter.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Settings\ISettingsResource.cs" />
-    <Compile Include="Settings\ISettingsResourceStore.cs" />
-    <Compile Include="Settings\SettingsResourceStore.cs" />
-    <Compile Include="UI\ViewModels\BaseKernelViewModel.cs" />
-    <Compile Include="UI\ViewModels\BaseKernelWithChildrenViewModel.cs" />
-    <Compile Include="UI\ViewModels\BaseViewModel.cs" />
-    <Compile Include="UI\ConsoleTokenHighlight.cs" />
-    <Compile Include="UI\ViewModels\ChartingViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\SerialPortConnectionViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\ConnectionViewModelFactoryViewModel.cs" />
-    <Compile Include="UI\ViewModels\DeviceTextMacroViewModel.cs" />
-    <Compile Include="UI\ViewModels\FakeViewModel.cs" />
-    <Compile Include="UI\IChildViewModelProvider.cs" />
-    <Compile Include="UI\ViewModels\Connections\IConnectionViewModelFactoryViewModel.cs" />
-    <Compile Include="UI\ViewModels\IChartingViewModel.cs" />
-    <Compile Include="UI\ViewModels\IDeviceTextMacroViewModel.cs" />
-    <Compile Include="UI\ViewModels\IMainViewModel.cs" />
-    <Compile Include="UI\ViewModels\IViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\BaseConnectionViewModel.cs" />
-    <Compile Include="UI\ViewModels\BaseDeviceViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\SerialPortConnectionSettingsViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\FakeConnectionViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\IConnectionViewModel.cs" />
-    <Compile Include="UI\ViewModels\ConsoleViewModel.cs" />
-    <Compile Include="UI\ViewModels\DeviceCommandsViewModel.cs" />
-    <Compile Include="UI\ViewModels\DeviceCommandViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\DeviceConnectionSettingsViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\FakeConnectionSettingsViewModel.cs" />
-    <Compile Include="UI\ViewModels\IChildViewModel.cs" />
-    <Compile Include="UI\ViewModels\IConsoleViewModel.cs" />
-    <Compile Include="UI\ViewModels\IDeviceCommandsViewModel.cs" />
-    <Compile Include="UI\ViewModels\IDeviceCommandViewModel.cs" />
-    <Compile Include="UI\ViewModels\Connections\IDeviceConnectionSettingsViewModel.cs" />
-    <Compile Include="UI\ViewModels\IDeviceViewModel.cs" />
-    <Compile Include="UI\Views\ChartingView.cs">
+    <Compile Update="UI\Views\ChartingView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\ChartingView.Designer.cs">
-      <DependentUpon>ChartingView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\ConnectionsView.cs">
+    <Compile Update="UI\Views\ConnectionsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\ConnectionsView.Designer.cs">
-      <DependentUpon>ConnectionsView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\ConnectionView.cs">
+    <Compile Update="UI\Views\ConnectionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\ConnectionView.Designer.cs">
-      <DependentUpon>ConnectionView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\ConsoleView.cs">
+    <Compile Update="UI\Views\ConsoleView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\ConsoleView.Designer.cs">
-      <DependentUpon>ConsoleView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\DeviceCommandsView.cs">
+    <Compile Update="UI\Views\DeviceCommandsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\DeviceCommandsView.Designer.cs">
-      <DependentUpon>DeviceCommandsView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\DeviceCommandView.cs">
+    <Compile Update="UI\Views\DeviceCommandView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\DeviceCommandView.Designer.cs">
-      <DependentUpon>DeviceCommandView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\IChildView.cs" />
-    <Compile Include="UI\Views\IMainView.cs" />
-    <Compile Include="UI\Views\DeviceTextMacroView.cs">
+    <Compile Update="UI\Views\DeviceTextMacroView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Views\DeviceTextMacroView.Designer.cs">
-      <DependentUpon>DeviceTextMacroView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\ProgressBarWithMarker.cs">
+    <Compile Update="UI\Views\ProgressBarWithMarker.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\ChartingView.resx">
-      <DependentUpon>ChartingView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\ConnectionsView.resx">
-      <DependentUpon>ConnectionsView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\ConnectionView.resx">
-      <DependentUpon>ConnectionView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\ConsoleView.resx">
-      <DependentUpon>ConsoleView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\DeviceCommandsView.resx">
-      <DependentUpon>DeviceCommandsView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\DeviceCommandView.resx">
-      <DependentUpon>DeviceCommandView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\DeviceTextMacroView.resx">
-      <DependentUpon>DeviceTextMacroView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Views\ProgressBarWithMarker.resx">
-      <DependentUpon>ProgressBarWithMarker.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj">
-      <Project>{0d051bf4-521d-4b1a-8b7f-8edc43d99bd0}</Project>
-      <Name>Ecs.Edpf.Devices</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\cmd_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\baseline_cable_black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\repeat_one.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\repeat.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pause.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\record.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Remove="ToRemove\IDeviceFactoryFactoryViewModel.cs" />
+    <Compile Remove="ToRemove\IDeviceFactoryVideoModel.cs" />
+  </ItemGroup>
 </Project>
