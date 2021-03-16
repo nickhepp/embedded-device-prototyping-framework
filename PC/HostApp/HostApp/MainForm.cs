@@ -38,8 +38,6 @@ namespace HostApp
         {
             InitializeComponent();
 
-            SetSplashScreen();
-
             this.Load += MainForm_Load;
             this.FormClosing += MainFormFormClosing;   
 
@@ -99,6 +97,9 @@ namespace HostApp
 
             _settingsManager = container.Get<ISettingsManager>();
             _settingsManager.ApplyCurrentSettings(_settingsResourceStore);
+
+            SetSplashScreen(toolWindowCohortFactory.GetToolWindowCohorts());
+
         }
 
         private IKernel GetConfiguredContainer()
@@ -112,25 +113,17 @@ namespace HostApp
             return container;
         }
 
-        private void SetSplashScreen()
+        private void SetSplashScreen(List<IToolWindowCohort> cohorts)
         {
 
             _showSplash = true;
             _splashScreen = new SplashScreen();
+            _splashScreen.SetToolWindows(cohorts);
 
             ResizeSplash();
             _splashScreen.Visible = true;
             _splashScreen.TopMost = true;
 
-            Timer _timer = new Timer();
-            _timer.Tick += (sender, e) =>
-            {
-                _splashScreen.Visible = false;
-                _timer.Enabled = false;
-                _showSplash = false;
-            };
-            _timer.Interval = 8000;
-            _timer.Enabled = true;
         }
 
         private void ResizeSplash()

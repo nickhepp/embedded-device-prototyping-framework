@@ -4,4 +4,9 @@
     <ProjectView>ShowAllFiles</ProjectView>
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="UI\Views\LoggingView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

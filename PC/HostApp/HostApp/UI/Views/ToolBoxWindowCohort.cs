@@ -13,10 +13,11 @@ namespace HostApp.UI.Views
     {
         public string Name => "Toolbox";
 
+        public string Description => "A toolbox to quickly open the other tools.";
+
         public Bitmap Image => HostApp.Properties.Resources.construction;
 
         private Lazy<ToolWindow> _toolWindow;
-
 
         private IConsoleViewModel _consoleViewModel = new ConsoleViewModel(new DeviceStateMachine());
         public IViewModel ViewModel => _consoleViewModel;

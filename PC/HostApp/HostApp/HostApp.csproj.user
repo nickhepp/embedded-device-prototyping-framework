@@ -10,6 +10,9 @@
     <Compile Update="UI\Views\SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Views\SplashScreenToolView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\Views\ToolWindow.cs">
       <SubType>Form</SubType>
     </Compile>

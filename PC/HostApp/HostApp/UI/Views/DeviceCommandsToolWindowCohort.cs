@@ -14,6 +14,10 @@ namespace HostApp.UI.Views
     {
         public string Name => "Device Commands";
 
+        public string Description => "Send arguments and execution instructions, much like a software " +
+            "program calls methods. The host application queries the attached device to learn of " +
+            "its capabilities and automatically creates a UI that honors the device's constraints.";
+
         public Bitmap Image => null;
 
 

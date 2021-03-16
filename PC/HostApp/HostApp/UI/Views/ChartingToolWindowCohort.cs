@@ -14,6 +14,10 @@ namespace HostApp.UI.Views
     {
         public string Name => "Charting";
 
+        public string Description => "Watches for the flow of device data and charts multiple values. " +
+            "The charting tools filter on device output to automatically chart data with signatures " +
+            "that match the filter.";
+
         public Bitmap Image => HostApp.Properties.Resources.charts;
 
         private Lazy<ToolWindow> _toolWindow;

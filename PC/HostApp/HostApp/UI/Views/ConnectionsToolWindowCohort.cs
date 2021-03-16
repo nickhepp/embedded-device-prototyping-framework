@@ -16,6 +16,9 @@ namespace HostApp.UI.Views
     {
         public string Name => "Connections";
 
+        public string Description => "Establish connections to devices over multiple connection options.";
+
+
         public Bitmap Image => HostApp.Properties.Resources.baseline_cable_black;
 
         private Lazy<ToolWindow> _toolWindow;

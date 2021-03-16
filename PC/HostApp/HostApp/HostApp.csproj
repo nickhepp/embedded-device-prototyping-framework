@@ -8,15 +8,20 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="ToRemove\HostAppMainView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Remove="ToRemove\**" />
+    <EmbeddedResource Remove="ToRemove\**" />
+    <None Remove="ToRemove\**" />
+    <Page Remove="ToRemove\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="UI\Views\ToolBoxView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ToRemove\Factories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\warning_icon.png" />
@@ -39,52 +44,9 @@
     <ProjectReference Include="..\..\Libraries\Ecs.Edpf.GUI\Ecs.Edpf.GUI.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="ToRemove\BaseChildViewModel.cs" />
-    <Compile Remove="ToRemove\BaseConnectionViewModel.cs" />
-    <Compile Remove="ToRemove\BaseDeviceViewModel.cs" />
-    <Compile Remove="ToRemove\BaseKernelViewModel.cs" />
-    <Compile Remove="ToRemove\BaseKernelWithChildrenViewModel.cs" />
-    <Compile Remove="ToRemove\BaseViewModel.cs" />
-    <Compile Remove="ToRemove\ComPortConnectionSettingsViewModel.cs" />
-    <Compile Remove="ToRemove\Connections\FakeConnectionViewModel.cs" />
-    <Compile Remove="ToRemove\Connections\IConnectionViewModel.cs" />
-    <Compile Remove="ToRemove\ConnectionView.cs" />
-    <Compile Remove="ToRemove\ConnectionView.Designer.cs" />
-    <Compile Remove="ToRemove\ConsoleControlView.cs" />
-    <Compile Remove="ToRemove\ConsoleControlView.Designer.cs" />
-    <Compile Remove="ToRemove\ConsoleControlViewModel.cs" />
-    <Compile Remove="ToRemove\ConsoleTokenHighlight.cs" />
-    <Compile Remove="ToRemove\Constants.cs" />
-    <Compile Remove="ToRemove\DeviceCommandsView.cs" />
-    <Compile Remove="ToRemove\DeviceCommandsView.Designer.cs" />
-    <Compile Remove="ToRemove\DeviceCommandsViewModel.cs" />
-    <Compile Remove="ToRemove\DeviceCommandView.cs" />
-    <Compile Remove="ToRemove\DeviceCommandView.Designer.cs" />
-    <Compile Remove="ToRemove\DeviceCommandViewModel.cs" />
-    <Compile Remove="ToRemove\DeviceConnectionSettingsViewModel.cs" />
-    <Compile Remove="ToRemove\FakeConnectionSettingsViewModel.cs" />
-    <Compile Remove="ToRemove\FakeViewModel.cs" />
-    <Compile Remove="ToRemove\IChildView.cs" />
-    <Compile Remove="ToRemove\IChildViewModel.cs" />
-    <Compile Remove="ToRemove\IChildViewModelProvider.cs" />
-    <Compile Remove="ToRemove\IConsoleControlViewModel.cs" />
-    <Compile Remove="ToRemove\IDeviceCommandsViewModel.cs" />
-    <Compile Remove="ToRemove\IDeviceCommandViewModel.cs" />
-    <Compile Remove="ToRemove\IDeviceConnectionSettingsViewModel.cs" />
-    <Compile Remove="ToRemove\IDeviceProviderViewModel.cs" />
-    <Compile Remove="ToRemove\IDeviceViewModel.cs" />
-    <Compile Remove="ToRemove\IMainView.cs" />
-    <Compile Remove="ToRemove\IMainViewModel.cs" />
-    <Compile Remove="ToRemove\ISimpleMainViewModel.cs" />
-    <Compile Remove="ToRemove\IViewModel.cs" />
-    <Compile Remove="ToRemove\SimpleMainView.cs" />
-    <Compile Remove="ToRemove\SimpleMainView.Designer.cs" />
-    <Compile Remove="ToRemove\SimpleMainViewModel.cs" />
-    <Compile Remove="ToRemove\ViewModelCommandExtractor.cs" />
-    <EmbeddedResource Remove="ToRemove\ConnectionView.resx" />
-    <EmbeddedResource Remove="ToRemove\ConsoleControlView.resx" />
-    <EmbeddedResource Remove="ToRemove\DeviceCommandsView.resx" />
-    <EmbeddedResource Remove="ToRemove\DeviceCommandView.resx" />
-    <EmbeddedResource Remove="ToRemove\SimpleMainView.resx" />
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

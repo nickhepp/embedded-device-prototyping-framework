@@ -15,6 +15,7 @@ namespace HostApp.UI.Views
 
         string Name { get; }
 
+        string Description { get; }
 
         ToolWindow GetToolWindow();
 

@@ -28,7 +28,9 @@ namespace HostApp.UI.Views
                     new ConsoleToolWindowCohort(),
                     new DeviceCommandsToolWindowCohort(),
                     new ConnectionsToolWindowCohort(),
-                    new ChartingToolWindowCohort()
+                    new ChartingToolWindowCohort(),
+                    new DeviceTextMacroToolWindowCohort(),
+                    new LoggingToolWindowCohort(),
                };
 
 
@@ -76,14 +78,7 @@ namespace HostApp.UI.Views
             ConsoleToolWindowCohort prevConsoleCohort = null;
             foreach (ConsoleToolWindowCohort consoleCohort in consoleCohorts)
             {
-                //if (prevConsoleCohort == null)
-                //{
-                    consoleCohort.GetToolWindow().Show(dockPanel, DockState.Document);
-                //}
-                //else
-                //{
-                //    consoleCohort.GetToolWindow().Show(prevConsoleCohort.GetToolWindow().Pane);
-                //}
+                consoleCohort.GetToolWindow().Show(dockPanel, DockState.Document);
                 prevConsoleCohort = consoleCohort;
             }
 
@@ -106,15 +101,30 @@ namespace HostApp.UI.Views
             }
 
             // device connections are bottom right
+            ConnectionsToolWindowCohort prevConnectionsToolWindowCohort;
             List<ConnectionsToolWindowCohort> connectionsToolWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(ConnectionsToolWindowCohort)).
                 Select(cohort => cohort as ConnectionsToolWindowCohort).ToList();
             foreach (ConnectionsToolWindowCohort connectionsToolWindowCohort in connectionsToolWindowCohorts)
             {
                 connectionsToolWindowCohort.GetToolWindow().Show(deviceCommandsToolWindowCohorts.Last().GetToolWindow().Pane, DockAlignment.Bottom, 0.5);
+                prevConnectionsToolWindowCohort = connectionsToolWindowCohort;
             }
 
+            List<DeviceTextMacroToolWindowCohort> devTxtMacroToolWndwCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(DeviceTextMacroToolWindowCohort)).
+                Select(cohort => cohort as DeviceTextMacroToolWindowCohort).ToList();
+            foreach (DeviceTextMacroToolWindowCohort devTxtMacroToolWndwCohort in devTxtMacroToolWndwCohorts)
+            {
+                devTxtMacroToolWndwCohort.GetToolWindow().Show(connectionsToolWindowCohorts.Last().GetToolWindow().Pane, connectionsToolWindowCohorts.Last().GetToolWindow());
+            }
 
+            List<LoggingToolWindowCohort> loggingToolWndwCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(LoggingToolWindowCohort)).
+                Select(cohort => cohort as LoggingToolWindowCohort).ToList();
+            foreach (LoggingToolWindowCohort loggingToolWndwCohort in loggingToolWndwCohorts)
+            {
+                loggingToolWndwCohort.GetToolWindow().Show(devTxtMacroToolWndwCohorts.Last().GetToolWindow().Pane, devTxtMacroToolWndwCohorts.Last().GetToolWindow());
+            }
 
+            //
         }
 
     }

@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace HostApp.UI.Views
 {
-    public class ConsoleToolWindowCohort : IToolWindowCohort
+    public class LoggingToolWindowCohort : IToolWindowCohort
     {
-        public string Name => "Console";
+        public string Name => "Logging";
 
         public string Description => "Interact with the device as if it were a server that " +
             "provides a terminal interface. The device responds with easy to understand text in a " +
             "'human readable' format.";
 
-        public Bitmap Image => HostApp.Properties.Resources.terminal;
+        public Bitmap Image => HostApp.Properties.Resources.clipboard_list;
 
         private Lazy<ToolWindow> _toolWindow;
 
@@ -26,23 +26,23 @@ namespace HostApp.UI.Views
         private IConsoleViewModel _consoleViewModel = new ConsoleViewModel(new DeviceStateMachine());
         public IViewModel ViewModel => _consoleViewModel;
 
-        public ConsoleToolWindowCohort()
+        public LoggingToolWindowCohort()
         {
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                ConsoleView consoleView = new ConsoleView
+                LoggingView loggingView = new LoggingView
                 {
-                    ConsoleViewModel = _consoleViewModel
+                    //ConsoleViewModel = _consoleViewModel
                 };
-                consoleView.ShowConsoleHeader = false;
+                //consoleView.ShowConsoleHeader = false;
 
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-                toolWindow.Initialize(consoleView, this.Name);
+                toolWindow.Initialize(loggingView, this.Name);
 
-                IntPtr terminalIcon = HostApp.Properties.Resources.terminal.GetHicon();
-                Icon cmdIcon = Icon.FromHandle(terminalIcon);
-                toolWindow.Icon = cmdIcon;
+                IntPtr loggingIconPtr = HostApp.Properties.Resources.clipboard_list.GetHicon();
+                Icon loggingIcon = Icon.FromHandle(loggingIconPtr);
+                toolWindow.Icon = loggingIcon;
                 toolWindow.ShowIcon = true;
                 return toolWindow;
             });
