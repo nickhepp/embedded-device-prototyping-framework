@@ -33,8 +33,8 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._macroProgressPbr = new System.Windows.Forms.ProgressBar();
             this._settingsPpg = new System.Windows.Forms.PropertyGrid();
             this._buttonsTlp = new System.Windows.Forms.TableLayoutPanel();
-            this._loopBtn = new System.Windows.Forms.Button();
             this._oneShotBtn = new System.Windows.Forms.Button();
+            this._loopBtn = new System.Windows.Forms.Button();
             this._recordPlayBtn = new System.Windows.Forms.Button();
             this._mainTlp.SuspendLayout();
             this._buttonsTlp.SuspendLayout();
@@ -96,36 +96,32 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._buttonsTlp.Size = new System.Drawing.Size(1030, 150);
             this._buttonsTlp.TabIndex = 2;
             // 
-            // _loopBtn
-            // 
-            this._loopBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._loopBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.repeat_64x64;
-            this._loopBtn.Location = new System.Drawing.Point(732, 10);
-            this._loopBtn.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this._loopBtn.Name = "_loopBtn";
-            this._loopBtn.Size = new System.Drawing.Size(159, 130);
-            this._loopBtn.TabIndex = 1;
-            this._loopBtn.Text = "Loop";
-            this._loopBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this._loopBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this._loopBtn.UseVisualStyleBackColor = true;
-            this._loopBtn.Click += new System.EventHandler(this._loopBtn_Click);
-            // 
             // _oneShotBtn
             // 
             this._oneShotBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this._oneShotBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this._oneShotBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.repeat_one_64x64;
-            this._oneShotBtn.Location = new System.Drawing.Point(434, 10);
-            this._oneShotBtn.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this._oneShotBtn.Location = new System.Drawing.Point(434, 3);
             this._oneShotBtn.Name = "_oneShotBtn";
-            this._oneShotBtn.Size = new System.Drawing.Size(159, 130);
+            this._oneShotBtn.Size = new System.Drawing.Size(159, 144);
             this._oneShotBtn.TabIndex = 0;
             this._oneShotBtn.Text = "One Shot";
             this._oneShotBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this._oneShotBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this._oneShotBtn.UseVisualStyleBackColor = true;
-            this._oneShotBtn.Click += new System.EventHandler(this._oneShotBtn_Click);
+            // 
+            // _loopBtn
+            // 
+            this._loopBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._loopBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.repeat_64x64;
+            this._loopBtn.Location = new System.Drawing.Point(732, 3);
+            this._loopBtn.Name = "_loopBtn";
+            this._loopBtn.Size = new System.Drawing.Size(159, 144);
+            this._loopBtn.TabIndex = 1;
+            this._loopBtn.Text = "Loop";
+            this._loopBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this._loopBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this._loopBtn.UseVisualStyleBackColor = true;
             // 
             // _recordPlayBtn
             // 

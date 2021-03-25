@@ -18,7 +18,7 @@ namespace HostApp.UI.Views
             "program calls methods. The host application queries the attached device to learn of " +
             "its capabilities and automatically creates a UI that honors the device's constraints.";
 
-        public Bitmap Image => null;
+        public Bitmap Image => HostApp.Properties.Resources.function;
 
 
         private Lazy<ToolWindow> _toolWindow;
@@ -32,7 +32,6 @@ namespace HostApp.UI.Views
             _deviceCommandsViewModel = new DeviceCommandsViewModel(new DeviceStateMachine());
             _toolWindow = new Lazy<ToolWindow>(() => 
             {
-                
                 DeviceCommandsView deviceCommandsView = new DeviceCommandsView
                 {
                     ViewModel = _deviceCommandsViewModel
@@ -40,6 +39,11 @@ namespace HostApp.UI.Views
 
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.Initialize(deviceCommandsView, this.Name);
+
+                IntPtr functionIconPtr = HostApp.Properties.Resources.function.GetHicon();
+                Icon functionIcon = Icon.FromHandle(functionIconPtr);
+                toolWindow.Icon = functionIcon;
+                toolWindow.ShowIcon = true;
                 return toolWindow;
             });
 

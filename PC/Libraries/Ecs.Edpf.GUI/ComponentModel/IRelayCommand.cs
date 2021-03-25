@@ -5,6 +5,11 @@ namespace Ecs.Edpf.GUI.ComponentModel
 {
     public interface IRelayCommand : ICommand
     {
-        event EventHandler CommandCanExecuteChanged;
+        //event EventHandler CommandCanExecuteChanged;
+
+        //bool CanExecute(object parameter);
+
+        //void Execute(object parameter);
+
     }
 }

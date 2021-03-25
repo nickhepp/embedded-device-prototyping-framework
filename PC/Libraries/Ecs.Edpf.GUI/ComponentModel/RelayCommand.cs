@@ -14,19 +14,34 @@ namespace Ecs.Edpf.GUI.ComponentModel
             this._execute = execute;
         }
 
+        private EventHandler _handler;
         public event EventHandler CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
+            add 
+            { 
+                CommandManager.RequerySuggested += value;
+                _handler = value;
+            }
             remove { CommandManager.RequerySuggested -= value; }
+            
         }
 
-        public event EventHandler CommandCanExecuteChanged;
+        //public event EventHandler CommandCanExecuteChanged;
 
-        public void RaiseCommandCanExecuteChanged()
+        private static EventArgs GetEventArgs()
         {
-            if (CommandCanExecuteChanged != null)
+            return new EventArgs();
+        }
+
+        public void RaiseCommandCanExecuteChanged(object sender = null, EventArgs eventArgs = null)
+        {
+            if (_handler != null)
             {
-                CommandCanExecuteChanged(this, new EventArgs());
+                if (eventArgs == null)
+                {
+                    eventArgs = new EventArgs();
+                }
+                _handler(sender, eventArgs);
             }
         }
 

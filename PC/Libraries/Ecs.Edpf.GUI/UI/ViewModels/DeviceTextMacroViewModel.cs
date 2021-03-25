@@ -124,13 +124,21 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private void ToggleLoopCommandExecute(object obj)
         {
-
+            if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice)
+            {
+                _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroLooping);
+            }
+                
+            else
+                _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroStopLooping);
         }
 
-
+        private static List<DeviceTextMacroState> _loopCanExecuteStates = new List<DeviceTextMacroState>
+        { DeviceTextMacroState.OpenedDevice, DeviceTextMacroState.LoopingMacro };
         public bool ToggleLoopCommandCanExecute(object obj)
         {
-            return true;
+            return ((_loopCanExecuteStates.Contains(_deviceTextMacroStateMachine.DeviceTextMacroState)) &&
+                (_deviceTextMacro?.DeviceTextLines.Count > 0));
         }
 
 
@@ -185,8 +193,16 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private void CheckCommandsCanExecute()
         {
-            RaiseNotifyPropertyChanged(nameof(ToggleLoopCommand));
-            RaiseNotifyPropertyChanged(nameof(OneShotCommand));
+            _toggleLoopCommand.RaiseCommandCanExecuteChanged(this);
+            _oneShotCommand.RaiseCommandCanExecuteChanged(this);
+            _recordPauseCommand.RaiseCommandCanExecuteChanged(this);
+        }
+
+        internal class BackgroundWorkerState
+        {
+
+            public string DeviceText { get; set; }
+
         }
 
         internal class DeviceTextMacroBackgroundWorker : BackgroundWorker
@@ -203,10 +219,35 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
             protected override void OnDoWork(DoWorkEventArgs e)
             {
+                TimeSpan GetNextDelay(DeviceTextLine deviceTextLine)
+                {
+                    TimeSpan ts = (deviceTextLine.Delay.HasValue) ? TimeSpan.FromMilliseconds((double)deviceTextLine.Delay) : TimeSpan.Zero;
+                    return ts;
+                }
 
-                //e.Cancel
+                bool keepRunning = !e.Cancel;
+                int itemIndex = 0;
 
-                base.OnDoWork(e);
+                DateTime startTime = DateTime.Now;
+                DateTime nextTime = startTime + GetNextDelay(_deviceTextMacro.DeviceTextLines[itemIndex]);
+
+                itemIndex = (itemIndex + 1) % _deviceTextMacro.DeviceTextLines.Count;
+                do
+                {
+                    if (DateTime.Now > nextTime)
+                    {
+                        //ReportProgress(()
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(33);
+                    }
+  
+                } while (keepRunning);
+
+
+
+            
             }
 
 
