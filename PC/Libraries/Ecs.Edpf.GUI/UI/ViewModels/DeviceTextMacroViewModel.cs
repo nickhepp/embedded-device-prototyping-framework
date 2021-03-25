@@ -1,21 +1,20 @@
 ﻿using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.IO.Macros;
 using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.ComponentModel.Macros;
 using Ecs.Edpf.GUI.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
     public class DeviceTextMacroViewModel : BaseDeviceViewModel, ISettingsResource, IDeviceTextMacroViewModel
     {
-        private DeviceTextMacroBackgroundWorker _oneShotBgWorker = null;
-        private DeviceTextMacroBackgroundWorker _loopBgWorker = null;
+
+        private IDeviceTextMacroBgWorkerFactory _deviceTextMacroBgWorkerFactory;
+
+        private IDeviceTextMacroBgWorker _macroLoopBgWorker;
 
         private IDeviceTextMacroStateMachine _deviceTextMacroStateMachine;
 
@@ -58,11 +57,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
-
-
-
         public DeviceTextMacroViewModel(
-            IDeviceTextMacroStateMachine deviceTextMacroStateMachine) :
+            IDeviceTextMacroStateMachine deviceTextMacroStateMachine,
+            IDeviceTextMacroBgWorkerFactory deviceTextMacroBgWorkerFactory) :
             base(deviceTextMacroStateMachine)
         {
             _toggleLoopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
@@ -79,6 +76,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
             _deviceTextMacroStateMachine = deviceTextMacroStateMachine;
             _deviceTextMacroStateMachine.DeviceTextMacroStateChanged += DeviceTextMacroStateMachine_DeviceTextMacroStateChanged;
+
+            _deviceTextMacroBgWorkerFactory = deviceTextMacroBgWorkerFactory;
         }
 
         private void DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(object sender, EventArgs e)
@@ -106,20 +105,30 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 (_deviceTextMacro?.DeviceTextLines.Count > 0));
         }
 
+        private DeviceTextMacroSignal _macroStoppingNextSignal;
         private void OneShotCommandExecute(object obj)
         {
             // set the next state
             _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroOneShotting);
 
             // make a copy so we dont have to worry about changes from one thread to the other
-            DeviceTextMacro deviceTextMacro = DeviceTextMacro.Copy();
-            _oneShotBgWorker = new DeviceTextMacroBackgroundWorker(deviceTextMacro);
+            _macroLoopBgWorker = _deviceTextMacroBgWorkerFactory.GetDeviceTextMacroBgWorker(DeviceTextMacro.Copy());
+            _macroLoopBgWorker.ProgressChanged += MacroLoopBgWorker_ProgressChanged;
+            _macroLoopBgWorker.RunWorkerCompleted += MacroLoopBgWorker_RunWorkerCompleted;
+        }
 
+        private void MacroLoopBgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(_macroStoppingNextSignal);
+            _macroLoopBgWorker.Dispose();
+        }
 
-            //            private DeviceTextMacroBackgroundWorker _oneShotBgWorker = null;
-            //private DeviceTextMacroBackgroundWorker _loopBgWorker = null;
-
-
+        private void MacroLoopBgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (e.UserState is DeviceTextMacroProgressChanged devTxtMacroProgressChanged)
+            {
+                Device.Write(devTxtMacroProgressChanged.DeviceText);
+            }
         }
 
         private void ToggleLoopCommandExecute(object obj)
@@ -179,18 +188,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             return settings;
         }
 
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        protected override void OnDeviceChanged(IDevice device)
-        {
-
-
-        }
-
         private void CheckCommandsCanExecute()
         {
             _toggleLoopCommand.RaiseCommandCanExecuteChanged(this);
@@ -198,62 +195,13 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _recordPauseCommand.RaiseCommandCanExecuteChanged(this);
         }
 
-        internal class BackgroundWorkerState
+        protected override void OnDeviceChanged(IDevice device)
         {
-
-            public string DeviceText { get; set; }
-
         }
 
-        internal class DeviceTextMacroBackgroundWorker : BackgroundWorker
+        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            private int? _deviceTextLineIdx = null;
-            private DeviceTextMacro _deviceTextMacro;
-
-            protected override bool CanRaiseEvents => true;
-
-            public DeviceTextMacroBackgroundWorker(DeviceTextMacro deviceTextMacro)
-            {
-                _deviceTextMacro = deviceTextMacro;
-            }
-
-            protected override void OnDoWork(DoWorkEventArgs e)
-            {
-                TimeSpan GetNextDelay(DeviceTextLine deviceTextLine)
-                {
-                    TimeSpan ts = (deviceTextLine.Delay.HasValue) ? TimeSpan.FromMilliseconds((double)deviceTextLine.Delay) : TimeSpan.Zero;
-                    return ts;
-                }
-
-                bool keepRunning = !e.Cancel;
-                int itemIndex = 0;
-
-                DateTime startTime = DateTime.Now;
-                DateTime nextTime = startTime + GetNextDelay(_deviceTextMacro.DeviceTextLines[itemIndex]);
-
-                itemIndex = (itemIndex + 1) % _deviceTextMacro.DeviceTextLines.Count;
-                do
-                {
-                    if (DateTime.Now > nextTime)
-                    {
-                        //ReportProgress(()
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(33);
-                    }
-  
-                } while (keepRunning);
-
-
-
-            
-            }
-
-
-
-
         }
-
+ 
     }
 }

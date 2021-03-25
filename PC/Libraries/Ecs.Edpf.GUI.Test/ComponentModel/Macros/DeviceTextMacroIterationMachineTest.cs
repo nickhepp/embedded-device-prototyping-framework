@@ -1,6 +1,7 @@
 ﻿using Ecs.Edpf.Devices.IO.Macros;
 using Ecs.Edpf.Devices.Test.ComponentModel;
 using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.ComponentModel.Macros;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecs.Edpf.GUI.Test.ComponentModel
+namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros
 {
 
     [TestClass]

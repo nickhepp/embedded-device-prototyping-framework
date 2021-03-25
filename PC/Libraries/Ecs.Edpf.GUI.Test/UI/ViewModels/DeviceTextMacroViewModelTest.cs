@@ -1,6 +1,7 @@
 ﻿using System;
 using Ecs.Edpf.Devices.Test.Devices;
 using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.ComponentModel.Macros;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -11,6 +12,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
     public class DeviceTextMacroViewModelTest
     {
         private Mock<IDeviceTextMacroStateMachine> _mockDevTxtMacroStateMachine;
+        private Mock<IDeviceTextMacroBgWorkerFactory> _mockDevTxtMacroBgWorkerFactory;
 
         private DeviceTextMacroViewModel _deviceTextMacroVwMdl;
 
@@ -20,7 +22,8 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
         public void InitializeTest()
         {
             _mockDevTxtMacroStateMachine = new Mock<IDeviceTextMacroStateMachine>();
-            _deviceTextMacroVwMdl = new DeviceTextMacroViewModel(_mockDevTxtMacroStateMachine.Object);
+            _mockDevTxtMacroBgWorkerFactory = new Mock<IDeviceTextMacroBgWorkerFactory>();
+            _deviceTextMacroVwMdl = new DeviceTextMacroViewModel(_mockDevTxtMacroStateMachine.Object, _mockDevTxtMacroBgWorkerFactory.Object);
             _mockDevice = new MockDevice();
         }
 

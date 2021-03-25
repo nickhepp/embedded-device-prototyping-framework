@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecs.Edpf.GUI.ComponentModel
+namespace Ecs.Edpf.GUI.ComponentModel.Macros
 {
     public class DeviceTextMacroIterationMachine
     {
 
         private DeviceTextMacro _deviceTextMacro;
         private int _deviceTextMacroLineIdx;
-        private DateTime? _nextTime;
+        private DateTime _nextTime;
         private DateTime _startTime;
 
         private IDateTimeProvider _dateTimeProvider;
@@ -22,6 +22,20 @@ namespace Ecs.Edpf.GUI.ComponentModel
         public bool Completed { get; private set; } = false;
 
         public int IterationCount { get; private set; } = 0;
+
+        public double RatioComplete
+        {
+            get
+            {
+                double ratio = 1.0;
+                if (_deviceTextMacroLineIdx != 0)
+                {
+                    ratio = (double)_deviceTextMacroLineIdx / _deviceTextMacro.DeviceTextLines.Count; 
+                }
+                return ratio;
+            }
+        }
+
 
         public DeviceTextMacroIterationMachine(DeviceTextMacro deviceTextMacro, IDateTimeProvider dateTimeProvider)
         {
@@ -63,7 +77,7 @@ namespace Ecs.Edpf.GUI.ComponentModel
         {
             DeviceTextLine devTextLine = null;
             DateTime currTime = _dateTimeProvider.GetCurrentDateTime();
-            if (currTime >= _nextTime.Value)
+            if (currTime >= _nextTime)
             {
                 // get the line and advance the pointer
                 devTextLine = _deviceTextMacro.DeviceTextLines[_deviceTextMacroLineIdx];

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ecs.Edpf.GUI.ComponentModel
+namespace Ecs.Edpf.GUI.ComponentModel.Macros
 {
     public interface IDeviceTextMacroStateMachine : IDeviceStateMachine
     {

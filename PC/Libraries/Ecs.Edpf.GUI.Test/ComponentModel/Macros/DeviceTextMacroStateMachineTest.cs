@@ -1,8 +1,9 @@
 ﻿using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.ComponentModel.Macros;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Ecs.Edpf.GUI.Test.ComponentModel
+namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros
 {
     [TestClass]
     public class DeviceTextMacroStateMachineTest
