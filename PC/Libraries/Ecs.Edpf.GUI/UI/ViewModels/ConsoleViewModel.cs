@@ -99,34 +99,26 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         {
         }
 
-        private void SetInputTextEnabled()
+        protected override void OnDeviceStateChanged()
         {
-            InputTextEnabled = Device.IsOpen;
-        }
-
-
-
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(IDevice.IsOpen))
+            if (DeviceState == DeviceState.OpenedDevice)
             {
-                SetInputTextEnabled();
+                // drop any refs to old devices
+                if (_currentDevice != null)
+                {
+                    _currentDevice.DeviceInputBuffer.ListChanged -= DeviceInputBufferListChanged;
+                }
+                // latch on the to the newest device
+                _currentDevice = Device;
+                _currentDevice.DeviceInputBuffer.ListChanged += DeviceInputBufferListChanged;
+                InputTextEnabled = true;
+            }
+            else
+            {
+                InputTextEnabled = false;
             }
         }
-
-
-
-        protected override void OnDeviceChanged(IDevice device)
-        {
-            if (_currentDevice != null)
-            {
-                _currentDevice.DeviceInputBuffer.ListChanged -= DeviceInputBufferListChanged;
-            }
-            _currentDevice = device;
-            _currentDevice.DeviceInputBuffer.ListChanged += DeviceInputBufferListChanged;
-            SetInputTextEnabled();
-        }
-
+   
         private void DeviceInputBufferListChanged(object sender, ListChangedEventArgs e)
         {
             if (e.ListChangedType == ListChangedType.ItemAdded)

@@ -28,6 +28,9 @@ namespace HostApp.UI.Views
 
         public IViewModel ViewModel => _connectionViewModelFactoryViewModel;
 
+        public string RoadmapIssueUrl => null;
+
+        public ToolState State => ToolState.Active;
 
         public ConnectionsToolWindowCohort()
         {

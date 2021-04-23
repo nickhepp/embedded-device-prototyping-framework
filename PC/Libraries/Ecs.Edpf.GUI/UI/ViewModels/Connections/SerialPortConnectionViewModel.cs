@@ -36,10 +36,5 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             return _serialPortDeviceFactory;
         }
 
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-
-        }
-
     }
 }

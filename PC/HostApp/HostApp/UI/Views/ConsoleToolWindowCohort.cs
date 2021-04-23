@@ -22,9 +22,13 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
-
         private IConsoleViewModel _consoleViewModel = new ConsoleViewModel(new DeviceStateMachine());
+
         public IViewModel ViewModel => _consoleViewModel;
+
+        public string RoadmapIssueUrl => null;
+
+        public ToolState State => ToolState.Active;
 
         public ConsoleToolWindowCohort()
         {

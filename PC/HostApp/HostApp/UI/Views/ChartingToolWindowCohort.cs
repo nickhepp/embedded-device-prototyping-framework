@@ -26,6 +26,9 @@ namespace HostApp.UI.Views
 
         public IViewModel ViewModel => _chartingViewModel;
 
+        public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/4";
+
+        public ToolState State => ToolState.Roadmap;
 
         public ChartingToolWindowCohort()
         {

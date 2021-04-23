@@ -32,10 +32,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         {
             return new FakeDeviceFactory();
         }
-
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-
-        }
+     
     }
 }

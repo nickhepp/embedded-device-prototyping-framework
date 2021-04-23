@@ -24,8 +24,12 @@ namespace HostApp.UI.Views
         private Lazy<ToolWindow> _toolWindow;
 
         private IDeviceCommandsViewModel _deviceCommandsViewModel;
+
         public IViewModel ViewModel => _deviceCommandsViewModel;
 
+        public string RoadmapIssueUrl => null;
+
+        public ToolState State => ToolState.Active;
 
         public DeviceCommandsToolWindowCohort()
         {

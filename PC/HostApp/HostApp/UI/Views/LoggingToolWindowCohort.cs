@@ -24,7 +24,12 @@ namespace HostApp.UI.Views
 
 
         private IConsoleViewModel _consoleViewModel = new ConsoleViewModel(new DeviceStateMachine());
+        
         public IViewModel ViewModel => _consoleViewModel;
+
+        public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/3";
+
+        public ToolState State => ToolState.Roadmap;
 
         public LoggingToolWindowCohort()
         {

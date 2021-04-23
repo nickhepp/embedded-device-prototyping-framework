@@ -38,14 +38,5 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         }
 
 
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-
-        }
-
-        protected override void OnDeviceChanged(IDevice device)
-        {
-
-        }
     }
 }

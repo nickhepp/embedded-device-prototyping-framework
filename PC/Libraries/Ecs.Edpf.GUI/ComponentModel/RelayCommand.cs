@@ -26,8 +26,6 @@ namespace Ecs.Edpf.GUI.ComponentModel
             
         }
 
-        //public event EventHandler CommandCanExecuteChanged;
-
         private static EventArgs GetEventArgs()
         {
             return new EventArgs();
@@ -50,9 +48,20 @@ namespace Ecs.Edpf.GUI.ComponentModel
             return _canExecute(parameter);
         }
 
+        public bool CanExecute()
+        {
+            return _canExecute(null);
+        }
+
+
         public void Execute(object parameter)
         {
             _execute(parameter);
+        }
+
+        public void Execute()
+        {
+            _execute(null);
         }
     }
 }

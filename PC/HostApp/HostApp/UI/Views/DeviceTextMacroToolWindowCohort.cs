@@ -26,7 +26,10 @@ namespace HostApp.UI.Views
 
         public IViewModel ViewModel => _deviceTextMacroViewModel;
 
- 
+        public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/5";
+
+        public ToolState State => ToolState.InProgress;
+
         public DeviceTextMacroToolWindowCohort()
         {
 

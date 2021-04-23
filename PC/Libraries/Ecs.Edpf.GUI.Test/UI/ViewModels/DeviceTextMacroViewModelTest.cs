@@ -56,7 +56,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
                  new EventArgs());
         }
 
-        private void SetupEnabledDeviceTextMacro()
+        private void SetupEnabledDeviceTextMacro(DeviceTextMacroState state = DeviceTextMacroState.OpenedDevice)
         {
             _deviceTextMacroVwMdl.DeviceTextMacro = new Devices.IO.Macros.DeviceTextMacro
             {
@@ -70,7 +70,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
                 Loop = false
             };
 
-            SetDeviceTextMacroState(DeviceTextMacroState.OpenedDevice);
+            SetDeviceTextMacroState(state);
         }
 
         [TestMethod]
@@ -119,7 +119,24 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
             Assert.IsFalse(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should not be enabled.");
         }
 
+        [TestMethod]
+        public void RecordPauseCommandExecute_IsRecording_True()
+        {
+            //-- arrange
+            SetupEnabledDeviceTextMacro(DeviceTextMacroState.OpenedDevice);
+            _mockDevTxtMacroStateMachine.Setup(devTxtMacroStateMachine => devTxtMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroRecording)).
+                Callback(() => {
+                    _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroStateMachine => devTxtMacroStateMachine.DeviceTextMacroState).Returns(DeviceTextMacroState.RecordingMacro);
+                    _mockDevTxtMacroStateMachine.Raise(devTxtMacroStateMachine => devTxtMacroStateMachine.DeviceTextMacroStateChanged += null, new EventArgs());
+                });
 
+            //-- act
+            _deviceTextMacroVwMdl.RecordPauseCommand.Execute(null);
+
+            //-- assert
+            Assert.IsTrue(_deviceTextMacroVwMdl.IsRecording);
+            Assert.AreEqual(expected: DeviceTextMacroViewModel.PauseText, actual: _deviceTextMacroVwMdl.RecordPauseButtonText);
+        }
 
 
     }

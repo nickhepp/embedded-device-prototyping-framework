@@ -20,12 +20,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             {
                 return _device;
             }
-            set
+            protected set
             {
                 _device = value;
                 if (_device != null)
                 {
-                    _device.PropertyChanged += DevicePropertyChanged;
                     _deviceStateMachine.SendSignal(DeviceSignal.DeviceAssigned);
                     _device.DeviceClosed += DeviceClosed;
                     _device.DeviceOpened += DeviceOpened;
@@ -44,7 +43,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 {
                     DeviceOutputBufferChanged(this, new EventArgs());
                 }
-                OnDeviceChanged(_device);
             }
         }
 
@@ -108,9 +106,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private void DeviceProviderDeviceCreated(object sender, EventArgs e)
         {
             Device = _deviceProvider.Device;
-            Device.PropertyChanged += DevicePropertyChanged;
             DeviceOutputBuffer = Device.DeviceOutputBuffer;
-
         }
 
 
@@ -122,18 +118,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         protected virtual void OnDeviceStateChanged()
         {
 
-        }
-
-
-
-        protected abstract void OnDeviceChanged(IDevice device);
-
-        protected abstract void InternalDevicePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e);
-
-        private void DevicePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            // leave it to the view model specific control as to how it wants to react to device changes
-            InternalDevicePropertyChanged(sender, e);
         }
 
     }

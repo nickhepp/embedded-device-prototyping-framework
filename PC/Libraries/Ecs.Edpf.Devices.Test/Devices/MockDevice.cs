@@ -16,13 +16,17 @@ namespace Ecs.Edpf.Devices.Test.Devices
             Setup(device => device.Open()).Returns(() => true).Callback(() =>
                 {
                     SetupGet(device => device.IsOpen).Returns(true);
+                    Raise(device => device.DeviceOpened += null, new EventArgs());
                 }
             );
             Setup(device => device.Close()).Callback(() => 
                 {
                     SetupGet(device => device.IsOpen).Returns(false);
+                    Raise(device => device.DeviceClosed += null, new EventArgs());
                 }
             );
+            SetupGet(device => device.DeviceInputBuffer).Returns(new System.ComponentModel.BindingList<string>());
+
         }
 
     }

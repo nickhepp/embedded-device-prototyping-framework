@@ -33,5 +33,9 @@ namespace HostApp.UI.Views
             this.ParentForm.Close();
         }
 
+        private void _upvoteEnhancementLlbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }

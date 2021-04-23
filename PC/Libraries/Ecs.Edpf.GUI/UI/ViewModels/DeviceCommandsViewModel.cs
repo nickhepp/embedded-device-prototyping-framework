@@ -103,30 +103,23 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         }
 
 
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnDeviceStateChanged()
         {
-
-        }
-
-        protected override void OnDeviceChanged(IDevice device)
-        {
-            // grab all the device commands
-            DeviceCommandViewModels.Clear();
-
-            if (device != null)
+            if (DeviceState == DeviceState.AssignedDevice)
             {
-                foreach (IDeviceCommand deviceCommand in device.DeviceCommands)
+                DeviceCommandViewModels.Clear();
+                foreach (IDeviceCommand deviceCommand in Device.DeviceCommands)
                 {
-                    DeviceCommandViewModel deviceCommandVwMdl = new DeviceCommandViewModel(device, deviceCommand);
+                    DeviceCommandViewModel deviceCommandVwMdl = new DeviceCommandViewModel(Device, deviceCommand);
                     if (SelectedDeviceCommandViewModel == null)
                     {
                         SelectedDeviceCommandViewModel = deviceCommandVwMdl;
                     }
                     DeviceCommandViewModels.Add(deviceCommandVwMdl);
                 }
+                DeviceCommandViewModels.ResetBindings();
             }
-
-            DeviceCommandViewModels.ResetBindings();
+            
         }
 
     }

@@ -20,7 +20,10 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         public string ResourceName => "DeviceTextMacro";
 
-        private string _recordPauseButtonText = "Record";
+        public const string RecordText = "Record";
+        public const string PauseText = "Pause";
+
+        private string _recordPauseButtonText = RecordText;
         public string RecordPauseButtonText
         {
             get
@@ -57,6 +60,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
+        public bool IsRecording { get; private set; }
+
         public DeviceTextMacroViewModel(
             IDeviceTextMacroStateMachine deviceTextMacroStateMachine,
             IDeviceTextMacroBgWorkerFactory deviceTextMacroBgWorkerFactory) :
@@ -78,6 +83,27 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _deviceTextMacroStateMachine.DeviceTextMacroStateChanged += DeviceTextMacroStateMachine_DeviceTextMacroStateChanged;
 
             _deviceTextMacroBgWorkerFactory = deviceTextMacroBgWorkerFactory;
+
+            SetIsRecording();
+            SetRecordPauseButtonText();
+        }
+
+
+        private void SetIsRecording()
+        {
+            IsRecording = (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro);
+        }
+
+        private void SetRecordPauseButtonText()
+        {
+            if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro)
+            {
+                RecordPauseButtonText = PauseText;
+            }
+            else
+            {
+                RecordPauseButtonText = RecordText;
+            }
         }
 
         private void DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(object sender, EventArgs e)
@@ -85,18 +111,27 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _toggleLoopCommand.RaiseCommandCanExecuteChanged();
             _recordPauseCommand.RaiseCommandCanExecuteChanged();
             _oneShotCommand.RaiseCommandCanExecuteChanged();
+
+            SetIsRecording();
+            SetRecordPauseButtonText();
         }
-
-
 
         private void RecordPauseCommandExecute(object obj)
         {
-
+            if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice)
+            {
+                _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroRecording);
+            }
+            else if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro)
+            {
+                _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroStopRecording);
+            }
         }
 
         private bool RecordPauseCommandCanExecute(object obj)
         {
-            return (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro);
+            return ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice) || 
+                (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro));
         }
 
         private bool OneShotCommandCanExecute(object obj)
@@ -137,9 +172,10 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             {
                 _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroLooping);
             }
-                
             else
+            {
                 _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroStopLooping);
+            }
         }
 
         private static List<DeviceTextMacroState> _loopCanExecuteStates = new List<DeviceTextMacroState>
@@ -195,13 +231,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _recordPauseCommand.RaiseCommandCanExecuteChanged(this);
         }
 
-        protected override void OnDeviceChanged(IDevice device)
-        {
-        }
-
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-        }
  
     }
 }
