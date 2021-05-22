@@ -29,6 +29,9 @@
 #include <EEPROM.h>
 #include "common.h"
 #include "KernelDevice.h"
+#include "CommandCollection.h"
+
+CommandCollection cmdCollection;
 
 /**************************************************************************/
 /*! 
@@ -40,6 +43,10 @@ KernelDevice::KernelDevice()
 }
 
 
+void KernelDevice::addCommand(Command* cmd)
+{
+    cmdCollection.addCommand(cmd);
+}
 
 
 
@@ -138,6 +145,12 @@ void getDeviceInfo()
     Serial.print(CMD_PARAMS_COUNT);
 }
 
+void get_device_info(Command* cmd)
+{
+    Serial.println("get_device_info");
+    getDeviceInfo();
+}
+
 
 // <-- Add more command methods here.  Signature needs to be like so below.
 //      Cant have any arguments.  That is what command parameters are for.
@@ -171,8 +184,14 @@ void getRegisteredCommands()
             Serial.println(cmds[k].cmd_name);            
         }
     }
-    
 }
+
+void get_registered_commands(Command* cmd)
+{
+    Serial.println("get_registered_commands");
+    getRegisteredCommands();
+}
+
 
 //////////////////////////////////////////////////////////////////////
 //  Prints the command parameters.
@@ -188,6 +207,12 @@ void getCommandParameters()
         Serial.print(cmd_params[k].param_value);
         Serial.println(F("'"));
     }
+}
+
+void get_command_parameters(Command* cmd)
+{
+    Serial.println("get_command_parameters");
+    getCommandParameters();
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -214,6 +239,14 @@ void KernelDevice::executeCommand()
         size_t cmd_val_sz = strlen(input_buffer + CMD_PREFIX_LENGTH + 1) - CMD_SUFFIX_LENGTH;
         if (cmd_val_sz > 0)
         {
+
+            Command* cmd = cmdCollection.getCommandByName(input_buffer + CMD_PREFIX_LENGTH, cmd_val_sz);
+            if (cmd != NULL_PTR)
+            {
+                cmd->execute();
+            }
+
+
             for (int k = 0; k < CMDS_COUNT; k++)
             {
                 
@@ -330,6 +363,10 @@ void registerCommand(char* cmd_name, void (*cmd)())
 }
 
 
+Command getDeviceInfoCommand;
+Command getRegisteredCommandsCommand;
+Command getCommandParametersCommand;
+
 void KernelDevice::init()
 {
     // clear out the buffers
@@ -347,6 +384,18 @@ void KernelDevice::init()
     delay(100);
     Serial.begin(115200);  
     // give the device time to catch up before reading
+
+    getDeviceInfoCommand.setCommandCallback(get_device_info);
+    getDeviceInfoCommand.setCommandName("getDeviceInfo");
+    addCommand(&getDeviceInfoCommand);
+
+    getRegisteredCommandsCommand.setCommandCallback(get_registered_commands);
+    getRegisteredCommandsCommand.setCommandName("getRegisteredCommands");
+    addCommand(&getRegisteredCommandsCommand);
+
+    getCommandParametersCommand.setCommandCallback(get_command_parameters);
+    getCommandParametersCommand.setCommandName("getCommandParameters");
+    addCommand(&getCommandParametersCommand);
 
     registerCommand("getDeviceInfo\0", getDeviceInfo);
     registerCommand("getRegisteredCommands\0", getRegisteredCommands);

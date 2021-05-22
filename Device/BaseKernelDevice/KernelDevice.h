@@ -31,6 +31,8 @@
 
 #include <Arduino.h>
 
+#include "Command.h"
+
 class KernelDevice{
     public:
     
@@ -40,6 +42,8 @@ class KernelDevice{
 
         void loopAction();
   
+        void addCommand(Command *cmd);
+
     private:
 
         void executeCommand();
@@ -47,7 +51,7 @@ class KernelDevice{
         void readCommandParam();
 
         void readCharacters();
-        
+
 };
 
 // KERNELDEVICE_H
