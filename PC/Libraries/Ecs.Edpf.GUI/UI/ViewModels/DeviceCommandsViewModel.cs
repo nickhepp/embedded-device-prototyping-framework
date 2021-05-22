@@ -119,6 +119,14 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 }
                 DeviceCommandViewModels.ResetBindings();
             }
+            else if (DeviceState == DeviceState.OpenedDevice)
+            {
+                string devInfo = Device.GetDeviceInfo();
+
+                devInfo = devInfo;
+
+
+            }
             
         }
 

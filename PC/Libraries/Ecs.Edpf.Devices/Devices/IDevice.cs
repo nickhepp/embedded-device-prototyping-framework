@@ -40,6 +40,8 @@ namespace Ecs.Edpf.Devices
         /// <param name="cmd">Command to execute.</param>
         void ExecuteCommand(IDeviceCommand cmd);
 
+        string GetDeviceInfo();
+
         /// <summary>
         /// Event that is raised when the device is opened.
         /// </summary>

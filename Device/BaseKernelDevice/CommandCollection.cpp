@@ -24,49 +24,31 @@ void CommandCollection::addCommand(Command *cmd)
 	}
 }
 
+Command* CommandCollection::getCommandByPtr(Command* cmd)
+{
+	Command* nextCmd;
+	if (cmd == NULL_PTR)
+	{
+		nextCmd = _headPtr;
+	}
+	else
+	{
+		nextCmd = cmd->_nextCommand;
+	}
+	return nextCmd;
+}
 
 Command* CommandCollection::getCommandByName(const char* cmdName, size_t cmdNameSz)
 {
-	Serial.print("looking for ");
-	Serial.print(cmdName);
-	Serial.print(", ");
-	//size_t cmdNameSz = strlen(cmdName);
-	Serial.println(cmdNameSz, DEC);
-
-	/*
 	Command* currCmd = _headPtr;
-	do {
-
+	while (currCmd != NULL_PTR)
+	{
 		if ((cmdNameSz == currCmd->_cmdNameSz) || (memcmp(currCmd->_cmdName, cmdName, cmdNameSz) == 0))
 		{
 			return currCmd;
 		}
-
-	} while (currCmd->_nextCommand != NULL_PTR);
-	*/
-
-	if (_headPtr != NULL_PTR)
-	{
-		Command* currCmd = _headPtr;
-
-		while (currCmd->_nextCommand != NULL_PTR)
-		{
-
-			Serial.print("comparing ");
-			Serial.print(currCmd->_cmdName);
-			Serial.print(", ");
-			//size_t cmdNameSz = strlen(cmdName);
-			Serial.println(currCmd->_cmdNameSz, DEC);
-
-			if ((cmdNameSz == currCmd->_cmdNameSz) || (memcmp(currCmd->_cmdName, cmdName, cmdNameSz) == 0))
-			{
-				return currCmd;
-			}
-			currCmd = currCmd->_nextCommand;
-		}
+		currCmd = currCmd->_nextCommand;
 	}
-
-
 
 	return NULL_PTR;
 }

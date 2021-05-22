@@ -220,7 +220,6 @@ void Command::printCommand()
   uint8_t pIdx = 0;
   while (pIdx < _paramsCnt)
   {
-
     Serial.print(F("p["));
     Serial.print(pIdx, DEC);
     Serial.print(F("]:("));

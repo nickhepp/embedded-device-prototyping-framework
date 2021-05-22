@@ -242,7 +242,7 @@ namespace Ecs.Edpf.Devices
 
         public string GetDeviceInfo()
         {
-            string devInfo = ExecuteCommand("printDeviceInfo");
+            string devInfo = ExecuteCommand(GetDeviceInfoCommand.GetDeviceInfoCommandMethodName);
             return devInfo;
         }
 

@@ -14,6 +14,8 @@ class CommandCollection
 
         Command* getCommandByName(const char* cmdName, size_t cmdNameSz);
 
+        Command* getCommandByPtr(Command* cmd);
+
     private:
 
         Command* _headPtr;

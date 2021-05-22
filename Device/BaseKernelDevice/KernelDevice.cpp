@@ -105,19 +105,6 @@ struct cmd_param cmd_params[CMD_PARAMS_COUNT];
 #define CMD_SUFFIX                      "()"
 #define CMD_SUFFIX_LENGTH               2
 #define MINIMUM_CMD_LENGTH              CMD_PREFIX_LENGTH + CMD_SUFFIX_LENGTH + 1
-#define CMD_NAME_LENGTH                 24
-struct cmd
-{
-    // name of the command that needs to be entered in the command line
-    char cmd_name[CMD_NAME_LENGTH];
-    // length of the used command name in characters
-    char cmd_name_length;
-    // method that will be executed
-    void (*cmd)();
-};
-
-#define CMDS_COUNT          12
-struct cmd cmds[CMDS_COUNT];
 
 ////******************************************************************
 ////******************************************************************
@@ -130,7 +117,7 @@ struct cmd cmds[CMDS_COUNT];
 //////////////////////////////////////////////////////////////////////
 //  Prints device info.
 //////////////////////////////////////////////////////////////////////
-void getDeviceInfo()
+void get_device_info(Command* cmd)
 {
     Serial.println(DEVICE_NAME);
     Serial.print(F("V"));
@@ -143,12 +130,6 @@ void getDeviceInfo()
     Serial.println(VERSION_REVISION);
     Serial.print(F("cmd params count:"));
     Serial.print(CMD_PARAMS_COUNT);
-}
-
-void get_device_info(Command* cmd)
-{
-    Serial.println("get_device_info");
-    getDeviceInfo();
 }
 
 
@@ -175,28 +156,21 @@ void get_device_info(Command* cmd)
 //////////////////////////////////////////////////////////////////////
 //  Prints the commands that have been registered.
 //////////////////////////////////////////////////////////////////////
-void getRegisteredCommands()
-{
-    for (int k = 0; k < CMDS_COUNT; k++)
-    {
-        if (cmds[k].cmd != NULL)
-        {
-            Serial.println(cmds[k].cmd_name);            
-        }
-    }
-}
-
 void get_registered_commands(Command* cmd)
 {
-    Serial.println("get_registered_commands");
-    getRegisteredCommands();
+    Command* cmdPtr = cmdCollection.getCommandByPtr(NULL_PTR);
+    while (cmdPtr != NULL_PTR)
+    {
+        cmdPtr->printCommand();
+        cmdPtr = cmdCollection.getCommandByPtr(cmdPtr);
+    }
 }
 
 
 //////////////////////////////////////////////////////////////////////
 //  Prints the command parameters.
 //////////////////////////////////////////////////////////////////////
-void getCommandParameters()
+void get_command_parameters(Command* cmd)
 {
     for (int k = 0; k < CMD_PARAMS_COUNT; k++)
     {
@@ -209,11 +183,6 @@ void getCommandParameters()
     }
 }
 
-void get_command_parameters(Command* cmd)
-{
-    Serial.println("get_command_parameters");
-    getCommandParameters();
-}
 
 //////////////////////////////////////////////////////////////////////
 //  Attempts to execute a registered command, if one is found.
@@ -244,17 +213,6 @@ void KernelDevice::executeCommand()
             if (cmd != NULL_PTR)
             {
                 cmd->execute();
-            }
-
-
-            for (int k = 0; k < CMDS_COUNT; k++)
-            {
-                
-                if ((cmds[k].cmd_name_length == cmd_val_sz) && 
-                        (memcmp(cmds[k].cmd_name, input_buffer + CMD_PREFIX_LENGTH, cmd_val_sz) == 0))
-                {
-                    cmds[k].cmd();
-                }
             }
         }
     }
@@ -335,37 +293,18 @@ void KernelDevice::readCharacters()
     }
 }
 
-//////////////////////////////////////////////////////////////////////
-//  Registers a command to be executed via command name.
-//////////////////////////////////////////////////////////////////////
-void registerCommand(char* cmd_name, void (*cmd)())
-{
-    int k = 0;
-    bool found_empty = false;
-    while (!found_empty && k < CMDS_COUNT)
-    {
-        found_empty = (cmds[k].cmd == NULL);
-        if (found_empty)
-        {
-            int cmd_name_sz = strlen(cmd_name);
-            if ((cmd_name_sz > 0) && (cmd_name_sz <= (CMD_NAME_LENGTH - 1)))
-            {
-                memcpy(cmds[k].cmd_name, cmd_name, cmd_name_sz);
-                cmds[k].cmd_name_length = cmd_name_sz;
-                cmds[k].cmd = cmd;
-            } else
-            {
-                Serial.println(err_registering_cmd_msg);
-            }
-        }
-        k++;
-    }
-}
 
+void test_command(Command* cmd)
+{
+
+    //if (cmd->
+}
 
 Command getDeviceInfoCommand;
 Command getRegisteredCommandsCommand;
 Command getCommandParametersCommand;
+Command testCommand;
+
 
 void KernelDevice::init()
 {
@@ -374,11 +313,6 @@ void KernelDevice::init()
     for (uint8_t k = 0; k < CMD_PARAMS_COUNT; k++)
     {
         cmd_params[k].param_value[0] = 0;
-    }
-    for (uint8_t k = 0; k < CMDS_COUNT; k++)
-    {
-        cmds[k].cmd_name[0] = 0;
-        cmds[k].cmd = NULL;
     }
 
     delay(100);
@@ -396,11 +330,13 @@ void KernelDevice::init()
     getCommandParametersCommand.setCommandCallback(get_command_parameters);
     getCommandParametersCommand.setCommandName("getCommandParameters");
     addCommand(&getCommandParametersCommand);
-
-    registerCommand("getDeviceInfo\0", getDeviceInfo);
-    registerCommand("getRegisteredCommands\0", getRegisteredCommands);
-    registerCommand("getCommandParameters\0", getCommandParameters);
     
+    getCommandParametersCommand.setCommandCallback(test_command);
+    getCommandParametersCommand.setCommandName("testCommand");
+    addCommand(&testCommand);
+    
+
+
     Serial.println();
     Serial.print(CMD_RESPONSE_LINE_ENDING);
 }
