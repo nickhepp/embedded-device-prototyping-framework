@@ -14,7 +14,7 @@ namespace Ecs.Edpf.Devices.Test.IO.Params
         public void GetParameterText_Val_CorrectText(int parameterIndex, double val, string formatString, string expectedText)
         {
             //-- arrange
-            FloatParameter floatParameter = new FloatParameter("fake name", parameterIndex, formatStr: formatString);
+            DoubleParameter floatParameter = new DoubleParameter("fake name", parameterIndex, formatStr: formatString);
             floatParameter.Value = val;
 
             //-- act

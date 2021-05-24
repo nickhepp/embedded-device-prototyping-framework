@@ -102,32 +102,44 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             SelectedCommandExecuteButtonEnabled = SelectedCommandCanExecute(null);
         }
 
+        private void RefreshDeviceCommandViewModels()
+        {
+            DeviceCommandViewModels.Clear();
+            foreach (IDeviceCommand deviceCommand in Device.DeviceCommands)
+            {
+                DeviceCommandViewModel deviceCommandVwMdl = new DeviceCommandViewModel(Device, deviceCommand);
+                if (SelectedDeviceCommandViewModel == null)
+                {
+                    SelectedDeviceCommandViewModel = deviceCommandVwMdl;
+                }
+                DeviceCommandViewModels.Add(deviceCommandVwMdl);
+            }
+            DeviceCommandViewModels.ResetBindings();
+
+        }
 
         protected override void OnDeviceStateChanged()
         {
             if (DeviceState == DeviceState.AssignedDevice)
             {
-                DeviceCommandViewModels.Clear();
-                foreach (IDeviceCommand deviceCommand in Device.DeviceCommands)
-                {
-                    DeviceCommandViewModel deviceCommandVwMdl = new DeviceCommandViewModel(Device, deviceCommand);
-                    if (SelectedDeviceCommandViewModel == null)
-                    {
-                        SelectedDeviceCommandViewModel = deviceCommandVwMdl;
-                    }
-                    DeviceCommandViewModels.Add(deviceCommandVwMdl);
-                }
-                DeviceCommandViewModels.ResetBindings();
+                RefreshDeviceCommandViewModels();
             }
             else if (DeviceState == DeviceState.OpenedDevice)
             {
-                string devInfo = Device.GetDeviceInfo();
-
-                devInfo = devInfo;
-
-
+                string cmds = Device.GetRegisteredCommands();
+                List<string> cmdList = cmds.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                cmdList = cmdList.Where(testCmd => !testCmd.StartsWith(Constants.CommandNamePrefix) &&
+                        !testCmd.StartsWith(Constants.CommandResponseLineEnding.Replace("\r", "").Replace("\n", ""))).ToList();
+                CommandByDescriptionBuilder builder = new CommandByDescriptionBuilder();
+                List<IDeviceCommand> builtCommands = new List<IDeviceCommand>();
+                foreach (string cmdDesc in cmdList)
+                {
+                    builtCommands.Add(builder.GetCommandByDescription(cmdDesc));
+                }
+                Device.AddDeviceCommands(builtCommands);
+                RefreshDeviceCommandViewModels();
             }
-            
+
         }
 
     }

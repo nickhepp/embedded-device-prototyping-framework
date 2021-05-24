@@ -22,9 +22,7 @@ class Command
   
         Command();
 
-        void setCommandName(const char *cmdName);
-
-        void setCommandCallback(void (*callback_handle)(Command *));
+        void initCommand(const char *cmdName, void (*callback_handle)(Command*));
 
         void execute();
     

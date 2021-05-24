@@ -192,14 +192,17 @@ void KernelDevice::executeCommand()
     // look that the inputer buffer is big enough,
     // has the correct prefix
     // and the correct suffix
-                                                    for (int k = 0; k < input_buffer_idx; k++)
-                                                    {
-                                                        TRACEHEX(input_buffer[k]); TRACE(" ");
-                                                    }
-                                                    TRACELN();
-                                                    TRACE(F("ibd=")); TRACELN(input_buffer_idx);
-                                                    TRACE(F("memcmp1=")); TRACELN(memcmp(CMD_PREFIX, input_buffer, CMD_PREFIX_LENGTH));
-                                                    TRACE(F("memcmp2=")); TRACELN(memcmp(CMD_SUFFIX, input_buffer + input_buffer_idx - CMD_SUFFIX_LENGTH - 1, CMD_SUFFIX_LENGTH));
+#ifdef DEBUG
+    for (int k = 0; k < input_buffer_idx; k++)
+    {
+        TRACEHEX(input_buffer[k]); TRACE(" ");
+    }
+    TRACELN();
+    TRACE(F("ibd=")); TRACELN(input_buffer_idx);
+    TRACE(F("memcmp1=")); TRACELN(memcmp(CMD_PREFIX, input_buffer, CMD_PREFIX_LENGTH));
+    TRACE(F("memcmp2=")); TRACELN(memcmp(CMD_SUFFIX, input_buffer + input_buffer_idx - CMD_SUFFIX_LENGTH - 1, CMD_SUFFIX_LENGTH));
+#endif
+
     if ((input_buffer_idx >= MINIMUM_CMD_LENGTH) &&
             (memcmp(CMD_PREFIX, input_buffer, CMD_PREFIX_LENGTH) == 0) &&
             (memcmp(CMD_SUFFIX, input_buffer + input_buffer_idx - CMD_SUFFIX_LENGTH - 1, CMD_SUFFIX_LENGTH) == 0))
@@ -317,25 +320,23 @@ void KernelDevice::init()
 
     delay(100);
     Serial.begin(115200);  
-    // give the device time to catch up before reading
 
-    getDeviceInfoCommand.setCommandCallback(get_device_info);
-    getDeviceInfoCommand.setCommandName("getDeviceInfo");
+    getDeviceInfoCommand.initCommand("getDeviceInfo", get_device_info);
     addCommand(&getDeviceInfoCommand);
 
-    getRegisteredCommandsCommand.setCommandCallback(get_registered_commands);
-    getRegisteredCommandsCommand.setCommandName("getRegisteredCommands");
+    getRegisteredCommandsCommand.initCommand("getRegisteredCommands", get_registered_commands);
     addCommand(&getRegisteredCommandsCommand);
 
-    getCommandParametersCommand.setCommandCallback(get_command_parameters);
-    getCommandParametersCommand.setCommandName("getCommandParameters");
+    getCommandParametersCommand.initCommand("getCommandParameters", get_command_parameters);
     addCommand(&getCommandParametersCommand);
     
-    getCommandParametersCommand.setCommandCallback(test_command);
-    getCommandParametersCommand.setCommandName("testCommand");
-    addCommand(&testCommand);
-    
+    testCommand.initCommand("testCommand", test_command);
 
+    testCommand.addUInt8Parameter("PinBank");
+    testCommand.addDoubleParameter("AnalogRead");
+
+
+    addCommand(&testCommand);
 
     Serial.println();
     Serial.print(CMD_RESPONSE_LINE_ENDING);

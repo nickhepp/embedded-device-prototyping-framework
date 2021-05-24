@@ -4,9 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Ecs.Edpf.Devices
 {
@@ -42,6 +40,9 @@ namespace Ecs.Edpf.Devices
 
         string GetDeviceInfo();
 
+        string GetRegisteredCommands();
+
+
         /// <summary>
         /// Event that is raised when the device is opened.
         /// </summary>
@@ -51,6 +52,8 @@ namespace Ecs.Edpf.Devices
         /// Event that is raised when the device is closed.
         /// </summary>
         event EventHandler DeviceClosed;
+
+        void AddDeviceCommands(List<IDeviceCommand> builtCommands);
 
     }
 }

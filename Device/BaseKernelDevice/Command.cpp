@@ -31,21 +31,16 @@ Command::Command()
   _nextCommand = NULL_PTR;
 }
 
-void Command::setCommandName(const char *cmdName)
+void Command::initCommand(const char* cmdName, void (*callback_handle)(Command*))
 {
     _cmdName = cmdName;
     _cmdNameSz = strlen(cmdName);
-}
-
-void Command::setCommandCallback(void (*callback_handle)(Command *))
-{
-  _callback_handle = callback_handle;
+    _callback_handle = callback_handle;
 }
 
 void Command::execute()
 {
   (*_callback_handle)(this);
-  
 }
 
 uint8_t Command::getParamByTypeAndName(uint8_t typeID, const char *paramName)
