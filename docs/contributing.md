@@ -3,9 +3,8 @@
 ## Getting started <!-- omit in toc -->
 
 Before you begin:
-- This site is powered by Node.js. Check to see if you're on the [version of node we support](contributing/development.md).
-- Have you read the [code of conduct](CODE_OF_CONDUCT.md)?
-- Check out the [existing issues](https://github.com/github/docs/issues) & see if we [accept contributions](#types-of-contributions-memo) for your type of issue.
+- Have you read the [code of conduct](../CODE_OF_CONDUCT.md)?
+- Check out the [existing issues](https://github.com/nickhepp/embedded-device-prototyping-framework/issues) & see if we [accept contributions](#types-of-contributions-memo) for your type of issue.
 
 ### Use the 'make a contribution' button
 
@@ -13,17 +12,13 @@ Before you begin:
 
 Navigating a new codebase can be challenging, so we're making that a little easier. As you're using docs.github.com, you may come across an article that you want to make an update to. You can click on the **make a contribution** button right on that article, which will take you to the file in this repo where you'll make your changes.
 
-Before you make your changes, check to see if an [issue exists](https://github.com/github/docs/issues/) already for the change you want to make.
+Before you make your changes, check to see if an [issue exists](https://github.com/nickhepp/embedded-device-prototyping-framework/issues) already for the change you want to make.
 
 ### Don't see your issue? Open one
 
-If you spot something new, open an issue using a [template](https://github.com/github/docs/issues/new/choose). We'll use the issue to have a conversation about the problem you want to fix.
-
-**Note:** We cannot accept contributions to the [REST API reference documentation](https://docs.github.com/en/rest/reference). If you spot an inaccuracy in the REST API reference documentation, open an issue in the [github/rest-api-description](https://github.com/github/rest-api-description/issues/new?template=schema-inaccuracy.md) repository.
+If you spot something new, [open an issue](https://github.com/nickhepp/embedded-device-prototyping-framework/issues/new). We'll use the issue to have a conversation about the problem you want to fix.
 
 ### Ready to make a change? Fork the repo
-
-You'll want to [install Git LFS](https://docs.github.com/en/github/managing-large-files/versioning-large-files/installing-git-large-file-storage).
 
 Fork using GitHub Desktop:
 
@@ -40,8 +35,7 @@ Fork with [GitHub Codespaces](https://github.com/features/codespaces):
 
 ### Make your update:
 Make your changes to the file(s) you'd like to update. Here are some tips and tricks for [using the docs codebase](#working-in-the-githubdocs-repository).
-  - Are you making changes to the application code? You'll need **Node.js v16** to run the site locally. See [contributing/development.md](contributing/development.md).
-  - Are you contributing to markdown? We use [GitHub Markdown](contributing/content-markup-reference.md).
+  - Are you making changes to the application code? Make sure the unit tests execute.  Also if doing work of any substance add more unit tests.
 
 ### Open a pull request
 When you're done making changes and you'd like to propose them for review, use the [pull request template](#pull-request-template) to open your PR (pull request).
@@ -86,6 +80,10 @@ You can contribute to the GitHub Docs content and site in several ways. This rep
 Discussions are where we have conversations.
 
 If you'd like help troubleshooting a docs PR you're working on, have a great new idea, or want to share something amazing you've learned in our docs, join us in [discussions](https://github.com/github/docs/discussions).
+
+
+TODO : keep going over things here
+
 
 ### :beetle: Issues
 [Issues](https://docs.github.com/en/github/managing-your-work-on-github/about-issues) are used to track tasks that contributors can help with. If an issue has a triage label, we haven't reviewed it yet and you shouldn't begin work on it.
