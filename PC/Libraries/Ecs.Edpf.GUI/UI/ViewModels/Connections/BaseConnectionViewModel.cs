@@ -81,6 +81,35 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             }
         }
 
+
+        public bool HasDevice
+        {
+            get
+            {
+                bool hasDev = false;
+                if (_deviceFactory != null)
+                {
+                    hasDev = (_deviceFactory.Device != null);
+                }
+                return hasDev;
+            }
+        }
+
+
+        private bool _enabled = true;
+        public bool Enabled
+        {
+            get
+            {
+                return _enabled;
+            }
+            set
+            {
+                _enabled = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
         public abstract Image ViewImage { get; }
 
         public virtual string Name { get; }
@@ -112,7 +141,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         protected override void OnDeviceStateChanged()
         {
             // we can open the device if its not open
-            OpenButtonEnabled = (DeviceState == DeviceState.AssignedDevice);
+            OpenButtonEnabled = (DeviceState == DeviceState.AssignedDevice || DeviceState == DeviceState.NoDevice);
             // we can close the device if its open
             CloseButtonEnabled = (DeviceState == DeviceState.OpenedDevice);
         }

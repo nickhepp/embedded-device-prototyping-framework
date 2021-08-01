@@ -101,6 +101,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private void DeviceClosed(object sender, EventArgs e)
         {
             _deviceStateMachine.SendSignal(DeviceSignal.DeviceClosed);
+            Device = null;
         }
 
         private void DeviceProviderDeviceCreated(object sender, EventArgs e)

@@ -35,7 +35,23 @@ namespace UnitTestProject.UI.ViewModels
             Assert.AreEqual(expected: val, actual: devCmdsViewMdl.SelectedCommandExecuteButtonEnabled, message);
         }
 
+        [TestMethod]
+        public void DeviceStateChanged_DeviceCleared_CommandViewModelsCleared()
+        {
 
+            //-- arrange
+            // start the view model as if it has some commands
+            DeviceCommandsViewModel devCmdsViewMdl = new DeviceCommandsViewModel(_mockDeviceStateMachine.Object);
+
+            devCmdsViewMdl.DeviceCommandViewModels.Add(_mockDeviceCmdVwMdl.Object);
+
+
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.GUI.ComponentModel.DeviceState.NoDevice);
+
+
+            Assert.AreEqual(expected: 0, devCmdsViewMdl.DeviceCommandViewModels.Count, "Expected that there are no commands after the device is cleared.");
+
+        }
 
     }
 }

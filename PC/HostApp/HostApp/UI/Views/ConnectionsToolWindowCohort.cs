@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.ComponentModel;
+﻿using Ecs.Edpf.Devices.Devices;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using Ecs.Edpf.GUI.UI.Views;
@@ -34,7 +35,16 @@ namespace HostApp.UI.Views
 
         public ConnectionsToolWindowCohort()
         {
-            _connectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel(new DeviceStateMachine());
+            DeviceStateMachine deviceStateMachine = new DeviceStateMachine();
+
+            List<IConnectionViewModel> connectionViewModels = new List<IConnectionViewModel>
+            {
+                new SerialPortConnectionViewModel(deviceStateMachine),
+                new FakeConnectionViewModel(deviceStateMachine),
+            };
+            CompositeDeviceProvider compositeDeviceProvider = new CompositeDeviceProvider(connectionViewModels.Select(connViewMdl => connViewMdl.GetDeviceFactory()));
+
+            _connectionViewModelFactoryViewModel = new ConnectionViewModelFactoryViewModel(deviceStateMachine, compositeDeviceProvider, connectionViewModels);
 
             _toolWindow = new Lazy<ToolWindow>(() =>
             {

@@ -33,8 +33,19 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
             set
             {
+
+                if (_selectedDeviceCommandViewModel != null)
+                {
+                    // in the event a prior one was set, add the event handler
+                    _selectedDeviceCommandViewModel.PropertyChanged -= SelectedDeviceCommandViewModelPropertyChanged;
+                }
+
                 _selectedDeviceCommandViewModel = value;
-                _selectedDeviceCommandViewModel.PropertyChanged += SelectedDeviceCommandViewModelPropertyChanged;
+                if (value != null)
+                {
+                    // if a valid one is set then add the event handler
+                    _selectedDeviceCommandViewModel.PropertyChanged += SelectedDeviceCommandViewModelPropertyChanged;
+                }
                 RaiseNotifyPropertyChanged();
                 SelectedCommandExecuteButtonText = (value == null) ? "Open device to enable commands" : $"Execute '{_selectedDeviceCommandViewModel.MethodName}' command";
                 SetSelectedCommandExecuteButtonEnabled();
@@ -138,6 +149,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 }
                 Device.AddDeviceCommands(builtCommands);
                 RefreshDeviceCommandViewModels();
+            }
+            else if (DeviceState == DeviceState.NoDevice)
+            {
+                SelectedDeviceCommandViewModel = null;
+                DeviceCommandViewModels.Clear();
             }
 
         }
