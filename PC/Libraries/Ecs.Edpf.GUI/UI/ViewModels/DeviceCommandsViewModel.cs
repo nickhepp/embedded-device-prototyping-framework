@@ -47,11 +47,10 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                     _selectedDeviceCommandViewModel.PropertyChanged += SelectedDeviceCommandViewModelPropertyChanged;
                 }
                 RaiseNotifyPropertyChanged();
-                SelectedCommandExecuteButtonText = (value == null) ? "Open device to enable commands" : $"Execute '{_selectedDeviceCommandViewModel.MethodName}' command";
+                SetSelectedCommandExecuteButtonText();
                 SetSelectedCommandExecuteButtonEnabled();
             }
         }
-
 
         private ICommand _selectedCommand;
         public ICommand SelectedCommand => _selectedCommand;
@@ -87,6 +86,14 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         public DeviceCommandsViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
             _selectedCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(canExecute: SelectedCommandCanExecute, execute: SelectedCommandExecute);
+            SetSelectedCommandExecuteButtonText();
+        }
+
+        private void SetSelectedCommandExecuteButtonText()
+        {
+            SelectedCommandExecuteButtonText = (_selectedDeviceCommandViewModel == null) ? 
+                    "Open device in [Connections] to enable commands" :
+                    $"Execute '{_selectedDeviceCommandViewModel.MethodName}' command";
         }
 
         private void SelectedDeviceCommandViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

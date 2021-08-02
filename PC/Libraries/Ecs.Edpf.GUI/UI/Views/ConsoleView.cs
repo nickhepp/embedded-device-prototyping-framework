@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Ecs.Edpf.GUI.UI.ViewModels;
 
@@ -58,7 +59,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             _progressBarWithMarker.Margin = new Padding(0);
 
             _inputTxt.KeyDown += InputTxtKeyDown;
-   
+            SetMainControlArea();
         }
 
  
@@ -132,7 +133,28 @@ namespace Ecs.Edpf.GUI.UI.Views
             {
                 _progressBarWithMarker.SelectedValue = _consoleViewModel.SelectedPreviousCommandIndex;
             }
+            else if (e.PropertyName == nameof(IConsoleViewModel.InputTextEnabled))
+            {
+                SetMainControlArea();
+            }
         }
+
+        private void SetMainControlArea()
+        {
+            if (_consoleViewModel != null && _consoleViewModel.InputTextEnabled)
+            {
+                _deviceHistoryRtb.Text = "";
+                _deviceHistoryRtb.ForeColor = Color.White;
+                _deviceHistoryRtb.BackColor = Color.Black;
+            }
+            else
+            {
+                _deviceHistoryRtb.Text = "Open device in [Connections] to enable console.";
+                _deviceHistoryRtb.ForeColor = Color.Black;
+                _deviceHistoryRtb.BackColor = Color.LightGray;
+            }
+        }
+
 
         private void ConsoleControlViewModelDeviceOutputBufferChanged(object sender, System.EventArgs e)
         {

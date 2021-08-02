@@ -35,14 +35,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         {
             _compositeDeviceProvider = compositeDeviceProvider;
             ConnectionViewModels = connectionViewModels;
-            //_compositeDeviceProvider.DeviceCreated += CompositeDeviceProvider_DeviceCreated;
-
         }
-
-        //private void CompositeDeviceProvider_DeviceCreated(object sender, EventArgs e)
-        //{
-        //    DeviceSta
-        //}
 
         protected override void OnDeviceStateChanged()
         {
@@ -50,9 +43,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             {
                 foreach (IConnectionViewModel connViewMdl in ConnectionViewModels)
                 {
-                    connViewMdl.Enabled = connViewMdl.DeviceProvider.Device != null;
                     connViewMdl.Enabled = connViewMdl.HasDevice;
-
                 }
             }
             else if (DeviceState == DeviceState.NoDevice)

@@ -40,7 +40,7 @@ namespace HostApp.UI.Views
             List<IConnectionViewModel> connectionViewModels = new List<IConnectionViewModel>
             {
                 new SerialPortConnectionViewModel(deviceStateMachine),
-                new FakeConnectionViewModel(deviceStateMachine),
+                //new FakeConnectionViewModel(deviceStateMachine),
             };
             CompositeDeviceProvider compositeDeviceProvider = new CompositeDeviceProvider(connectionViewModels.Select(connViewMdl => connViewMdl.GetDeviceFactory()));
 

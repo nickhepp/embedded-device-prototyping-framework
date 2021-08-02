@@ -36,9 +36,12 @@ namespace HostApp.UI.Views
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
                 DeviceTextMacroView deviceTextMacroView = new DeviceTextMacroView();
+                deviceTextMacroView.Enabled = false;
                 deviceTextMacroView.DeviceTextMacroViewModel = _deviceTextMacroViewModel;
                 ToolWindow toolWindow = new ToolWindow();
-                toolWindow.Initialize(deviceTextMacroView, this.Name);
+
+                NotImplementedView notImplementedView = new NotImplementedView(deviceTextMacroView, RoadmapIssueUrl);
+                toolWindow.Initialize(notImplementedView, this.Name);
                 IntPtr repeatIconPtr = HostApp.Properties.Resources.repeat.GetHicon();
                 Icon repeatIcon = Icon.FromHandle(repeatIconPtr);
                 toolWindow.Icon = repeatIcon;

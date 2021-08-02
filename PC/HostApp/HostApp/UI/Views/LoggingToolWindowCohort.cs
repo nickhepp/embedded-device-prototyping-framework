@@ -40,10 +40,12 @@ namespace HostApp.UI.Views
                     //ConsoleViewModel = _consoleViewModel
                 };
                 //consoleView.ShowConsoleHeader = false;
+                loggingView.Enabled = false;
 
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-                toolWindow.Initialize(loggingView, this.Name);
+                //toolWindow.Initialize(loggingView, this.Name);
+                toolWindow.Initialize(new NotImplementedView(RoadmapIssueUrl), this.Name);
 
                 IntPtr loggingIconPtr = HostApp.Properties.Resources.clipboard_list.GetHicon();
                 Icon loggingIcon = Icon.FromHandle(loggingIconPtr);
