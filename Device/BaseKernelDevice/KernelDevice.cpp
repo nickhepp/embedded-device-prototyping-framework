@@ -297,17 +297,51 @@ void KernelDevice::readCharacters()
 }
 
 
-void test_command(Command* cmd)
+void example_io_command(Command* cmd)
 {
-
-    //if (cmd->
+    // nothing here yet
+    // TODO: add output of values
 }
+
+const int16_t MAX_WAVE_VAL = 1000;
+const int16_t MIN_WAVE_VAL = -1000;
+int16_t wave_val = 0;
+bool wave_ascending = true;
+
+void charting_command(Command* cmd)
+{
+    // in place of real hardware sensing a value 
+    // do a in memory representation
+
+    // figure out how much to offset the 
+    if (wave_ascending)
+    {
+        wave_val += MAX_WAVE_VAL / 10;
+        if (wave_val >= MAX_WAVE_VAL)
+        {
+            wave_val = MAX_WAVE_VAL;
+            wave_ascending = false;
+        }
+
+    } else {
+        wave_val -= MAX_WAVE_VAL / 10;
+        if (wave_val <= MIN_WAVE_VAL)
+        {
+            wave_val = MIN_WAVE_VAL;
+            wave_ascending = true;
+        }
+    }
+
+    Serial.print("val-a:");
+    Serial.println(wave_val, DEC);
+}
+
 
 Command getDeviceInfoCommand;
 Command getRegisteredCommandsCommand;
 Command getCommandParametersCommand;
-Command testCommand;
-
+Command exampleIOCommand;
+Command chartingCommand;
 
 void KernelDevice::init()
 {
@@ -321,22 +355,34 @@ void KernelDevice::init()
     delay(100);
     Serial.begin(115200);  
 
-    getDeviceInfoCommand.initCommand("getDeviceInfo", get_device_info);
+    exampleIOCommand.initCommand("example_io_command", example_io_command);
+    exampleIOCommand.addUInt8Parameter("PinBank");
+    exampleIOCommand.addDoubleParameter("AnalogRead");
+    addCommand(&exampleIOCommand);
+
+
+
+    //////////////////////////////////////////
+    // START - leave these commands alone, they are meant for proper operation of the framework
+    //////////////////////////////////////////
+    // leave this command here, its meants for proper operation of the framework
+    getDeviceInfoCommand.initCommand("get_device_info", get_device_info);
     addCommand(&getDeviceInfoCommand);
 
-    getRegisteredCommandsCommand.initCommand("getRegisteredCommands", get_registered_commands);
+    // leave this command here, its meants for proper operation of the framework
+    getRegisteredCommandsCommand.initCommand("get_registered_commands", get_registered_commands);
     addCommand(&getRegisteredCommandsCommand);
 
-    getCommandParametersCommand.initCommand("getCommandParameters", get_command_parameters);
+    // leave this command here, its meants for proper operation of the framework
+    getCommandParametersCommand.initCommand("get_command_parameters", get_command_parameters);
     addCommand(&getCommandParametersCommand);
-    
-    testCommand.initCommand("testCommand", test_command);
+    //////////////////////////////////////////
+    // END - leave these commands alone, they are meant for proper operation of the framework
+    //////////////////////////////////////////
 
-    testCommand.addUInt8Parameter("PinBank");
-    testCommand.addDoubleParameter("AnalogRead");
+    chartingCommand.initCommand("charting_command", charting_command);
+    addCommand(&chartingCommand);
 
-
-    addCommand(&testCommand);
 
     Serial.println();
     Serial.print(CMD_RESPONSE_LINE_ENDING);

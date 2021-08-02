@@ -6,7 +6,7 @@ namespace Ecs.Edpf.Devices.IO.Cmds
 {
     public class GetRegisteredCommandsCommand : BaseDeviceCommand
     {
-        public const string GetRegisteredCommandsCommandMethodName = "getRegisteredCommands";
+        public const string GetRegisteredCommandsCommandMethodName = "get_registered_commands";
 
         public override string MethodName => GetRegisteredCommandsCommandMethodName;
 

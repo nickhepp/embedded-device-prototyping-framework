@@ -9,7 +9,7 @@ namespace Ecs.Edpf.Devices.IO.Cmds
     public class GetCommandParametersCommand : BaseDeviceCommand
     {
 
-        public const string GetCommandParametersCommandMethodName = "getCommandParameters";
+        public const string GetCommandParametersCommandMethodName = "get_command_parameters";
 
         public GetCommandParametersCommand() : base()
         {
