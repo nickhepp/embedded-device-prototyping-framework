@@ -15,37 +15,46 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
     public class ConnectionViewModelFactoryViewModel : BaseDeviceViewModel, IConnectionViewModelFactoryViewModel
     {
 
-        private CompositeDeviceProvider _compositeDeviceProvider;
+        private ICompositeDeviceProvider _compositeDeviceProvider;
         public IDeviceProvider GlobalDeviceProvider => _compositeDeviceProvider;
 
 
-        private List<IConnectionViewModel> _connectionViewModels = new List<IConnectionViewModel>
-        {
-            new SerialPortConnectionViewModel(new DeviceStateMachine()),
-            new FakeConnectionViewModel(new DeviceStateMachine()),
-        };
+        public IEnumerable<IConnectionViewModel> ConnectionViewModels { get; private set; }
+
+
 
         public Image ViewImage => throw new NotImplementedException();
 
         public string Name => "Connections";
 
 
-        public List<IConnectionViewModel> ConnectionViewModels => _connectionViewModels;
 
-        public ConnectionViewModelFactoryViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
+        public ConnectionViewModelFactoryViewModel(IDeviceStateMachine deviceStateMachine, 
+            ICompositeDeviceProvider compositeDeviceProvider,
+            IEnumerable<IConnectionViewModel> connectionViewModels) : base(deviceStateMachine)
         {
-            _compositeDeviceProvider = new CompositeDeviceProvider(_connectionViewModels.Select(connVwMdl => connVwMdl.GetDeviceFactory()));
+            _compositeDeviceProvider = compositeDeviceProvider;
+            ConnectionViewModels = connectionViewModels;
         }
 
-
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnDeviceStateChanged()
         {
-
+            if (DeviceState == DeviceState.OpenedDevice)
+            {
+                foreach (IConnectionViewModel connViewMdl in ConnectionViewModels)
+                {
+                    connViewMdl.Enabled = connViewMdl.HasDevice;
+                }
+            }
+            else if (DeviceState == DeviceState.NoDevice)
+            {
+                foreach (IConnectionViewModel connViewMdl in ConnectionViewModels)
+                {
+                    connViewMdl.Enabled = true;
+                }
+            }
         }
 
-        protected override void OnDeviceChanged(IDevice device)
-        {
-
-        }
+ 
     }
 }

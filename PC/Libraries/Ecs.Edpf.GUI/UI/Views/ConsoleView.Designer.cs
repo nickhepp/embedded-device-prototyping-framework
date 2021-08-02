@@ -65,7 +65,7 @@
             this._consoleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._consoleLbl.Location = new System.Drawing.Point(3, 0);
             this._consoleLbl.Name = "_consoleLbl";
-            this._consoleLbl.Size = new System.Drawing.Size(93, 24);
+            this._consoleLbl.Size = new System.Drawing.Size(174, 42);
             this._consoleLbl.TabIndex = 0;
             this._consoleLbl.Text = "Console:";
             // 
@@ -107,7 +107,7 @@
             this._inputTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
             this._inputTxt.Location = new System.Drawing.Point(123, 3);
             this._inputTxt.Name = "_inputTxt";
-            this._inputTxt.Size = new System.Drawing.Size(816, 28);
+            this._inputTxt.Size = new System.Drawing.Size(816, 49);
             this._inputTxt.TabIndex = 1;
             // 
             // _inputLbl

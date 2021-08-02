@@ -8,7 +8,7 @@ namespace Ecs.Edpf.Devices.Devices
     /// <summary>
     /// A device provider built out of device factories.
     /// </summary>
-    public class CompositeDeviceProvider : IDeviceProvider
+    public class CompositeDeviceProvider : IDeviceProvider, ICompositeDeviceProvider
     {
 
         private IDeviceFactory _selectedDeviceFactory;
@@ -39,6 +39,6 @@ namespace Ecs.Edpf.Devices.Devices
 
         public event EventHandler DeviceCreated;
 
-   
+
     }
 }

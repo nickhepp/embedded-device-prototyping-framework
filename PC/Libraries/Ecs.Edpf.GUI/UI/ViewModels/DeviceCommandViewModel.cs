@@ -133,7 +133,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             {
                 Attribute[] atts = new Attribute[] { new CategoryAttribute("Parameters"),
                     new DescriptionAttribute("The name of the command that the host app passes to the device."),
-                    new DisplayNameAttribute($"{parameter.GetName()}[{parameter.GetParameterIndex()}]")};
+                    new DisplayNameAttribute($"[{parameter.GetParameterIndex()}]{parameter.GetName()}")};
 
                 return atts;
             }

@@ -82,39 +82,35 @@ namespace HostApp.UI.Views
                 prevConsoleCohort = consoleCohort;
             }
 
-
-
-            // tool box is top right
-            List<ToolBoxWindowCohort> toolBoxWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(ToolBoxWindowCohort)).
-                Select(cohort => cohort as ToolBoxWindowCohort).ToList();
-            foreach (ToolBoxWindowCohort toolBoxWindowCohort in toolBoxWindowCohorts)
-            {
-                toolBoxWindowCohort.GetToolWindow().Show(dockPanel, DockState.DockRight);
-            }
-
-            // device commands are bottom right
-            List<DeviceCommandsToolWindowCohort> deviceCommandsToolWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(DeviceCommandsToolWindowCohort)).
-                Select(cohort => cohort as DeviceCommandsToolWindowCohort).ToList();
-            foreach (DeviceCommandsToolWindowCohort deviceCommandsToolWindowCohort in deviceCommandsToolWindowCohorts)
-            {
-                deviceCommandsToolWindowCohort.GetToolWindow().Show(toolBoxWindowCohorts.Last().GetToolWindow().Pane, DockAlignment.Bottom, 0.67);
-            }
-
-            // device connections are bottom right
-            ConnectionsToolWindowCohort prevConnectionsToolWindowCohort;
+            // connections view is top right
             List<ConnectionsToolWindowCohort> connectionsToolWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(ConnectionsToolWindowCohort)).
                 Select(cohort => cohort as ConnectionsToolWindowCohort).ToList();
             foreach (ConnectionsToolWindowCohort connectionsToolWindowCohort in connectionsToolWindowCohorts)
             {
-                connectionsToolWindowCohort.GetToolWindow().Show(deviceCommandsToolWindowCohorts.Last().GetToolWindow().Pane, DockAlignment.Bottom, 0.5);
-                prevConnectionsToolWindowCohort = connectionsToolWindowCohort;
+                connectionsToolWindowCohort.GetToolWindow().Show(dockPanel, DockState.DockRight);
+            }
+
+            // device commands are mid right
+            List<DeviceCommandsToolWindowCohort> deviceCommandsToolWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(DeviceCommandsToolWindowCohort)).
+                Select(cohort => cohort as DeviceCommandsToolWindowCohort).ToList();
+            foreach (DeviceCommandsToolWindowCohort deviceCommandsToolWindowCohort in deviceCommandsToolWindowCohorts)
+            {
+                deviceCommandsToolWindowCohort.GetToolWindow().Show(connectionsToolWindowCohorts.Last().GetToolWindow().Pane, DockAlignment.Bottom, 0.67);
+            }
+
+            // device connections are bottom right
+            List<ToolBoxWindowCohort> toolBoxWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(ToolBoxWindowCohort)).
+                Select(cohort => cohort as ToolBoxWindowCohort).ToList();
+            foreach (ToolBoxWindowCohort toolBoxWindowCohort in toolBoxWindowCohorts)
+            {
+                toolBoxWindowCohort.GetToolWindow().Show(deviceCommandsToolWindowCohorts.Last().GetToolWindow().Pane, DockAlignment.Bottom, 0.5);
             }
 
             List<DeviceTextMacroToolWindowCohort> devTxtMacroToolWndwCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(DeviceTextMacroToolWindowCohort)).
                 Select(cohort => cohort as DeviceTextMacroToolWindowCohort).ToList();
             foreach (DeviceTextMacroToolWindowCohort devTxtMacroToolWndwCohort in devTxtMacroToolWndwCohorts)
             {
-                devTxtMacroToolWndwCohort.GetToolWindow().Show(connectionsToolWindowCohorts.Last().GetToolWindow().Pane, connectionsToolWindowCohorts.Last().GetToolWindow());
+                devTxtMacroToolWndwCohort.GetToolWindow().Show(toolBoxWindowCohorts.Last().GetToolWindow().Pane, toolBoxWindowCohorts.Last().GetToolWindow());
             }
 
             List<LoggingToolWindowCohort> loggingToolWndwCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(LoggingToolWindowCohort)).

@@ -26,17 +26,21 @@ namespace HostApp.UI.Views
 
         public IViewModel ViewModel => _chartingViewModel;
 
+        public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/4";
+
+        public ToolState State => ToolState.Roadmap;
 
         public ChartingToolWindowCohort()
         {
 
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                ChartingView chartingView = new ChartingView();
-                chartingView.ChartingViewModel = _chartingViewModel;
+                //ChartingView chartingView = new ChartingView();
+                //chartingView.ChartingViewModel = _chartingViewModel;
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-                toolWindow.Initialize(chartingView, this.Name);
+                //toolWindow.Initialize(chartingView, this.Name);
+                toolWindow.Initialize(new NotImplementedView(RoadmapIssueUrl), this.Name);
                 IntPtr chartIconPtr = HostApp.Properties.Resources.charts.GetHicon();
                 Icon chartIcon = Icon.FromHandle(chartIconPtr);
                 toolWindow.Icon = chartIcon;

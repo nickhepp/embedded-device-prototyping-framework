@@ -11,6 +11,10 @@ namespace Ecs.Edpf.Devices.IO.Macros
 
         public string DeviceText { get; set; }
 
+        public DeviceTextLine Copy()
+        {
+            return (DeviceTextLine)MemberwiseClone();
+        }
 
 
     }

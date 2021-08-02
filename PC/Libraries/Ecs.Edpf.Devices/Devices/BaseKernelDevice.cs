@@ -242,8 +242,14 @@ namespace Ecs.Edpf.Devices
 
         public string GetDeviceInfo()
         {
-            string devInfo = ExecuteCommand("printDeviceInfo");
+            string devInfo = ExecuteCommand(GetDeviceInfoCommand.GetDeviceInfoCommandMethodName);
             return devInfo;
+        }
+
+        public string GetRegisteredCommands()
+        {
+            string commands = ExecuteCommand(GetRegisteredCommandsCommand.GetRegisteredCommandsCommandMethodName);
+            return commands;
         }
 
          public bool Open()
@@ -314,6 +320,12 @@ namespace Ecs.Edpf.Devices
             {
                 Write(line);
             }
+        }
+
+        public void AddDeviceCommands(List<IDeviceCommand> builtCommands)
+        {
+            _deviceCommands = new ReadOnlyCollection<IDeviceCommand>(builtCommands);
+            RaiseNotifyPropertyChanged(nameof(DeviceCommands));
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;

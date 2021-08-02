@@ -33,14 +33,24 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
             set
             {
+
+                if (_selectedDeviceCommandViewModel != null)
+                {
+                    // in the event a prior one was set, add the event handler
+                    _selectedDeviceCommandViewModel.PropertyChanged -= SelectedDeviceCommandViewModelPropertyChanged;
+                }
+
                 _selectedDeviceCommandViewModel = value;
-                _selectedDeviceCommandViewModel.PropertyChanged += SelectedDeviceCommandViewModelPropertyChanged;
+                if (value != null)
+                {
+                    // if a valid one is set then add the event handler
+                    _selectedDeviceCommandViewModel.PropertyChanged += SelectedDeviceCommandViewModelPropertyChanged;
+                }
                 RaiseNotifyPropertyChanged();
-                SelectedCommandExecuteButtonText = (value == null) ? "Open device to enable commands" : $"Execute '{_selectedDeviceCommandViewModel.MethodName}' command";
+                SetSelectedCommandExecuteButtonText();
                 SetSelectedCommandExecuteButtonEnabled();
             }
         }
-
 
         private ICommand _selectedCommand;
         public ICommand SelectedCommand => _selectedCommand;
@@ -76,6 +86,14 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         public DeviceCommandsViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
             _selectedCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(canExecute: SelectedCommandCanExecute, execute: SelectedCommandExecute);
+            SetSelectedCommandExecuteButtonText();
+        }
+
+        private void SetSelectedCommandExecuteButtonText()
+        {
+            SelectedCommandExecuteButtonText = (_selectedDeviceCommandViewModel == null) ? 
+                    "Open device in [Connections] to enable commands" :
+                    $"Execute '{_selectedDeviceCommandViewModel.MethodName}' command";
         }
 
         private void SelectedDeviceCommandViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -102,31 +120,49 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             SelectedCommandExecuteButtonEnabled = SelectedCommandCanExecute(null);
         }
 
-
-        protected override void InternalDevicePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void RefreshDeviceCommandViewModels()
         {
+            DeviceCommandViewModels.Clear();
+            foreach (IDeviceCommand deviceCommand in Device.DeviceCommands)
+            {
+                DeviceCommandViewModel deviceCommandVwMdl = new DeviceCommandViewModel(Device, deviceCommand);
+                if (SelectedDeviceCommandViewModel == null)
+                {
+                    SelectedDeviceCommandViewModel = deviceCommandVwMdl;
+                }
+                DeviceCommandViewModels.Add(deviceCommandVwMdl);
+            }
+            DeviceCommandViewModels.ResetBindings();
 
         }
 
-        protected override void OnDeviceChanged(IDevice device)
+        protected override void OnDeviceStateChanged()
         {
-            // grab all the device commands
-            DeviceCommandViewModels.Clear();
-
-            if (device != null)
+            if (DeviceState == DeviceState.AssignedDevice)
             {
-                foreach (IDeviceCommand deviceCommand in device.DeviceCommands)
+                RefreshDeviceCommandViewModels();
+            }
+            else if (DeviceState == DeviceState.OpenedDevice)
+            {
+                string cmds = Device.GetRegisteredCommands();
+                List<string> cmdList = cmds.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                cmdList = cmdList.Where(testCmd => !testCmd.StartsWith(Constants.CommandNamePrefix) &&
+                        !testCmd.StartsWith(Constants.CommandResponseLineEnding.Replace("\r", "").Replace("\n", ""))).ToList();
+                CommandByDescriptionBuilder builder = new CommandByDescriptionBuilder();
+                List<IDeviceCommand> builtCommands = new List<IDeviceCommand>();
+                foreach (string cmdDesc in cmdList)
                 {
-                    DeviceCommandViewModel deviceCommandVwMdl = new DeviceCommandViewModel(device, deviceCommand);
-                    if (SelectedDeviceCommandViewModel == null)
-                    {
-                        SelectedDeviceCommandViewModel = deviceCommandVwMdl;
-                    }
-                    DeviceCommandViewModels.Add(deviceCommandVwMdl);
+                    builtCommands.Add(builder.GetCommandByDescription(cmdDesc));
                 }
+                Device.AddDeviceCommands(builtCommands);
+                RefreshDeviceCommandViewModels();
+            }
+            else if (DeviceState == DeviceState.NoDevice)
+            {
+                SelectedDeviceCommandViewModel = null;
+                DeviceCommandViewModels.Clear();
             }
 
-            DeviceCommandViewModels.ResetBindings();
         }
 
     }

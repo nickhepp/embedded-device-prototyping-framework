@@ -19,5 +19,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 
         ICommand CloseCommand { get; }
 
+        bool HasDevice { get; }
+
+        bool Enabled { get; set; }
+
     }
 }

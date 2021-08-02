@@ -24,7 +24,12 @@ namespace HostApp.UI.Views
 
 
         private IConsoleViewModel _consoleViewModel = new ConsoleViewModel(new DeviceStateMachine());
+        
         public IViewModel ViewModel => _consoleViewModel;
+
+        public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/3";
+
+        public ToolState State => ToolState.Roadmap;
 
         public LoggingToolWindowCohort()
         {
@@ -35,10 +40,12 @@ namespace HostApp.UI.Views
                     //ConsoleViewModel = _consoleViewModel
                 };
                 //consoleView.ShowConsoleHeader = false;
+                loggingView.Enabled = false;
 
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-                toolWindow.Initialize(loggingView, this.Name);
+                //toolWindow.Initialize(loggingView, this.Name);
+                toolWindow.Initialize(new NotImplementedView(RoadmapIssueUrl), this.Name);
 
                 IntPtr loggingIconPtr = HostApp.Properties.Resources.clipboard_list.GetHicon();
                 Icon loggingIcon = Icon.FromHandle(loggingIconPtr);

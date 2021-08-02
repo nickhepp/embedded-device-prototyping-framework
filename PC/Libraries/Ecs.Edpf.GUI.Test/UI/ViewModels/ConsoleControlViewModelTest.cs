@@ -11,47 +11,45 @@ namespace UnitTestProject.UI.ViewModels.Controls
     public class ConsoleControlViewModelTest
     {
         private MockDeviceStateMachine _mockDeviceStateMachine;
-        private MockDevice _mockDevice;
-
+        private FakeDeviceProvider _fakeDeviceProvider;
+        private ConsoleViewModel _ccViewMdl;
 
         [TestInitialize]
         public void InitializeTest()
         {
-            _mockDevice = new MockDevice();
+            _fakeDeviceProvider = new FakeDeviceProvider();
             _mockDeviceStateMachine = new MockDeviceStateMachine();
+            _ccViewMdl = new ConsoleViewModel(_mockDeviceStateMachine.Object)
+            {
+                DeviceProvider = _fakeDeviceProvider
+            };
+            _fakeDeviceProvider.InitDevice();
         }
 
         [TestMethod]
         public void InputTextEnabled_DeviceNotOpen_NotEnabled()
         {
             //-- arrange
-            
-            _mockDevice.Object.Close();
-            ConsoleViewModel ccViewMdl = new ConsoleViewModel(_mockDeviceStateMachine.Object);
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.GUI.ComponentModel.DeviceState.OpenedDevice);
 
             //-- act
-            ccViewMdl.Device = _mockDevice.Object;
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.GUI.ComponentModel.DeviceState.AssignedDevice);
 
             //-- assert
-            Assert.IsFalse(ccViewMdl.InputTextEnabled);
+            Assert.IsFalse(_ccViewMdl.InputTextEnabled);
         }
 
         [TestMethod]
         public void InputTextEnabled_DeviceOpen_Enabled()
         {
             //-- arrange
-            _mockDevice.Object.Open();
-            ConsoleViewModel ccViewMdl = new ConsoleViewModel(_mockDeviceStateMachine.Object);
 
             //-- act
-            ccViewMdl.Device = _mockDevice.Object;
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.GUI.ComponentModel.DeviceState.OpenedDevice);
 
             //-- assert
-            Assert.IsTrue(ccViewMdl.InputTextEnabled);
+            Assert.IsTrue(_ccViewMdl.InputTextEnabled);
         }
-
-
-
 
     }
 }

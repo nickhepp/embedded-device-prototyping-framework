@@ -20,16 +20,22 @@ namespace HostApp.UI.Views
         private Lazy<ToolWindow> _toolWindow;
 
         private IConsoleViewModel _consoleViewModel = new ConsoleViewModel(new DeviceStateMachine());
+        
         public IViewModel ViewModel => _consoleViewModel;
+
+        public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/10";
+
+        public ToolState State => ToolState.Roadmap;
 
         public ToolBoxWindowCohort(List<IToolWindowCohort> cohorts)
         {
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                ToolBoxView toolBoxView = new ToolBoxView();
+                //ToolBoxView toolBoxView = new ToolBoxView();
+                NotImplementedView notImplementedView = new NotImplementedView(RoadmapIssueUrl);
 
                 ToolWindow toolWindow = new ToolWindow();
-                toolWindow.Initialize(toolBoxView, this.Name);
+                toolWindow.Initialize(notImplementedView, this.Name);
 
                 IntPtr Hicon = HostApp.Properties.Resources.construction.GetHicon();
                 Icon toolBoxIcon = Icon.FromHandle(Hicon);

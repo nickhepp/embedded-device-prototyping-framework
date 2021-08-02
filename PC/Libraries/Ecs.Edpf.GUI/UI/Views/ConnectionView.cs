@@ -47,6 +47,9 @@ namespace Ecs.Edpf.GUI.UI.Views
             _openBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _connectionViewModel, nameof(IConnectionViewModel.OpenButtonEnabled)));
             _closeBtn.DataBindings.Clear();
             _closeBtn.DataBindings.Add(new Binding(nameof(Button.Enabled), _connectionViewModel, nameof(IConnectionViewModel.CloseButtonEnabled)));
+
+            DataBindings.Clear();
+            DataBindings.Add(new Binding(nameof(Control.Enabled), _connectionViewModel, nameof(IConnectionViewModel.Enabled)));
         }
  
         private void OpenBtn_Click(object sender, EventArgs e)

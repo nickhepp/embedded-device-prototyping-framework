@@ -81,6 +81,35 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             }
         }
 
+
+        public bool HasDevice
+        {
+            get
+            {
+                bool hasDev = false;
+                if (_deviceFactory != null)
+                {
+                    hasDev = (_deviceFactory.Device != null);
+                }
+                return hasDev;
+            }
+        }
+
+
+        private bool _enabled = true;
+        public bool Enabled
+        {
+            get
+            {
+                return _enabled;
+            }
+            set
+            {
+                _enabled = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
         public abstract Image ViewImage { get; }
 
         public virtual string Name { get; }
@@ -97,33 +126,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 
         public abstract IDeviceFactory GetDeviceFactory();
 
-        private void SetButtonEnables()
-        {
-            // we can open the device if its not open
-            OpenButtonEnabled = !Device.IsOpen;
-            // we can close the device if its open
-            CloseButtonEnabled = Device.IsOpen;
-        }
-
-        private void DevicePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(IDevice.IsOpen))
-            {
-                SetButtonEnables();
-            }
-        }
-
         private void OpenCommandHandler(object obj)
         {
             _deviceFactory.CreateDevice();
             Device = _deviceFactory.Device;
-
-            // device is now set
-            Device.DeviceOpened += DeviceOpened;
-            Device.DeviceClosed += DeviceClosed;
-
             Device.Open();
-            SetButtonEnables();
         }
 
         private void CloseCommandHandler(object obj)
@@ -131,29 +138,13 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             Device.Close();
         }
 
-        protected override void OnDeviceChanged(IDevice device)
+        protected override void OnDeviceStateChanged()
         {
-            SetButtonEnables();
-
+            // we can open the device if its not open
+            OpenButtonEnabled = (DeviceState == DeviceState.AssignedDevice || DeviceState == DeviceState.NoDevice);
+            // we can close the device if its open
+            CloseButtonEnabled = (DeviceState == DeviceState.OpenedDevice);
         }
 
-        private void DeviceClosed(object sender, EventArgs e)
-        {
-            SetButtonEnables();
-        }
-
-        private void DeviceOpened(object sender, EventArgs e)
-        {
-            SetButtonEnables();
-        }
-
-
-
-
-
-
-
-
-
-}
+    }
 }

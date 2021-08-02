@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HostApp.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,7 @@ namespace HostApp.UI.Views
             _toolIconPbx.Image = cohort.Image;
             _toolNameLinkLbl.Text = cohort.Name;
             _descriptionLbl.Text = cohort.Description;
+            _upvoteEnhancementLlbl.Visible = (cohort.State != Ecs.Edpf.GUI.ComponentModel.ToolState.Active);
         }
 
         private void _toolNameLinkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -33,5 +35,9 @@ namespace HostApp.UI.Views
             this.ParentForm.Close();
         }
 
+        private void _upvoteEnhancementLlbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LinkVisitor.VisitUrl(_cohort.RoadmapIssueUrl);
+        }
     }
 }

@@ -5,6 +5,9 @@
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="ComponentModel\Macros\DeviceTextMacroBgWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="UI\Views\LoggingView.cs">
       <SubType>UserControl</SubType>
     </Compile>

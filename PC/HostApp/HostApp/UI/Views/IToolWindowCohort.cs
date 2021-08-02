@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.UI.ViewModels;
+﻿using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -24,6 +25,10 @@ namespace HostApp.UI.Views
 
 
         IViewModel ViewModel { get; }
+
+        ToolState State { get; }
+
+        string RoadmapIssueUrl { get; }
 
 
     }

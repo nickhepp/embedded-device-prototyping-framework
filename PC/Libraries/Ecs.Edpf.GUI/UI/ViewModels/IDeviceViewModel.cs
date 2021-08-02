@@ -13,7 +13,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         IDeviceProvider DeviceProvider { get; set; }
 
-        IDevice Device { get; set; }
+        IDevice Device { get; }
 
         BindingList<string> DeviceOutputBuffer { get; }
 

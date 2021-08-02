@@ -7,6 +7,9 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Views\NotImplementedView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\Views\SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
