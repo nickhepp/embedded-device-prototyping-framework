@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Charting;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
 using System.Collections.Generic;
@@ -35,12 +36,12 @@ namespace HostApp.UI.Views
 
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                //ChartingView chartingView = new ChartingView();
-                //chartingView.ChartingViewModel = _chartingViewModel;
+                ChartingView chartingView = new ChartingView();
+                chartingView.ViewModel = (IChildViewModel)_chartingViewModel;
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-                //toolWindow.Initialize(chartingView, this.Name);
-                toolWindow.Initialize(new NotImplementedView(RoadmapIssueUrl), this.Name);
+                toolWindow.Initialize(chartingView, this.Name);
+                //toolWindow.Initialize(new NotImplementedView(RoadmapIssueUrl), this.Name);
                 IntPtr chartIconPtr = HostApp.Properties.Resources.charts.GetHicon();
                 Icon chartIcon = Icon.FromHandle(chartIconPtr);
                 toolWindow.Icon = chartIcon;
