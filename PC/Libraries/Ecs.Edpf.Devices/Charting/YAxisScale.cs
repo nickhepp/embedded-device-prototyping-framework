@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecs.Edpf.GUI.UI.ViewModels
+namespace Ecs.Edpf.Devices.Charting
 {
-
-    public interface IChartingViewModel : IViewModel
+    public enum YAxisScale
     {
+        Linear,
+        Logarithmic,
     }
-
 }
