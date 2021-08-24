@@ -308,6 +308,9 @@ const int16_t MIN_WAVE_VAL = -1000;
 int16_t wave_val = 0;
 bool wave_ascending = true;
 
+float ascending_val = 0.0;
+float descending_val = 100.0;
+
 void charting_command(Command* cmd)
 {
     // in place of real hardware sensing a value 
@@ -332,8 +335,15 @@ void charting_command(Command* cmd)
         }
     }
 
-    Serial.print("val-a:");
-    Serial.println(wave_val, DEC);
+    ascending_val += 1.1;
+    descending_val -= 0.01;
+
+    Serial.print("vals:");
+    Serial.print(wave_val, DEC);
+    Serial.print(",");
+    Serial.print(ascending_val, 1);
+    Serial.print(",");
+    Serial.println(descending_val, 2);
 }
 
 

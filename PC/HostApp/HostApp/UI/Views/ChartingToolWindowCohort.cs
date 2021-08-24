@@ -1,4 +1,6 @@
-﻿using Ecs.Edpf.GUI.ComponentModel;
+﻿using Ecs.Edpf.Devices.Charting;
+using Ecs.Edpf.Devices.ComponentModel;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.ViewModels.Charting;
 using Ecs.Edpf.GUI.UI.Views;
@@ -23,7 +25,7 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
-        private IChartingViewModel _chartingViewModel = new ChartingViewModel(new DeviceStateMachine());
+        private IChartingViewModel _chartingViewModel;
 
         public IViewModel ViewModel => _chartingViewModel;
 
@@ -33,6 +35,25 @@ namespace HostApp.UI.Views
 
         public ChartingToolWindowCohort()
         {
+            // a default set of settings
+            ChartSettings chartSettings = new ChartSettings
+            {
+                Expression = "vals:{a},{b},{c}",
+                ExpressionType = Ecs.Edpf.Devices.ComponentModel.ExpressionType.Simple,
+                ChartName = "MyChart",
+                XAxisType = XAxisType.SampleNumber,
+                XRange = new Range { Min = -1100, Max = 1100, RangeType = RangeType.Auto },
+                YAxisScale = YAxisScale.Linear,
+                YRange = new Range { Min = -1100, Max = 1100, RangeType = RangeType.Auto },
+            };
+
+            _chartingViewModel = new ChartingViewModel(
+                new ChartSampleCollector(
+                    new SimpleChartingExpressionFilter(),
+                    chartSettings,
+                    new DateTimeProvider()),
+                chartSettings,
+                new DeviceStateMachine());
 
             _toolWindow = new Lazy<ToolWindow>(() =>
             {

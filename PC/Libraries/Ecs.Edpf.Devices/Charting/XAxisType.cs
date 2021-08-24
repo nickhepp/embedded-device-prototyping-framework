@@ -9,9 +9,9 @@ namespace Ecs.Edpf.Devices.Charting
 
     public enum XAxisType
     {
-        DirectFromDevice,
         SampleNumber,
-        Time
+        Time,
+        //DirectFromDevice,
     }
 
 }

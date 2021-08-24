@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Ecs.Edpf.GUI.UI.Views
 {
@@ -34,14 +35,41 @@ namespace Ecs.Edpf.GUI.UI.Views
                 _chartingViewModel = value as IChartingViewModel;
                 InitializeSubComponents();
                 ShowHideSettings();
+
+                if (_chartingViewModel != null)
+                {
+                    _chartingViewModel.ChartNamesToSettingsChanged += ChartingViewModel_ChartNamesToSettingsChanged;
+                    _chartingViewModel.ChartSamplesCollected += ChartingViewModel_ChartSamplesCollected;
+                }
+
             }
         }
 
+        private void ChartingViewModel_ChartSamplesCollected(object sender, Dictionary<string, Devices.Charting.ChartSample> e)
+        {
+            foreach (string seriesName in e.Keys)
+            {
+                int seriesIdx = _mainChrt.Series.IndexOf(seriesName);
+                if (seriesIdx != -1)
+                {
+                    Devices.Charting.ChartSample chartSample = e[seriesName];
+                    _mainChrt.Series[seriesIdx].Points.Add(new DataPoint(chartSample.XNumberValue.Value, chartSample.YValue));
+                }
+            }
+            
+        }
 
+        private void ChartingViewModel_ChartNamesToSettingsChanged(object sender, EventArgs e)
+        {
+            InitializeSeries();
+        }
 
         public ChartingView()
         {
             InitializeComponent();
+
+            // clear the example that is there
+            _mainChrt.Series.Clear();
 
             InitializeSubComponents();
             ShowHideSettings();
@@ -65,8 +93,59 @@ namespace Ecs.Edpf.GUI.UI.Views
             {
                 _chartSettingsPpg.SelectedObject = _chartingViewModel.SettingsViewModel;
                 _chartingViewModel.PropertyChanged += ChartingViewModel_PropertyChanged;
+                InitializeSeries();
             }
         }
+
+        private void InitializeSeries()
+        {
+            const string chartAreaName = "chart-area";
+            ChartArea chartArea;
+            if (_mainChrt.ChartAreas.Count == 0)
+            {
+                chartArea = new ChartArea(chartAreaName);
+                _mainChrt.ChartAreas.Add(chartArea);
+                chartArea.AxisX = new Axis
+                {
+                    Enabled = AxisEnabled.Auto,
+                };
+            }
+            else
+            {
+                chartArea = _mainChrt.ChartAreas[0];
+            }
+
+            // add series that need to be added
+            foreach (string seriesName in _chartingViewModel.ChartNamesToSettings.Keys)
+            {
+                Series series;
+                int seriesIdx = _mainChrt.Series.IndexOf(seriesName);
+                if (seriesIdx == -1)
+                {
+                    series = new Series(seriesName)
+                    {
+                        ChartArea = chartArea.Name,
+                        Enabled = true,
+                        ChartType = SeriesChartType.Line,
+                    };
+                    _mainChrt.Series.Add(series);
+                }
+                //else
+                //{
+                //    series = _mainChrt.Series[seriesIdx];
+                //}
+                
+            }
+
+            // remove series that are no longer needed
+            List<string> extraSeriesNames = _mainChrt.Series.Select(series => series.Name).Except(_chartingViewModel.ChartNamesToSettings.Keys).ToList();
+            foreach (string extraSeriesName in extraSeriesNames)
+            {
+                _mainChrt.Series.Remove(_mainChrt.Series.FindByName(extraSeriesName));
+            }
+
+        }
+
 
 
         private void ShowHideSettings()

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ecs.Edpf.Devices.Charting
 {
-    public class SimpleChartingExpressionFilter
+    public class SimpleChartingExpressionFilter : IChartingExpressionFilter
     {
 
         public const string UnexpectedExpressionFormatErrorMessage = "Unexpected Expression format.  Simple Expression strings are of the following format: " +
@@ -24,11 +24,29 @@ namespace Ecs.Edpf.Devices.Charting
 
         private Lazy<string> _chartValuesPrefix;
 
-        public string Expression { get; set; }
+        private string _expression;
+        public string Expression
+        {
+            get
+            {
+                return _expression;
+            }
+            set
+            {
+                _expression = value;
+                InitializeGetters();
+            }
+        }
 
         public SimpleChartingExpressionFilter()
         {
+            InitializeGetters();
 
+
+        }
+
+        private void InitializeGetters()
+        {
             _chartValuesPrefix = new Lazy<string>(() =>
             {
                 if (string.IsNullOrEmpty(Expression))
@@ -67,10 +85,7 @@ namespace Ecs.Edpf.Devices.Charting
 
                 return valueNames;
             });
-
         }
-
-
 
         public Dictionary<string, double> GetChartPoints(string lineWithPoints)
         {

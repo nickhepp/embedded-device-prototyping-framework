@@ -9,7 +9,5 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
     public interface IChartingViewSettingsViewModel
     {
 
-        List<ChartSettingsViewModel> Charts { get; set; }
-
     }
 }

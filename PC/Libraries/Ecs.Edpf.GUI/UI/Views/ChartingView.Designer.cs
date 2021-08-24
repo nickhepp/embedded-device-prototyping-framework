@@ -30,15 +30,18 @@ namespace Ecs.Edpf.GUI.UI.Views
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChartingView));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this._showSettingsTsb = new System.Windows.Forms.ToolStripButton();
             this._mainSpl = new System.Windows.Forms.SplitContainer();
             this._chartSettingsPpg = new System.Windows.Forms.PropertyGrid();
             this._chartPnl = new System.Windows.Forms.Panel();
-            this._mainTcl = new System.Windows.Forms.TabControl();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this._settingsSsl = new System.Windows.Forms.ToolStripStatusLabel();
             this._mainPnl = new System.Windows.Forms.Panel();
+            this._mainChrt = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._mainSpl)).BeginInit();
             this._mainSpl.Panel2.SuspendLayout();
@@ -46,6 +49,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._chartPnl.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this._mainPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._mainChrt)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -94,20 +98,11 @@ namespace Ecs.Edpf.GUI.UI.Views
             // 
             // _chartPnl
             // 
-            this._chartPnl.Controls.Add(this._mainTcl);
+            this._chartPnl.Controls.Add(this._mainChrt);
             this._chartPnl.Location = new System.Drawing.Point(101, 65);
             this._chartPnl.Name = "_chartPnl";
             this._chartPnl.Size = new System.Drawing.Size(772, 580);
             this._chartPnl.TabIndex = 2;
-            // 
-            // _mainTcl
-            // 
-            this._mainTcl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._mainTcl.Location = new System.Drawing.Point(0, 0);
-            this._mainTcl.Name = "_mainTcl";
-            this._mainTcl.SelectedIndex = 0;
-            this._mainTcl.Size = new System.Drawing.Size(772, 580);
-            this._mainTcl.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -136,6 +131,23 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._mainPnl.Size = new System.Drawing.Size(1963, 878);
             this._mainPnl.TabIndex = 4;
             // 
+            // _mainChrt
+            // 
+            chartArea1.Name = "ChartArea1";
+            this._mainChrt.ChartAreas.Add(chartArea1);
+            this._mainChrt.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this._mainChrt.Legends.Add(legend1);
+            this._mainChrt.Location = new System.Drawing.Point(0, 0);
+            this._mainChrt.Name = "_mainChrt";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this._mainChrt.Series.Add(series1);
+            this._mainChrt.Size = new System.Drawing.Size(772, 580);
+            this._mainChrt.TabIndex = 0;
+            this._mainChrt.Text = "chart1";
+            // 
             // ChartingView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -154,6 +166,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this._mainPnl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._mainChrt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,9 +179,9 @@ namespace Ecs.Edpf.GUI.UI.Views
         private System.Windows.Forms.SplitContainer _mainSpl;
         private System.Windows.Forms.PropertyGrid _chartSettingsPpg;
         private System.Windows.Forms.Panel _chartPnl;
-        private System.Windows.Forms.TabControl _mainTcl;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel _settingsSsl;
         private System.Windows.Forms.Panel _mainPnl;
+        private System.Windows.Forms.DataVisualization.Charting.Chart _mainChrt;
     }
 }
