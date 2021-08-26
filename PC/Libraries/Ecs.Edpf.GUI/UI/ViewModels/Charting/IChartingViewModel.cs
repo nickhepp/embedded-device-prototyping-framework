@@ -12,13 +12,13 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
     public interface IChartingViewModel : IChildViewModel, IDeviceProviderListener
     {
 
-        Dictionary<string, ChartSettings> ChartNamesToSettings { get; }
+        IChartSampleCollector ChartSampleCollector { get; }
+
+        IChartingExpressionFilter ChartingExpressionFilter { get; }
 
         IChartingViewSettingsViewModel SettingsViewModel { get; set; }
 
         bool ShowSettings { get; set; }
-
-        event EventHandler ChartNamesToSettingsChanged;
 
         event EventHandler<Dictionary<string, ChartSample>> ChartSamplesCollected;
 

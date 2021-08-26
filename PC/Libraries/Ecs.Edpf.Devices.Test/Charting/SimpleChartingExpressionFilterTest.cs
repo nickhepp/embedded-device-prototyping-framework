@@ -23,13 +23,13 @@ namespace Ecs.Edpf.Devices.Test.Charting
 
 
         [TestMethod]
-        public void GetChartValueNames_FilterHasValueNames_ValueNamesGotten()
+        public void GetSeriesNames_FilterHasSeriesNames_SeriesNamesGotten()
         {
             //-- arrange
-            _simpleChartExpressionFilter.Expression = "vals:{a},{b},{c}";
+            _simpleChartExpressionFilter.Expression = "vals:{a:ch1},{b:ch2},{c:ch3}";
 
             //-- act
-            List<string> valueNames = _simpleChartExpressionFilter.GetChartValueNames();
+            List<string> valueNames = _simpleChartExpressionFilter.GetSeriesNames();
 
             //-- assert
             Assert.AreEqual(expected: 3, valueNames.Count);

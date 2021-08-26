@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Ecs.Edpf.GUI.UI.Views
 {
-    public partial class ChartingView : UserControl, IChildView
+    public partial class ChartingView : UserControl, IChildView, IChartProvider
     {
 
         private IChartingViewModel _chartingViewModel = null;
@@ -38,11 +39,17 @@ namespace Ecs.Edpf.GUI.UI.Views
 
                 if (_chartingViewModel != null)
                 {
-                    _chartingViewModel.ChartNamesToSettingsChanged += ChartingViewModel_ChartNamesToSettingsChanged;
+                    //_chartingViewModel.ChartNamesToSettingsChanged += ChartingViewModel_ChartNamesToSettingsChanged;
                     _chartingViewModel.ChartSamplesCollected += ChartingViewModel_ChartSamplesCollected;
+                    _chartingViewModel.ChartingExpressionFilter.ExpressionChanged += ChartingExpressionFilter_ExpressionChanged;
                 }
 
             }
+        }
+
+        private void ChartingExpressionFilter_ExpressionChanged(object sender, EventArgs e)
+        {
+            InitializeChart();
         }
 
         private void ChartingViewModel_ChartSamplesCollected(object sender, Dictionary<string, Devices.Charting.ChartSample> e)
@@ -57,11 +64,6 @@ namespace Ecs.Edpf.GUI.UI.Views
                 }
             }
             
-        }
-
-        private void ChartingViewModel_ChartNamesToSettingsChanged(object sender, EventArgs e)
-        {
-            InitializeSeries();
         }
 
         public ChartingView()
@@ -93,55 +95,60 @@ namespace Ecs.Edpf.GUI.UI.Views
             {
                 _chartSettingsPpg.SelectedObject = _chartingViewModel.SettingsViewModel;
                 _chartingViewModel.PropertyChanged += ChartingViewModel_PropertyChanged;
-                InitializeSeries();
+                InitializeChart();
             }
         }
 
-        private void InitializeSeries()
+        private void InitializeChart()
         {
-            const string chartAreaName = "chart-area";
-            ChartArea chartArea;
-            if (_mainChrt.ChartAreas.Count == 0)
+            // add new chart areas
+            foreach (string chartAreaName in _chartingViewModel.ChartingExpressionFilter.GetChartAreaNames())
             {
-                chartArea = new ChartArea(chartAreaName);
-                _mainChrt.ChartAreas.Add(chartArea);
-                chartArea.AxisX = new Axis
+                int chartIdx = _mainChrt.ChartAreas.IndexOf(chartAreaName);
+                if (chartIdx == -1)
                 {
-                    Enabled = AxisEnabled.Auto,
-                };
-            }
-            else
-            {
-                chartArea = _mainChrt.ChartAreas[0];
+                    ChartArea chartArea = new ChartArea(chartAreaName);
+                    _mainChrt.ChartAreas.Add(chartAreaName);
+                }
             }
 
+
+
             // add series that need to be added
-            foreach (string seriesName in _chartingViewModel.ChartNamesToSettings.Keys)
+            foreach (string seriesName in _chartingViewModel.ChartingExpressionFilter.GetSeriesNames())
             {
-                Series series;
+                string chartName = _chartingViewModel.ChartingExpressionFilter.GetChartAreaNameBySeries(seriesName);
+                Series series; 
                 int seriesIdx = _mainChrt.Series.IndexOf(seriesName);
                 if (seriesIdx == -1)
                 {
                     series = new Series(seriesName)
                     {
-                        ChartArea = chartArea.Name,
                         Enabled = true,
                         ChartType = SeriesChartType.Line,
+                        BorderWidth = 4
                     };
                     _mainChrt.Series.Add(series);
                 }
-                //else
-                //{
-                //    series = _mainChrt.Series[seriesIdx];
-                //}
-                
+                else
+                {
+                    series = _mainChrt.Series[seriesIdx];
+                }
+                series.ChartArea = chartName;
             }
 
             // remove series that are no longer needed
-            List<string> extraSeriesNames = _mainChrt.Series.Select(series => series.Name).Except(_chartingViewModel.ChartNamesToSettings.Keys).ToList();
+            List<string> extraSeriesNames = _mainChrt.Series.Select(series => series.Name).Except(_chartingViewModel.ChartingExpressionFilter.GetSeriesNames()).ToList();
             foreach (string extraSeriesName in extraSeriesNames)
             {
                 _mainChrt.Series.Remove(_mainChrt.Series.FindByName(extraSeriesName));
+            }
+
+            //remove chart areas that are no longer needed
+            List<string> extraChartAreaNames = _mainChrt.ChartAreas.Select(chartArea => chartArea.Name).Except(_chartingViewModel.ChartingExpressionFilter.GetChartAreaNames()).ToList();
+            foreach (string extraChartArea in extraChartAreaNames)
+            {
+                _mainChrt.ChartAreas.Remove(_mainChrt.ChartAreas.FindByName(extraChartArea));
             }
 
         }
@@ -193,5 +200,37 @@ namespace Ecs.Edpf.GUI.UI.Views
             }
         }
 
+        public Chart GetChart()
+        {
+            return _mainChrt;
+        }
+
+        private void _saveSettingsTsb_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void _loadSettingsTsb_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void _downloadDataTsb_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "xml file | *.xml";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fStream = new FileStream(sfd.FileName, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    _mainChrt.Serializer.Content = SerializationContents.Data;
+                    _mainChrt.Serializer.Save(fStream);
+                }
+            }
+
+
+
+        }
     }
 }

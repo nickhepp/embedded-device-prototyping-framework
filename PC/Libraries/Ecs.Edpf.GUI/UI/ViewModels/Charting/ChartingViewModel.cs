@@ -16,12 +16,14 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
 
         private ChartSettings _chartSettings;
 
-        private IChartSampleCollector _chartSampleCollector;
+        //private IChartSampleCollector _chartSampleCollector;
+        public IChartSampleCollector ChartSampleCollector { get; private set;  }
+
+
+        public IChartingExpressionFilter ChartingExpressionFilter { get; private set; }
 
 
         public event EventHandler<Dictionary<string, ChartSample>> ChartSamplesCollected;
-
-        public event EventHandler ChartNamesToSettingsChanged;
 
         public IChartingViewSettingsViewModel SettingsViewModel { get; set; }
 
@@ -29,19 +31,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
 
         public string Name => "Charting";
 
-        private Dictionary<string, ChartSettings> _pubChartSettings;
-        public Dictionary<string, ChartSettings> ChartNamesToSettings
-        {
-            get
-            {
-                return _pubChartSettings;
-            }
-            private set
-            {
-                _pubChartSettings = value;
-                RaiseChartNamesToSettingsChanged();
-            }
-        }
         private bool _showSettings = true;
         public bool ShowSettings 
         { 
@@ -56,50 +45,24 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
             }
         }
 
-        public ChartingViewModel(IChartSampleCollector chartSampleCollector, 
+        public ChartingViewModel(IChartSampleCollector chartSampleCollector,
+            IChartingExpressionFilter chartingExpressionFilter,
+            IChartProvider chartProvider,
             ChartSettings chartSettings,
             IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
-            _chartSampleCollector = chartSampleCollector;
-            SettingsViewModel = new ChartingViewSettingsViewModel(chartSettings);
+            ChartSampleCollector = chartSampleCollector;
+            ChartingExpressionFilter = chartingExpressionFilter;
+            SettingsViewModel = new ChartingViewSettingsViewModel(chartProvider, chartSettings);
             _chartSettings = chartSettings;
-            _chartSettings.PropertyChanged += ChartSettings_PropertyChanged;
-            _chartSampleCollector.ChartSamplesCollected += ChartSampleCollector_ChartSamplesCollected;
-            _chartSampleCollector.PropertyChanged += ChartSampleCollector_PropertyChanged;
-            SetPubChartSettings();
-        }
-
-        private void ChartSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            SetPubChartSettings();
-        }
-
-        private void ChartSampleCollector_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(IChartSampleCollector.ChartSamples))
-            {
-                SetPubChartSettings();
-            }
-        }
-
-        private void SetPubChartSettings()
-        {
-            Dictionary<string, ChartSettings> chartNamesToSettings = new Dictionary<string, ChartSettings>();
-            foreach (string seriesName in _chartSampleCollector.ChartSamples.Keys)
-            {
-                chartNamesToSettings[seriesName] = _chartSettings;
-            }
-            ChartNamesToSettings = chartNamesToSettings;
+            //_chartSettings.PropertyChanged += ChartSettings_PropertyChanged;
+            ChartSampleCollector.ChartSamplesCollected += ChartSampleCollector_ChartSamplesCollected;
+            //_chartSampleCollector.PropertyChanged += ChartSampleCollector_PropertyChanged;
         }
 
 
-        private void RaiseChartNamesToSettingsChanged()
-        {
-            if (ChartNamesToSettingsChanged != null)
-            {
-                ChartNamesToSettingsChanged(this, new EventArgs());
-            }
-        }
+
+
 
 
         private void ChartSampleCollector_ChartSamplesCollected(object sender, Dictionary<string, ChartSample> e)
@@ -136,7 +99,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
                 List<string> possibleValLines = newLinesStr.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 foreach (string possibleValLine in possibleValLines)
                 {
-                    _chartSampleCollector.AddPossibleSampleLine(possibleValLine);
+                    ChartSampleCollector.AddPossibleSampleLine(possibleValLine);
                 }
             }
         }

@@ -9,22 +9,27 @@ namespace Ecs.Edpf.Devices.Charting
     {
 
         public const string UnexpectedExpressionFormatErrorMessage = "Unexpected Expression format.  Simple Expression strings are of the following format: " +
-            "'value_prefix:{val1},{val2},{valn}'";
+            "'value_prefix:{series-1|chart-1},{series-2|chart-2},{series-n|chart-n}'";
 
 
         public const string ValueSeparatorToken = ":";
 
-        public const string ValueNameBeginToken = "{";
+        public const string SeriesAndChartNameBeginToken = "{";
 
-        public const string ValueNameEndToken = "}";
+        public const string SeriesAndChartNameEndToken = "}";
 
         public const string ValuesSeparatorToken = ",";
 
-        private Lazy<List<string>> _chartValueNames;
+        public const string SeriesChartNameSeparatorToken = "|";
+
+        private Lazy<Dictionary<string, string>> _chartSeriesToChartNames;
 
         private Lazy<string> _chartValuesPrefix;
 
         private string _expression;
+
+        public event EventHandler ExpressionChanged;
+
         public string Expression
         {
             get
@@ -35,14 +40,22 @@ namespace Ecs.Edpf.Devices.Charting
             {
                 _expression = value;
                 InitializeGetters();
+                RaiseExpressionChanged();
             }
         }
 
         public SimpleChartingExpressionFilter()
         {
             InitializeGetters();
+        }
 
 
+        private void RaiseExpressionChanged()
+        {
+            if (ExpressionChanged != null)
+            {
+                ExpressionChanged(this, new EventArgs());
+            }
         }
 
         private void InitializeGetters()
@@ -63,27 +76,35 @@ namespace Ecs.Edpf.Devices.Charting
                 return splitVals[0];
             });
 
-            _chartValueNames = new Lazy<List<string>>(() =>
+            _chartSeriesToChartNames = new Lazy<Dictionary<string, string>>(() =>
             {
                 string prefix = _chartValuesPrefix.Value + ValueSeparatorToken;
-                string valueNamesPart = Expression.Substring(prefix.Length);
-                List<string> valueNameParts = valueNamesPart.Split(new string[] { ValuesSeparatorToken }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                string seriesAndChartsNamesPart = Expression.Substring(prefix.Length);
+                List<string> seriesAndChartsNamesParts = seriesAndChartsNamesPart.Split(new string[] { ValuesSeparatorToken }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                List<string> valueNames = new List<string>();
-                foreach (string valueNamePart in valueNameParts)
+                Dictionary<string, string> seriesAndChartsNames = new Dictionary<string, string>();
+                foreach (string seriesAndChartNamePart in seriesAndChartsNamesParts)
                 {
-                    if ((valueNamePart.Length < (ValueNameBeginToken.Length + ValueNameEndToken.Length + 1)) ||
-                            (valueNamePart.Substring(0, ValueNameBeginToken.Length) != ValueNameBeginToken) ||
-                            (valueNamePart.Substring(valueNamePart.Length - 1, 1) != ValueNameEndToken))
+                    if ((seriesAndChartNamePart.Length < (SeriesAndChartNameBeginToken.Length + SeriesAndChartNameEndToken.Length + 1)) ||
+                            (seriesAndChartNamePart.Substring(0, SeriesAndChartNameBeginToken.Length) != SeriesAndChartNameBeginToken) ||
+                            (seriesAndChartNamePart.Substring(seriesAndChartNamePart.Length - 1, 1) != SeriesAndChartNameEndToken))
                     {
                         throw new Exception(UnexpectedExpressionFormatErrorMessage);
                     }
 
-                    int valueNameLength = valueNamePart.Length - ValueNameBeginToken.Length - ValueNameEndToken.Length;
-                    valueNames.Add(valueNamePart.Substring(ValueNameBeginToken.Length, valueNameLength));
+                    int seriesAndChartNameLength = seriesAndChartNamePart.Length - SeriesAndChartNameBeginToken.Length - SeriesAndChartNameEndToken.Length;
+                    string seriesAndChartName = seriesAndChartNamePart.Substring(SeriesAndChartNameBeginToken.Length, seriesAndChartNameLength);
+
+                    List<string> seriesChartParts = seriesAndChartName.Split(new string[] { SeriesChartNameSeparatorToken }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    if (seriesChartParts.Count != 2)
+                    {
+                        throw new Exception(UnexpectedExpressionFormatErrorMessage);
+                    }
+
+                    seriesAndChartsNames[seriesChartParts[0]] = seriesChartParts[1];
                 }
 
-                return valueNames;
+                return seriesAndChartsNames;
             });
         }
 
@@ -101,7 +122,7 @@ namespace Ecs.Edpf.Devices.Charting
                 // at least the beginning is good, see if we can decompose the parts
                 List<string> valParts = lineWithPoints.Substring(valsPrefix.Length).Split(new string[] { ValuesSeparatorToken }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                List<string> chartValueNames = GetChartValueNames();
+                List<string> chartValueNames = GetSeriesNames();
                 if (valParts.Count == chartValueNames.Count)
                 {
                     Dictionary<string, double> tempDictBuilder = new Dictionary<string, double>();
@@ -126,11 +147,21 @@ namespace Ecs.Edpf.Devices.Charting
             return valPoints;
         }
 
-
-        public List<string> GetChartValueNames()
+        public List<string> GetSeriesNames()
         {
-            return new List<string>(_chartValueNames.Value);
+            return _chartSeriesToChartNames.Value.Keys.ToList();
         }
+
+        public List<string> GetChartAreaNames()
+        {
+            return _chartSeriesToChartNames.Value.Values.Distinct().ToList();
+        }
+
+        public string GetChartAreaNameBySeries(string series)
+        {
+            return _chartSeriesToChartNames.Value[series];
+        }
+
 
 
     }

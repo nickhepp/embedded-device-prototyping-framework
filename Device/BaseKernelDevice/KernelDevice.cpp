@@ -303,47 +303,103 @@ void example_io_command(Command* cmd)
     // TODO: add output of values
 }
 
-const int16_t MAX_WAVE_VAL = 1000;
-const int16_t MIN_WAVE_VAL = -1000;
-int16_t wave_val = 0;
-bool wave_ascending = true;
+const int16_t TRIANGLE_WAVE_VAL = 1000;
+const int16_t MIN_TRIANGLE_WAVE_VAL = -1000;
+int16_t triangle_wave_val = 0;
+bool triangle_wave_ascending = true;
 
-float ascending_val = 0.0;
-float descending_val = 100.0;
+
+static float sin_qtr_cycle[] = { 0.0, .20, .38, .56, .70, .84, .92, .98 };
+
+const uint8_t sin_qtr_cycle_sample_max = 8;
+uint8_t sin_qtr_cycle_sample_idx = sin_qtr_cycle_sample_max;
+
+const uint8_t sin_qtr_part_max = 4;
+uint8_t sin_qtr_part_idx = sin_qtr_part_max;
+
+const uint8_t saw_tooth_sample_max = sin_qtr_cycle_sample_max * sin_qtr_part_max;
+uint8_t saw_tooth_sample_idx = saw_tooth_sample_max;
+
+
 
 void charting_command(Command* cmd)
 {
-    // in place of real hardware sensing a value 
-    // do a in memory representation
+    // in place of real hardware sensing a value do an in memory representation
 
-    // figure out how much to offset the 
-    if (wave_ascending)
+    /////////////////////////////////////////////////////////////
+    // do the triangle wave, oscillates from 1000 to -1000
+    if (triangle_wave_ascending)
     {
-        wave_val += MAX_WAVE_VAL / 10;
-        if (wave_val >= MAX_WAVE_VAL)
+        triangle_wave_val += TRIANGLE_WAVE_VAL / 10;
+        if (triangle_wave_val >= TRIANGLE_WAVE_VAL)
         {
-            wave_val = MAX_WAVE_VAL;
-            wave_ascending = false;
+            triangle_wave_val = TRIANGLE_WAVE_VAL;
+            triangle_wave_ascending = false;
         }
 
     } else {
-        wave_val -= MAX_WAVE_VAL / 10;
-        if (wave_val <= MIN_WAVE_VAL)
+        triangle_wave_val -= TRIANGLE_WAVE_VAL / 10;
+        if (triangle_wave_val <= MIN_TRIANGLE_WAVE_VAL)
         {
-            wave_val = MIN_WAVE_VAL;
-            wave_ascending = true;
+            triangle_wave_val = MIN_TRIANGLE_WAVE_VAL;
+            triangle_wave_ascending = true;
         }
     }
 
-    ascending_val += 1.1;
-    descending_val -= 0.01;
+    /////////////////////////////////////////////////////////////
+    // do the sin wave
+    sin_qtr_cycle_sample_idx++;
+    if (sin_qtr_cycle_sample_idx >= sin_qtr_cycle_sample_max)
+    {
+        sin_qtr_part_idx++;
+        if (sin_qtr_part_idx >= sin_qtr_part_max)
+        {
+            sin_qtr_part_idx = 0;
+        }
+
+        if ((sin_qtr_part_idx & 1) == 1)
+        {
+            sin_qtr_cycle_sample_idx = 0;
+        }
+        else
+        {
+            sin_qtr_cycle_sample_idx = 1;
+        }
+    }
+
+    float sin_val;
+    if (sin_qtr_part_idx == 0)
+    {
+        sin_val = sin_qtr_cycle[sin_qtr_cycle_sample_idx];
+    }
+    else if (sin_qtr_part_idx == 1)
+    {
+        sin_val = sin_qtr_cycle[sin_qtr_cycle_sample_max - sin_qtr_cycle_sample_idx - 1];
+    }
+    else if (sin_qtr_part_idx == 2)
+    {
+        sin_val = -sin_qtr_cycle[sin_qtr_cycle_sample_idx];
+    }
+    else //if (sin_qtr_part_idx == 3)
+    {
+        sin_val = -sin_qtr_cycle[sin_qtr_cycle_sample_max - sin_qtr_cycle_sample_idx - 1];
+    }
+
+    /////////////////////////////////////////////////////////////
+    // do the saw tooth wave
+    saw_tooth_sample_idx++;
+    if (saw_tooth_sample_idx > saw_tooth_sample_max)
+    {
+        saw_tooth_sample_idx = 0;
+    }
+    float saw_tooth_val = (float)(saw_tooth_sample_idx) / (float)(saw_tooth_sample_max);
 
     Serial.print("vals:");
-    Serial.print(wave_val, DEC);
+    Serial.print(triangle_wave_val, DEC);
     Serial.print(",");
-    Serial.print(ascending_val, 1);
+    Serial.print(sin_val, 2);
     Serial.print(",");
-    Serial.println(descending_val, 2);
+    Serial.println(saw_tooth_val, 2);
 }
 
 

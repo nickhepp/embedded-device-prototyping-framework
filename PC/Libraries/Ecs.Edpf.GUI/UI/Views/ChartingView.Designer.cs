@@ -38,25 +38,31 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._mainSpl = new System.Windows.Forms.SplitContainer();
             this._chartSettingsPpg = new System.Windows.Forms.PropertyGrid();
             this._chartPnl = new System.Windows.Forms.Panel();
+            this._mainChrt = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this._settingsSsl = new System.Windows.Forms.ToolStripStatusLabel();
             this._mainPnl = new System.Windows.Forms.Panel();
-            this._mainChrt = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this._saveSettingsTsb = new System.Windows.Forms.ToolStripButton();
+            this._loadSettingsTsb = new System.Windows.Forms.ToolStripButton();
+            this._downloadDataTsb = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._mainSpl)).BeginInit();
             this._mainSpl.Panel2.SuspendLayout();
             this._mainSpl.SuspendLayout();
             this._chartPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._mainChrt)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this._mainPnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._mainChrt)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._showSettingsTsb});
+            this._showSettingsTsb,
+            this._saveSettingsTsb,
+            this._loadSettingsTsb,
+            this._downloadDataTsb});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1963, 42);
@@ -104,6 +110,23 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._chartPnl.Size = new System.Drawing.Size(772, 580);
             this._chartPnl.TabIndex = 2;
             // 
+            // _mainChrt
+            // 
+            chartArea1.Name = "ChartArea1";
+            this._mainChrt.ChartAreas.Add(chartArea1);
+            this._mainChrt.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this._mainChrt.Legends.Add(legend1);
+            this._mainChrt.Location = new System.Drawing.Point(0, 0);
+            this._mainChrt.Name = "_mainChrt";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this._mainChrt.Series.Add(series1);
+            this._mainChrt.Size = new System.Drawing.Size(772, 580);
+            this._mainChrt.TabIndex = 0;
+            this._mainChrt.Text = "chart1";
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -131,22 +154,32 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._mainPnl.Size = new System.Drawing.Size(1963, 878);
             this._mainPnl.TabIndex = 4;
             // 
-            // _mainChrt
+            // _saveSettingsTsb
             // 
-            chartArea1.Name = "ChartArea1";
-            this._mainChrt.ChartAreas.Add(chartArea1);
-            this._mainChrt.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this._mainChrt.Legends.Add(legend1);
-            this._mainChrt.Location = new System.Drawing.Point(0, 0);
-            this._mainChrt.Name = "_mainChrt";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this._mainChrt.Series.Add(series1);
-            this._mainChrt.Size = new System.Drawing.Size(772, 580);
-            this._mainChrt.TabIndex = 0;
-            this._mainChrt.Text = "chart1";
+            this._saveSettingsTsb.Image = ((System.Drawing.Image)(resources.GetObject("_saveSettingsTsb.Image")));
+            this._saveSettingsTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._saveSettingsTsb.Name = "_saveSettingsTsb";
+            this._saveSettingsTsb.Size = new System.Drawing.Size(209, 36);
+            this._saveSettingsTsb.Text = "Save Settings...";
+            this._saveSettingsTsb.Click += new System.EventHandler(this._saveSettingsTsb_Click);
+            // 
+            // _loadSettingsTsb
+            // 
+            this._loadSettingsTsb.Image = ((System.Drawing.Image)(resources.GetObject("_loadSettingsTsb.Image")));
+            this._loadSettingsTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._loadSettingsTsb.Name = "_loadSettingsTsb";
+            this._loadSettingsTsb.Size = new System.Drawing.Size(210, 36);
+            this._loadSettingsTsb.Text = "Load Settings...";
+            this._loadSettingsTsb.Click += new System.EventHandler(this._loadSettingsTsb_Click);
+            // 
+            // _downloadDataTsb
+            // 
+            this._downloadDataTsb.Image = ((System.Drawing.Image)(resources.GetObject("_downloadDataTsb.Image")));
+            this._downloadDataTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._downloadDataTsb.Name = "_downloadDataTsb";
+            this._downloadDataTsb.Size = new System.Drawing.Size(230, 36);
+            this._downloadDataTsb.Text = "Download Data...";
+            this._downloadDataTsb.Click += new System.EventHandler(this._downloadDataTsb_Click);
             // 
             // ChartingView
             // 
@@ -163,10 +196,10 @@ namespace Ecs.Edpf.GUI.UI.Views
             ((System.ComponentModel.ISupportInitialize)(this._mainSpl)).EndInit();
             this._mainSpl.ResumeLayout(false);
             this._chartPnl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this._mainChrt)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this._mainPnl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this._mainChrt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,5 +216,8 @@ namespace Ecs.Edpf.GUI.UI.Views
         private System.Windows.Forms.ToolStripStatusLabel _settingsSsl;
         private System.Windows.Forms.Panel _mainPnl;
         private System.Windows.Forms.DataVisualization.Charting.Chart _mainChrt;
+        private System.Windows.Forms.ToolStripButton _saveSettingsTsb;
+        private System.Windows.Forms.ToolStripButton _loadSettingsTsb;
+        private System.Windows.Forms.ToolStripButton _downloadDataTsb;
     }
 }

@@ -1,15 +1,15 @@
 ﻿
-namespace Ecs.Edpf.Devices.Charting
-{
+//namespace Ecs.Edpf.Devices.Charting
+//{
 
-    public class Range
-    {
+//    //public class Range
+//    //{
 
-        public RangeType RangeType { get; set; } = RangeType.Auto;
+//    //    public RangeType RangeType { get; set; } = RangeType.Auto;
 
-        public int Min { get; set; }
+//    //    public int Min { get; set; }
 
-        public int Max { get; set; }
+//    //    public int Max { get; set; }
 
-    }
-}
+//    //}
+//}

@@ -22,7 +22,7 @@ namespace Ecs.Edpf.Devices.Charting
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Dictionary<string, List<ChartSample>> ChartSamples { get; private set; }
+        public Dictionary<string, List<ChartSample>> SeriesSamples { get; private set; }
 
 
 
@@ -43,21 +43,21 @@ namespace Ecs.Edpf.Devices.Charting
             try
             {
                 _chartingExpressionFilter.Expression = _chartSettings.Expression;
-                List<string> valNames = _chartingExpressionFilter.GetChartValueNames();
+                List<string> seriesNames = _chartingExpressionFilter.GetSeriesNames();
 
-                ChartSamples = new Dictionary<string, List<ChartSample>>();
-                foreach (string valName in valNames)
+                SeriesSamples = new Dictionary<string, List<ChartSample>>();
+                foreach (string seriesName in seriesNames)
                 {
-                    ChartSamples[valName] = new List<ChartSample>();
+                    SeriesSamples[seriesName] = new List<ChartSample>();
                 }
             }
             catch (Exception ex)
             {
                 ex = ex; // TODO: add logging
-                ChartSamples = new Dictionary<string, List<ChartSample>>();
+                SeriesSamples = new Dictionary<string, List<ChartSample>>();
             }
 
-            RaiseNotifyPropertyChanged(nameof(ChartSamples));
+            RaiseNotifyPropertyChanged(nameof(SeriesSamples));
 
         }
 
