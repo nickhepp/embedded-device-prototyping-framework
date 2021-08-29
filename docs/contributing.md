@@ -39,7 +39,7 @@ You can browse existing issues to find something that needs help!
 You can use the GitHub user interface :pencil2: for some small changes, like fixing a typo or updating a readme. You can also fork the repo and then clone it locally, to view changes and run your tests on your machine.
 
 ## Reviewing
-We review every single PR. The purpose of reviews is to create the best content we can for people who use GitHub.
+We review every single PR.S
 
 :yellow_heart: Reviews are always respectful, acknowledging that everyone did the best possible job with the knowledge they had at the time.  
 :yellow_heart: Reviews discuss content, not the person who created it.  
