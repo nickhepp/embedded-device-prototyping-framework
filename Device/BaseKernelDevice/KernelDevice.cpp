@@ -303,11 +303,18 @@ void example_io_command(Command* cmd)
     // TODO: add output of values
 }
 
+void show_highlights_command(Command* cmd)
+{
+    Serial.println(F("WARN: an example warning message"));
+    Serial.println(F("PASS: an example success message"));
+    Serial.println(F("ERR: an example error message"));
+}
+
+
 const int16_t TRIANGLE_WAVE_VAL = 1000;
 const int16_t MIN_TRIANGLE_WAVE_VAL = -1000;
 int16_t triangle_wave_val = 0;
 bool triangle_wave_ascending = true;
-
 
 static float sin_qtr_cycle[] = { 0.0, .20, .38, .56, .70, .84, .92, .98 };
 
@@ -320,9 +327,7 @@ uint8_t sin_qtr_part_idx = sin_qtr_part_max;
 const uint8_t saw_tooth_sample_max = sin_qtr_cycle_sample_max * sin_qtr_part_max;
 uint8_t saw_tooth_sample_idx = saw_tooth_sample_max;
 
-
-
-void charting_command(Command* cmd)
+void charting_values_command(Command* cmd)
 {
     // in place of real hardware sensing a value do an in memory representation
 
@@ -408,6 +413,7 @@ Command getRegisteredCommandsCommand;
 Command getCommandParametersCommand;
 Command exampleIOCommand;
 Command chartingCommand;
+Command highlightsCommand;
 
 void KernelDevice::init()
 {
@@ -426,7 +432,8 @@ void KernelDevice::init()
     exampleIOCommand.addDoubleParameter("AnalogRead");
     addCommand(&exampleIOCommand);
 
-
+    chartingCommand.initCommand("charting_values", charting_values_command);
+    addCommand(&chartingCommand);
 
     //////////////////////////////////////////
     // START - leave these commands alone, they are meant for proper operation of the framework
@@ -446,8 +453,9 @@ void KernelDevice::init()
     // END - leave these commands alone, they are meant for proper operation of the framework
     //////////////////////////////////////////
 
-    chartingCommand.initCommand("charting_command", charting_command);
-    addCommand(&chartingCommand);
+
+    highlightsCommand.initCommand("show_highlights", show_highlights_command);
+    addCommand(&highlightsCommand);
 
 
     Serial.println();

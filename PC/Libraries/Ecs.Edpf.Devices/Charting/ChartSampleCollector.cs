@@ -85,24 +85,24 @@ namespace Ecs.Edpf.Devices.Charting
                 _sampleCount++;
                 Dictionary<string, ChartSample> chartSamples = new Dictionary<string, ChartSample>();
 
-                if (_chartSettings.XAxisType == XAxisType.SampleNumber)
+                //if (_chartSettings.XAxisType == XAxisType.SampleNumber)
+                //{
+                foreach (KeyValuePair<string, double> value in values)
                 {
-                    foreach (KeyValuePair<string, double> value in values)
-                    {
-                        chartSamples[value.Key] = new ChartSample { XNumberValue = _sampleCount, YValue = value.Value };
-                    }
+                    chartSamples[value.Key] = new ChartSample { XNumberValue = _sampleCount, YValue = value.Value };
                 }
-                else if (_chartSettings.XAxisType == XAxisType.Time)
-                {
-                    foreach (KeyValuePair<string, double> value in values)
-                    {
-                        chartSamples[value.Key] = new ChartSample
-                        {
-                            XTimestampValue = _dateTimeProvider.GetCurrentDateTime(),
-                            YValue = value.Value
-                        };
-                    }
-                }
+                //}
+                //else if (_chartSettings.XAxisType == XAxisType.Time)
+                //{
+                //    foreach (KeyValuePair<string, double> value in values)
+                //    {
+                //        chartSamples[value.Key] = new ChartSample
+                //        {
+                //            XTimestampValue = _dateTimeProvider.GetCurrentDateTime(),
+                //            YValue = value.Value
+                //        };
+                //    }
+                //}
 
                 if (ChartSamplesCollected != null)
                 {

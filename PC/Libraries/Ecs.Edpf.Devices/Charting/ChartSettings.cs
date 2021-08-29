@@ -11,9 +11,7 @@ namespace Ecs.Edpf.Devices.Charting
     public class ChartSettings : INotifyPropertyChanged
     {
   
-        public XAxisType XAxisType { get; set; } = XAxisType.SampleNumber;
-
-        public Ecs.Edpf.Devices.ComponentModel.ExpressionType ExpressionType { get; set; }
+        //public XAxisType XAxisType { get; set; } = XAxisType.SampleNumber;
 
         private string _expression;
         public string Expression

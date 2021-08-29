@@ -48,8 +48,7 @@ namespace HostApp.UI.Views
             ChartSettings chartSettings = new ChartSettings
             {
                 Expression = "vals:{a|chart1},{b|chart2},{c|chart2}",
-                ExpressionType = Ecs.Edpf.Devices.ComponentModel.ExpressionType.Simple,
-                XAxisType = XAxisType.SampleNumber,
+                //XAxisType = XAxisType.SampleNumber,
             };
 
             _chartingView = new ChartingView();

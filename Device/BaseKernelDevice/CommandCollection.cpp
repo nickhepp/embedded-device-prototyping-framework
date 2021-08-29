@@ -43,7 +43,7 @@ Command* CommandCollection::getCommandByName(const char* cmdName, size_t cmdName
 	Command* currCmd = _headPtr;
 	while (currCmd != NULL_PTR)
 	{
-		if ((cmdNameSz == currCmd->_cmdNameSz) || (memcmp(currCmd->_cmdName, cmdName, cmdNameSz) == 0))
+		if ((cmdNameSz == currCmd->_cmdNameSz) && (memcmp(currCmd->_cmdName, cmdName, cmdNameSz) == 0))
 		{
 			return currCmd;
 		}

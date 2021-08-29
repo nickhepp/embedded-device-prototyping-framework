@@ -84,22 +84,22 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
         #region "Axes"
 
 
-        private const string AxesCategoryName = StringExtensions.Tab9 + "Axes";
+        //private const string AxesCategoryName = StringExtensions.Tab9 + "Axes";
 
-        [Category(AxesCategoryName)]
-        [DisplayName(StringExtensions.Tab10 + "X Axis Type")]
-        public XAxisType XAxisType
-        {
-            get
-            {
-                return _chartSettings.XAxisType;
-            }
-            set
-            {
-                _chartSettings.XAxisType = value;
-                RaiseNotifyPropertyChanged();
-            }
-        }
+        //[Category(AxesCategoryName)]
+        //[DisplayName(StringExtensions.Tab10 + "X Axis Type")]
+        //public XAxisType XAxisType
+        //{
+        //    get
+        //    {
+        //        return _chartSettings.XAxisType;
+        //    }
+        //    set
+        //    {
+        //        _chartSettings.XAxisType = value;
+        //        RaiseNotifyPropertyChanged();
+        //    }
+        //}
 
         #endregion
 
@@ -107,25 +107,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
         #region Expression
 
         private const string ExpressionCategoryName = StringExtensions.Tab10 + "Expression";
-
-        /// <summary>
-        /// The type of expression.
-        /// </summary>
-        [Category(ExpressionCategoryName)]
-        [DisplayName("\t\tExpression Type")]
-        [Browsable(browsable: false)]
-        public ExpressionType ExpressionType
-        {
-            get
-            {
-                return _chartSettings.ExpressionType;
-            }
-            set
-            {
-                _chartSettings.ExpressionType = value;
-                RaiseNotifyPropertyChanged();
-            }
-        }
 
         [Category(ExpressionCategoryName)]
         [DisplayName("\tExpression")]
