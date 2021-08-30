@@ -89,13 +89,13 @@ void Command::addUInt16Parameter(const char *paramName)
 
 bool Command::getUInt16Parameter(const char *paramName, uint16_t *val)
 {
-  uint8_t idx = getParamByTypeAndName(UINT16_VALUE_TYPEID, paramName);
-  if (idx != UNDEFINED_PARAM_IDX)
-  {
-    *val = uint16Param.getValue(idx);
-    return true;
-  }
-  return false;
+    uint8_t idx = getParamByTypeAndName(UINT16_VALUE_TYPEID, paramName);
+    if (idx != UNDEFINED_PARAM_IDX)
+    {
+        *val = uint16Param.getValue(idx, _cmd_params_data);
+        return true;
+    }
+    return false;
 }
 
 void Command::addUInt32Parameter(const char *paramName)
@@ -137,13 +137,13 @@ void Command::addInt16Parameter(const char *paramName)
 
 bool Command::getInt16Parameter(const char *paramName, int16_t *val)
 {
-  uint8_t idx = getParamByTypeAndName(INT16_VALUE_TYPEID, paramName);
-  if (idx != UNDEFINED_PARAM_IDX)
-  {
-    *val = int16Param.getValue(idx);
-    return true;
-  }
-  return false;
+    uint8_t idx = getParamByTypeAndName(INT16_VALUE_TYPEID, paramName);
+    if (idx != UNDEFINED_PARAM_IDX)
+    {
+        *val = int16Param.getValue(idx, _cmd_params_data);
+        return true;
+    }
+    return false;
 }
 
 void Command::addInt32Parameter(const char *paramName)

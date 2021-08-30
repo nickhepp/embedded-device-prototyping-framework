@@ -293,23 +293,50 @@ void KernelDevice::readCharacters()
 
 #define EXAMPLE_UINT8_PARAM_NAME    "uint8_val"
 #define EXAMPLE_INT8_PARAM_NAME     "int8_val"
+#define EXAMPLE_UINT16_PARAM_NAME   "uint16_val"
+#define EXAMPLE_INT16_PARAM_NAME    "int16_val"
+#define EXAMPLE_UINT32_PARAM_NAME   "uint32_val"
 
 void example_io_command(Command* cmd)
 {
     uint8_t uint8_val;
-    cmd->getUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME, &uint8_val);
-    Serial.print(F(EXAMPLE_UINT8_PARAM_NAME));
-    Serial.print(F("="));
-    Serial.println(uint8_val, DEC);
+    if (cmd->getUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME, &uint8_val))
+    {
+        Serial.print(F(EXAMPLE_UINT8_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(uint8_val, DEC);
+    }
 
     int8_t int8_val;
-    cmd->getInt8Parameter(EXAMPLE_INT8_PARAM_NAME, &int8_val);
-    Serial.print(F(EXAMPLE_INT8_PARAM_NAME));
-    Serial.print(F("="));
-    Serial.println(int8_val, DEC);
+    if (cmd->getInt8Parameter(EXAMPLE_INT8_PARAM_NAME, &int8_val))
+    {
+        Serial.print(F(EXAMPLE_INT8_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(int8_val, DEC);
+    }
 
-    //bool getUInt16Parameter(const char* paramName, uint16_t * val);
-    //bool getInt16Parameter(const char* paramName, int16_t * val);
+    uint16_t uint16_val;
+    if (cmd->getUInt16Parameter(EXAMPLE_UINT16_PARAM_NAME, &uint16_val))
+    {
+        Serial.print(F(EXAMPLE_UINT16_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(uint16_val, DEC);
+    }
+
+    int16_t int16_val;
+    if (cmd->getInt16Parameter(EXAMPLE_INT16_PARAM_NAME, &int16_val))
+    {
+        Serial.print(F(EXAMPLE_INT16_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(int16_val, DEC);
+    }
+
+    uint32_t uint32_val;
+    if (cmd->getUInt32Parameter(EXAMPLE_UINT32_PARAM_NAME, &uint32_val))
+    {
+
+        EXAMPLE_UINT32_PARAM_NAME
+    }
 
     //bool getUInt32Parameter(const char* paramName, uint32_t * val);
     //bool getInt32Parameter(const char* paramName, int32_t * val);
@@ -463,6 +490,8 @@ void KernelDevice::init()
     exampleIOCommand.initCommand("example_io_command", cmd_params, example_io_command);
     exampleIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
     exampleIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
+    exampleIOCommand.addUInt16Parameter(EXAMPLE_UINT16_PARAM_NAME);
+    exampleIOCommand.addInt16Parameter(EXAMPLE_INT16_PARAM_NAME);
     addCommand(&exampleIOCommand);
 
     chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);

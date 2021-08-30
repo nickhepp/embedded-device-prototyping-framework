@@ -109,6 +109,7 @@
     <ClInclude Include="BoolParameter.h">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClInclude Include="cmd_param.h" />
     <ClInclude Include="Command.h">
       <FileType>CppCode</FileType>
     </ClInclude>
