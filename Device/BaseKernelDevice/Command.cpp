@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 
+#include "cmd_param.h"
 #include "command.h"
 #include "parameter.h"
 #include "doubleparameter.h"
@@ -31,10 +32,11 @@ Command::Command()
   _nextCommand = NULL_PTR;
 }
 
-void Command::initCommand(const char* cmdName, void (*callback_handle)(Command*))
+void Command::initCommand(const char* cmdName, struct cmd_param cmd_params[], void (*callback_handle)(Command*))
 {
     _cmdName = cmdName;
     _cmdNameSz = strlen(cmdName);
+    _cmd_params_data = cmd_params;
     _callback_handle = callback_handle;
 }
 
@@ -47,16 +49,16 @@ uint8_t Command::getParamByTypeAndName(uint8_t typeID, const char *paramName)
 {
 	uint8_t paramIdx = 0;
 	size_t testSz = strlen(paramName);
-  size_t typeSz;
+    size_t typeSz;
 	while (paramIdx < _paramsCnt)
 	{
 
-    if ((_params[paramIdx].param->getValueTypeID() == typeID) &&
-        (testSz == _params[paramIdx].param_name_len) &&
-        (memcmp(_params[paramIdx].param_name, paramName, testSz) == 0))
-    {
-      return paramIdx;
-    }
+        if ((_params[paramIdx].param->getValueTypeID() == typeID) &&
+            (testSz == _params[paramIdx].param_name_len) &&
+            (memcmp(_params[paramIdx].param_name, paramName, testSz) == 0))
+        {
+            return paramIdx;
+        }
   
 		paramIdx++;
 	}
@@ -74,7 +76,7 @@ bool Command::getUInt8Parameter(const char *paramName, uint8_t *val)
 	uint8_t idx = getParamByTypeAndName(UINT8_VALUE_TYPEID, paramName);
 	if (idx != UNDEFINED_PARAM_IDX)
 	{
-		*val = uint8Param.getValue(idx);
+		*val = uint8Param.getValue(idx, _cmd_params_data);
     return true;
 	}
   return false;
@@ -122,7 +124,7 @@ bool Command::getInt8Parameter(const char *paramName, int8_t *val)
   uint8_t idx = getParamByTypeAndName(INT8_VALUE_TYPEID, paramName);
   if (idx != UNDEFINED_PARAM_IDX)
   {
-    *val = int8Param.getValue(idx);
+    *val = int8Param.getValue(idx, _cmd_params_data);
     return true;
   }
   return false;

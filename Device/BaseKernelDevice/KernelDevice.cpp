@@ -28,6 +28,7 @@
 
 #include <EEPROM.h>
 #include "common.h"
+#include "cmd_param.h"
 #include "KernelDevice.h"
 #include "CommandCollection.h"
 
@@ -74,13 +75,6 @@ int input_buffer_idx;
 // what the device echoes back to the host signalling it has finished processing input
 #define CMD_RESPONSE_LINE_ENDING            F("\n>")
 
-// structure of a command parameter
-#define PARAM_VALUE_LENGTH  16
-struct cmd_param
-{
-    // value of the parameter
-    char param_value[PARAM_VALUE_LENGTH];
-};
 
 // parts the make up a command parameter
 #define CMD_PARAM_PREFIX                "p["
@@ -88,7 +82,7 @@ struct cmd_param
 #define CMD_PARAM_SUFFIX                "]="
 #define CMD_PARAM_SUFFIX_LENGTH         2
 
-#define CMD_PARAMS_COUNT        4
+
 #define CMD_PARAMS_IDX_LENGTH   1
 struct cmd_param cmd_params[CMD_PARAMS_COUNT];
 
@@ -297,10 +291,49 @@ void KernelDevice::readCharacters()
 }
 
 
+#define EXAMPLE_UINT8_PARAM_NAME    "uint8_val"
+#define EXAMPLE_INT8_PARAM_NAME     "int8_val"
+
 void example_io_command(Command* cmd)
 {
-    // nothing here yet
-    // TODO: add output of values
+    uint8_t uint8_val;
+    cmd->getUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME, &uint8_val);
+    Serial.print(F(EXAMPLE_UINT8_PARAM_NAME));
+    Serial.print(F("="));
+    Serial.println(uint8_val, DEC);
+
+    int8_t int8_val;
+    cmd->getInt8Parameter(EXAMPLE_INT8_PARAM_NAME, &int8_val);
+    Serial.print(F(EXAMPLE_INT8_PARAM_NAME));
+    Serial.print(F("="));
+    Serial.println(int8_val, DEC);
+
+    //bool getUInt16Parameter(const char* paramName, uint16_t * val);
+    //bool getInt16Parameter(const char* paramName, int16_t * val);
+
+    //bool getUInt32Parameter(const char* paramName, uint32_t * val);
+    //bool getInt32Parameter(const char* paramName, int32_t * val);
+
+    //bool getBoolParameter(const char* paramName, bool* val);
+
+    //bool getDoubleParameter(const char* paramName, double* val);
+
+
+
+
+    //void addUInt8Parameter(const char* paramName);
+    //void addInt8Parameter(const char* paramName);
+
+    //void addUInt16Parameter(const char* paramName);
+    //void addInt16Parameter(const char* paramName);
+
+    //void addUInt32Parameter(const char* paramName);
+    //void addInt32Parameter(const char* paramName);
+
+    //void addBoolParameter(const char* paramName);
+
+    //void addDoubleParameter(const char* paramName);
+
 }
 
 void show_highlights_command(Command* cmd)
@@ -427,34 +460,34 @@ void KernelDevice::init()
     delay(100);
     Serial.begin(115200);  
 
-    exampleIOCommand.initCommand("example_io_command", example_io_command);
-    exampleIOCommand.addUInt8Parameter("PinBank");
-    exampleIOCommand.addDoubleParameter("AnalogRead");
+    exampleIOCommand.initCommand("example_io_command", cmd_params, example_io_command);
+    exampleIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
+    exampleIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
     addCommand(&exampleIOCommand);
 
-    chartingCommand.initCommand("charting_values", charting_values_command);
+    chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);
     addCommand(&chartingCommand);
 
     //////////////////////////////////////////
     // START - leave these commands alone, they are meant for proper operation of the framework
     //////////////////////////////////////////
     // leave this command here, its meants for proper operation of the framework
-    getDeviceInfoCommand.initCommand("get_device_info", get_device_info);
+    getDeviceInfoCommand.initCommand("get_device_info", cmd_params, get_device_info);
     addCommand(&getDeviceInfoCommand);
 
     // leave this command here, its meants for proper operation of the framework
-    getRegisteredCommandsCommand.initCommand("get_registered_commands", get_registered_commands);
+    getRegisteredCommandsCommand.initCommand("get_registered_commands", cmd_params, get_registered_commands);
     addCommand(&getRegisteredCommandsCommand);
 
     // leave this command here, its meants for proper operation of the framework
-    getCommandParametersCommand.initCommand("get_command_parameters", get_command_parameters);
+    getCommandParametersCommand.initCommand("get_command_parameters", cmd_params, get_command_parameters);
     addCommand(&getCommandParametersCommand);
     //////////////////////////////////////////
     // END - leave these commands alone, they are meant for proper operation of the framework
     //////////////////////////////////////////
 
 
-    highlightsCommand.initCommand("show_highlights", show_highlights_command);
+    highlightsCommand.initCommand("show_highlights", cmd_params, show_highlights_command);
     addCommand(&highlightsCommand);
 
 
