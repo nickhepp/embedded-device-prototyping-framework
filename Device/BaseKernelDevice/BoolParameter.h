@@ -10,7 +10,7 @@ class BoolParameter : public Parameter
   
   public:
     
-    bool getValue(uint8_t pIdx);
+    bool getValue(uint8_t pIdx, struct cmd_param cmd_params[]);
 
     const char * getValueType();
 

@@ -296,8 +296,11 @@ void KernelDevice::readCharacters()
 #define EXAMPLE_UINT16_PARAM_NAME   "uint16_val"
 #define EXAMPLE_INT16_PARAM_NAME    "int16_val"
 #define EXAMPLE_UINT32_PARAM_NAME   "uint32_val"
+#define EXAMPLE_INT32_PARAM_NAME    "int32_val"
+#define EXAMPLE_DOUBLE_PARAM_NAME   "double_val"
+#define EXAMPLE_BOOL_PARAM_NAME     "bool_val"
 
-void example_io_command(Command* cmd)
+void param_io_command(Command* cmd)
 {
     uint8_t uint8_val;
     if (cmd->getUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME, &uint8_val))
@@ -334,32 +337,41 @@ void example_io_command(Command* cmd)
     uint32_t uint32_val;
     if (cmd->getUInt32Parameter(EXAMPLE_UINT32_PARAM_NAME, &uint32_val))
     {
-
-        EXAMPLE_UINT32_PARAM_NAME
+        Serial.print(F(EXAMPLE_UINT32_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(uint32_val, DEC);
     }
 
-    //bool getUInt32Parameter(const char* paramName, uint32_t * val);
-    //bool getInt32Parameter(const char* paramName, int32_t * val);
+    int32_t int32_val;
+    if (cmd->getInt32Parameter(EXAMPLE_INT32_PARAM_NAME, &int32_val))
+    {
+        Serial.print(F(EXAMPLE_INT32_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(int32_val, DEC);
+    }
 
-    //bool getBoolParameter(const char* paramName, bool* val);
+    double dbl_val;
+    if (cmd->getDoubleParameter(EXAMPLE_DOUBLE_PARAM_NAME, &dbl_val))
+    {
+        Serial.print(F(EXAMPLE_DOUBLE_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(dbl_val, 3);
+    }
 
-    //bool getDoubleParameter(const char* paramName, double* val);
-
-
-
-
-    //void addUInt8Parameter(const char* paramName);
-    //void addInt8Parameter(const char* paramName);
-
-    //void addUInt16Parameter(const char* paramName);
-    //void addInt16Parameter(const char* paramName);
-
-    //void addUInt32Parameter(const char* paramName);
-    //void addInt32Parameter(const char* paramName);
-
-    //void addBoolParameter(const char* paramName);
-
-    //void addDoubleParameter(const char* paramName);
+    bool bool_val;
+    if (cmd->getBoolParameter(EXAMPLE_BOOL_PARAM_NAME, &bool_val))
+    {
+        Serial.print(F(EXAMPLE_BOOL_PARAM_NAME));
+        Serial.print(F("="));
+        if (bool_val)
+        {
+            Serial.println(F("TRUE"));
+        }
+        else
+        {
+            Serial.println(F("FALSE"));
+        }
+    }
 
 }
 
@@ -471,7 +483,7 @@ void charting_values_command(Command* cmd)
 Command getDeviceInfoCommand;
 Command getRegisteredCommandsCommand;
 Command getCommandParametersCommand;
-Command exampleIOCommand;
+Command paramIOCommand;
 Command chartingCommand;
 Command highlightsCommand;
 
@@ -487,12 +499,16 @@ void KernelDevice::init()
     delay(100);
     Serial.begin(115200);  
 
-    exampleIOCommand.initCommand("example_io_command", cmd_params, example_io_command);
-    exampleIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
-    exampleIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
-    exampleIOCommand.addUInt16Parameter(EXAMPLE_UINT16_PARAM_NAME);
-    exampleIOCommand.addInt16Parameter(EXAMPLE_INT16_PARAM_NAME);
-    addCommand(&exampleIOCommand);
+    paramIOCommand.initCommand("param_io_command", cmd_params, param_io_command);
+    paramIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
+    paramIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
+    paramIOCommand.addUInt16Parameter(EXAMPLE_UINT16_PARAM_NAME);
+    paramIOCommand.addInt16Parameter(EXAMPLE_INT16_PARAM_NAME);
+    paramIOCommand.addUInt32Parameter(EXAMPLE_UINT32_PARAM_NAME);
+    paramIOCommand.addInt32Parameter(EXAMPLE_INT32_PARAM_NAME);
+    paramIOCommand.addDoubleParameter(EXAMPLE_DOUBLE_PARAM_NAME);
+    paramIOCommand.addBoolParameter(EXAMPLE_BOOL_PARAM_NAME);
+    addCommand(&paramIOCommand);
 
     chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);
     addCommand(&chartingCommand);

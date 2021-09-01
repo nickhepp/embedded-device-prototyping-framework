@@ -37,7 +37,7 @@
 #define VERSION_MAJOR       0
 #define VERSION_MINOR       0
 #define VERSION_BUILD       0    
-#define VERSION_REVISION    27
+#define VERSION_REVISION    32
 
 #define DEVICE_NAME         F("KernelDevice")
 
@@ -71,14 +71,6 @@
 #define err_reading_param_msg   F("ERR: Reading parameters")
 #define err_registering_cmd_msg F("ERR: Registering command")
 #define err_invalid_value_msg   F("ERR: Invalid value")
-
-
-
-
-
-
-
-
 
 
 

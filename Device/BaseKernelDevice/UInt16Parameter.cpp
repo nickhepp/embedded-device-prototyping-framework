@@ -1,7 +1,7 @@
 #include "uint16parameter.h"
 #include "consts.h"
 #include "cmd_param.h"
-
+#include <stdlib.h>
 
 uint16_t UInt16Parameter::getValue(uint8_t pIdx, struct cmd_param cmd_params[])
 {

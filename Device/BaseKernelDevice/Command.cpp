@@ -108,7 +108,7 @@ bool Command::getUInt32Parameter(const char *paramName, uint32_t *val)
   uint8_t idx = getParamByTypeAndName(UINT32_VALUE_TYPEID, paramName);
   if (idx != UNDEFINED_PARAM_IDX)
   {
-    *val = uint32Param.getValue(idx);
+    *val = uint32Param.getValue(idx, _cmd_params_data);
     return true;
   }
   return false;
@@ -156,7 +156,7 @@ bool Command::getInt32Parameter(const char *paramName, int32_t *val)
   uint8_t idx = getParamByTypeAndName(INT32_VALUE_TYPEID, paramName);
   if (idx != UNDEFINED_PARAM_IDX)
   {
-    *val = int32Param.getValue(idx);
+    *val = int32Param.getValue(idx, _cmd_params_data);
     return true;
   }
   return false;
@@ -169,13 +169,13 @@ void Command::addBoolParameter(const char *paramName)
 
 bool Command::getBoolParameter(const char *paramName, bool *val)
 {
-  uint8_t idx = getParamByTypeAndName(BOOL_VALUE_TYPEID, paramName);
-  if (idx != UNDEFINED_PARAM_IDX)
-  {
-    *val = boolParam.getValue(idx);
-    return true;
-  }
-  return false;
+    uint8_t idx = getParamByTypeAndName(BOOL_VALUE_TYPEID, paramName);
+    if (idx != UNDEFINED_PARAM_IDX)
+    {
+        *val = boolParam.getValue(idx, _cmd_params_data);
+        return true;
+    }
+    return false;
 }
 
 void Command::addDoubleParameter(const char *paramName)
@@ -188,7 +188,7 @@ bool Command::getDoubleParameter(const char *paramName, double *val)
   uint8_t idx = getParamByTypeAndName(DOUBLE_VALUE_TYPEID, paramName);
   if (idx != UNDEFINED_PARAM_IDX)
   {
-    *val = doubleParam.getValue(idx);
+    *val = doubleParam.getValue(idx, _cmd_params_data);
     return true;
   }
   return false;
