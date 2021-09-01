@@ -1,5 +1,8 @@
-﻿using Ecs.Edpf.GUI.ComponentModel;
+﻿using Ecs.Edpf.Devices.Charting;
+using Ecs.Edpf.Devices.ComponentModel;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Charting;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
 using System.Collections.Generic;
@@ -22,9 +25,18 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
-        private IChartingViewModel _chartingViewModel = new ChartingViewModel(new DeviceStateMachine());
+        private IChartingViewModel _chartingViewModel;
+
+        private IChartSampleCollector _chartSampleCollector;
+
+        private IChartingExpressionFilter _chartingExpressionFilter;
+
+        private ChartingView _chartingView;
 
         public IViewModel ViewModel => _chartingViewModel;
+
+
+
 
         public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/4";
 
@@ -32,15 +44,35 @@ namespace HostApp.UI.Views
 
         public ChartingToolWindowCohort()
         {
+            // a default set of settings
+            ChartSettings chartSettings = new ChartSettings
+            {
+                Expression = "vals:{a|chart1},{b|chart2},{c|chart2}",
+                //XAxisType = XAxisType.SampleNumber,
+            };
+
+            _chartingView = new ChartingView();
+
+            _chartingExpressionFilter = new SimpleChartingExpressionFilter();
+
+            _chartSampleCollector = new ChartSampleCollector(
+                    _chartingExpressionFilter,
+                    chartSettings,
+                    new DateTimeProvider());
+
+            _chartingViewModel = new ChartingViewModel(
+                _chartSampleCollector,
+                _chartingExpressionFilter,
+                _chartingView,
+                chartSettings,
+                new DeviceStateMachine());
 
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                //ChartingView chartingView = new ChartingView();
-                //chartingView.ChartingViewModel = _chartingViewModel;
+                _chartingView.ViewModel = (IChildViewModel)_chartingViewModel;
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-                //toolWindow.Initialize(chartingView, this.Name);
-                toolWindow.Initialize(new NotImplementedView(RoadmapIssueUrl), this.Name);
+                toolWindow.Initialize(_chartingView, this.Name);
                 IntPtr chartIconPtr = HostApp.Properties.Resources.charts.GetHicon();
                 Icon chartIcon = Icon.FromHandle(chartIconPtr);
                 toolWindow.Icon = chartIcon;

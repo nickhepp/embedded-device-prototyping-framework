@@ -10,7 +10,7 @@ class DoubleParameter : public Parameter
   
   public:
     
-    double getValue(uint8_t pIdx);
+    double getValue(uint8_t pIdx, struct cmd_param cmd_params[]);
 
     const char * getValueType();
 

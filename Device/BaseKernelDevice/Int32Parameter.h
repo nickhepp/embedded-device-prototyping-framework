@@ -11,7 +11,7 @@ class Int32Parameter : public Parameter
   
   public:
     
-    int32_t getValue(uint8_t pIdx);
+    int32_t getValue(uint8_t pIdx, struct cmd_param cmd_params[]);
 
     const char * getValueType();
 

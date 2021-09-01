@@ -5,15 +5,15 @@
 
 class Parameter
 {
-  public:
+    public:
     
-    Parameter();
+        Parameter();
 
-    virtual const char * getValueType() = 0;
+        virtual const char * getValueType() = 0;
 
-    virtual uint8_t getValueTypeID() = 0;
+        virtual uint8_t getValueTypeID() = 0;
     
-  private:
+    private:
 
 };
 

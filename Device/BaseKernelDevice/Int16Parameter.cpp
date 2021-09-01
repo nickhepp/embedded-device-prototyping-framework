@@ -1,11 +1,12 @@
 #include "int16parameter.h"
 #include "consts.h"
+#include "cmd_param.h"
 
-int16_t valint16 = -16;
-int16_t Int16Parameter::getValue(uint8_t pIdx)
+int16_t Int16Parameter::getValue(uint8_t pIdx, struct cmd_param cmd_params[])
 {
-  valint16++;
-  return valint16;
+	int16_t val = 0;
+	val = (int16_t)atoi(cmd_params[pIdx].param_value);
+	return val;
 }
 
 const char * Int16Parameter::getValueType()

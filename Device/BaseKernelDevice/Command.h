@@ -5,6 +5,9 @@
 #include "consts.h"
 #include "parameter.h"
 
+// predeclare
+struct cmd_param;
+
 struct param_ptr
 {
   
@@ -22,7 +25,7 @@ class Command
   
         Command();
 
-        void initCommand(const char *cmdName, void (*callback_handle)(Command*));
+        void initCommand(const char *cmdName, struct cmd_param cmd_params[], void (*callback_handle)(Command*));
 
         void execute();
     
@@ -76,6 +79,8 @@ class Command
     
         param_ptr _params[MAX_COMMAND_PARAMS];
     
+        struct cmd_param* _cmd_params_data;
+
         uint8_t _paramsCnt;
 
         void (*_callback_handle)(Command *);

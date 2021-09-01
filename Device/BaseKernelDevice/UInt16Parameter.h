@@ -12,7 +12,7 @@ class UInt16Parameter : public Parameter
   
   public:
     
-    uint16_t getValue(uint8_t pIdx);
+    uint16_t getValue(uint8_t pIdx, struct cmd_param cmd_params[]);
 
     const char * getValueType();
 
