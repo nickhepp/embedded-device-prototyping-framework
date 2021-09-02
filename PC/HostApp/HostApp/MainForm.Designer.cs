@@ -30,11 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this._mainPnl = new System.Windows.Forms.Panel();
             this._fileTsm = new System.Windows.Forms.ToolStripMenuItem();
             this._exitTsm = new System.Windows.Forms.ToolStripMenuItem();
             this._toolsTsm = new System.Windows.Forms.ToolStripMenuItem();
             this._shareTsm = new System.Windows.Forms.ToolStripMenuItem();
+            this._shareAnIdeaTsm = new System.Windows.Forms.ToolStripMenuItem();
+            this._reportBugTsm = new System.Windows.Forms.ToolStripMenuItem();
+            this._mainPnl = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,17 +50,9 @@
             this._shareTsm});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1370, 48);
+            this.menuStrip1.Size = new System.Drawing.Size(1370, 40);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // _mainPnl
-            // 
-            this._mainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._mainPnl.Location = new System.Drawing.Point(0, 48);
-            this._mainPnl.Name = "_mainPnl";
-            this._mainPnl.Size = new System.Drawing.Size(1370, 701);
-            this._mainPnl.TabIndex = 1;
             // 
             // _fileTsm
             // 
@@ -66,7 +60,7 @@
             this._exitTsm});
             this._fileTsm.Image = global::HostApp.Properties.Resources.file;
             this._fileTsm.Name = "_fileTsm";
-            this._fileTsm.Size = new System.Drawing.Size(104, 40);
+            this._fileTsm.Size = new System.Drawing.Size(104, 36);
             this._fileTsm.Text = "File";
             // 
             // _exitTsm
@@ -80,15 +74,42 @@
             // 
             this._toolsTsm.Image = global::HostApp.Properties.Resources.construction;
             this._toolsTsm.Name = "_toolsTsm";
-            this._toolsTsm.Size = new System.Drawing.Size(122, 40);
+            this._toolsTsm.Size = new System.Drawing.Size(122, 36);
             this._toolsTsm.Text = "Tools";
             // 
             // _shareTsm
             // 
+            this._shareTsm.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._shareAnIdeaTsm,
+            this._reportBugTsm});
             this._shareTsm.Image = global::HostApp.Properties.Resources.share_alt;
             this._shareTsm.Name = "_shareTsm";
-            this._shareTsm.Size = new System.Drawing.Size(127, 40);
+            this._shareTsm.Size = new System.Drawing.Size(127, 36);
             this._shareTsm.Text = "Share";
+            // 
+            // _shareAnIdeaTsm
+            // 
+            this._shareAnIdeaTsm.Image = global::HostApp.Properties.Resources.lightbulb_on;
+            this._shareAnIdeaTsm.Name = "_shareAnIdeaTsm";
+            this._shareAnIdeaTsm.Size = new System.Drawing.Size(407, 44);
+            this._shareAnIdeaTsm.Text = "Share an idea for EDPF...";
+            this._shareAnIdeaTsm.Click += new System.EventHandler(this._shareAnIdeaTsm_Click);
+            // 
+            // _reportBugTsm
+            // 
+            this._reportBugTsm.Image = global::HostApp.Properties.Resources.bug;
+            this._reportBugTsm.Name = "_reportBugTsm";
+            this._reportBugTsm.Size = new System.Drawing.Size(407, 44);
+            this._reportBugTsm.Text = "Report an EDPF bug...";
+            this._reportBugTsm.Click += new System.EventHandler(this._reportBugTsm_Click);
+            // 
+            // _mainPnl
+            // 
+            this._mainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._mainPnl.Location = new System.Drawing.Point(0, 40);
+            this._mainPnl.Name = "_mainPnl";
+            this._mainPnl.Size = new System.Drawing.Size(1370, 709);
+            this._mainPnl.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -114,6 +135,8 @@
         private System.Windows.Forms.ToolStripMenuItem _toolsTsm;
         private System.Windows.Forms.Panel _mainPnl;
         private System.Windows.Forms.ToolStripMenuItem _shareTsm;
+        private System.Windows.Forms.ToolStripMenuItem _shareAnIdeaTsm;
+        private System.Windows.Forms.ToolStripMenuItem _reportBugTsm;
     }
 }
 

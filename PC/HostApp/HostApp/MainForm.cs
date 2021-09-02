@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using Ecs.Edpf.Devices.IO.File;
 using Ecs.Edpf.GUI.Settings;
 using Ecs.Edpf.GUI.UI.ViewModels;
+using HostApp.ComponentModel;
 using HostApp.Devices;
 using HostApp.UI;
 using HostApp.UI.Settings;
@@ -33,14 +35,15 @@ namespace HostApp
         private List<ToolWindow> _toolWindows;
         private bool _showSplash;
         private SplashScreen _splashScreen;
+        private IWarningMessageBoxService _warningMessageBoxService;
 
         public MainForm()
         {
             InitializeComponent();
 
+            _warningMessageBoxService = new WarningMessageBoxService();
             this.Load += MainForm_Load;
             this.FormClosing += MainFormFormClosing;   
-
             this.Text = $"{this.Text} V{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
         }
 
@@ -154,6 +157,30 @@ namespace HostApp
         private void _exitTsm_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void _shareAnIdeaTsm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(Ecs.Edpf.Devices.Constants.ProjectDiscussionsUrl);
+            }
+            catch (Exception ex)
+            {
+                _warningMessageBoxService.ShowWarningMessageBox(ex.Message, "!!Error visiting project discussions!!");
+            }
+        }
+
+        private void _reportBugTsm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(Ecs.Edpf.Devices.Constants.ProjectBugsUrl);
+            }
+            catch (Exception ex)
+            {
+                _warningMessageBoxService.ShowWarningMessageBox(ex.Message, "!!Error visiting project bugs!!");
+            }
         }
     }
 }
