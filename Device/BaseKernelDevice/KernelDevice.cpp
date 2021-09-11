@@ -291,6 +291,7 @@ void KernelDevice::readCharacters()
 }
 
 
+#if INCLUDE_PARAM_IO_COMMAND
 #define EXAMPLE_UINT8_PARAM_NAME    "uint8_val"
 #define EXAMPLE_INT8_PARAM_NAME     "int8_val"
 #define EXAMPLE_UINT16_PARAM_NAME   "uint16_val"
@@ -300,6 +301,7 @@ void KernelDevice::readCharacters()
 #define EXAMPLE_DOUBLE_PARAM_NAME   "double_val"
 #define EXAMPLE_BOOL_PARAM_NAME     "bool_val"
 
+Command paramIOCommand;
 void param_io_command(Command* cmd)
 {
     uint8_t uint8_val;
@@ -372,17 +374,20 @@ void param_io_command(Command* cmd)
             Serial.println(F("FALSE"));
         }
     }
-
 }
+#endif  // INCLUDE_PARAM_IO_COMMAND
 
+#if INCLUDE_SHOW_HIGHLIGHTS_COMMAND 
+Command highlightsCommand;
 void show_highlights_command(Command* cmd)
 {
     Serial.println(F("WARN: an example warning message"));
     Serial.println(F("PASS: an example success message"));
     Serial.println(F("ERR: an example error message"));
 }
+#endif  // INCLUDE_SHOW_HIGHLIGHTS_COMMAND
 
-
+#if INCLUDE_CHARTING_VALUES_COMMAND
 const int16_t TRIANGLE_WAVE_VAL = 1000;
 const int16_t MIN_TRIANGLE_WAVE_VAL = -1000;
 int16_t triangle_wave_val = 0;
@@ -399,6 +404,7 @@ uint8_t sin_qtr_part_idx = sin_qtr_part_max;
 const uint8_t saw_tooth_sample_max = sin_qtr_cycle_sample_max * sin_qtr_part_max;
 uint8_t saw_tooth_sample_idx = saw_tooth_sample_max;
 
+Command chartingCommand;
 void charting_values_command(Command* cmd)
 {
     // in place of real hardware sensing a value do an in memory representation
@@ -478,14 +484,13 @@ void charting_values_command(Command* cmd)
     Serial.print(",");
     Serial.println(saw_tooth_val, 2);
 }
+#endif  // INCLUDE_CHARTING_VALUES_COMMAND
 
-
+// these are the core commands that are needed for the
+// the device to work properly
 Command getDeviceInfoCommand;
 Command getRegisteredCommandsCommand;
 Command getCommandParametersCommand;
-Command paramIOCommand;
-Command chartingCommand;
-Command highlightsCommand;
 
 void KernelDevice::init()
 {
@@ -499,6 +504,17 @@ void KernelDevice::init()
     delay(100);
     Serial.begin(115200);  
 
+#if INCLUDE_CHARTING_VALUES_COMMAND
+    chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);
+    addCommand(&chartingCommand);
+#endif  // INCLUDE_CHARTING_VALUES_COMMAND
+
+#if INCLUDE_SHOW_HIGHLIGHTS_COMMAND
+    highlightsCommand.initCommand("show_highlights", cmd_params, show_highlights_command);
+    addCommand(&highlightsCommand);
+#endif  // INCLUDE_SHOW_HIGHLIGHTS_COMMAND
+
+#if INCLUDE_PARAM_IO_COMMAND
     paramIOCommand.initCommand("param_io_command", cmd_params, param_io_command);
     paramIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
     paramIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
@@ -509,9 +525,7 @@ void KernelDevice::init()
     paramIOCommand.addDoubleParameter(EXAMPLE_DOUBLE_PARAM_NAME);
     paramIOCommand.addBoolParameter(EXAMPLE_BOOL_PARAM_NAME);
     addCommand(&paramIOCommand);
-
-    chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);
-    addCommand(&chartingCommand);
+#endif  // INCLUDE_PARAM_IO_COMMAND
 
     //////////////////////////////////////////
     // START - leave these commands alone, they are meant for proper operation of the framework
@@ -530,11 +544,6 @@ void KernelDevice::init()
     //////////////////////////////////////////
     // END - leave these commands alone, they are meant for proper operation of the framework
     //////////////////////////////////////////
-
-
-    highlightsCommand.initCommand("show_highlights", cmd_params, show_highlights_command);
-    addCommand(&highlightsCommand);
-
 
     Serial.println();
     Serial.print(CMD_RESPONSE_LINE_ENDING);
