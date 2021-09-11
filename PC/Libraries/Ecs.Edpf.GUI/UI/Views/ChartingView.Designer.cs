@@ -35,6 +35,9 @@ namespace Ecs.Edpf.GUI.UI.Views
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this._showSettingsTsb = new System.Windows.Forms.ToolStripButton();
+            this._saveSettingsTsb = new System.Windows.Forms.ToolStripButton();
+            this._loadSettingsTsb = new System.Windows.Forms.ToolStripButton();
+            this._downloadDataTsb = new System.Windows.Forms.ToolStripButton();
             this._mainSpl = new System.Windows.Forms.SplitContainer();
             this._chartSettingsPpg = new System.Windows.Forms.PropertyGrid();
             this._chartPnl = new System.Windows.Forms.Panel();
@@ -42,9 +45,6 @@ namespace Ecs.Edpf.GUI.UI.Views
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this._settingsSsl = new System.Windows.Forms.ToolStripStatusLabel();
             this._mainPnl = new System.Windows.Forms.Panel();
-            this._saveSettingsTsb = new System.Windows.Forms.ToolStripButton();
-            this._loadSettingsTsb = new System.Windows.Forms.ToolStripButton();
-            this._downloadDataTsb = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._mainSpl)).BeginInit();
             this._mainSpl.Panel2.SuspendLayout();
@@ -79,6 +79,35 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._showSettingsTsb.Name = "_showSettingsTsb";
             this._showSettingsTsb.Size = new System.Drawing.Size(202, 36);
             this._showSettingsTsb.Text = "Show Settings";
+            // 
+            // _saveSettingsTsb
+            // 
+            this._saveSettingsTsb.Image = ((System.Drawing.Image)(resources.GetObject("_saveSettingsTsb.Image")));
+            this._saveSettingsTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._saveSettingsTsb.Name = "_saveSettingsTsb";
+            this._saveSettingsTsb.Size = new System.Drawing.Size(209, 36);
+            this._saveSettingsTsb.Text = "Save Settings...";
+            this._saveSettingsTsb.Visible = false;
+            this._saveSettingsTsb.Click += new System.EventHandler(this._saveSettingsTsb_Click);
+            // 
+            // _loadSettingsTsb
+            // 
+            this._loadSettingsTsb.Image = ((System.Drawing.Image)(resources.GetObject("_loadSettingsTsb.Image")));
+            this._loadSettingsTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._loadSettingsTsb.Name = "_loadSettingsTsb";
+            this._loadSettingsTsb.Size = new System.Drawing.Size(210, 36);
+            this._loadSettingsTsb.Text = "Load Settings...";
+            this._loadSettingsTsb.Visible = false;
+            this._loadSettingsTsb.Click += new System.EventHandler(this._loadSettingsTsb_Click);
+            // 
+            // _downloadDataTsb
+            // 
+            this._downloadDataTsb.Image = ((System.Drawing.Image)(resources.GetObject("_downloadDataTsb.Image")));
+            this._downloadDataTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._downloadDataTsb.Name = "_downloadDataTsb";
+            this._downloadDataTsb.Size = new System.Drawing.Size(230, 36);
+            this._downloadDataTsb.Text = "Download Data...";
+            this._downloadDataTsb.Click += new System.EventHandler(this._downloadDataTsb_Click);
             // 
             // _mainSpl
             // 
@@ -153,33 +182,6 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._mainPnl.Name = "_mainPnl";
             this._mainPnl.Size = new System.Drawing.Size(1963, 878);
             this._mainPnl.TabIndex = 4;
-            // 
-            // _saveSettingsTsb
-            // 
-            this._saveSettingsTsb.Image = ((System.Drawing.Image)(resources.GetObject("_saveSettingsTsb.Image")));
-            this._saveSettingsTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._saveSettingsTsb.Name = "_saveSettingsTsb";
-            this._saveSettingsTsb.Size = new System.Drawing.Size(209, 36);
-            this._saveSettingsTsb.Text = "Save Settings...";
-            this._saveSettingsTsb.Click += new System.EventHandler(this._saveSettingsTsb_Click);
-            // 
-            // _loadSettingsTsb
-            // 
-            this._loadSettingsTsb.Image = ((System.Drawing.Image)(resources.GetObject("_loadSettingsTsb.Image")));
-            this._loadSettingsTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._loadSettingsTsb.Name = "_loadSettingsTsb";
-            this._loadSettingsTsb.Size = new System.Drawing.Size(210, 36);
-            this._loadSettingsTsb.Text = "Load Settings...";
-            this._loadSettingsTsb.Click += new System.EventHandler(this._loadSettingsTsb_Click);
-            // 
-            // _downloadDataTsb
-            // 
-            this._downloadDataTsb.Image = ((System.Drawing.Image)(resources.GetObject("_downloadDataTsb.Image")));
-            this._downloadDataTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._downloadDataTsb.Name = "_downloadDataTsb";
-            this._downloadDataTsb.Size = new System.Drawing.Size(230, 36);
-            this._downloadDataTsb.Text = "Download Data...";
-            this._downloadDataTsb.Click += new System.EventHandler(this._downloadDataTsb_Click);
             // 
             // ChartingView
             // 

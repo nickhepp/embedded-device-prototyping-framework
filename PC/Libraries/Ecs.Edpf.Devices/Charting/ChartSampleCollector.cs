@@ -89,7 +89,10 @@ namespace Ecs.Edpf.Devices.Charting
                 //{
                 foreach (KeyValuePair<string, double> value in values)
                 {
-                    chartSamples[value.Key] = new ChartSample { XNumberValue = _sampleCount, YValue = value.Value };
+                    string seriesName = value.Key;
+                    ChartSample sample = new ChartSample { XNumberValue = _sampleCount, YValue = value.Value };
+                    chartSamples[seriesName] = sample;
+                    SeriesSamples[seriesName].Add(sample);
                 }
                 //}
                 //else if (_chartSettings.XAxisType == XAxisType.Time)

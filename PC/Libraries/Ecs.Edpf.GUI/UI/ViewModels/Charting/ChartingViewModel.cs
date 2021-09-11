@@ -16,7 +16,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
 
         private ChartSettings _chartSettings;
 
-        //private IChartSampleCollector _chartSampleCollector;
         public IChartSampleCollector ChartSampleCollector { get; private set;  }
 
 
@@ -67,6 +66,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
 
         private void ChartSampleCollector_ChartSamplesCollected(object sender, Dictionary<string, ChartSample> e)
         {
+
+
+
             if (ChartSamplesCollected != null)
             {
                 ChartSamplesCollected(this, e);

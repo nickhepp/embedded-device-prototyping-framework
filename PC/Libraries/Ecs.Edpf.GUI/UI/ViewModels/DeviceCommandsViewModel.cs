@@ -125,15 +125,10 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             DeviceCommandViewModels.Clear();
             foreach (IDeviceCommand deviceCommand in Device.DeviceCommands)
             {
-                DeviceCommandViewModel deviceCommandVwMdl = new DeviceCommandViewModel(Device, deviceCommand);
-                if (SelectedDeviceCommandViewModel == null)
-                {
-                    SelectedDeviceCommandViewModel = deviceCommandVwMdl;
-                }
-                DeviceCommandViewModels.Add(deviceCommandVwMdl);
+                DeviceCommandViewModels.Add(new DeviceCommandViewModel(Device, deviceCommand));
             }
             DeviceCommandViewModels.ResetBindings();
-
+            SelectedDeviceCommandViewModel = DeviceCommandViewModels.FirstOrDefault();
         }
 
         protected override void OnDeviceStateChanged()

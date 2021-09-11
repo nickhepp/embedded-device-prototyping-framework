@@ -1,9 +1,11 @@
-﻿using Ecs.Edpf.GUI.UI.ViewModels;
+﻿using Ecs.Edpf.Devices.Charting;
+using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.ViewModels.Charting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -218,15 +220,39 @@ namespace Ecs.Edpf.GUI.UI.Views
         private void _downloadDataTsb_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "xml file | *.xml";
+
+            const string CsvFileExtension = ".csv";
+            const string XmlFileExtension = ".xml";
+
+            sfd.Filter = $"CSV file (*{CsvFileExtension})|*{CsvFileExtension}|XML file (*{XmlFileExtension}| *{XmlFileExtension}";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                using (FileStream fStream = new FileStream(sfd.FileName, FileMode.OpenOrCreate, FileAccess.Write))
+                if (sfd.FileName.EndsWith(CsvFileExtension, StringComparison.OrdinalIgnoreCase))
                 {
-                    _mainChrt.Serializer.Content = SerializationContents.Data;
-                    _mainChrt.Serializer.Save(fStream);
+                    FileInfo file = new FileInfo(sfd.FileName);
+                    ChartSampleSerializer chartSampleSerializer = new ChartSampleSerializer();
+                    chartSampleSerializer.SaveSamplesToCsvFile(_chartingViewModel.ChartSampleCollector, file);
                 }
+                else
+                {
+                    using (FileStream fStream = new FileStream(sfd.FileName, FileMode.OpenOrCreate, FileAccess.Write))
+                    {
+                        _mainChrt.Serializer.Content = SerializationContents.Data;
+                        _mainChrt.Serializer.Save(fStream);
+                    }
+                }
+
+                try
+                {
+                    Process.Start(sfd.FileName);
+                }
+                catch (Exception)
+                {
+                    // TODO: add logging
+                }
+
+
             }
 
 

@@ -69,6 +69,7 @@ namespace Ecs.Edpf.GUI.UI.Views
 
                 _commandsTab.TabPages.Clear();
 
+                TabPage selectedTabPage = null;
                 foreach (IDeviceCommandViewModel devCmdVwMdl in _deviceCommandsViewModel.DeviceCommandViewModels)
                 {
                     DeviceCommandView deviceCommandView = new DeviceCommandView();
@@ -79,12 +80,18 @@ namespace Ecs.Edpf.GUI.UI.Views
                     deviceCommandView.Dock = DockStyle.Fill;
                     _commandsTab.TabPages.Add(tbpg);
 
-                    if (object.ReferenceEquals(devCmdVwMdl, _deviceCommandsViewModel.SelectedDeviceCommandViewModel))
+                    if (_deviceCommandsViewModel.SelectedDeviceCommandViewModel != null && 
+                        _deviceCommandsViewModel.SelectedDeviceCommandViewModel.MethodName == devCmdVwMdl.MethodName)
                     {
-                        tbpg.Select();
+                        selectedTabPage = tbpg;
                     }
 
                     deviceCommandView.DeviceCommandViewModel = devCmdVwMdl;
+                }
+
+                if (selectedTabPage != null)
+                {
+                    selectedTabPage.BringToFront();
                 }
 
                 _populatingTabs = false;
