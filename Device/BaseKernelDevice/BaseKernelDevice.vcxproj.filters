@@ -63,6 +63,9 @@
     <ClInclude Include="UInt8Parameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cmd_param.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoolParameter.cpp">

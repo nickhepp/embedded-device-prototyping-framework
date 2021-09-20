@@ -28,6 +28,7 @@
 
 #include <EEPROM.h>
 #include "common.h"
+#include "cmd_param.h"
 #include "KernelDevice.h"
 #include "CommandCollection.h"
 
@@ -74,13 +75,6 @@ int input_buffer_idx;
 // what the device echoes back to the host signalling it has finished processing input
 #define CMD_RESPONSE_LINE_ENDING            F("\n>")
 
-// structure of a command parameter
-#define PARAM_VALUE_LENGTH  16
-struct cmd_param
-{
-    // value of the parameter
-    char param_value[PARAM_VALUE_LENGTH];
-};
 
 // parts the make up a command parameter
 #define CMD_PARAM_PREFIX                "p["
@@ -88,7 +82,7 @@ struct cmd_param
 #define CMD_PARAM_SUFFIX                "]="
 #define CMD_PARAM_SUFFIX_LENGTH         2
 
-#define CMD_PARAMS_COUNT        4
+
 #define CMD_PARAMS_IDX_LENGTH   1
 struct cmd_param cmd_params[CMD_PARAMS_COUNT];
 
@@ -297,17 +291,206 @@ void KernelDevice::readCharacters()
 }
 
 
-void test_command(Command* cmd)
+#if INCLUDE_PARAM_IO_COMMAND
+#define EXAMPLE_UINT8_PARAM_NAME    "uint8_val"
+#define EXAMPLE_INT8_PARAM_NAME     "int8_val"
+#define EXAMPLE_UINT16_PARAM_NAME   "uint16_val"
+#define EXAMPLE_INT16_PARAM_NAME    "int16_val"
+#define EXAMPLE_UINT32_PARAM_NAME   "uint32_val"
+#define EXAMPLE_INT32_PARAM_NAME    "int32_val"
+#define EXAMPLE_DOUBLE_PARAM_NAME   "double_val"
+#define EXAMPLE_BOOL_PARAM_NAME     "bool_val"
+
+Command paramIOCommand;
+void param_io_command(Command* cmd)
 {
+    uint8_t uint8_val;
+    if (cmd->getUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME, &uint8_val))
+    {
+        Serial.print(F(EXAMPLE_UINT8_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(uint8_val, DEC);
+    }
 
-    //if (cmd->
+    int8_t int8_val;
+    if (cmd->getInt8Parameter(EXAMPLE_INT8_PARAM_NAME, &int8_val))
+    {
+        Serial.print(F(EXAMPLE_INT8_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(int8_val, DEC);
+    }
+
+    uint16_t uint16_val;
+    if (cmd->getUInt16Parameter(EXAMPLE_UINT16_PARAM_NAME, &uint16_val))
+    {
+        Serial.print(F(EXAMPLE_UINT16_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(uint16_val, DEC);
+    }
+
+    int16_t int16_val;
+    if (cmd->getInt16Parameter(EXAMPLE_INT16_PARAM_NAME, &int16_val))
+    {
+        Serial.print(F(EXAMPLE_INT16_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(int16_val, DEC);
+    }
+
+    uint32_t uint32_val;
+    if (cmd->getUInt32Parameter(EXAMPLE_UINT32_PARAM_NAME, &uint32_val))
+    {
+        Serial.print(F(EXAMPLE_UINT32_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(uint32_val, DEC);
+    }
+
+    int32_t int32_val;
+    if (cmd->getInt32Parameter(EXAMPLE_INT32_PARAM_NAME, &int32_val))
+    {
+        Serial.print(F(EXAMPLE_INT32_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(int32_val, DEC);
+    }
+
+    double dbl_val;
+    if (cmd->getDoubleParameter(EXAMPLE_DOUBLE_PARAM_NAME, &dbl_val))
+    {
+        Serial.print(F(EXAMPLE_DOUBLE_PARAM_NAME));
+        Serial.print(F("="));
+        Serial.println(dbl_val, 3);
+    }
+
+    bool bool_val;
+    if (cmd->getBoolParameter(EXAMPLE_BOOL_PARAM_NAME, &bool_val))
+    {
+        Serial.print(F(EXAMPLE_BOOL_PARAM_NAME));
+        Serial.print(F("="));
+        if (bool_val)
+        {
+            Serial.println(F("TRUE"));
+        }
+        else
+        {
+            Serial.println(F("FALSE"));
+        }
+    }
 }
+#endif  // INCLUDE_PARAM_IO_COMMAND
 
+#if INCLUDE_SHOW_HIGHLIGHTS_COMMAND 
+Command highlightsCommand;
+void show_highlights_command(Command* cmd)
+{
+    Serial.println(F("WARN: an example warning message"));
+    Serial.println(F("PASS: an example success message"));
+    Serial.println(F("ERR: an example error message"));
+}
+#endif  // INCLUDE_SHOW_HIGHLIGHTS_COMMAND
+
+#if INCLUDE_CHARTING_VALUES_COMMAND
+const int16_t TRIANGLE_WAVE_VAL = 1000;
+const int16_t MIN_TRIANGLE_WAVE_VAL = -1000;
+int16_t triangle_wave_val = 0;
+bool triangle_wave_ascending = true;
+
+static float sin_qtr_cycle[] = { 0.0, .20, .38, .56, .70, .84, .92, .98 };
+
+const uint8_t sin_qtr_cycle_sample_max = 8;
+uint8_t sin_qtr_cycle_sample_idx = sin_qtr_cycle_sample_max;
+
+const uint8_t sin_qtr_part_max = 4;
+uint8_t sin_qtr_part_idx = sin_qtr_part_max;
+
+const uint8_t saw_tooth_sample_max = sin_qtr_cycle_sample_max * sin_qtr_part_max;
+uint8_t saw_tooth_sample_idx = saw_tooth_sample_max;
+
+Command chartingCommand;
+void charting_values_command(Command* cmd)
+{
+    // in place of real hardware sensing a value do an in memory representation
+
+    /////////////////////////////////////////////////////////////
+    // do the triangle wave, oscillates from 1000 to -1000
+    if (triangle_wave_ascending)
+    {
+        triangle_wave_val += TRIANGLE_WAVE_VAL / 10;
+        if (triangle_wave_val >= TRIANGLE_WAVE_VAL)
+        {
+            triangle_wave_val = TRIANGLE_WAVE_VAL;
+            triangle_wave_ascending = false;
+        }
+
+    } else {
+        triangle_wave_val -= TRIANGLE_WAVE_VAL / 10;
+        if (triangle_wave_val <= MIN_TRIANGLE_WAVE_VAL)
+        {
+            triangle_wave_val = MIN_TRIANGLE_WAVE_VAL;
+            triangle_wave_ascending = true;
+        }
+    }
+
+    /////////////////////////////////////////////////////////////
+    // do the sin wave
+    sin_qtr_cycle_sample_idx++;
+    if (sin_qtr_cycle_sample_idx >= sin_qtr_cycle_sample_max)
+    {
+        sin_qtr_part_idx++;
+        if (sin_qtr_part_idx >= sin_qtr_part_max)
+        {
+            sin_qtr_part_idx = 0;
+        }
+
+        if ((sin_qtr_part_idx & 1) == 1)
+        {
+            sin_qtr_cycle_sample_idx = 0;
+        }
+        else
+        {
+            sin_qtr_cycle_sample_idx = 1;
+        }
+    }
+
+    float sin_val;
+    if (sin_qtr_part_idx == 0)
+    {
+        sin_val = sin_qtr_cycle[sin_qtr_cycle_sample_idx];
+    }
+    else if (sin_qtr_part_idx == 1)
+    {
+        sin_val = sin_qtr_cycle[sin_qtr_cycle_sample_max - sin_qtr_cycle_sample_idx - 1];
+    }
+    else if (sin_qtr_part_idx == 2)
+    {
+        sin_val = -sin_qtr_cycle[sin_qtr_cycle_sample_idx];
+    }
+    else //if (sin_qtr_part_idx == 3)
+    {
+        sin_val = -sin_qtr_cycle[sin_qtr_cycle_sample_max - sin_qtr_cycle_sample_idx - 1];
+    }
+
+    /////////////////////////////////////////////////////////////
+    // do the saw tooth wave
+    saw_tooth_sample_idx++;
+    if (saw_tooth_sample_idx > saw_tooth_sample_max)
+    {
+        saw_tooth_sample_idx = 0;
+    }
+    float saw_tooth_val = (float)(saw_tooth_sample_idx) / (float)(saw_tooth_sample_max);
+
+    Serial.print("vals:");
+    Serial.print(triangle_wave_val, DEC);
+    Serial.print(",");
+    Serial.print(sin_val, 2);
+    Serial.print(",");
+    Serial.println(saw_tooth_val, 2);
+}
+#endif  // INCLUDE_CHARTING_VALUES_COMMAND
+
+// these are the core commands that are needed for the
+// the device to work properly
 Command getDeviceInfoCommand;
 Command getRegisteredCommandsCommand;
 Command getCommandParametersCommand;
-Command testCommand;
-
 
 void KernelDevice::init()
 {
@@ -321,22 +504,46 @@ void KernelDevice::init()
     delay(100);
     Serial.begin(115200);  
 
-    getDeviceInfoCommand.initCommand("getDeviceInfo", get_device_info);
+#if INCLUDE_CHARTING_VALUES_COMMAND
+    chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);
+    addCommand(&chartingCommand);
+#endif  // INCLUDE_CHARTING_VALUES_COMMAND
+
+#if INCLUDE_SHOW_HIGHLIGHTS_COMMAND
+    highlightsCommand.initCommand("show_highlights", cmd_params, show_highlights_command);
+    addCommand(&highlightsCommand);
+#endif  // INCLUDE_SHOW_HIGHLIGHTS_COMMAND
+
+#if INCLUDE_PARAM_IO_COMMAND
+    paramIOCommand.initCommand("param_io_command", cmd_params, param_io_command);
+    paramIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
+    paramIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
+    paramIOCommand.addUInt16Parameter(EXAMPLE_UINT16_PARAM_NAME);
+    paramIOCommand.addInt16Parameter(EXAMPLE_INT16_PARAM_NAME);
+    paramIOCommand.addUInt32Parameter(EXAMPLE_UINT32_PARAM_NAME);
+    paramIOCommand.addInt32Parameter(EXAMPLE_INT32_PARAM_NAME);
+    paramIOCommand.addDoubleParameter(EXAMPLE_DOUBLE_PARAM_NAME);
+    paramIOCommand.addBoolParameter(EXAMPLE_BOOL_PARAM_NAME);
+    addCommand(&paramIOCommand);
+#endif  // INCLUDE_PARAM_IO_COMMAND
+
+    //////////////////////////////////////////
+    // START - leave these commands alone, they are meant for proper operation of the framework
+    //////////////////////////////////////////
+    // leave this command here, its meants for proper operation of the framework
+    getDeviceInfoCommand.initCommand("get_device_info", cmd_params, get_device_info);
     addCommand(&getDeviceInfoCommand);
 
-    getRegisteredCommandsCommand.initCommand("getRegisteredCommands", get_registered_commands);
+    // leave this command here, its meants for proper operation of the framework
+    getRegisteredCommandsCommand.initCommand("get_registered_commands", cmd_params, get_registered_commands);
     addCommand(&getRegisteredCommandsCommand);
 
-    getCommandParametersCommand.initCommand("getCommandParameters", get_command_parameters);
+    // leave this command here, its meants for proper operation of the framework
+    getCommandParametersCommand.initCommand("get_command_parameters", cmd_params, get_command_parameters);
     addCommand(&getCommandParametersCommand);
-    
-    testCommand.initCommand("testCommand", test_command);
-
-    testCommand.addUInt8Parameter("PinBank");
-    testCommand.addDoubleParameter("AnalogRead");
-
-
-    addCommand(&testCommand);
+    //////////////////////////////////////////
+    // END - leave these commands alone, they are meant for proper operation of the framework
+    //////////////////////////////////////////
 
     Serial.println();
     Serial.print(CMD_RESPONSE_LINE_ENDING);

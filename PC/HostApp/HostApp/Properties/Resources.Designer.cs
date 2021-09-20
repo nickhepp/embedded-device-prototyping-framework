@@ -73,6 +73,16 @@ namespace HostApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bug {
+            get {
+                object obj = ResourceManager.GetObject("bug", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap charts {
             get {
                 object obj = ResourceManager.GetObject("charts", resourceCulture);
@@ -116,6 +126,16 @@ namespace HostApp.Properties {
         internal static System.Drawing.Bitmap function {
             get {
                 object obj = ResourceManager.GetObject("function", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lightbulb_on {
+            get {
+                object obj = ResourceManager.GetObject("lightbulb-on", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

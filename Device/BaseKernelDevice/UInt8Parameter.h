@@ -12,7 +12,7 @@ class UInt8Parameter : public Parameter
   
   public:
     
-    uint8_t getValue(uint8_t pIdx);
+    uint8_t getValue(uint8_t pIdx, struct cmd_param cmd_params[]);
 
     const char * getValueType();
 

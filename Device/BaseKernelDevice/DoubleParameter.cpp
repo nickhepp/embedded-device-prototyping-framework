@@ -1,12 +1,14 @@
 #include "doubleparameter.h"
+#include "cmd_param.h"
 #include "consts.h"
+#include <stdlib.h>
 
-double dblval = 1.0;
 
-double DoubleParameter::getValue(uint8_t pIdx)
+double DoubleParameter::getValue(uint8_t pIdx, struct cmd_param cmd_params[])
 {
-  dblval += 0.1;
-  return dblval;
+	double val;
+	val = atof(cmd_params[pIdx].param_value);
+	return val;
 }
 
 const char * DoubleParameter::getValueType()

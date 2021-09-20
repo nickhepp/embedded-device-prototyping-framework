@@ -20,5 +20,12 @@ namespace Ecs.Edpf.Devices
         public const string CommandResponseLineEnding = "\n>";
 
         public const int DefaultTimeOut = 5000;
+
+        public const string ProjectDiscussionsUrl = "https://github.com/nickhepp/embedded-device-prototyping-framework/discussions";
+
+        public const string ProjectBugsUrl = "https://github.com/nickhepp/embedded-device-prototyping-framework/issues";
+
+
+
     }
 }

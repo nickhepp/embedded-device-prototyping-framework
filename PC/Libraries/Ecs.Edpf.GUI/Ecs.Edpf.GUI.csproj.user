@@ -8,8 +8,14 @@
     <Compile Update="ComponentModel\Macros\DeviceTextMacroBgWorker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="UI\Views\ChartingView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\Views\LoggingView.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Views\SettingsView.cs">
+      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
 </Project>
