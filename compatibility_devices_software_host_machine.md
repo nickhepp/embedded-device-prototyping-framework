@@ -16,6 +16,7 @@ Currently EDPF focuses on Arduino devices, RS232 (default Arduino USB IO mechani
 ## <img id="id-devices" src="Resources/Media/graphics/microchip_duotone.svg" style="width:40px;"/> Compatible Devices
 Here are the boards and devices that have been verified to work with the EDPF. 
 #### <img id="id-devices" src="Resources/Media/graphics/Arduino_Logo.svg" style="width:40px;"/> Arduino
+
 :heavy_check_mark: Arduino Uno
 
 :heavy_check_mark: Arduino Mega 2560 Rev3
@@ -47,6 +48,8 @@ Communication between the device and the host application can be established wit
 <a id='id-host-machine'></a>
 ### <img src="Resources/Media/graphics/computer-classic_duotone.svg" style="width:40px;"/> Compatible Host Machines
 
-
+The .NET Framework runs on recent Windows OS versions:
+* Windows Server 2016, 2019, and beyond
+* Windows 7 and 10
 
 
