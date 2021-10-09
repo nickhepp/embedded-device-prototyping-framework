@@ -42,9 +42,10 @@ class KernelDevice{
 
         void loopAction();
   
-        void addCommand(Command *cmd);
 
     private:
+
+        void registerCommand(Command *cmd);
 
         void executeCommand();
 

@@ -44,7 +44,7 @@ KernelDevice::KernelDevice()
 }
 
 
-void KernelDevice::addCommand(Command* cmd)
+void KernelDevice::registerCommand(Command* cmd)
 {
     cmdCollection.addCommand(cmd);
 }
@@ -506,16 +506,20 @@ void KernelDevice::init()
 
 #if INCLUDE_CHARTING_VALUES_COMMAND
     chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);
-    addCommand(&chartingCommand);
+    registerCommand(&chartingCommand);
 #endif  // INCLUDE_CHARTING_VALUES_COMMAND
 
 #if INCLUDE_SHOW_HIGHLIGHTS_COMMAND
     highlightsCommand.initCommand("show_highlights", cmd_params, show_highlights_command);
-    addCommand(&highlightsCommand);
+    registerCommand(&highlightsCommand);
 #endif  // INCLUDE_SHOW_HIGHLIGHTS_COMMAND
 
 #if INCLUDE_PARAM_IO_COMMAND
+	// initialize the command by giving it a name for the host application and assigning the callback method,
+	// note that this example uses the same characters for the text name and the callback name, but they dont have
+	// to be the same
     paramIOCommand.initCommand("param_io_command", cmd_params, param_io_command);
+	// add parameters to the command
     paramIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
     paramIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
     paramIOCommand.addUInt16Parameter(EXAMPLE_UINT16_PARAM_NAME);
@@ -524,7 +528,8 @@ void KernelDevice::init()
     paramIOCommand.addInt32Parameter(EXAMPLE_INT32_PARAM_NAME);
     paramIOCommand.addDoubleParameter(EXAMPLE_DOUBLE_PARAM_NAME);
     paramIOCommand.addBoolParameter(EXAMPLE_BOOL_PARAM_NAME);
-    addCommand(&paramIOCommand);
+	// register the command so the processing loop can look for matches by name
+    registerCommand(&paramIOCommand);
 #endif  // INCLUDE_PARAM_IO_COMMAND
 
     //////////////////////////////////////////
@@ -532,15 +537,15 @@ void KernelDevice::init()
     //////////////////////////////////////////
     // leave this command here, its meants for proper operation of the framework
     getDeviceInfoCommand.initCommand("get_device_info", cmd_params, get_device_info);
-    addCommand(&getDeviceInfoCommand);
+    registerCommand(&getDeviceInfoCommand);
 
     // leave this command here, its meants for proper operation of the framework
     getRegisteredCommandsCommand.initCommand("get_registered_commands", cmd_params, get_registered_commands);
-    addCommand(&getRegisteredCommandsCommand);
+    registerCommand(&getRegisteredCommandsCommand);
 
     // leave this command here, its meants for proper operation of the framework
     getCommandParametersCommand.initCommand("get_command_parameters", cmd_params, get_command_parameters);
-    addCommand(&getCommandParametersCommand);
+    registerCommand(&getCommandParametersCommand);
     //////////////////////////////////////////
     // END - leave these commands alone, they are meant for proper operation of the framework
     //////////////////////////////////////////
