@@ -25,6 +25,8 @@ Embedded Device Prototyping Framework (EDPF) is an embedded device rapid prototy
 
 :link: [Host PC to Embedded Device IO](./host_pc_to_embedded_device_io.md)
 
+:link: [How to create custom commands](./how_to_create_custom_commands.md)
+
 ---
 <a id='id-proj-philosophy' />
 
@@ -54,6 +56,14 @@ The EDPF provides a powerful combination of [Embedded Firmware](#id-firwmare-rap
 
 ### <img src='Resources/Media/graphics/laptop-code.svg' style="width:35px;"/> Host Machine Software for Rapid Prototyping
 
+The software on the host machine configures itself to facilitate the functionality offered by the firmware.  When a connection is established from the host software to the firmware, the host software queries the firmware for the commands supported by the firmware.  The firmware responds by describing the commands, and the UI sets up custom controls to support each command.
+
+<img src='Resources/Media/uml/ui_config.png' style='display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  /*width: 70%;*/'/>
+  
+  
 TODO: list UI tools with animations
 
 
