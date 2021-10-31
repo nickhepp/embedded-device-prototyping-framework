@@ -486,6 +486,59 @@ void charting_values_command(Command* cmd)
 }
 #endif  // INCLUDE_CHARTING_VALUES_COMMAND
 
+#if INCLUDE_EDPF_DEMO_KIT
+
+
+//// the joysticks Y axis
+//#define EDPF_DEMO_STICK_PRESS_PIN	(A2)
+//
+//// the joysticks Y axis
+//#define EDPF_DEMO_STICK_VRY_PIN		(A4)
+//
+//// the joysticks X axis
+//#define EDPF_DEMO_STICK_VRX_PIN		(A5)
+
+Command edpfKitReadCommand;
+void edpf_kit_read_command(Command* cmd)
+{
+    int joy_x = analogRead(EDPF_DEMO_STICK_VRX_PIN);
+    int joy_y = analogRead(EDPF_DEMO_STICK_VRY_PIN);
+    int joy_pressed = analogRead(EDPF_DEMO_STICK_PRESS_PIN);
+    uint8_t b1 = digitalRead(EDPD_DEMO_BUTTON_B1);
+    uint8_t b2 = digitalRead(EDPD_DEMO_BUTTON_B2);
+    uint8_t b3 = digitalRead(EDPD_DEMO_BUTTON_B3);
+    uint8_t b4 = digitalRead(EDPD_DEMO_BUTTON_B4);
+
+    Serial.print("kit:");
+    Serial.print(joy_x, DEC);
+    Serial.print(",");
+    Serial.print(joy_y, DEC);
+    Serial.print(",");
+    Serial.print(joy_pressed, DEC);
+    Serial.print(",");
+    Serial.print(b1, DEC);
+    Serial.print(",");
+    Serial.print(b2, DEC);
+    Serial.print(",");
+    Serial.print(b3, DEC);
+    Serial.print(",");
+    Serial.println(b4, DEC);
+
+}
+
+
+#endif //INCLUDE_EDPF_DEMO_KIT
+
+void clear_input_buffers()
+{
+    // clear out the buffers
+    input_buffer_idx = 0;
+    for (uint8_t k = 0; k < CMD_PARAMS_COUNT; k++)
+    {
+        cmd_params[k].param_value[0] = 0;
+    }
+}
+
 // these are the core commands that are needed for the
 // the device to work properly
 Command getDeviceInfoCommand;
@@ -494,12 +547,7 @@ Command getCommandParametersCommand;
 
 void KernelDevice::init()
 {
-    // clear out the buffers
-    input_buffer_idx = 0;
-    for (uint8_t k = 0; k < CMD_PARAMS_COUNT; k++)
-    {
-        cmd_params[k].param_value[0] = 0;
-    }
+    clear_input_buffers();
 
     delay(100);
     Serial.begin(115200);  
@@ -526,7 +574,7 @@ void KernelDevice::init()
 	// initialize the command by giving it a name for the host application and assigning the callback method,
 	// note that this example uses the same characters for the text name and the callback name, but they dont have
 	// to be the same
-    paramIOCommand.initCommand("param_io_command", cmd_params, param_io_command);
+    paramIOCommand.initCommand("param_io", cmd_params, param_io_command);
 	// add parameters to the command
     paramIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
     paramIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
@@ -539,6 +587,17 @@ void KernelDevice::init()
 	// register the command so the processing loop can look for matches by name
     registerCommand(&paramIOCommand);
 #endif  // INCLUDE_PARAM_IO_COMMAND
+
+#if INCLUDE_EDPF_DEMO_KIT
+
+    pinMode(EDPD_DEMO_BUTTON_B1, INPUT_PULLUP);
+    pinMode(EDPD_DEMO_BUTTON_B2, INPUT_PULLUP);
+    pinMode(EDPD_DEMO_BUTTON_B3, INPUT_PULLUP);
+    pinMode(EDPD_DEMO_BUTTON_B4, INPUT_PULLUP);
+    edpfKitReadCommand.initCommand("edpf_kit_read", cmd_params, edpf_kit_read_command);
+    // register the command so the processing loop can look for matches by name
+    registerCommand(&edpfKitReadCommand);
+#endif  // INCLUDE_EDPF_DEMO_KIT
 
     //////////////////////////////////////////
     // START - leave these commands alone, they are meant for proper operation of the framework
