@@ -10,8 +10,25 @@ namespace Ecs.Edpf.Devices.Charting
 {
     public class ChartSettings : INotifyPropertyChanged
     {
-  
+
         //public XAxisType XAxisType { get; set; } = XAxisType.SampleNumber;
+
+        private uint? _maxDisplaySampleCount = 150;
+        public uint? MaxDisplaySampleCount
+        {
+            get
+            {
+                return _maxDisplaySampleCount;
+            }
+            set
+            {
+                _maxDisplaySampleCount = value;
+                RaiseNotifyPropertyChanged();
+            }
+
+
+        }
+
 
         private string _expression;
         public string Expression

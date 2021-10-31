@@ -504,6 +504,14 @@ void KernelDevice::init()
     delay(100);
     Serial.begin(115200);  
 
+// How to create a custom command
+// https://github.com/nickhepp/embedded-device-prototyping-framework/blob/master/how_to_create_custom_commands.md
+
+// create a simple command that matches the example found above, and keep the one command with all the type options
+// as a seperate compile in example
+
+
+
 #if INCLUDE_CHARTING_VALUES_COMMAND
     chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);
     registerCommand(&chartingCommand);
