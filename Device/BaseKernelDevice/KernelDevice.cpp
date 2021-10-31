@@ -503,7 +503,8 @@ void edpf_kit_read_command(Command* cmd)
 {
     int joy_x = analogRead(EDPF_DEMO_STICK_VRX_PIN);
     int joy_y = analogRead(EDPF_DEMO_STICK_VRY_PIN);
-    int joy_pressed = analogRead(EDPF_DEMO_STICK_PRESS_PIN);
+    //int joy_pressed = analogRead(EDPF_DEMO_STICK_PRESS_PIN);
+    int joy_pressed = digitalRead(EDPF_DEMO_STICK_PRESS_PIN);
     uint8_t b1 = digitalRead(EDPD_DEMO_BUTTON_B1);
     uint8_t b2 = digitalRead(EDPD_DEMO_BUTTON_B2);
     uint8_t b3 = digitalRead(EDPD_DEMO_BUTTON_B3);
@@ -589,6 +590,9 @@ void KernelDevice::init()
 #endif  // INCLUDE_PARAM_IO_COMMAND
 
 #if INCLUDE_EDPF_DEMO_KIT
+
+    pinMode(EDPF_DEMO_STICK_PRESS_PIN, INPUT);
+    digitalWrite(EDPF_DEMO_STICK_PRESS_PIN, HIGH);
 
     pinMode(EDPD_DEMO_BUTTON_B1, INPUT_PULLUP);
     pinMode(EDPD_DEMO_BUTTON_B2, INPUT_PULLUP);
