@@ -20,28 +20,12 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         public string ResourceName => "DeviceTextMacro";
 
-        public const string RecordText = "Record";
-        public const string PauseText = "Pause";
 
-        private string _recordPauseButtonText = RecordText;
-        public string RecordPauseButtonText
-        {
-            get
-            {
-                return _recordPauseButtonText;
-            }
-            private set
-            {
-                _recordPauseButtonText = value;
-                RaiseNotifyPropertyChanged();
-            }
-        }
+        private RelayCommand _stopCommand;
+        public IRelayCommand StopCommand => _stopCommand;
 
-        private RelayCommand _recordPauseCommand;
-        public IRelayCommand RecordPauseCommand => _recordPauseCommand;
-
-        private RelayCommand _toggleLoopCommand;
-        public IRelayCommand ToggleLoopCommand => _toggleLoopCommand;
+        private RelayCommand _loopCommand;
+        public IRelayCommand LoopCommand => _loopCommand;
 
         private RelayCommand _oneShotCommand;
         public IRelayCommand OneShotCommand => _oneShotCommand;
@@ -60,78 +44,49 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
-        public bool IsRecording { get; private set; }
-
         public DeviceTextMacroViewModel(
             IDeviceTextMacroStateMachine deviceTextMacroStateMachine,
             IDeviceTextMacroBgWorkerFactory deviceTextMacroBgWorkerFactory) :
             base(deviceTextMacroStateMachine)
         {
-            _toggleLoopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
-                canExecute: ToggleLoopCommandCanExecute,
-                execute: ToggleLoopCommandExecute);
+            _loopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
+                canExecute: LoopCommandCanExecute,
+                execute: LoopCommandExecute);
 
             _oneShotCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
                 canExecute: OneShotCommandCanExecute,
                 execute: OneShotCommandExecute);
 
-            _recordPauseCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
-                canExecute: RecordPauseCommandCanExecute,
-                execute: RecordPauseCommandExecute);
+            _stopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
+                canExecute: StopCommandCanExecute,
+                execute: StopCommandExecute);
 
             _deviceTextMacroStateMachine = deviceTextMacroStateMachine;
             _deviceTextMacroStateMachine.DeviceTextMacroStateChanged += DeviceTextMacroStateMachine_DeviceTextMacroStateChanged;
 
             _deviceTextMacroBgWorkerFactory = deviceTextMacroBgWorkerFactory;
 
-            SetIsRecording();
-            SetRecordPauseButtonText();
         }
 
 
-        private void SetIsRecording()
-        {
-            IsRecording = (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro);
-        }
 
-        private void SetRecordPauseButtonText()
-        {
-            if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro)
-            {
-                RecordPauseButtonText = PauseText;
-            }
-            else
-            {
-                RecordPauseButtonText = RecordText;
-            }
-        }
 
         private void DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(object sender, EventArgs e)
         {
-            _toggleLoopCommand.RaiseCommandCanExecuteChanged();
-            _recordPauseCommand.RaiseCommandCanExecuteChanged();
+            _loopCommand.RaiseCommandCanExecuteChanged();
+            _stopCommand.RaiseCommandCanExecuteChanged();
             _oneShotCommand.RaiseCommandCanExecuteChanged();
-
-            SetIsRecording();
-            SetRecordPauseButtonText();
         }
 
-        private void RecordPauseCommandExecute(object obj)
+        private void StopCommandExecute(object obj)
         {
-            if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice)
-            {
-                _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroRecording);
-            }
-            else if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro)
-            {
-                _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroStopRecording);
-            }
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.DeviceOpened);
         }
 
-        private bool RecordPauseCommandCanExecute(object obj)
+        private bool StopCommandCanExecute(object obj)
         {
-            return ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice) || 
-                (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.RecordingMacro));
+            return ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.LoopingMacro) || 
+                (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OneShottingMacro));
         }
 
         private bool OneShotCommandCanExecute(object obj)
@@ -166,21 +121,18 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
-        private void ToggleLoopCommandExecute(object obj)
+        private void LoopCommandExecute(object obj)
         {
-            if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice)
+            if (obj is DeviceTextMacroInitArgs initArgs)
             {
-                _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroLooping);
+
             }
-            else
-            {
-                _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroStopLooping);
-            }
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroLooping);
         }
 
         private static List<DeviceTextMacroState> _loopCanExecuteStates = new List<DeviceTextMacroState>
         { DeviceTextMacroState.OpenedDevice, DeviceTextMacroState.LoopingMacro };
-        public bool ToggleLoopCommandCanExecute(object obj)
+        public bool LoopCommandCanExecute(object obj)
         {
             return ((_loopCanExecuteStates.Contains(_deviceTextMacroStateMachine.DeviceTextMacroState)) &&
                 (_deviceTextMacro?.DeviceTextLines.Count > 0));
@@ -226,9 +178,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private void CheckCommandsCanExecute()
         {
-            _toggleLoopCommand.RaiseCommandCanExecuteChanged(this);
+            _loopCommand.RaiseCommandCanExecuteChanged(this);
             _oneShotCommand.RaiseCommandCanExecuteChanged(this);
-            _recordPauseCommand.RaiseCommandCanExecuteChanged(this);
+            _stopCommand.RaiseCommandCanExecuteChanged(this);
         }
 
  

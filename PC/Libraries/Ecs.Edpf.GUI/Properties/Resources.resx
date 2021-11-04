@@ -124,20 +124,23 @@
   <data name="repeat_one" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\repeat_one.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="repeat_one1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\repeat_one1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="unlocked_96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\unlocked_96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="record_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\record_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="repeat_one_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\repeat_one_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="repeat_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\repeat_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cmd_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cmd_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="baseline_cable_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\baseline_cable_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cmd_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cmd_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="repeat_one1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\repeat_one1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,7 +148,13 @@
   <data name="record" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\record.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="repeat_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\repeat_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="repeat_one_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\repeat_one_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="locked_96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\locked_96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reset_96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reset_96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

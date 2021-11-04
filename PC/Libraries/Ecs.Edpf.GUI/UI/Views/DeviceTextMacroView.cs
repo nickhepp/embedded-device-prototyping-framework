@@ -36,11 +36,11 @@ namespace Ecs.Edpf.GUI.UI.Views
             InitializeComponent();
 
             // _recordPlayBtn
-            _recordPlayBtn.ImageList = new ImageList();
-            _recordPlayBtn.ImageList.Images.Add(Ecs.Edpf.GUI.Properties.Resources.record);
-            _recordPlayBtn.ImageList.ColorDepth = ColorDepth.Depth32Bit;
-            _recordPlayBtn.ImageList.ImageSize = new Size(50, 50);
-            _recordPlayBtn.Image = _recordPlayBtn.ImageList.Images[0];
+            _stopBtn.ImageList = new ImageList();
+            _stopBtn.ImageList.Images.Add(Ecs.Edpf.GUI.Properties.Resources.record);
+            _stopBtn.ImageList.ColorDepth = ColorDepth.Depth32Bit;
+            _stopBtn.ImageList.ImageSize = new Size(50, 50);
+            _stopBtn.Image = _stopBtn.ImageList.Images[0];
 
             // _oneShotBtn
             _oneShotBtn.ImageList = new ImageList();
@@ -70,13 +70,16 @@ namespace Ecs.Edpf.GUI.UI.Views
                     new RelayCommandHandler(_oneShotBtn, _deviceTextMacroViewModel.OneShotCommand));
 
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_loopBtn, _deviceTextMacroViewModel.ToggleLoopCommand));
+                    new RelayCommandHandler(_loopBtn, _deviceTextMacroViewModel.LoopCommand));
 
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_recordPlayBtn, _deviceTextMacroViewModel.RecordPauseCommand));
+                    new RelayCommandHandler(_stopBtn, _deviceTextMacroViewModel.StopCommand));
             }
         }
 
+        private void LoadDemoScriptTsb_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

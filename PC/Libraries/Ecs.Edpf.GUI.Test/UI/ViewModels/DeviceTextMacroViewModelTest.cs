@@ -44,7 +44,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
             }
             else if (commandName == _loopCmdName)
             {
-                cmd = _deviceTextMacroVwMdl.ToggleLoopCommand;
+                cmd = _deviceTextMacroVwMdl.LoopCommand;
             }
             return cmd;
         }

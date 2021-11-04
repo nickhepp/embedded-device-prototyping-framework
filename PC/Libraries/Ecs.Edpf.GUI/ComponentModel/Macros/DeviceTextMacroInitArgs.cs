@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.ComponentModel.Macros
 {
-
-    public enum DeviceTextMacroState
+    public class DeviceTextMacroInitArgs
     {
-        NotOpenDevice,
-        OpenedDevice,
-        LoopingMacro,
-        OneShottingMacro,
-    }
 
+        public List<string> Instructions { get; set; } = new List<string>();
+
+
+    }
 }

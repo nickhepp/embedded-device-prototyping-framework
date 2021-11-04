@@ -37,8 +37,6 @@
             this._previousCommandsPnl = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this._executeScriptTsb = new System.Windows.Forms.ToolStripButton();
-            this._loopScriptTsb = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this._mainTlp.SuspendLayout();
             this._consoleInputTlp.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -125,9 +123,7 @@
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._executeScriptTsb,
-            this._loopScriptTsb,
-            this.toolStripButton1});
+            this._executeScriptTsb});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1015, 42);
@@ -142,23 +138,6 @@
             this._executeScriptTsb.Size = new System.Drawing.Size(215, 36);
             this._executeScriptTsb.Text = "Execute Script...";
             this._executeScriptTsb.Click += new System.EventHandler(this._executeScriptTsb_Click);
-            // 
-            // _loopScriptTsb
-            // 
-            this._loopScriptTsb.Image = global::Ecs.Edpf.GUI.Properties.Resources.repeat;
-            this._loopScriptTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._loopScriptTsb.Name = "_loopScriptTsb";
-            this._loopScriptTsb.Size = new System.Drawing.Size(186, 36);
-            this._loopScriptTsb.Text = "Loop Script...";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(46, 36);
-            this.toolStripButton1.Text = "toolStripButton1";
             // 
             // ConsoleView
             // 
@@ -188,7 +167,5 @@
         private System.Windows.Forms.Panel _previousCommandsPnl;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton _executeScriptTsb;
-        private System.Windows.Forms.ToolStripButton _loopScriptTsb;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
