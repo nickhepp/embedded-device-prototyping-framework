@@ -9,5 +9,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
     public interface IChartingViewSettingsViewModel
     {
 
+        uint? MaxDisplaySampleCount { get; set; }
+
     }
 }

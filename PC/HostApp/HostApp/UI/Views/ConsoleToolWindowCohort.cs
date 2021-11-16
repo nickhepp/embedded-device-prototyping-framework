@@ -38,7 +38,6 @@ namespace HostApp.UI.Views
                 {
                     ConsoleViewModel = _consoleViewModel
                 };
-                consoleView.ShowConsoleHeader = false;
 
                 ToolWindow toolWindow = new ToolWindow();
                 toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;

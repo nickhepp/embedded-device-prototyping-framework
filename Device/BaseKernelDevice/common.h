@@ -37,7 +37,7 @@
 #define VERSION_MAJOR       0
 #define VERSION_MINOR       0
 #define VERSION_BUILD       0    
-#define VERSION_REVISION    33
+#define VERSION_REVISION    35
 
 #define DEVICE_NAME         F("KernelDevice")
 

@@ -40,7 +40,7 @@ namespace HostApp.UI.Views
 
         public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/4";
 
-        public ToolState State => ToolState.Roadmap;
+        public ToolState State => ToolState.Active;
 
         public ChartingToolWindowCohort()
         {

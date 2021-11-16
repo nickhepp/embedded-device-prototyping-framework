@@ -59,11 +59,32 @@ namespace Ecs.Edpf.GUI.UI.Views
             foreach (string seriesName in e.Keys)
             {
                 int seriesIdx = _mainChrt.Series.IndexOf(seriesName);
+                bool resetChartAreasScale = false;
                 if (seriesIdx != -1)
                 {
                     Devices.Charting.ChartSample chartSample = e[seriesName];
                     _mainChrt.Series[seriesIdx].Points.Add(new DataPoint(chartSample.XNumberValue.Value, chartSample.YValue));
+
+                    // look to see if the extra display values should get trimmed
+                    uint maxSampleCount = _chartingViewModel.SettingsViewModel.MaxDisplaySampleCount.GetValueOrDefault(0);
+                    if (maxSampleCount > 0)
+                    {
+                        while (_mainChrt.Series[seriesIdx].Points.Count > maxSampleCount)
+                        {
+                            _mainChrt.Series[seriesIdx].Points.RemoveAt(0);
+                            resetChartAreasScale = true;
+                        }
+                    }
                 }
+
+                if (resetChartAreasScale)
+                {
+                    foreach (ChartArea area in _mainChrt.ChartAreas)
+                    {
+                        area.RecalculateAxesScale();
+                    }
+                }
+
             }
             
         }

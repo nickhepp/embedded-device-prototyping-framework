@@ -83,6 +83,16 @@ namespace Ecs.Edpf.GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap locked_96x96 {
+            get {
+                object obj = ResourceManager.GetObject("locked_96x96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pause {
             get {
                 object obj = ResourceManager.GetObject("pause", resourceCulture);
@@ -156,6 +166,26 @@ namespace Ecs.Edpf.GUI.Properties {
         internal static System.Drawing.Bitmap repeat_one1 {
             get {
                 object obj = ResourceManager.GetObject("repeat_one1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap reset_96x96 {
+            get {
+                object obj = ResourceManager.GetObject("reset_96x96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unlocked_96x96 {
+            get {
+                object obj = ResourceManager.GetObject("unlocked_96x96", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

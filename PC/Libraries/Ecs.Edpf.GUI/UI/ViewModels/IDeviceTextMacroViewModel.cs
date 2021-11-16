@@ -10,17 +10,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         /// </summary>
         string ResourceName { get; }
 
-
-        /// <summary>
-        /// Gets whether the device is recording macro text.
-        /// </summary>
-        bool IsRecording { get; }
-
-        /// <summary>
-        /// Text to display on the Record/Pause button.
-        /// </summary>
-        string RecordPauseButtonText { get; }
-
         /// <summary>
         /// The macro text for the device.
         /// </summary>
@@ -34,12 +23,12 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         /// <summary>
         /// Command for toggling the record and pause of the device text.
         /// </summary>
-        IRelayCommand RecordPauseCommand { get; }
+        IRelayCommand StopCommand { get; }
 
         /// <summary>
         /// Command for looping the macro text.
         /// </summary>
-        IRelayCommand ToggleLoopCommand { get; }
+        IRelayCommand LoopCommand { get; }
 
 
     }

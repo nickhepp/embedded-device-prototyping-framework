@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Ecs.Edpf.GUI.UI.ViewModels;
 
@@ -10,29 +12,6 @@ namespace Ecs.Edpf.GUI.UI.Views
     {
         private ProgressBarWithMarker _progressBarWithMarker;
         private List<string> _previousCommands = new List<string>();
-
-        private float _headerHeight;
-        private bool _showConsoleHeader = true;
-        public bool ShowConsoleHeader
-        {
-            get
-            {
-                return _showConsoleHeader;
-            }
-            set
-            {
-                _showConsoleHeader = value;
-                if (_showConsoleHeader)
-                {
-                    _mainTlp.RowStyles[0].Height = _headerHeight;
-                }
-                else
-                {
-                    _mainTlp.RowStyles[0].Height = 0;
-                }
-            }
-        }
-
 
         private IConsoleViewModel _consoleViewModel;
         public IConsoleViewModel ConsoleViewModel
@@ -52,7 +31,6 @@ namespace Ecs.Edpf.GUI.UI.Views
         {
             InitializeComponent();
             _deviceHistoryRtb.Clear();
-            _headerHeight = _mainTlp.RowStyles[0].Height;
             _progressBarWithMarker = new ProgressBarWithMarker();
             _previousCommandsPnl.Controls.Add(_progressBarWithMarker);
             _progressBarWithMarker.Dock = DockStyle.Fill;
@@ -97,7 +75,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             _inputLbl.DataBindings.Add(new Binding(nameof(Label.Enabled),
                 _consoleViewModel,
                 nameof(IConsoleViewModel.InputTextEnabled)));
-            _consoleLbl.DataBindings.Add(new Binding(nameof(Label.Enabled),
+            toolStrip1.DataBindings.Add(new Binding(nameof(ToolStrip.Enabled),
                 _consoleViewModel,
                 nameof(IConsoleViewModel.InputTextEnabled)));
 
@@ -197,5 +175,25 @@ namespace Ecs.Edpf.GUI.UI.Views
                 _inputTxt.Text = "";
             }
         }
+
+        private void _executeScriptTsb_Click(object sender, System.EventArgs e)
+        {
+
+            OpenFileDialog opf = new OpenFileDialog();
+            if (opf.ShowDialog() == DialogResult.OK)
+            {
+                List<string> lines = System.IO.File.ReadAllLines(opf.FileName).ToList();
+                foreach (string line in lines)
+                {
+                    _consoleViewModel.Device.Write(line);
+                }
+
+
+            }
+
+
+        }
+
+    
     }
 }

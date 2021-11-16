@@ -12,11 +12,8 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros
         DeviceOpened,
         DeviceNotOpened,
         MacroLooping,
-        MacroStopLooping,
-        MacroRecording,
-        MacroStopRecording,
         MacroOneShotting,
-        MacroStopOneShotting,
+        MacroStop,
     }
 
 }
