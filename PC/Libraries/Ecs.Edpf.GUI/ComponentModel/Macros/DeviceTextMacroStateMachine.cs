@@ -69,10 +69,6 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros
                     {
                         DeviceTextMacroState = DeviceTextMacroState.LoopingMacro;
                     }
-                    else if (signal == DeviceTextMacroSignal.MacroRecording)
-                    {
-                        DeviceTextMacroState = DeviceTextMacroState.RecordingMacro;
-                    }
                     else if (signal == DeviceTextMacroSignal.DeviceNotOpened)
                     {
                         DeviceTextMacroState = DeviceTextMacroState.NotOpenDevice;
@@ -84,7 +80,7 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros
                     break;
 
                 case DeviceTextMacroState.OneShottingMacro:
-                    if (signal == DeviceTextMacroSignal.MacroStopOneShotting)
+                    if (signal == DeviceTextMacroSignal.MacroStop)
                     {
                         DeviceTextMacroState = DeviceTextMacroState.OpenedDevice;
                     }
@@ -99,22 +95,7 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros
                     break;
 
                 case DeviceTextMacroState.LoopingMacro:
-                    if (signal == DeviceTextMacroSignal.MacroStopLooping)
-                    {
-                        DeviceTextMacroState = DeviceTextMacroState.OpenedDevice;
-                    }
-                    else if (signal == DeviceTextMacroSignal.DeviceNotOpened)
-                    {
-                        DeviceTextMacroState = DeviceTextMacroState.NotOpenDevice;
-                    }
-                    else
-                    {
-                        ThrowUnexpectedSendSignalArgs(signal);
-                    }
-                    break;
-
-                case DeviceTextMacroState.RecordingMacro:
-                    if (signal == DeviceTextMacroSignal.MacroStopRecording)
+                    if (signal == DeviceTextMacroSignal.MacroStop)
                     {
                         DeviceTextMacroState = DeviceTextMacroState.OpenedDevice;
                     }

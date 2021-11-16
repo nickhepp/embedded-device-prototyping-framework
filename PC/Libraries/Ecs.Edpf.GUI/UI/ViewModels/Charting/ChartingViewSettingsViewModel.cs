@@ -48,6 +48,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
         private const string DisplayCategoryName = StringExtensions.Tab10 + "Display";
 
         [Category(DisplayCategoryName)]
+        [DisplayName(StringExtensions.Tab9 + nameof(Legends))]
         public DataVizCharting.LegendCollection Legends
         {
             get
@@ -57,6 +58,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
         }
 
         [Category(DisplayCategoryName)]
+        [DisplayName(StringExtensions.Tab8 + nameof(Titles))]
         public DataVizCharting.TitleCollection Titles
         {
             get
@@ -66,6 +68,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
         }
 
         [Category(DisplayCategoryName)]
+        [DisplayName(StringExtensions.Tab7 + nameof(Palette))]
         public DataVizCharting.ChartColorPalette Palette
         {
             get
@@ -77,6 +80,21 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
                 _chart.Value.Palette = value;
             }
         }
+
+        [Category(DisplayCategoryName)]
+        public uint? MaxDisplaySampleCount
+        {
+            get
+            {
+                return _chartSettings.MaxDisplaySampleCount;
+            }
+            set
+            {
+                _chartSettings.MaxDisplaySampleCount = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
 
         #endregion
 

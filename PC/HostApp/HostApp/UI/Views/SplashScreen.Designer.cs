@@ -90,7 +90,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SplashScreen";
+            this.Text = "Embedded Device Prototyping Framework";
             this.TopMost = true;
             this._mainTlp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._logoPbx)).EndInit();

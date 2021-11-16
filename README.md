@@ -3,7 +3,8 @@
   margin-right: auto; height:299px
   /*width: 70%;*/'/>
   
-TODO: add gifs of host tools, link to host section below
+
+<!--TODO: add gifs of host tools, link to host section below-->
 # Embedded Device Prototyping Framework
 Embedded Device Prototyping Framework (EDPF) is an embedded device rapid prototyping framework. A lot of time and effort can be spent simply establishing communication back and forth from a host PC to an embedded device uPC.  This framework establishes a base infrastructure that removes much of that plumbing work off the backs of developers/designers/hobbyists/etc.  This design has been used in numerous applications for both commercial and hobbyist purposes.  Please make use of it yourself if it can lighten your load, help you complete your task, and get to what matters in your device -- completing your design.
 
@@ -63,7 +64,7 @@ The software on the host machine configures itself to facilitate the functionali
   margin-right: auto; 
   /*width: 70%;*/'/>
   
-  
+<!--  
 TODO: list UI tools with animations
 
 
@@ -92,6 +93,7 @@ TODO: list UI tools with animations
 * Firmware kernel (Arduino and other compatible devices)
   * Easily extendable for custom functionality
   * Handles routing command line IO to device subroutines along with parameters
+  -->
 
 
 
