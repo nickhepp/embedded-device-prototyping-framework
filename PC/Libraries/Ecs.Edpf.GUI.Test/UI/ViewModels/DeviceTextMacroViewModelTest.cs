@@ -28,7 +28,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
         }
 
         private const string _oneShotCmdName = "OneShot";
-        private const string _recordCmdName = "Record";
+        private const string _stopCmdName = "Stop";
         private const string _loopCmdName = "Loop";
 
         private IRelayCommand GetRelayCommand(string commandName)
@@ -38,9 +38,9 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
             {
                 cmd = _deviceTextMacroVwMdl.OneShotCommand;
             }
-            else if (commandName == _recordCmdName)
+            else if (commandName == _stopCmdName)
             {
-                cmd = _deviceTextMacroVwMdl.RecordPauseCommand;
+                cmd = _deviceTextMacroVwMdl.StopCommand;
             }
             else if (commandName == _loopCmdName)
             {
@@ -76,7 +76,6 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
         [TestMethod]
         [DataRow(_oneShotCmdName)]
         [DataRow(_loopCmdName)]
-        [DataRow(_recordCmdName)]
         public void CommandCanExecute_MacroTextAndDevice_True(string cmdName)
         {
             //-- arrange
@@ -91,7 +90,6 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
         [TestMethod]
         [DataRow(_oneShotCmdName)]
         [DataRow(_loopCmdName)]
-        [DataRow(_recordCmdName)]
         public void CommandCanExecute_NotOpenDevice_False(string cmdName)
         {
             //-- arrange
@@ -119,24 +117,6 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
             Assert.IsFalse(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should not be enabled.");
         }
 
-        [TestMethod]
-        public void RecordPauseCommandExecute_IsRecording_True()
-        {
-            //-- arrange
-            SetupEnabledDeviceTextMacro(DeviceTextMacroState.OpenedDevice);
-            _mockDevTxtMacroStateMachine.Setup(devTxtMacroStateMachine => devTxtMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroRecording)).
-                Callback(() => {
-                    _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroStateMachine => devTxtMacroStateMachine.DeviceTextMacroState).Returns(DeviceTextMacroState.RecordingMacro);
-                    _mockDevTxtMacroStateMachine.Raise(devTxtMacroStateMachine => devTxtMacroStateMachine.DeviceTextMacroStateChanged += null, new EventArgs());
-                });
-
-            //-- act
-            _deviceTextMacroVwMdl.RecordPauseCommand.Execute(null);
-
-            //-- assert
-            Assert.IsTrue(_deviceTextMacroVwMdl.IsRecording);
-            Assert.AreEqual(expected: DeviceTextMacroViewModel.PauseText, actual: _deviceTextMacroVwMdl.RecordPauseButtonText);
-        }
 
 
     }

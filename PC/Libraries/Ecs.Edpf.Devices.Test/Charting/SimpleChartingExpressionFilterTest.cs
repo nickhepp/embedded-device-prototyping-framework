@@ -26,7 +26,7 @@ namespace Ecs.Edpf.Devices.Test.Charting
         public void GetSeriesNames_FilterHasSeriesNames_SeriesNamesGotten()
         {
             //-- arrange
-            _simpleChartExpressionFilter.Expression = "vals:{a:ch1},{b:ch2},{c:ch3}";
+            _simpleChartExpressionFilter.Expression = "vals:{a|ch1},{b|ch2},{c|ch3}";
 
             //-- act
             List<string> valueNames = _simpleChartExpressionFilter.GetSeriesNames();
@@ -44,7 +44,7 @@ namespace Ecs.Edpf.Devices.Test.Charting
         public void GetChartPoints_LineHasPoints_PointsGotten()
         {
             //-- arrange
-            _simpleChartExpressionFilter.Expression = "vals:{a},{b},{c}";
+            _simpleChartExpressionFilter.Expression = "vals:{a|chart1},{b|chart1},{c|chart1}";
             string lineWithPoints = "vals:45.32,32.98,10.01";
 
             //-- act
@@ -59,13 +59,13 @@ namespace Ecs.Edpf.Devices.Test.Charting
 
         [DataTestMethod]
         [DataRow("vals:45.1,45.1,45.1,45.1,45.1,45.1")]     // line with too many values
-        [DataRow("vals:45.1,45.1,")]                        // line missing a number
         [DataRow("vals:45.1,45.1")]                         // line with too few number
+        [DataRow("vals:45.1,45.1,")]                        // line missing a number
         [DataRow("vals:a,45.1,45.1")]                       // line with a non-number
         public void GetChartPoints_LineDoesntHavePoints_NullReturned(string line)
         {
             //-- arrange
-            _simpleChartExpressionFilter.Expression = "vals:{a},{b},{c}";
+            _simpleChartExpressionFilter.Expression = "vals:{a|chart1},{b|chart1},{c|chart2}";
 
             //-- act
             Dictionary<string, double> valDict = _simpleChartExpressionFilter.GetChartPoints(line);
@@ -73,6 +73,7 @@ namespace Ecs.Edpf.Devices.Test.Charting
             //-- assert
             Assert.IsNull(valDict);
         }
+
 
     }
 }
