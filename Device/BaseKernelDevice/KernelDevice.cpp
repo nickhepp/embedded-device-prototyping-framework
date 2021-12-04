@@ -577,7 +577,6 @@ void KernelDevice::init()
 	// to be the same
     paramIOCommand.initCommand("param_io", cmd_params, param_io_command);
 	// add parameters to the command
-	// add parameters to the command
     paramIOCommand.addUInt8Parameter(EXAMPLE_UINT8_PARAM_NAME);
     paramIOCommand.addInt8Parameter(EXAMPLE_INT8_PARAM_NAME);
     paramIOCommand.addUInt16Parameter(EXAMPLE_UINT16_PARAM_NAME);
