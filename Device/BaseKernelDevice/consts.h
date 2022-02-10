@@ -35,7 +35,7 @@
 /////////////////////////////////////////////
 
 // the joysticks Y axis
-#define EDPF_DEMO_STICK_PRESS_PIN	(A2)
+#define EDPF_DEMO_STICK_PRESS_PIN	(A3)
 
 // the joysticks Y axis
 #define EDPF_DEMO_STICK_VRY_PIN		(A4)
@@ -53,7 +53,7 @@
 #define EDPD_DEMO_BUTTON_B1			(D6)
 #define EDPD_DEMO_BUTTON_B2			(D5)
 #define EDPD_DEMO_BUTTON_B3			(D4)
-#define EDPD_DEMO_BUTTON_B4			(D2)
+#define EDPD_DEMO_BUTTON_B4			(D3)
 
 
 
