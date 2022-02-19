@@ -47,6 +47,19 @@ namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros
             //-- assert
             Assert.AreEqual(expected: 4, instrColl.Instructions.Count);
             
+            DelayInstruction delayInstr0 = instrColl.Instructions[0] as DelayInstruction;
+            Assert.IsNotNull(delayInstr0);
+            Assert.AreEqual(expected: 0.5, delayInstr0.DelayInSeconds);
+
+            DelayInstruction delayInstr1 = instrColl.Instructions[1] as DelayInstruction;
+            Assert.IsNotNull(delayInstr1);
+            Assert.AreEqual(expected: 1.2, delayInstr1.DelayInSeconds);
+
+            DeviceTextInstruction deviceTextInstruction = instrColl.Instructions[2] as DeviceTextInstruction;
+            Assert.IsNotNull(deviceTextInstruction);
+
+            CommentInstruction commentInstruction = instrColl.Instructions[3] as CommentInstruction;
+            Assert.IsNotNull(commentInstruction);
 
         }
 

@@ -12,5 +12,10 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros.Instructions
 
         public string DeviceText { get; set; } = "";
 
+        public DeviceTextInstruction(string instructionLine)
+        {
+            DeviceText = instructionLine;
+        }
+
     }
 }
