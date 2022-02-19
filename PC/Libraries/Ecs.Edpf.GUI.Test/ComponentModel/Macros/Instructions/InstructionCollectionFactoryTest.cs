@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros
+namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros.Instructions
 {
 
     [TestClass]
@@ -46,7 +46,16 @@ namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros
 
             //-- assert
             Assert.AreEqual(expected: 4, instrColl.Instructions.Count);
-            
+
+            DelayInstruction delayInstruction0 = instrColl.Instructions[0] as DelayInstruction;
+            Assert.IsNotNull(delayInstruction0);
+            Assert.AreEqual(expected: 0.5, delayInstruction0.DelayInSeconds, 0.001);
+
+            DelayInstruction delayInstruction1 = instrColl.Instructions[1] as DelayInstruction;
+            Assert.IsNotNull(delayInstruction1);
+            Assert.AreEqual(expected: 1.2, delayInstruction1.DelayInSeconds, 0.001);
+
+            //Command
 
         }
 

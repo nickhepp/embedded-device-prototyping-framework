@@ -1,5 +1,6 @@
 ﻿
 using Ecs.Edpf.GUI.ComponentModel.Macros.Instructions;
+using System.Linq;
 
 namespace Ecs.Edpf.GUI.ComponentModel.Macros
 {
@@ -18,7 +19,10 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros
                 {
                     instruction = new CommentInstruction(instructionLine);
                 }
-
+                else if (DelayInstruction.DelayPrefices.Any(delayPrefix => instructionLine.StartsWith(delayPrefix)))
+                {
+                    instruction = new DelayInstruction(instructionLine);
+                }
 
 
 
