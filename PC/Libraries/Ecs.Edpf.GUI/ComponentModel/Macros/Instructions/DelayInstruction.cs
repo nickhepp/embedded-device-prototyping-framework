@@ -63,7 +63,5 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros.Instructions
             DelayInSeconds = factor * timeNumb;
         }
 
-
-
     }
 }

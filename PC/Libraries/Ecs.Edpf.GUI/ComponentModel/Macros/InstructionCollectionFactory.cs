@@ -1,4 +1,3 @@
-﻿
 using Ecs.Edpf.GUI.ComponentModel.Macros.Instructions;
 using System.Linq;
 
@@ -23,6 +22,7 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros
                 {
                     instruction = new DelayInstruction(instructionLine);
                 }
+
 
 
 
