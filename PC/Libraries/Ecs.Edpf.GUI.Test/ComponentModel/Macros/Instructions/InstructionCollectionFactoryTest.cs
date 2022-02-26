@@ -29,13 +29,14 @@ namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros.Instructions
         public void ParseDeviceTextMacroInitArgs_DifferentTypes_TypesFound()
         {
             //-- arrange
+            string cmdText = "cmd:doStuff()";
             DeviceTextMacroInitArgs initArgs = new DeviceTextMacroInitArgs
             {
                 Instructions = new List<string>
                 {
                     $"{DelayInstruction.DelayPrefices.First()} 500ms",
                     $"{DelayInstruction.DelayPrefices.Last()} 1.2 s",
-                    "cmd:doStuff()",
+                    cmdText,
                     $"{CommentInstruction.CommentPrefix} comment text",
                 }
             };
@@ -55,8 +56,12 @@ namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros.Instructions
             Assert.IsNotNull(delayInstruction1);
             Assert.AreEqual(expected: 1.2, delayInstruction1.DelayInSeconds, 0.001);
 
-            //Command
+            DeviceTextInstruction devTextInstruction2 = instrColl.Instructions[2] as DeviceTextInstruction;
+            Assert.IsNotNull(devTextInstruction2);
+            Assert.AreEqual(expected: cmdText, actual: devTextInstruction2.DeviceText);
 
+            CommentInstruction cmtInstruction3 = instrColl.Instructions[3] as CommentInstruction;
+            Assert.IsNotNull(cmtInstruction3);
         }
 
 

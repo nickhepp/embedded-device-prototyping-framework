@@ -74,6 +74,8 @@ namespace Ecs.Edpf.GUI.UI.Views
 
                 _relayCmdHandlers.Add(
                     new RelayCommandHandler(_stopBtn, _deviceTextMacroViewModel.StopCommand));
+
+                _scriptRtb.DataBindings.Add(new Binding(nameof(RichTextBox.Enabled), _deviceTextMacroViewModel, nameof(IDeviceTextMacroViewModel.MacroTextEnabled)));
             }
         }
 

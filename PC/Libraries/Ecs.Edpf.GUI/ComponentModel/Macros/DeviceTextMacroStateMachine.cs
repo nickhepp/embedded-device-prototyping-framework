@@ -8,6 +8,12 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros
 {
     public class DeviceTextMacroStateMachine : DeviceStateMachine, IDeviceTextMacroStateMachine
     {
+
+        public DeviceTextMacroStateMachine()
+        {
+
+        }
+
         private List<DeviceState> _deviceNotOpenStates = new List<DeviceState>
         { DeviceState.AssignedDevice, DeviceState.NoDevice};
         protected override void OnDeviceStateChanged()
@@ -57,6 +63,10 @@ namespace Ecs.Edpf.GUI.ComponentModel.Macros
                     if (signal == DeviceTextMacroSignal.DeviceOpened)
                     {
                         DeviceTextMacroState = DeviceTextMacroState.OpenedDevice;
+                    }
+                    else if (signal == DeviceTextMacroSignal.DeviceNotOpened)
+                    {
+                        // no change
                     }
                     else
                     {

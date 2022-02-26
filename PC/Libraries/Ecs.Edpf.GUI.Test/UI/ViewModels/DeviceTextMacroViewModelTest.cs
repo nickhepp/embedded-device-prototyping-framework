@@ -22,6 +22,8 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
         public void InitializeTest()
         {
             _mockDevTxtMacroStateMachine = new Mock<IDeviceTextMacroStateMachine>();
+            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(DeviceTextMacroState.NotOpenDevice);
+
             _mockDevTxtMacroBgWorkerFactory = new Mock<IDeviceTextMacroBgWorkerFactory>();
             _deviceTextMacroVwMdl = new DeviceTextMacroViewModel(_mockDevTxtMacroStateMachine.Object, _mockDevTxtMacroBgWorkerFactory.Object);
             _mockDevice = new MockDevice();
@@ -72,6 +74,51 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
 
             SetDeviceTextMacroState(state);
         }
+
+
+        [DataTestMethod]
+        [DataRow(DeviceTextMacroState.NotOpenDevice)]
+        [DataRow(DeviceTextMacroState.LoopingMacro)]
+        [DataRow(DeviceTextMacroState.OneShottingMacro)]
+        public void MacroTextEnabled_OtherStateToOpenedDeviceState_True(DeviceTextMacroState startState)
+        {
+            //-- arrange
+            // go to NOT open
+            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(startState);
+            _mockDevTxtMacroStateMachine.Raise(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroStateChanged += null, new EventArgs());
+
+            //-- act
+            // go to open
+            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(DeviceTextMacroState.OpenedDevice);
+            _mockDevTxtMacroStateMachine.Raise(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroStateChanged += null, new EventArgs());
+
+            //-- assert
+            Assert.IsTrue(_deviceTextMacroVwMdl.MacroTextEnabled);
+        }
+
+
+
+
+        [DataTestMethod]
+        [DataRow(DeviceTextMacroState.NotOpenDevice)]
+        [DataRow(DeviceTextMacroState.LoopingMacro)]
+        [DataRow(DeviceTextMacroState.OneShottingMacro)]
+        public void MacroTextEnabled_OpenedDeviceStateToOtherState_False(DeviceTextMacroState nextState)
+        {
+            //-- arrange
+            // go to open
+            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(DeviceTextMacroState.OpenedDevice);
+            _mockDevTxtMacroStateMachine.Raise(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroStateChanged += null, new EventArgs());
+
+            //-- act
+            // go to NOT open
+            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(nextState);
+            _mockDevTxtMacroStateMachine.Raise(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroStateChanged += null, new EventArgs());
+
+            //-- assert
+            Assert.IsFalse(_deviceTextMacroVwMdl.MacroTextEnabled);
+        }
+
 
         [TestMethod]
         [DataRow(_oneShotCmdName)]

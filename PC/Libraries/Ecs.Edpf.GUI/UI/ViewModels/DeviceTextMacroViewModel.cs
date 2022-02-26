@@ -44,6 +44,22 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
+        private bool _macroTextEnabled;
+        public bool MacroTextEnabled
+        {
+            get
+            {
+                return _macroTextEnabled;
+            }
+            private set
+            {
+                _macroTextEnabled = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
+
+
         public DeviceTextMacroViewModel(
             IDeviceTextMacroStateMachine deviceTextMacroStateMachine,
             IDeviceTextMacroBgWorkerFactory deviceTextMacroBgWorkerFactory) :
@@ -66,16 +82,19 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
             _deviceTextMacroBgWorkerFactory = deviceTextMacroBgWorkerFactory;
 
+            // set the initial state
+            DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(null, new EventArgs());
+
         }
 
-
-
-
+         
         private void DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(object sender, EventArgs e)
         {
             _loopCommand.RaiseCommandCanExecuteChanged();
             _stopCommand.RaiseCommandCanExecuteChanged();
             _oneShotCommand.RaiseCommandCanExecuteChanged();
+
+            MacroTextEnabled = (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice);
         }
 
         private void StopCommandExecute(object obj)

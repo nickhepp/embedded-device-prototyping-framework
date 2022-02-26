@@ -26,6 +26,21 @@ namespace Ecs.Edpf.GUI.Test.ComponentModel.Macros
             _stateChangedCnt = 0;
         }
 
+
+        [TestMethod]
+        public void SendSignal_NotOpenDeviceAndDeviceNotOpened_NotOpenDevice()
+        {
+            // arrange
+
+            // act
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.DeviceNotOpened);
+
+            // assert
+            Assert.AreEqual(DeviceTextMacroState.NotOpenDevice, _deviceTextMacroStateMachine.DeviceTextMacroState);
+            Assert.AreEqual(0, _stateChangedCnt);
+        }
+
+
         [TestMethod]
         public void SendSignal_NotOpenDeviceAndDeviceOpened_OpenedDevice()
         {

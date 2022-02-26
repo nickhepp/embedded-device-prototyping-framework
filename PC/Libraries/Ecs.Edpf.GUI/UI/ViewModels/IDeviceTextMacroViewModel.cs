@@ -1,9 +1,10 @@
-﻿using Ecs.Edpf.Devices.IO.Macros;
+﻿using Ecs.Edpf.Devices.Devices;
+using Ecs.Edpf.Devices.IO.Macros;
 using Ecs.Edpf.GUI.ComponentModel;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
-    public interface IDeviceTextMacroViewModel : IViewModel
+    public interface IDeviceTextMacroViewModel : IDeviceViewModel, IDeviceProviderListener
     {
         /// <summary>
         /// Resource identifier for serialization.
@@ -29,6 +30,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         /// Command for looping the macro text.
         /// </summary>
         IRelayCommand LoopCommand { get; }
+
+        /// <summary>
+        /// Whether the macro text editor is enabled.
+        /// </summary>
+        bool MacroTextEnabled { get; }
 
 
     }
