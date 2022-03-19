@@ -1,3 +1,5 @@
+#include <SoftwareSerial.h>
+
 
 #include "common.h"
 #include "KernelDevice.h"
