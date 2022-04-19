@@ -1,5 +1,5 @@
-﻿using Ecs.Edpf.Devices.Devices;
-using Ecs.Edpf.Devices.IO.Macros;
+﻿using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
+using Ecs.Edpf.Devices.Devices;
 using Ecs.Edpf.GUI.ComponentModel;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
@@ -14,7 +14,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         /// <summary>
         /// The macro text for the device.
         /// </summary>
-        DeviceTextMacro DeviceTextMacro { get; set; }
+        InstructionCollection Instructions { get; set; }
 
         /// <summary>
         /// Command for a one shot of the macro text.

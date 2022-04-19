@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-
 using Ecs.Edpf.Devices;
-using Ecs.Edpf.Devices.Devices;
-using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.Devices.ComponentModel;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {

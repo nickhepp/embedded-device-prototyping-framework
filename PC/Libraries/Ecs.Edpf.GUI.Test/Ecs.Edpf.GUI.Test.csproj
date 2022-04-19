@@ -20,4 +20,7 @@
     <ProjectReference Include="..\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj" />
     <ProjectReference Include="..\Ecs.Edpf.GUI\Ecs.Edpf.GUI.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ComponentModel\" />
+  </ItemGroup>
 </Project>

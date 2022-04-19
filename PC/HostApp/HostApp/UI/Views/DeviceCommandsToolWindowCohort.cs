@@ -1,4 +1,5 @@
-﻿using Ecs.Edpf.GUI.ComponentModel;
+﻿using Ecs.Edpf.Devices.ComponentModel;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.Views;
 using System;

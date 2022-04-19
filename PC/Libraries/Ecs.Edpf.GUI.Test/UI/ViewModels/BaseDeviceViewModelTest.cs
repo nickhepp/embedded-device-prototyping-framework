@@ -1,16 +1,8 @@
-﻿using Ecs.Edpf.Devices;
+﻿using Ecs.Edpf.Devices.ComponentModel;
+using Ecs.Edpf.Devices.Test.ComponentModel;
 using Ecs.Edpf.Devices.Test.Devices;
-using Ecs.Edpf.GUI.ComponentModel;
-using Ecs.Edpf.GUI.Test.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.Test.UI.ViewModels
 {

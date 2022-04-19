@@ -1,13 +1,8 @@
 ﻿using Ecs.Edpf.Devices.Devices;
-using Ecs.Edpf.GUI.Test.ComponentModel;
+using Ecs.Edpf.Devices.Test.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels.Connections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.Test.UI.ViewModels.Connections
 {
@@ -54,7 +49,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels.Connections
             _mockConnViewMdl3.SetupSet(connViewMdl => connViewMdl.Enabled = false).Callback<bool>(value => enabled3 = value);
 
             //-- act
-            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(GUI.ComponentModel.DeviceState.OpenedDevice);
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.Devices.ComponentModel.DeviceState.OpenedDevice);
 
             //-- assert
             Assert.IsTrue(enabled1.HasValue && (enabled1.Value == false), "Enabled should be set to false for 1.");
@@ -76,7 +71,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels.Connections
             _mockConnViewMdl3.SetupSet(connViewMdl => connViewMdl.Enabled = true).Callback<bool>(value => enabled3 = value);
 
             //-- act
-            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(GUI.ComponentModel.DeviceState.NoDevice);
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.Devices.ComponentModel.DeviceState.NoDevice);
 
             //-- assert
             Assert.IsTrue(enabled1.HasValue && (enabled1.Value == true), "Enabled should be set to true for 1.");

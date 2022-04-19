@@ -1,5 +1,4 @@
-﻿using System;
-using Ecs.Edpf.GUI.Test.ComponentModel;
+﻿using Ecs.Edpf.Devices.Test.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -46,7 +45,7 @@ namespace UnitTestProject.UI.ViewModels
             devCmdsViewMdl.DeviceCommandViewModels.Add(_mockDeviceCmdVwMdl.Object);
 
 
-            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.GUI.ComponentModel.DeviceState.NoDevice);
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.Devices.ComponentModel.DeviceState.NoDevice);
 
 
             Assert.AreEqual(expected: 0, devCmdsViewMdl.DeviceCommandViewModels.Count, "Expected that there are no commands after the device is cleared.");
