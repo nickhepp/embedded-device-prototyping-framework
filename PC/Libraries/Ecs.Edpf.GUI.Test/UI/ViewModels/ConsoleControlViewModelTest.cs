@@ -1,6 +1,6 @@
 ﻿using System;
+using Ecs.Edpf.Devices.Test.ComponentModel;
 using Ecs.Edpf.Devices.Test.Devices;
-using Ecs.Edpf.GUI.Test.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -30,10 +30,10 @@ namespace UnitTestProject.UI.ViewModels.Controls
         public void InputTextEnabled_DeviceNotOpen_NotEnabled()
         {
             //-- arrange
-            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.GUI.ComponentModel.DeviceState.OpenedDevice);
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.Devices.ComponentModel.DeviceState.OpenedDevice);
 
             //-- act
-            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.GUI.ComponentModel.DeviceState.AssignedDevice);
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.Devices.ComponentModel.DeviceState.AssignedDevice);
 
             //-- assert
             Assert.IsFalse(_ccViewMdl.InputTextEnabled);
@@ -45,7 +45,7 @@ namespace UnitTestProject.UI.ViewModels.Controls
             //-- arrange
 
             //-- act
-            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.GUI.ComponentModel.DeviceState.OpenedDevice);
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(Ecs.Edpf.Devices.ComponentModel.DeviceState.OpenedDevice);
 
             //-- assert
             Assert.IsTrue(_ccViewMdl.InputTextEnabled);

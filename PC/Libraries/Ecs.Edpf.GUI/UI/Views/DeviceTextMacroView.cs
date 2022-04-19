@@ -56,6 +56,8 @@ namespace Ecs.Edpf.GUI.UI.Views
             _loopBtn.ImageList.ImageSize = new Size(50, 50);
             _loopBtn.Image = _loopBtn.ImageList.Images[0];
 
+
+
         }
 
         private void UpdateDeviceTextMacroViewModel()
@@ -74,7 +76,21 @@ namespace Ecs.Edpf.GUI.UI.Views
 
                 _relayCmdHandlers.Add(
                     new RelayCommandHandler(_stopBtn, _deviceTextMacroViewModel.StopCommand));
+
+                _scriptRtb.DataBindings.Add(new Binding(nameof(RichTextBox.Enabled), _deviceTextMacroViewModel, nameof(IDeviceTextMacroViewModel.MacroTextEnabled)));
+
+                _deviceTextMacroViewModel.PropertyChanged += DeviceTextMacroViewModel_PropertyChanged;
+
             }
+        }
+
+        private void DeviceTextMacroViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //if (e.PropertyName == nameof(IDeviceTextMacroViewModel.MacroTextEnabled))
+            //{
+            //    // not sure why this is needed
+            //    _scriptRtb.Enabled = _deviceTextMacroViewModel.MacroTextEnabled;
+            //}
         }
 
         private void LoadDemoScriptTsb_Click(object sender, EventArgs e)

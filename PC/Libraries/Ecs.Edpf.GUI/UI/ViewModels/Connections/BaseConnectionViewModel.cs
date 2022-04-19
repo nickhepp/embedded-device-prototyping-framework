@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Ecs.Edpf.Devices;
+using Ecs.Edpf.Devices.ComponentModel;
 using Ecs.Edpf.GUI.ComponentModel;
-using Ecs.Edpf.GUI.UI.ViewModels;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 {

@@ -1,7 +1,6 @@
-﻿using Ecs.Edpf.Devices;
-using Ecs.Edpf.Devices.IO.Macros;
+﻿using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
 using Ecs.Edpf.GUI.ComponentModel;
-using Ecs.Edpf.GUI.ComponentModel.Macros;
+using Ecs.Edpf.Devices.ComponentModel.Macros;
 using Ecs.Edpf.GUI.Settings;
 using System;
 using System.Collections.Generic;
@@ -30,19 +29,35 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private RelayCommand _oneShotCommand;
         public IRelayCommand OneShotCommand => _oneShotCommand;
 
-        private DeviceTextMacro _deviceTextMacro;
-        public DeviceTextMacro DeviceTextMacro
+        private InstructionCollection _instructions;
+        public InstructionCollection Instructions
         {
             get
             {
-                return _deviceTextMacro;
+                return _instructions;
             }
             set
             {
-                _deviceTextMacro = value;
+                _instructions = value;
                 CheckCommandsCanExecute();
             }
         }
+
+        private bool _macroTextEnabled;
+        public bool MacroTextEnabled
+        {
+            get
+            {
+                return _macroTextEnabled;
+            }
+            private set
+            {
+                _macroTextEnabled = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
+
 
         public DeviceTextMacroViewModel(
             IDeviceTextMacroStateMachine deviceTextMacroStateMachine,
@@ -66,16 +81,19 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
             _deviceTextMacroBgWorkerFactory = deviceTextMacroBgWorkerFactory;
 
+            // set the initial state
+            DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(null, new EventArgs());
+
         }
 
-
-
-
+         
         private void DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(object sender, EventArgs e)
         {
             _loopCommand.RaiseCommandCanExecuteChanged();
             _stopCommand.RaiseCommandCanExecuteChanged();
             _oneShotCommand.RaiseCommandCanExecuteChanged();
+
+            MacroTextEnabled = (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice);
         }
 
         private void StopCommandExecute(object obj)
@@ -92,7 +110,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private bool OneShotCommandCanExecute(object obj)
         {
             return ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice) &&
-                (_deviceTextMacro?.DeviceTextLines.Count > 0));
+                (_instructions?.Instructions.Count > 0));
         }
 
         private DeviceTextMacroSignal _macroStoppingNextSignal;
@@ -102,7 +120,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroOneShotting);
 
             // make a copy so we dont have to worry about changes from one thread to the other
-            _macroLoopBgWorker = _deviceTextMacroBgWorkerFactory.GetDeviceTextMacroBgWorker(DeviceTextMacro.Copy());
+            _macroLoopBgWorker = _deviceTextMacroBgWorkerFactory.GetDeviceTextMacroBgWorker(Instructions.Copy(), MacroExecutionType.OneShot);
             _macroLoopBgWorker.ProgressChanged += MacroLoopBgWorker_ProgressChanged;
             _macroLoopBgWorker.RunWorkerCompleted += MacroLoopBgWorker_RunWorkerCompleted;
         }
@@ -123,7 +141,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private void LoopCommandExecute(object obj)
         {
-            if (obj is DeviceTextMacroInitArgs initArgs)
+            if (obj is InstructionCollectionInitArgs initArgs)
             {
 
             }
@@ -135,13 +153,13 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         public bool LoopCommandCanExecute(object obj)
         {
             return ((_loopCanExecuteStates.Contains(_deviceTextMacroStateMachine.DeviceTextMacroState)) &&
-                (_deviceTextMacro?.DeviceTextLines.Count > 0));
+                (_instructions?.Instructions.Count > 0));
         }
 
 
         public void ApplyDefaultSettings()
         {
-            DeviceTextMacro = new DeviceTextMacro();
+            Instructions = new InstructionCollection();
         }
 
         // settings names
@@ -153,7 +171,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             {
                 if (settings.ContainsKey(DeviceTextMacroSettingsName))
                 {
-                    DeviceTextMacro = Newtonsoft.Json.JsonConvert.DeserializeObject<DeviceTextMacro>(settings[DeviceTextMacroSettingsName]);
+                    Instructions = Newtonsoft.Json.JsonConvert.DeserializeObject<InstructionCollection>(settings[DeviceTextMacroSettingsName]);
                 }
 
             }
@@ -167,7 +185,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         public Dictionary<string, string> GetSettings()
         {
-            string deviceTextMacroStr = Newtonsoft.Json.JsonConvert.SerializeObject(DeviceTextMacro);
+            string deviceTextMacroStr = Newtonsoft.Json.JsonConvert.SerializeObject(Instructions);
             Dictionary<string, string> settings = new Dictionary<string, string>
             {
                 { DeviceTextMacroSettingsName, deviceTextMacroStr }

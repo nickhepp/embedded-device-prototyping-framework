@@ -1,5 +1,5 @@
-﻿using Ecs.Edpf.GUI.ComponentModel;
-using Ecs.Edpf.GUI.ComponentModel.Macros;
+﻿using Ecs.Edpf.Devices.ComponentModel.Macros;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
@@ -36,7 +36,7 @@ namespace HostApp.UI.Views
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
                 DeviceTextMacroView deviceTextMacroView = new DeviceTextMacroView();
-                deviceTextMacroView.Enabled = false;
+                deviceTextMacroView.Enabled = true;
                 deviceTextMacroView.DeviceTextMacroViewModel = _deviceTextMacroViewModel;
                 ToolWindow toolWindow = new ToolWindow();
 

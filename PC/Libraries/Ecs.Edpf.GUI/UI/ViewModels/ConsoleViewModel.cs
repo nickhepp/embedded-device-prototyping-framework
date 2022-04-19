@@ -1,5 +1,5 @@
 ﻿using Ecs.Edpf.Devices;
-using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.Devices.ComponentModel;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
