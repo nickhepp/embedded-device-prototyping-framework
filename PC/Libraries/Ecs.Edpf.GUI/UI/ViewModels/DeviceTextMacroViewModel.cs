@@ -110,7 +110,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private bool OneShotCommandCanExecute(object obj)
         {
             return ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice) &&
-                (_instructions?.Instructions.Count > 0));
+                (_instructions?.InstructionsCount > 0));
         }
 
         private DeviceTextMacroSignal _macroStoppingNextSignal;
@@ -135,7 +135,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         {
             if (e.UserState is DeviceTextMacroProgressChanged devTxtMacroProgressChanged)
             {
-                Device.Write(devTxtMacroProgressChanged.DeviceText);
+                //Device.Write(devTxtMacroProgressChanged.DeviceText);
             }
         }
 
@@ -153,13 +153,13 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         public bool LoopCommandCanExecute(object obj)
         {
             return ((_loopCanExecuteStates.Contains(_deviceTextMacroStateMachine.DeviceTextMacroState)) &&
-                (_instructions?.Instructions.Count > 0));
+                (_instructions?.InstructionsCount > 0));
         }
 
 
         public void ApplyDefaultSettings()
         {
-            Instructions = new InstructionCollection();
+            Instructions = new InstructionCollection(new List<Instruction>());
         }
 
         // settings names

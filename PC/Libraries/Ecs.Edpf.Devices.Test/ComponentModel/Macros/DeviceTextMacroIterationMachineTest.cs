@@ -4,6 +4,7 @@ using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
 {
@@ -29,30 +30,41 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
             //-- arrange
             const string line00 = "LINE 00";
             const string line01 = "LINE 01";
+            const string line02 = "LINE 02";
+
             const string line10 = "LINE 10";
             const string line11 = "LINE 11";
+
             const string line20 = "LINE 20";
             const string line21 = "LINE 21";
+            const string line22 = "LINE 22";
+            const string line23 = "LINE 23";
 
             const double firstDelay = 0.1;
             const double secondDelay = 0.05;
             const double thirdDelay = 0.025;
+            const double fourthDelay = 0.0125;
 
-            InstructionCollection instructions = new InstructionCollection
-            {
-                Instructions = new List<Instruction>
+            InstructionCollection instructions = new InstructionCollection(
+                new List<Instruction>
                 {
                     new DelayInstruction(delayInSeconds: firstDelay),
                     new DeviceTextInstruction(line00),
                     new DeviceTextInstruction(line01),
+                    new DeviceTextInstruction(line02),
+
                     new DelayInstruction(delayInSeconds: secondDelay),
+                    new DelayInstruction(delayInSeconds: thirdDelay),
                     new DeviceTextInstruction(line10),
                     new DeviceTextInstruction(line11),
-                    new DelayInstruction(delayInSeconds: thirdDelay),
+
+                    new DelayInstruction(fourthDelay),
                     new DeviceTextInstruction(line20),
                     new DeviceTextInstruction(line21),
+                    new DeviceTextInstruction(line22),
+                    new DeviceTextInstruction(line23),
                 }
-            };
+            );
 
             double totalIterationTime = instructions.GetTotalTimeDuration();
 
@@ -61,33 +73,35 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
 
             _devTextMacroIterMachine = new DeviceTextMacroIterationMachine(instructions, MacroExecutionType.Loop, _stubDateTimeProvider);
 
-            List<TimeGrouping> srcGroupings = instructions.GetTimeGroupings();
+            List<TimeGrouping> srcGroupings = instructions.GetTimeGroupings().ToList();
 
             //-- act + assert
             for (int k = 0; k < 3; k++)
             {
 
                 // this should return nothing, we are 1/2 way to the first delay
-                _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds((k * totalIterationTime) + (firstDelay / 2)));
+                double offset = (k * totalIterationTime) + (firstDelay / 2.0);
+                _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds(offset * 1000));
                 List<TimeGrouping> timeGroupings = _devTextMacroIterMachine.GetNextTimeGroupings();
                 Assert.AreEqual(expected: 0, timeGroupings.Count);
                 Assert.IsFalse(_devTextMacroIterMachine.Completed);
 
                 // this should return the first group
-                _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds((k * totalIterationTime) + firstDelay + (secondDelay / 2)));
+                offset = (k * totalIterationTime) + firstDelay + (secondDelay / 2);
+                _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds(offset * 1000));
                 timeGroupings = _devTextMacroIterMachine.GetNextTimeGroupings();
                 Assert.AreEqual(expected: 1, actual: timeGroupings.Count);
                 Assert.ReferenceEquals(srcGroupings[0], timeGroupings[0]);
                 Assert.IsFalse(_devTextMacroIterMachine.Completed);
 
                 //// this should return nothing, we are 50 millisecs before "LINE 2"
-                //_stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds((k * totalIterationTime) + 150));
+                //_stubDateTimeProvider.SetCurrentDateTime(startTime.AddSeconds((k * totalIterationTime) + 150));
                 //devTextLine = _devTextMacroIterMachine.GetNextDeviceTextLine();
                 //Assert.IsNull(devTextLine);
                 //Assert.IsFalse(_devTextMacroIterMachine.Completed);
 
                 //// this should return the second item
-                //_stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds((k * totalIterationTime) + 220));
+                //_stubDateTimeProvider.SetCurrentDateTime(startTime.AddSeconds((k * totalIterationTime) + 220));
                 //devTextLine = _devTextMacroIterMachine.GetNextDeviceTextLine();
                 //Assert.IsNotNull(devTextLine);
                 //Assert.AreEqual(expected: line2, actual: devTextLine.DeviceText);

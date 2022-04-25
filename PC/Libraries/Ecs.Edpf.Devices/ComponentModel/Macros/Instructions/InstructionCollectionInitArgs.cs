@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecs.Edpf.Devices.ComponentModel.Macros
+namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
 {
     public class InstructionCollectionInitArgs
     {

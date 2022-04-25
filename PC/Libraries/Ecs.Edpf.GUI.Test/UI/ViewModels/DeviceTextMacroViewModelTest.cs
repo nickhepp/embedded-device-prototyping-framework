@@ -5,6 +5,8 @@ using Ecs.Edpf.Devices.ComponentModel.Macros;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
+using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
 
 namespace Ecs.Edpf.GUI.Test.UI.ViewModels
 {
@@ -60,13 +62,12 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
 
         private void SetupEnabledDeviceTextMacro(DeviceTextMacroState state = DeviceTextMacroState.OpenedDevice)
         {
-            _deviceTextMacroVwMdl.Instructions = new Devices.ComponentModel.Macros.Instructions.InstructionCollection
-            {
-                Instructions = new System.Collections.Generic.List<Devices.ComponentModel.Macros.Instructions.Instruction>
+            _deviceTextMacroVwMdl.Instructions = new Devices.ComponentModel.Macros.Instructions.InstructionCollection(
+                new List<Instruction>
                 {
                     new Devices.ComponentModel.Macros.Instructions.DelayInstruction(0.1)
                 }
-            };
+            );
 
             SetDeviceTextMacroState(state);
         }

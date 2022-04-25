@@ -33,7 +33,7 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
                 double ratio = 1.0;
                 if (_deviceTextMacroLineIdx != 0)
                 {
-                    ratio = (double)_deviceTextMacroLineIdx / _instructions.Instructions.Count; 
+                    ratio = (double)_deviceTextMacroLineIdx / _instructions.InstructionsCount; 
                 }
                 return ratio;
             }
@@ -42,7 +42,7 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
 
         public DeviceTextMacroIterationMachine(InstructionCollection instructions, MacroExecutionType exeType, IDateTimeProvider dateTimeProvider)
         {
-            if (instructions.Instructions.Count == 0)
+            if (instructions.InstructionsCount == 0)
             {
                 throw new Exception("DeviceTextLines must have more than 0 lines.");
             }
@@ -52,33 +52,20 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
             ExecutionType = exeType;
             _dateTimeProvider = dateTimeProvider;
 
-            _timeGroupings = instructions.GetTimeGroupings();
+            _timeGroupings = instructions.GetTimeGroupings().ToList();
             _totalIterationTime = instructions.GetTotalTimeDuration();
 
             _iterationRatios = new List<double>();
 
-            double totalRunningOffset = 0.0;
             foreach (TimeGrouping tg in _timeGroupings)
             {
-                totalRunningOffset += tg.TimeOffsetInSeconds;
-                double iterationRatio = totalRunningOffset / _totalIterationTime;
-                _iterationRatios.Add(iterationRatio);
+                _iterationRatios.Add(tg.TimeOffsetInSeconds / _totalIterationTime);
             }
             _currentGroupingIdx = 0;
 
             Completed = false;
 
-            //IterationCount = 0;
-            //_totalIterationTime = 0;
-            //List<DelayInstruction> deviceTextLinesWithDelays = GetAllInstructionsWithDelays();
-            //if (deviceTextLinesWithDelays.Count > 0)
-            //{
-            //    _totalIterationTime = deviceTextLinesWithDelays.Select(devTextLine => devTextLine.DelayInSeconds).Sum();
-            //}
-
             _startTime = _dateTimeProvider.GetCurrentDateTime();
-
-            //SetNextTime();
         }
 
 
@@ -118,72 +105,13 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
                 else
                 {
                     timeGroupings.Add(GetTimeGroupingByIndex(_currentGroupingIdx));
+                    _currentGroupingIdx++;
                 }
                 
             }
             return timeGroupings;
 
         }
-
-
-
-        //private List<DelayInstruction> GetAllInstructionsWithDelays()
-        //{
-        //    return GetInstructionsWithDelays(0, _instructions.Instructions.Count);
-        //}
-
-        //private List<DelayInstruction> GetInstructionsWithDelays(int rangeMin, int count)
-        //{
-        //    List<DelayInstruction> deviceTextLinesWithDelays = _instructions.Instructions.GetRange(rangeMin, count). Where(instr => instr.InstructionType == InstructionType.Delay).ToList().ConvertAll(instr => (DelayInstruction)instr);
-        //    return deviceTextLinesWithDelays;
-        //}
-
-
-        //private void SetNextTime()
-        //{
-        //    DateTime baseTime = _startTime + TimeSpan.FromMilliseconds(IterationCount * _totalIterationTime);
-        //    //List<DelayInstruction> deviceTextLinesWithDelays = GetInstructionsWithDelays();
-        //    List<DelayInstruction> deviceTextLinesWithDelays = GetInstructionsWithDelays(0, _deviceTextMacroLineIdx + 1);
-        //    baseTime += TimeSpan.FromMilliseconds(deviceTextLinesWithDelays.Select(devTextLine => devTextLine.DelayInSeconds).Sum());
-        //    // advance the next run time to the delay + the current time
-        //    _nextTime = baseTime;
-        //}
-
-
-
-        //public Instruction GetNextDeviceTextLine()
-        //{
-        //    throw new NotImplementedException();
-        //    //Instruction devTextLine = null;
-        //    //DateTime currTime = _dateTimeProvider.GetCurrentDateTime();
-        //    //if (currTime >= _nextTime)
-        //    //{
-        //    //    // get the line and advance the pointer
-        //    //    devTextLine = _instructions.Instructions[_deviceTextMacroLineIdx];
-        //    //    _deviceTextMacroLineIdx++;
-        //    //    if (_deviceTextMacroLineIdx >= _instructions.Instructions.Count)
-        //    //    {
-        //    //        IterationCount++;
-        //    //        // see if we need to roll over or are we done
-        //    //        if (ExecutionType == MacroExecutionType.Loop)
-        //    //        {
-        //    //            _deviceTextMacroLineIdx = 0;
-        //    //        }
-        //    //        else
-        //    //        {
-        //    //            Completed = true;
-        //    //        }
-        //    //    }
-        //    //    if (!Completed)
-        //    //    {
-        //    //        SetNextTime();
-        //    //    }
-        //    //}
-
-        //    //return devTextLine;
-        //}
-
-
 
     }
 }
