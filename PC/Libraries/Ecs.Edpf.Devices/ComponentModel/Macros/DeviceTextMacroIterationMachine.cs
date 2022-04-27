@@ -10,11 +10,15 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
 
         private InstructionCollection _instructions;
         private int _deviceTextMacroLineIdx;
-        private DateTime _nextTime;
+
         private DateTime _startTime;
 
         private IDateTimeProvider _dateTimeProvider;
         private double _totalIterationTime;
+        private List<TimeGrouping> _timeGroupings;
+        private List<double> _iterationRatios;
+        private int _currentGroupingIdx;
+
 
         public bool Completed { get; private set; } = false;
 
@@ -29,7 +33,7 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
                 double ratio = 1.0;
                 if (_deviceTextMacroLineIdx != 0)
                 {
-                    ratio = (double)_deviceTextMacroLineIdx / _instructions.Instructions.Count; 
+                    ratio = (double)_deviceTextMacroLineIdx / _instructions.InstructionsCount; 
                 }
                 return ratio;
             }
@@ -38,7 +42,7 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
 
         public DeviceTextMacroIterationMachine(InstructionCollection instructions, MacroExecutionType exeType, IDateTimeProvider dateTimeProvider)
         {
-            if (instructions.Instructions.Count == 0)
+            if (instructions.InstructionsCount == 0)
             {
                 throw new Exception("DeviceTextLines must have more than 0 lines.");
             }
@@ -47,77 +51,67 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
             _instructions = instructions;
             ExecutionType = exeType;
             _dateTimeProvider = dateTimeProvider;
+
+            _timeGroupings = instructions.GetTimeGroupings().ToList();
+            _totalIterationTime = instructions.GetTotalTimeDuration();
+
+            _iterationRatios = new List<double>();
+
+            foreach (TimeGrouping tg in _timeGroupings)
+            {
+                _iterationRatios.Add(tg.TimeOffsetInSeconds / _totalIterationTime);
+            }
+            _currentGroupingIdx = 0;
+
             Completed = false;
 
-            IterationCount = 0;
-            _totalIterationTime = 0;
-            List<DelayInstruction> deviceTextLinesWithDelays = GetAllInstructionsWithDelays();
-            if (deviceTextLinesWithDelays.Count > 0)
+            _startTime = _dateTimeProvider.GetCurrentDateTime();
+        }
+
+
+        private TimeGrouping GetTimeGroupingByIndex(int idx)
+        {
+            int iterationidx = idx % _timeGroupings.Count;
+            return _timeGroupings[iterationidx];
+        }
+
+        public List<TimeGrouping> GetNextTimeGroupings()
+        {
+            DateTime currentTime = _dateTimeProvider.GetCurrentDateTime();
+
+            double totalExecutingSeconds = currentTime.Subtract(_startTime).TotalSeconds;
+
+            double iterations = totalExecutingSeconds / _totalIterationTime;
+
+            int roundIterations = (int)iterations;
+            double partialIteration = iterations - (double)roundIterations;
+            int partialTimeGroups = 0;
+            int groupingIdx = 0;
+            while ((groupingIdx < _timeGroupings.Count) && (partialIteration > _iterationRatios[groupingIdx]))
             {
-                _totalIterationTime = deviceTextLinesWithDelays.Select(devTextLine => devTextLine.DelayInSeconds).Sum();
+                partialTimeGroups++;
+                groupingIdx++;
             }
 
-            _startTime = dateTimeProvider.GetCurrentDateTime();
+            int totalIterations = roundIterations * _timeGroupings.Count + partialTimeGroups;
 
-            SetNextTime();
-        }
-
-        private List<DelayInstruction> GetAllInstructionsWithDelays()
-        {
-            return GetInstructionsWithDelays(0, _instructions.Instructions.Count);
-        }
-
-        private List<DelayInstruction> GetInstructionsWithDelays(int rangeMin, int count)
-        {
-            List<DelayInstruction> deviceTextLinesWithDelays = _instructions.Instructions.GetRange(rangeMin, count). Where(instr => instr.InstructionType == InstructionType.Delay).ToList().ConvertAll(instr => (DelayInstruction)instr);
-            return deviceTextLinesWithDelays;
-        }
-
-
-        private void SetNextTime()
-        {
-            DateTime baseTime = _startTime + TimeSpan.FromMilliseconds(IterationCount * _totalIterationTime);
-            //List<DelayInstruction> deviceTextLinesWithDelays = GetInstructionsWithDelays();
-            List<DelayInstruction> deviceTextLinesWithDelays = GetInstructionsWithDelays(0, _deviceTextMacroLineIdx + 1);
-            baseTime += TimeSpan.FromMilliseconds(deviceTextLinesWithDelays.Select(devTextLine => devTextLine.DelayInSeconds).Sum());
-            // advance the next run time to the delay + the current time
-            _nextTime = baseTime;
-        }
-
-
-
-        public Instruction GetNextDeviceTextLine()
-        {
-            Instruction devTextLine = null;
-            DateTime currTime = _dateTimeProvider.GetCurrentDateTime();
-            if (currTime >= _nextTime)
+            List<TimeGrouping> timeGroupings = new List<TimeGrouping>();
+            while ((_currentGroupingIdx < totalIterations) && !Completed)
             {
-                // get the line and advance the pointer
-                devTextLine = _instructions.Instructions[_deviceTextMacroLineIdx];
-                _deviceTextMacroLineIdx++;
-                if (_deviceTextMacroLineIdx >= _instructions.Instructions.Count)
+                if ((ExecutionType == MacroExecutionType.OneShot) && (_currentGroupingIdx >= _timeGroupings.Count))
                 {
-                    IterationCount++;
-                    // see if we need to roll over or are we done
-                    if (ExecutionType == MacroExecutionType.Loop)
-                    {
-                        _deviceTextMacroLineIdx = 0;
-                    }
-                    else
-                    {
-                        Completed = true;
-                    }
+                    Completed = true;
                 }
-                if (!Completed)
+                else
                 {
-                    SetNextTime();
+                    timeGroupings.Add(GetTimeGroupingByIndex(_currentGroupingIdx));
+                    _currentGroupingIdx++;
                 }
+                
             }
+            return timeGroupings;
 
-            return devTextLine;
         }
-
-
 
     }
 }

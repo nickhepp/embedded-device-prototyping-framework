@@ -1,4 +1,7 @@
 ﻿
+using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
+using System.Collections.Generic;
+
 namespace Ecs.Edpf.Devices.ComponentModel.Macros
 {
     public class DeviceTextMacroProgressChanged
@@ -6,7 +9,7 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
 
         public double? RatioComplete { get; set; }
 
-        public string DeviceText { get; set; }
+        public List<TimeGrouping> TimeGroupings { get; set; }
 
     }
 }

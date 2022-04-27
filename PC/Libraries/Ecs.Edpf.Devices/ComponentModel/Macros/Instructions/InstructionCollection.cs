@@ -9,17 +9,66 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
     public class InstructionCollection
     {
 
-        public List<Instruction> Instructions { get; set; } = new List<Instruction>();
+        private List<Instruction> _instructions;
+        public IEnumerable<Instruction> Instructions => _instructions;
+
+        public int InstructionsCount => _instructions.Count;
+
+        private Lazy<IEnumerable<TimeGrouping>> _timeGroupings;
+
+
+        public InstructionCollection(IEnumerable<Instruction> instructions)
+        {
+            _instructions = instructions.ToList();
+
+            _timeGroupings = new Lazy<IEnumerable<TimeGrouping>>(() =>
+            {
+                List<TimeGrouping> groupings = new List<TimeGrouping>();
+                double timeOffset = 0.0;
+                TimeGrouping currentTimeGrouping = new TimeGrouping { TimeOffsetInSeconds = timeOffset };
+                groupings.Add(currentTimeGrouping);
+                int idx = 0;
+
+                while (idx < _instructions.Count)
+                {
+                    if ((_instructions[idx].InstructionType == InstructionType.DeviceText) && (_instructions[idx] is DeviceTextInstruction devTextInstr))
+                    {
+                        currentTimeGrouping.DeviceTextInstructions.Add(devTextInstr);
+                    }
+                    else if ((_instructions[idx].InstructionType == InstructionType.Delay) && (_instructions[idx] is DelayInstruction delayInstr))
+                    {
+                        timeOffset += delayInstr.DelayInSeconds;
+
+                        if (currentTimeGrouping.DeviceTextInstructions.Count == 0)
+                        {
+                            // these are initial delays, update the current one
+                            currentTimeGrouping.TimeOffsetInSeconds = timeOffset;
+                        }
+                        else
+                        {
+                            // This is a delay after a DeviceText instruction.  Make a new grouping.
+                            currentTimeGrouping = new TimeGrouping { TimeOffsetInSeconds = timeOffset };
+                            groupings.Add(currentTimeGrouping);
+                        }
+                    }
+                    idx++;
+                }
+
+                return groupings;
+            });
+
+        }
+
 
 
         public List<DelayInstruction> GetDelayInstructions(int startIdx, int count)
         {
-            return Instructions.GetRange(startIdx, count).Where(instr => instr.GetType() == typeof(DelayInstruction)).ToList().ConvertAll(instr => (DelayInstruction)instr);
+            return _instructions.GetRange(startIdx, count).Where(instr => instr.GetType() == typeof(DelayInstruction)).ToList().ConvertAll(instr => (DelayInstruction)instr);
         }
 
         public List<DelayInstruction> GetDelayInstructions()
         {
-            return GetDelayInstructions(0, Instructions.Count);
+            return GetDelayInstructions(0, _instructions.Count);
         }
 
         public double GetTotalTimeDuration()
@@ -27,40 +76,14 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
             return GetDelayInstructions().Select(delayInstr => delayInstr.DelayInSeconds).Sum();
         }
 
-        public List<TimeGrouping> GetTimeGroupings()
+        public IEnumerable<TimeGrouping> GetTimeGroupings()
         {
-            List<TimeGrouping> groupings = new List<TimeGrouping>();
-            double timeOffset = 0.0;
-            TimeGrouping currentTimeGrouping = new TimeGrouping {  TimeOffsetInSeconds = timeOffset };
-            groupings.Add(currentTimeGrouping);
-            int idx = 0;
-
-            while (idx < Instructions.Count)
-            {
-                if ((Instructions[idx].InstructionType == InstructionType.DeviceText) && (Instructions[idx] is DeviceTextInstruction devTextInstr))
-                {
-                    currentTimeGrouping.DeviceTextInstructions.Add(devTextInstr);
-                }
-                else if ((Instructions[idx].InstructionType == InstructionType.Delay) && (Instructions[idx] is DelayInstruction delayInstr))
-                {
-                    timeOffset += delayInstr.DelayInSeconds;
-                    currentTimeGrouping = new TimeGrouping { TimeOffsetInSeconds = timeOffset };
-                    groupings.Add(currentTimeGrouping);
-                }
-                idx++;
-            }
-
-
-            return groupings;
-
+            return _timeGroupings.Value;
         }
 
         public InstructionCollection Copy()
         {
-            InstructionCollection theCopy = new InstructionCollection
-            {
-                Instructions = this.Instructions.ConvertAll(instr => instr.Copy())
-            };
+            InstructionCollection theCopy = new InstructionCollection(this.Instructions.ToList().ConvertAll(instr => instr.Copy()));
             return theCopy;
         }
 

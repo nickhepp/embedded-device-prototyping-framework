@@ -1,8 +1,11 @@
 ﻿using Ecs.Edpf.Devices.ComponentModel.Macros;
 using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros.Instructions
 {
@@ -26,14 +29,13 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros.Instructions
         public void ParseDeviceTextMacroInitArgs_DifferentTypes_TypesFound()
         {
             //-- arrange
-            string cmdText = "cmd:doStuff()";
             InstructionCollectionInitArgs initArgs = new InstructionCollectionInitArgs
             {
                 Instructions = new List<string>
                 {
                     $"{DelayInstruction.DelayPrefices.First()} 500ms",
                     $"{DelayInstruction.DelayPrefices.Last()} 1.2 s",
-                    cmdText,
+                    "cmd:doStuff()",
                     $"{CommentInstruction.CommentPrefix} comment text",
                 }
             };
@@ -43,22 +45,23 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros.Instructions
 
 
             //-- assert
-            Assert.AreEqual(expected: 4, instrColl.Instructions.Count);
+            Assert.AreEqual(expected: 4, instrColl.InstructionsCount);
+            
+            List<Instruction> instructions = instrColl.Instructions.ToList();
+            DelayInstruction delayInstr0 = instructions[0] as DelayInstruction;
+            Assert.IsNotNull(delayInstr0);
+            Assert.AreEqual(expected: 0.5, delayInstr0.DelayInSeconds);
 
-            DelayInstruction delayInstruction0 = instrColl.Instructions[0] as DelayInstruction;
-            Assert.IsNotNull(delayInstruction0);
-            Assert.AreEqual(expected: 0.5, delayInstruction0.DelayInSeconds, 0.001);
+            DelayInstruction delayInstr1 = instructions[1] as DelayInstruction;
+            Assert.IsNotNull(delayInstr1);
+            Assert.AreEqual(expected: 1.2, delayInstr1.DelayInSeconds);
 
-            DelayInstruction delayInstruction1 = instrColl.Instructions[1] as DelayInstruction;
-            Assert.IsNotNull(delayInstruction1);
-            Assert.AreEqual(expected: 1.2, delayInstruction1.DelayInSeconds, 0.001);
+            DeviceTextInstruction deviceTextInstruction = instructions[2] as DeviceTextInstruction;
+            Assert.IsNotNull(deviceTextInstruction);
 
-            DeviceTextInstruction devTextInstruction2 = instrColl.Instructions[2] as DeviceTextInstruction;
-            Assert.IsNotNull(devTextInstruction2);
-            Assert.AreEqual(expected: cmdText, actual: devTextInstruction2.DeviceText);
+            CommentInstruction commentInstruction = instructions[3] as CommentInstruction;
+            Assert.IsNotNull(commentInstruction);
 
-            CommentInstruction cmtInstruction3 = instrColl.Instructions[3] as CommentInstruction;
-            Assert.IsNotNull(cmtInstruction3);
         }
 
 

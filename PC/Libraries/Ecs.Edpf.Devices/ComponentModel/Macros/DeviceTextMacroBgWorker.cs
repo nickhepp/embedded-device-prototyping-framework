@@ -27,11 +27,10 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
         {
             while (!e.Cancel && !_iterationMachine.Completed)
             {
-                Instruction instruction = _iterationMachine.GetNextDeviceTextLine();
-                if (instruction != null)
+                List<TimeGrouping> timeGroupings = _iterationMachine.GetNextTimeGroupings();
+                if (timeGroupings.Count > 0)
                 {
-                    string devText = instruction.GetDeviceText();
-                    ReportProgress(0, new DeviceTextMacroProgressChanged { DeviceText = devText, RatioComplete = _iterationMachine.RatioComplete });
+                    ReportProgress(0, new DeviceTextMacroProgressChanged { RatioComplete = _iterationMachine.RatioComplete, TimeGroupings = timeGroupings });
                 }
             }
         }

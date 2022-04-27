@@ -47,18 +47,17 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros.Instructions
             string grp2Idx3DevText = "2-3";
             DeviceTextInstruction grp2Idx3DevTextInstr = new DeviceTextInstruction(grp2Idx3DevText);
 
-            InstructionCollection instructionCollection = new InstructionCollection
-            {
-                Instructions = new List<Instruction>
+            InstructionCollection instructionCollection = new InstructionCollection(
+                new List<Instruction>
                 {
                     grp0Idx0DevTextInstr, grp0Idx1DevTextInstr, grp0Idx2CmtInstr,
                     grp1Idx0DelayInstr, grp1Idx1DevTextInstr, grp1Idx2DevTextInstr, grp1Idx3CmtInstr,
                     grp2Idx0DelayInstr, grp2Idx1CmtInstr, grp2Idx2DevTextInstr, grp2Idx3DevTextInstr
                 }
-            };
+            );
 
             //-- act
-            List<TimeGrouping> groupings = instructionCollection.GetTimeGroupings();
+            List<TimeGrouping> groupings = instructionCollection.GetTimeGroupings().ToList();
 
             //-- assert
             Assert.AreEqual(expected: 3, groupings.Count, "Did not find the expected number of groupings.");

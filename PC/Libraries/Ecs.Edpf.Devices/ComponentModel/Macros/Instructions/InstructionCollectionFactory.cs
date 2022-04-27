@@ -1,15 +1,16 @@
 using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace Ecs.Edpf.Devices.ComponentModel.Macros
+namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
 {
     public class InstructionCollectionFactory
     {
 
         public InstructionCollection ParseDeviceTextMacroInitArgs(InstructionCollectionInitArgs initArgs)
         {
-            InstructionCollection instructionCollection = new InstructionCollection();
 
+            List<Instruction> instructions = new List<Instruction>();
             foreach (string instructionLine in initArgs.Instructions)
             {
                 Instruction instruction = null;
@@ -25,9 +26,10 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
                 {
                     instruction = new DeviceTextInstruction(instructionLine);
                 }
-                instructionCollection.Instructions.Add(instruction);
+                instructions.Add(instruction);
             }
 
+            InstructionCollection instructionCollection = new InstructionCollection(instructions);
             return instructionCollection;
         }
 
