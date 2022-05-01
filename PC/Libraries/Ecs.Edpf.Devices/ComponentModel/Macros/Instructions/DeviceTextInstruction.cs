@@ -10,21 +10,22 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
     {
         public override InstructionType InstructionType => InstructionType.DeviceText;
 
-        public string DeviceText { get; set; } = "";
+        //public string DeviceText { get; set; } = "";
+        private string _deviceText;
 
         public DeviceTextInstruction(string instructionLine)
         {
-            DeviceText = instructionLine;
+            _deviceText = instructionLine;
         }
 
         public override string GetDeviceText()
         {
-            return DeviceText;
+            return _deviceText;
         }
 
         public override Instruction Copy()
         {
-            return new DeviceTextInstruction(DeviceText);
+            return new DeviceTextInstruction(_deviceText);
         }
 
     }

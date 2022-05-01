@@ -1,13 +1,11 @@
-﻿using Ecs.Edpf.GUI.ComponentModel;
+﻿using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ecs.Edpf.GUI.UI.Views
@@ -55,9 +53,6 @@ namespace Ecs.Edpf.GUI.UI.Views
             _loopBtn.ImageList.ColorDepth = ColorDepth.Depth32Bit;
             _loopBtn.ImageList.ImageSize = new Size(50, 50);
             _loopBtn.Image = _loopBtn.ImageList.Images[0];
-
-
-
         }
 
         private void UpdateDeviceTextMacroViewModel()
@@ -69,10 +64,10 @@ namespace Ecs.Edpf.GUI.UI.Views
             else
             {
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_oneShotBtn, _deviceTextMacroViewModel.OneShotCommand));
+                    new RelayCommandHandler(_oneShotBtn, _deviceTextMacroViewModel.OneShotCommand, GetInstructionCollectionInitArgs));
 
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_loopBtn, _deviceTextMacroViewModel.LoopCommand));
+                    new RelayCommandHandler(_loopBtn, _deviceTextMacroViewModel.LoopCommand, GetInstructionCollectionInitArgs));
 
                 _relayCmdHandlers.Add(
                     new RelayCommandHandler(_stopBtn, _deviceTextMacroViewModel.StopCommand));
@@ -97,5 +92,32 @@ namespace Ecs.Edpf.GUI.UI.Views
         {
 
         }
+
+        private InstructionCollectionInitArgs GetInstructionCollectionInitArgs()
+        {
+            List<string> lines = _scriptRtb.Text.Split(new[] { "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            InstructionCollectionInitArgs initArgs = new InstructionCollectionInitArgs
+            {
+                InstructionsLines = lines
+            };
+            return initArgs;
+        }
+
+
+        //private void _loopBtn_Click(object sender, EventArgs e)
+        //{
+        //    _deviceTextMacroViewModel.LoopCommand.Execute(initArgs);
+        //}
+
+        //private void _oneShotBtn_Click(object sender, EventArgs e)
+        //{
+        //    List<string> lines = _scriptRtb.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        //    InstructionCollectionInitArgs initArgs = new InstructionCollectionInitArgs
+        //    {
+        //        InstructionsLines = lines
+        //    };
+        //    _deviceTextMacroViewModel.OneShotCommand.Execute(initArgs);
+        //}
+
     }
 }

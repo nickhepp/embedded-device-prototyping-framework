@@ -12,11 +12,13 @@ namespace Ecs.Edpf.GUI.ComponentModel
 
         private Button _button;
         private IRelayCommand _relayCommand;
+        private Func<object> _getCommandArgHandler;
 
-        public RelayCommandHandler(Button button, IRelayCommand relayCommand)
+        public RelayCommandHandler(Button button, IRelayCommand relayCommand, Func<object> getCommandArgHandler = null)
         {
             _button = button;
             _relayCommand = relayCommand;
+            _getCommandArgHandler = getCommandArgHandler;
 
             _relayCommand.CanExecuteChanged += RelayCommand_CanExecuteChanged;
             _button.Click += Button_Click;
@@ -24,7 +26,8 @@ namespace Ecs.Edpf.GUI.ComponentModel
 
         private void Button_Click(object sender, EventArgs e)
         {
-            _relayCommand.Execute(null);
+            object arg = (_getCommandArgHandler != null) ? _getCommandArgHandler() : null;
+            _relayCommand.Execute(arg);
         }
 
         private void RelayCommand_CanExecuteChanged(object sender, EventArgs e)

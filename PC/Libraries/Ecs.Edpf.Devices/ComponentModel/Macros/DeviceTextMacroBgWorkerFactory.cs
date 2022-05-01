@@ -15,5 +15,6 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
         {
             return new DeviceTextMacroBgWorker(instructions, exeType);
         }
+
     }
 }

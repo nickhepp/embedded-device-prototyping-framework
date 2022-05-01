@@ -9,7 +9,7 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
     public class InstructionCollectionInitArgs
     {
 
-        public List<string> Instructions { get; set; } = new List<string>();
+        public List<string> InstructionsLines { get; set; } = new List<string>();
 
 
     }

@@ -70,6 +70,23 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
         }
 
         [TestMethod]
+        public void SendSignal_OpenedDeviceAndMacroOneShotting_OneShottingMacro()
+        {
+            // arrange
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.DeviceOpened);
+            _stateChangedCnt = 0;
+
+            // act
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroOneShotting);
+
+
+            // assert
+            Assert.AreEqual(DeviceTextMacroState.OneShottingMacro, _deviceTextMacroStateMachine.DeviceTextMacroState);
+            Assert.AreEqual(1, _stateChangedCnt);
+        }
+
+
+        [TestMethod]
         public void SendSignal_OpenedDeviceAndDeviceNotOpened_NotOpenDevice()
         {
             // arrange

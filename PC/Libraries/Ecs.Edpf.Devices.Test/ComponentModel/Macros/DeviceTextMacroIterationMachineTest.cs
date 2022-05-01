@@ -111,7 +111,7 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
                 _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds(offset * 1000));
                 timeGroupings = _devTextMacroIterMachine.GetNextTimeGroupings();
                 Assert.AreEqual(expected: 1, actual: timeGroupings.Count);
-                ReferenceEquals(srcGroupings[0], timeGroupings[0]);
+                Assert.IsTrue(ReferenceEquals(srcGroupings[0], timeGroupings[0]));
                 Assert.IsFalse(_devTextMacroIterMachine.Completed);
 
                 // now do the same time, but this time we do it, it should return an empty list
@@ -124,7 +124,7 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
                 _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds(offset * 1000));
                 timeGroupings = _devTextMacroIterMachine.GetNextTimeGroupings();
                 Assert.AreEqual(expected: 1, actual: timeGroupings.Count);
-                ReferenceEquals(srcGroupings[1], timeGroupings[0]);
+                Assert.IsTrue(ReferenceEquals(srcGroupings[1], timeGroupings[0]));
                 Assert.IsFalse(_devTextMacroIterMachine.Completed);
 
                 // now do the same time, but this time we do it, it should return an empty list
@@ -137,8 +137,8 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
                 _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds(offset * 1000));
                 timeGroupings = _devTextMacroIterMachine.GetNextTimeGroupings();
                 Assert.AreEqual(expected: 2, actual: timeGroupings.Count);
-                ReferenceEquals(srcGroupings[2], timeGroupings[0]);
-                ReferenceEquals(srcGroupings[3], timeGroupings[1]);
+                Assert.IsTrue(ReferenceEquals(srcGroupings[2], timeGroupings[0]));
+                Assert.IsTrue(ReferenceEquals(srcGroupings[3], timeGroupings[1]));
                 Assert.IsFalse(_devTextMacroIterMachine.Completed);
             }
 
@@ -167,10 +167,10 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
             List<TimeGrouping> timeGroupings = _devTextMacroIterMachine.GetNextTimeGroupings();
 
             Assert.AreEqual(expected: 4, actual: timeGroupings.Count);
-            ReferenceEquals(srcGroupings[0], timeGroupings[0]);
-            ReferenceEquals(srcGroupings[1], timeGroupings[1]);
-            ReferenceEquals(srcGroupings[2], timeGroupings[2]);
-            ReferenceEquals(srcGroupings[3], timeGroupings[3]);
+            Assert.IsTrue(ReferenceEquals(srcGroupings[0], timeGroupings[0]));
+            Assert.IsTrue(ReferenceEquals(srcGroupings[1], timeGroupings[1]));
+            Assert.IsTrue(ReferenceEquals(srcGroupings[2], timeGroupings[2]));
+            Assert.IsTrue(ReferenceEquals(srcGroupings[3], timeGroupings[3]));
             Assert.IsTrue(_devTextMacroIterMachine.Completed);
         }
 

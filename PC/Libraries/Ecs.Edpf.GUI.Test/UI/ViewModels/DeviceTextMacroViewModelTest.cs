@@ -15,6 +15,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
     {
         private Mock<IDeviceTextMacroStateMachine> _mockDevTxtMacroStateMachine;
         private Mock<IDeviceTextMacroBgWorkerFactory> _mockDevTxtMacroBgWorkerFactory;
+        private Mock<IInstructionCollectionFactory> _mockInstructionCollectionFactory;
 
         private DeviceTextMacroViewModel _deviceTextMacroVwMdl;
 
@@ -27,9 +28,134 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
             _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(DeviceTextMacroState.NotOpenDevice);
 
             _mockDevTxtMacroBgWorkerFactory = new Mock<IDeviceTextMacroBgWorkerFactory>();
-            _deviceTextMacroVwMdl = new DeviceTextMacroViewModel(_mockDevTxtMacroStateMachine.Object, _mockDevTxtMacroBgWorkerFactory.Object);
+            _mockInstructionCollectionFactory = new Mock<IInstructionCollectionFactory>();
+
+            _deviceTextMacroVwMdl = new DeviceTextMacroViewModel(_mockDevTxtMacroStateMachine.Object, _mockDevTxtMacroBgWorkerFactory.Object, _mockInstructionCollectionFactory.Object);
             _mockDevice = new MockDevice();
         }
+
+
+        [TestMethod]
+        [DataRow(DeviceTextMacroState.LoopingMacro)]
+        [DataRow(DeviceTextMacroState.OneShottingMacro)]
+        public void StopCommandCanExecute_ActiveTextSending_True(DeviceTextMacroState devTxtMacroState)
+        {
+            //-- arrange
+
+
+            //-- act
+            SetDeviceTextMacroState(devTxtMacroState);
+
+            //-- assert
+            Assert.IsTrue(_deviceTextMacroVwMdl.StopCommand.CanExecute(), $"DeviceTextMacroState of '{devTxtMacroState}' should allow for the stop condition.");
+        }
+
+        [TestMethod]
+        [DataRow(DeviceTextMacroState.NotOpenDevice)]
+        [DataRow(DeviceTextMacroState.OpenedDevice)]
+        public void StopCommandCanExecute_NotActiveTextSending_False(DeviceTextMacroState devTxtMacroState)
+        {
+            //-- arrange
+
+            //-- act
+            SetDeviceTextMacroState(devTxtMacroState);
+
+            //-- assert
+            Assert.IsFalse(_deviceTextMacroVwMdl.StopCommand.CanExecute(), $"DeviceTextMacroState of '{devTxtMacroState}' should not allow for the stop condition.");
+        }
+
+
+        [TestMethod]
+        [DataRow(DeviceTextMacroState.OpenedDevice)]
+        public void OneShotCommandCanExecute_OpenedDevice_True(DeviceTextMacroState devTxtMacroState)
+        {
+            //-- arrange
+
+            //-- act
+            SetDeviceTextMacroState(devTxtMacroState);
+
+            //-- assert
+            Assert.IsTrue(_deviceTextMacroVwMdl.OneShotCommand.CanExecute(), $"DeviceTextMacroState of '{devTxtMacroState}' should allow for the one shot command.");
+        }
+
+        [TestMethod]
+        [DataRow(DeviceTextMacroState.NotOpenDevice)]
+        [DataRow(DeviceTextMacroState.LoopingMacro)]
+        [DataRow(DeviceTextMacroState.OneShottingMacro)]
+        public void OneShotCommandCanExecute_NotOpenedDevice_False(DeviceTextMacroState devTxtMacroState)
+        {
+            //-- arrange
+
+            //-- act
+            SetDeviceTextMacroState(devTxtMacroState);
+
+            //-- assert
+            Assert.IsFalse(_deviceTextMacroVwMdl.OneShotCommand.CanExecute(), $"DeviceTextMacroState of '{devTxtMacroState}' should not allow for the one shot command.");
+        }
+
+        [TestMethod]
+        [DataRow(DeviceTextMacroState.OpenedDevice)]
+        public void LoopingCommandCanExecute_OpenedDevice_True(DeviceTextMacroState devTxtMacroState)
+        {
+            //-- arrange
+
+            //-- act
+            SetDeviceTextMacroState(devTxtMacroState);
+
+            //-- assert
+            Assert.IsTrue(_deviceTextMacroVwMdl.LoopCommand.CanExecute(), $"DeviceTextMacroState of '{devTxtMacroState}' should allow for the loop command.");
+        }
+
+        [TestMethod]
+        [DataRow(DeviceTextMacroState.NotOpenDevice)]
+        [DataRow(DeviceTextMacroState.LoopingMacro)]
+        [DataRow(DeviceTextMacroState.OneShottingMacro)]
+        public void LoopingCommandCanExecute_NotOpenedDevice_False(DeviceTextMacroState devTxtMacroState)
+        {
+            //-- arrange
+
+            //-- act
+            SetDeviceTextMacroState(devTxtMacroState);
+
+            //-- assert
+            Assert.IsFalse(_deviceTextMacroVwMdl.LoopCommand.CanExecute(), $"DeviceTextMacroState of '{devTxtMacroState}' should not allow for the loop command.");
+        }
+
+        [DataTestMethod]
+        [DataRow(DeviceTextMacroState.NotOpenDevice)]
+        [DataRow(DeviceTextMacroState.OpenedDevice)]
+        public void MacroTextEnabled_NotActiveSendingData_True(DeviceTextMacroState devTxtMacroState)
+        {
+            //-- arrange
+
+            //-- act
+            SetDeviceTextMacroState(devTxtMacroState);
+
+            //-- assert
+            Assert.IsTrue(_deviceTextMacroVwMdl.MacroTextEnabled, "Text editing should be enabled when not sending data.");
+        }
+
+
+        [DataTestMethod]
+        [DataRow(DeviceTextMacroState.LoopingMacro)]
+        [DataRow(DeviceTextMacroState.OneShottingMacro)]
+        public void MacroTextEnabled_ActiveSendingData_False(DeviceTextMacroState devTxtMacroState)
+        {
+            //-- arrange
+
+            //-- act
+            SetDeviceTextMacroState(devTxtMacroState);
+
+            //-- assert
+            Assert.IsFalse(_deviceTextMacroVwMdl.MacroTextEnabled, "Text editing should not be enabled when sending data.");
+        }
+
+
+        /// <summary>
+        /// //////////////////////////////////////////////////////////////
+        /// </summary>
+
+
 
         private const string _oneShotCmdName = "OneShot";
         private const string _stopCmdName = "Stop";
@@ -60,91 +186,52 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
                  new EventArgs());
         }
 
-        private void SetupEnabledDeviceTextMacro(DeviceTextMacroState state = DeviceTextMacroState.OpenedDevice)
-        {
-            _deviceTextMacroVwMdl.Instructions = new Devices.ComponentModel.Macros.Instructions.InstructionCollection(
-                new List<Instruction>
-                {
-                    new Devices.ComponentModel.Macros.Instructions.DelayInstruction(0.1)
-                }
-            );
+        //private void SetupEnabledDeviceTextMacro(DeviceTextMacroState state = DeviceTextMacroState.OpenedDevice)
+        //{
+        //    _deviceTextMacroVwMdl.Instructions = new InstructionCollection(
+        //        new List<Instruction>
+        //        {
+        //            new DelayInstruction(0.1)
+        //        }
+        //    );
 
-            SetDeviceTextMacroState(state);
-        }
-
-
-        [DataTestMethod]
-        [DataRow(DeviceTextMacroState.NotOpenDevice)]
-        [DataRow(DeviceTextMacroState.LoopingMacro)]
-        [DataRow(DeviceTextMacroState.OneShottingMacro)]
-        public void MacroTextEnabled_OtherStateToOpenedDeviceState_True(DeviceTextMacroState startState)
-        {
-            //-- arrange
-            // go to NOT open
-            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(startState);
-            _mockDevTxtMacroStateMachine.Raise(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroStateChanged += null, new EventArgs());
-
-            //-- act
-            // go to open
-            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(DeviceTextMacroState.OpenedDevice);
-            _mockDevTxtMacroStateMachine.Raise(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroStateChanged += null, new EventArgs());
-
-            //-- assert
-            Assert.IsTrue(_deviceTextMacroVwMdl.MacroTextEnabled);
-        }
+        //    SetDeviceTextMacroState(state);
+        //}
 
 
 
 
-        [DataTestMethod]
-        [DataRow(DeviceTextMacroState.NotOpenDevice)]
-        [DataRow(DeviceTextMacroState.LoopingMacro)]
-        [DataRow(DeviceTextMacroState.OneShottingMacro)]
-        public void MacroTextEnabled_OpenedDeviceStateToOtherState_False(DeviceTextMacroState nextState)
-        {
-            //-- arrange
-            // go to open
-            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(DeviceTextMacroState.OpenedDevice);
-            _mockDevTxtMacroStateMachine.Raise(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroStateChanged += null, new EventArgs());
-
-            //-- act
-            // go to NOT open
-            _mockDevTxtMacroStateMachine.SetupGet(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroState).Returns(nextState);
-            _mockDevTxtMacroStateMachine.Raise(devTxtMacroSttMchn => devTxtMacroSttMchn.DeviceTextMacroStateChanged += null, new EventArgs());
-
-            //-- assert
-            Assert.IsFalse(_deviceTextMacroVwMdl.MacroTextEnabled);
-        }
 
 
-        [TestMethod]
-        [DataRow(_oneShotCmdName)]
-        [DataRow(_loopCmdName)]
-        public void CommandCanExecute_MacroTextAndDevice_True(string cmdName)
-        {
-            //-- arrange
-            SetupEnabledDeviceTextMacro();
 
-            //-- act
+        //[TestMethod]
+        //[DataRow(_oneShotCmdName)]
+        //[DataRow(_loopCmdName)]
+        //public void CommandCanExecute_MacroTextAndDevice_True(string cmdName)
+        //{
+        //    //-- arrange
+        //    SetupEnabledDeviceTextMacro();
 
-            //-- assert
-            Assert.IsTrue(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should be enabled.");
-        }
+        //    //-- act
 
-        [TestMethod]
-        [DataRow(_oneShotCmdName)]
-        [DataRow(_loopCmdName)]
-        public void CommandCanExecute_NotOpenDevice_False(string cmdName)
-        {
-            //-- arrange
-            SetupEnabledDeviceTextMacro();
+        //    //-- assert
+        //    Assert.IsTrue(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should be enabled.");
+        //}
 
-            //-- act
-            SetDeviceTextMacroState(DeviceTextMacroState.NotOpenDevice);
+        //[TestMethod]
+        //[DataRow(_oneShotCmdName)]
+        //[DataRow(_loopCmdName)]
+        //public void CommandCanExecute_NotOpenDevice_False(string cmdName)
+        //{
+        //    //-- arrange
+        //    SetupEnabledDeviceTextMacro();
 
-            //-- assert
-            Assert.IsFalse(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should not be enabled.");
-        }
+        //    //-- act
+        //    SetDeviceTextMacroState(DeviceTextMacroState.NotOpenDevice);
+
+        //    //-- assert
+        //    Assert.IsFalse(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should not be enabled.");
+        //}
 
         [TestMethod]
         [DataRow(_oneShotCmdName)]
@@ -161,6 +248,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
             ////-- assert
             //Assert.IsFalse(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should not be enabled.");
         }
+
 
 
 

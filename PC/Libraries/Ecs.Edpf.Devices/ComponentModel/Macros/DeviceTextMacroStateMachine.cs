@@ -79,6 +79,10 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
                     {
                         DeviceTextMacroState = DeviceTextMacroState.LoopingMacro;
                     }
+                    else if (signal == DeviceTextMacroSignal.MacroOneShotting)
+                    {
+                        DeviceTextMacroState = DeviceTextMacroState.OneShottingMacro;
+                    }
                     else if (signal == DeviceTextMacroSignal.DeviceNotOpened)
                     {
                         DeviceTextMacroState = DeviceTextMacroState.NotOpenDevice;

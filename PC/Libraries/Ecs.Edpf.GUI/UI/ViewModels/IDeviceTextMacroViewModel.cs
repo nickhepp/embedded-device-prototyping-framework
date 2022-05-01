@@ -12,11 +12,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         string ResourceName { get; }
 
         /// <summary>
-        /// The macro text for the device.
-        /// </summary>
-        InstructionCollection Instructions { get; set; }
-
-        /// <summary>
         /// Command for a one shot of the macro text.
         /// </summary>
         IRelayCommand OneShotCommand { get; }

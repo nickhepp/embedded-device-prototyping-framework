@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
 {
-    public class InstructionCollectionFactory
+    public class InstructionCollectionFactory : IInstructionCollectionFactory
     {
 
         public InstructionCollection ParseDeviceTextMacroInitArgs(InstructionCollectionInitArgs initArgs)
         {
 
             List<Instruction> instructions = new List<Instruction>();
-            foreach (string instructionLine in initArgs.Instructions)
+            foreach (string instructionLine in initArgs.InstructionsLines)
             {
                 Instruction instruction = null;
                 if (instructionLine.StartsWith(CommentInstruction.CommentPrefix))

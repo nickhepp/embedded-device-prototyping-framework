@@ -31,7 +31,7 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros.Instructions
             //-- arrange
             InstructionCollectionInitArgs initArgs = new InstructionCollectionInitArgs
             {
-                Instructions = new List<string>
+                InstructionsLines = new List<string>
                 {
                     $"{DelayInstruction.DelayPrefices.First()} 500ms",
                     $"{DelayInstruction.DelayPrefices.Last()} 1.2 s",
