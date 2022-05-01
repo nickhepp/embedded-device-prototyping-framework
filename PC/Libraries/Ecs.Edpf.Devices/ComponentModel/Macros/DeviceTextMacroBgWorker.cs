@@ -25,13 +25,19 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
 
         protected override void OnDoWork(DoWorkEventArgs e)
         {
-            while (!e.Cancel && !_iterationMachine.Completed)
+            
+            while (!CancellationPending && !_iterationMachine.Completed)
             {
                 List<TimeGrouping> timeGroupings = _iterationMachine.GetNextTimeGroupings();
                 if (timeGroupings.Count > 0)
                 {
                     ReportProgress(0, new DeviceTextMacroProgressChanged { RatioComplete = _iterationMachine.RatioComplete, TimeGroupings = timeGroupings });
                 }
+            }
+
+            if (CancellationPending)
+            {
+                e.Cancel = true;
             }
         }
 

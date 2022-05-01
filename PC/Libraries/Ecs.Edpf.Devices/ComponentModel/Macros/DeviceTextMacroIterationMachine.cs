@@ -5,11 +5,10 @@ using System.Linq;
 
 namespace Ecs.Edpf.Devices.ComponentModel.Macros
 {
-    public class DeviceTextMacroIterationMachine
+    public class DeviceTextMacroIterationMachine : IDeviceTextMacroIterationMachine
     {
 
         private InstructionCollection _instructions;
-        private int _deviceTextMacroLineIdx;
 
         private DateTime _startTime;
 
@@ -30,11 +29,21 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
         {
             get
             {
-                double ratio = 1.0;
-                if (_deviceTextMacroLineIdx != 0)
+                double ratio;
+                int iterationidx = _currentGroupingIdx % _timeGroupings.Count;
+                if (_currentGroupingIdx == 0)
                 {
-                    ratio = (double)_deviceTextMacroLineIdx / _instructions.InstructionsCount; 
+                    ratio = 0.0;
                 }
+                else if ((iterationidx == 0) && (_currentGroupingIdx > 0))
+                {
+                    ratio = 1.0;
+                }
+                else
+                {
+                    ratio = (double)iterationidx / _timeGroupings.Count;
+                }
+
                 return ratio;
             }
         }
@@ -47,12 +56,17 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
                 throw new Exception("DeviceTextLines must have more than 0 lines.");
             }
 
-            _deviceTextMacroLineIdx = 0;
+            _timeGroupings = instructions.GetTimeGroupings().ToList();
+            if (_timeGroupings.Count == 0)
+            {
+                throw new Exception("There were no timing groups in the InstructionCollection.");
+            }
+
             _instructions = instructions;
             ExecutionType = exeType;
             _dateTimeProvider = dateTimeProvider;
 
-            _timeGroupings = instructions.GetTimeGroupings().ToList();
+            
             _totalIterationTime = instructions.GetTotalTimeDuration();
 
             _iterationRatios = new List<double>();
@@ -107,7 +121,7 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
                     timeGroupings.Add(GetTimeGroupingByIndex(_currentGroupingIdx));
                     _currentGroupingIdx++;
                 }
-                
+
             }
             return timeGroupings;
 

@@ -5,6 +5,7 @@ using Ecs.Edpf.GUI.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
@@ -13,9 +14,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private IDeviceTextMacroBgWorkerFactory _deviceTextMacroBgWorkerFactory;
 
-        private IDeviceTextMacroBgWorker _macroLoopBgWorker;
+        private IDeviceTextMacroBgWorker _macroBgWorker;
 
         private IDeviceTextMacroStateMachine _deviceTextMacroStateMachine;
+
+        private IInstructionCollectionFactory _instructionCollectionFactory;
 
         public string ResourceName => "DeviceTextMacro";
 
@@ -29,19 +32,19 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private RelayCommand _oneShotCommand;
         public IRelayCommand OneShotCommand => _oneShotCommand;
 
-        private InstructionCollection _instructions;
-        public InstructionCollection Instructions
-        {
-            get
-            {
-                return _instructions;
-            }
-            set
-            {
-                _instructions = value;
-                CheckCommandsCanExecute();
-            }
-        }
+        //private InstructionCollection _instructions;
+        //public InstructionCollection Instructions
+        //{
+        //    get
+        //    {
+        //        return _instructions;
+        //    }
+        //    set
+        //    {
+        //        _instructions = value;
+        //        CheckCommandsCanExecute();
+        //    }
+        //}
 
         private bool _macroTextEnabled;
         public bool MacroTextEnabled
@@ -61,18 +64,19 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         public DeviceTextMacroViewModel(
             IDeviceTextMacroStateMachine deviceTextMacroStateMachine,
-            IDeviceTextMacroBgWorkerFactory deviceTextMacroBgWorkerFactory) :
+            IDeviceTextMacroBgWorkerFactory deviceTextMacroBgWorkerFactory,
+            IInstructionCollectionFactory instructionCollectionFactory) :
             base(deviceTextMacroStateMachine)
         {
-            _loopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
+            _loopCommand = new RelayCommand(
                 canExecute: LoopCommandCanExecute,
                 execute: LoopCommandExecute);
 
-            _oneShotCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
+            _oneShotCommand = new RelayCommand(
                 canExecute: OneShotCommandCanExecute,
                 execute: OneShotCommandExecute);
 
-            _stopCommand = new Ecs.Edpf.GUI.ComponentModel.RelayCommand(
+            _stopCommand = new RelayCommand(
                 canExecute: StopCommandCanExecute,
                 execute: StopCommandExecute);
 
@@ -80,6 +84,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _deviceTextMacroStateMachine.DeviceTextMacroStateChanged += DeviceTextMacroStateMachine_DeviceTextMacroStateChanged;
 
             _deviceTextMacroBgWorkerFactory = deviceTextMacroBgWorkerFactory;
+
+            _instructionCollectionFactory = instructionCollectionFactory;
 
             // set the initial state
             DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(null, new EventArgs());
@@ -93,12 +99,12 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _stopCommand.RaiseCommandCanExecuteChanged();
             _oneShotCommand.RaiseCommandCanExecuteChanged();
 
-            MacroTextEnabled = (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice);
+            MacroTextEnabled = ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice) || (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.NotOpenDevice));
         }
 
         private void StopCommandExecute(object obj)
         {
-            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.DeviceOpened);
+            _macroBgWorker.CancelAsync();
         }
 
         private bool StopCommandCanExecute(object obj)
@@ -109,32 +115,58 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private bool OneShotCommandCanExecute(object obj)
         {
-            return ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice) &&
-                (_instructions?.InstructionsCount > 0));
+            return (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice);
         }
 
-        private DeviceTextMacroSignal _macroStoppingNextSignal;
-        private void OneShotCommandExecute(object obj)
+
+        private void InternalMacroCommandExecute(InstructionCollection instructionCollection, DeviceTextMacroSignal signal, MacroExecutionType exeType)
         {
             // set the next state
-            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroOneShotting);
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(signal);
 
-            // make a copy so we dont have to worry about changes from one thread to the other
-            _macroLoopBgWorker = _deviceTextMacroBgWorkerFactory.GetDeviceTextMacroBgWorker(Instructions.Copy(), MacroExecutionType.OneShot);
-            _macroLoopBgWorker.ProgressChanged += MacroLoopBgWorker_ProgressChanged;
-            _macroLoopBgWorker.RunWorkerCompleted += MacroLoopBgWorker_RunWorkerCompleted;
+            _macroBgWorker = _deviceTextMacroBgWorkerFactory.GetDeviceTextMacroBgWorker(instructionCollection, exeType);
+            _macroBgWorker.ProgressChanged += MacroBgWorker_ProgressChanged;
+            _macroBgWorker.RunWorkerCompleted += MacroBgWorker_RunWorkerCompleted;
+
+            _macroBgWorker.RunWorkerAsync();
+
         }
 
-        private void MacroLoopBgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void OneShotCommandExecute(object obj)
         {
-            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(_macroStoppingNextSignal);
-            _macroLoopBgWorker.Dispose();
+            if (obj is InstructionCollectionInitArgs initArgs)
+            {
+                InstructionCollection instructionCollection = _instructionCollectionFactory.ParseDeviceTextMacroInitArgs(initArgs);
+                InternalMacroCommandExecute(instructionCollection, DeviceTextMacroSignal.MacroOneShotting, MacroExecutionType.OneShot);
+            }
+            else
+            {
+                throw new ArgumentException($"Argument for '{nameof(OneShotCommandExecute)}' is not the expected type.");
+            }
         }
 
-        private void MacroLoopBgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void MacroBgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroStop);
+            _macroBgWorker.Dispose();
+        }
+
+        private void MacroBgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (e.UserState is DeviceTextMacroProgressChanged devTxtMacroProgressChanged)
             {
+                if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.LoopingMacro ||
+                    _deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OneShottingMacro)
+                {
+                    IEnumerable<DeviceTextInstruction> devTextInstructions = devTxtMacroProgressChanged.TimeGroupings.SelectMany(tGrpng => tGrpng.DeviceTextInstructions);
+                    foreach (DeviceTextInstruction deviceTextInstruction in devTextInstructions)
+                    {
+                        Device.Write(deviceTextInstruction.GetDeviceText());
+                    }
+
+                }
+
+
                 //Device.Write(devTxtMacroProgressChanged.DeviceText);
             }
         }
@@ -143,23 +175,26 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         {
             if (obj is InstructionCollectionInitArgs initArgs)
             {
-
+                InstructionCollection instructionCollection = _instructionCollectionFactory.ParseDeviceTextMacroInitArgs(initArgs);
+                InternalMacroCommandExecute(instructionCollection, DeviceTextMacroSignal.MacroLooping, MacroExecutionType.Loop);
             }
-            _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroLooping);
+            else
+            {
+                throw new ArgumentException($"Argument for '{nameof(OneShotCommandExecute)}' is not the expected type.");
+            }
         }
 
         private static List<DeviceTextMacroState> _loopCanExecuteStates = new List<DeviceTextMacroState>
         { DeviceTextMacroState.OpenedDevice, DeviceTextMacroState.LoopingMacro };
         public bool LoopCommandCanExecute(object obj)
         {
-            return ((_loopCanExecuteStates.Contains(_deviceTextMacroStateMachine.DeviceTextMacroState)) &&
-                (_instructions?.InstructionsCount > 0));
+            return (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice);
         }
 
 
         public void ApplyDefaultSettings()
         {
-            Instructions = new InstructionCollection(new List<Instruction>());
+            
         }
 
         // settings names
@@ -171,7 +206,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             {
                 if (settings.ContainsKey(DeviceTextMacroSettingsName))
                 {
-                    Instructions = Newtonsoft.Json.JsonConvert.DeserializeObject<InstructionCollection>(settings[DeviceTextMacroSettingsName]);
+                    //Instructions = Newtonsoft.Json.JsonConvert.DeserializeObject<InstructionCollection>(settings[DeviceTextMacroSettingsName]);
                 }
 
             }
@@ -185,13 +220,14 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         public Dictionary<string, string> GetSettings()
         {
-            string deviceTextMacroStr = Newtonsoft.Json.JsonConvert.SerializeObject(Instructions);
-            Dictionary<string, string> settings = new Dictionary<string, string>
-            {
-                { DeviceTextMacroSettingsName, deviceTextMacroStr }
-            };
+            return new Dictionary<string, string>();
+            //string deviceTextMacroStr = Newtonsoft.Json.JsonConvert.SerializeObject(Instructions);
+            //Dictionary<string, string> settings = new Dictionary<string, string>
+            //{
+            //    { DeviceTextMacroSettingsName, deviceTextMacroStr }
+            //};
 
-            return settings;
+            //return settings;
         }
 
         private void CheckCommandsCanExecute()
