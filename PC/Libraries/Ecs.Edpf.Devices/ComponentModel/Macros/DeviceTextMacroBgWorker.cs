@@ -33,6 +33,8 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
                 {
                     ReportProgress(0, new DeviceTextMacroProgressChanged { RatioComplete = _iterationMachine.RatioComplete, TimeGroupings = timeGroupings });
                 }
+                // add some throttling so we dont overrun the application
+                System.Threading.Thread.Sleep(200);
             }
 
             if (CancellationPending)

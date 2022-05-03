@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Ecs.Edpf.GUI.UI.ViewModels;
 
@@ -139,6 +141,18 @@ namespace Ecs.Edpf.GUI.UI.Views
             _consoleViewModel.DeviceOutputBuffer.ListChanged += DeviceOutputBufferListChanged;
         }
 
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        private const int WM_VSCROLL = 277;
+        private const int SB_PAGEBOTTOM = 7;
+
+        public static void ScrollToBottom(RichTextBox MyRichTextBox)
+        {
+            SendMessage(MyRichTextBox.Handle, WM_VSCROLL, (IntPtr)SB_PAGEBOTTOM, IntPtr.Zero);
+        }
+
+
         private void DeviceOutputBufferListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
         {
             if (e.ListChangedType == System.ComponentModel.ListChangedType.ItemAdded)
@@ -162,8 +176,14 @@ namespace Ecs.Edpf.GUI.UI.Views
                 }
 
                 // set the current caret position to the end, scroll it automatically
-                _deviceHistoryRtb.SelectionStart = _deviceHistoryRtb.Text.Length;
-                _deviceHistoryRtb.ScrollToCaret();
+                // Originally we did below but under heavy load it would throw AccessViolationException --
+                // "Attempted to read or write protected memory. This is often an indication that other memory is corrupt."
+                // see https://stackoverflow.com/questions/14027505/accessviolationexception-with-richtextbox-scrolltocaret-in-forms-launched-by-xna
+                //_deviceHistoryRtb.SelectionStart = _deviceHistoryRtb.Text.Length;
+                //_deviceHistoryRtb.ScrollToCaret();
+
+                // Found stack overflow solution that provided this example of scrolling to bottom
+                ScrollToBottom(_deviceHistoryRtb);
             }
         }
 

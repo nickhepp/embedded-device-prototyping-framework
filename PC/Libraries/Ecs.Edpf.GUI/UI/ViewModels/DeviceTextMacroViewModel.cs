@@ -32,19 +32,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private RelayCommand _oneShotCommand;
         public IRelayCommand OneShotCommand => _oneShotCommand;
 
-        //private InstructionCollection _instructions;
-        //public InstructionCollection Instructions
-        //{
-        //    get
-        //    {
-        //        return _instructions;
-        //    }
-        //    set
-        //    {
-        //        _instructions = value;
-        //        CheckCommandsCanExecute();
-        //    }
-        //}
 
         private bool _macroTextEnabled;
         public bool MacroTextEnabled
@@ -56,6 +43,21 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             private set
             {
                 _macroTextEnabled = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
+        public const int MinPercentCompete = 0;
+        public const int MaxPercentCompete = 100;
+
+        private int _percentComplete = 0;
+        public int PercentComplete
+        {
+            get { return _percentComplete; }
+            private set
+            {
+                value = Math.Min(Math.Max(value, MinPercentCompete), MaxPercentCompete);
+                _percentComplete = value;
                 RaiseNotifyPropertyChanged();
             }
         }
@@ -121,12 +123,16 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         private void InternalMacroCommandExecute(InstructionCollection instructionCollection, DeviceTextMacroSignal signal, MacroExecutionType exeType)
         {
+
+            _macroBgWorker = _deviceTextMacroBgWorkerFactory.GetDeviceTextMacroBgWorker(instructionCollection, exeType);
+
             // set the next state
             _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(signal);
 
-            _macroBgWorker = _deviceTextMacroBgWorkerFactory.GetDeviceTextMacroBgWorker(instructionCollection, exeType);
             _macroBgWorker.ProgressChanged += MacroBgWorker_ProgressChanged;
             _macroBgWorker.RunWorkerCompleted += MacroBgWorker_RunWorkerCompleted;
+
+            PercentComplete = MinPercentCompete;
 
             _macroBgWorker.RunWorkerAsync();
 
@@ -149,6 +155,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         {
             _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroStop);
             _macroBgWorker.Dispose();
+            PercentComplete = 0;
         }
 
         private void MacroBgWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -166,8 +173,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
                 }
 
-
-                //Device.Write(devTxtMacroProgressChanged.DeviceText);
+                PercentComplete = (int)(100 * devTxtMacroProgressChanged.RatioComplete.GetValueOrDefault());
             }
         }
 

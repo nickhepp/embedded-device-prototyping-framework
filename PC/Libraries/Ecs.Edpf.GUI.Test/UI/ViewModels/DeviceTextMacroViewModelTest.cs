@@ -151,105 +151,12 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
         }
 
 
-        /// <summary>
-        /// //////////////////////////////////////////////////////////////
-        /// </summary>
-
-
-
-        private const string _oneShotCmdName = "OneShot";
-        private const string _stopCmdName = "Stop";
-        private const string _loopCmdName = "Loop";
-
-        private IRelayCommand GetRelayCommand(string commandName)
-        {
-            IRelayCommand cmd = null;
-            if (commandName == _oneShotCmdName)
-            {
-                cmd = _deviceTextMacroVwMdl.OneShotCommand;
-            }
-            else if (commandName == _stopCmdName)
-            {
-                cmd = _deviceTextMacroVwMdl.StopCommand;
-            }
-            else if (commandName == _loopCmdName)
-            {
-                cmd = _deviceTextMacroVwMdl.LoopCommand;
-            }
-            return cmd;
-        }
-
         private void SetDeviceTextMacroState(DeviceTextMacroState state)
         {
             _mockDevTxtMacroStateMachine.SetupGet(stateMachine => stateMachine.DeviceTextMacroState).Returns(state);
             _mockDevTxtMacroStateMachine.Raise(stateMachine => stateMachine.DeviceTextMacroStateChanged += null,
                  new EventArgs());
         }
-
-        //private void SetupEnabledDeviceTextMacro(DeviceTextMacroState state = DeviceTextMacroState.OpenedDevice)
-        //{
-        //    _deviceTextMacroVwMdl.Instructions = new InstructionCollection(
-        //        new List<Instruction>
-        //        {
-        //            new DelayInstruction(0.1)
-        //        }
-        //    );
-
-        //    SetDeviceTextMacroState(state);
-        //}
-
-
-
-
-
-
-
-        //[TestMethod]
-        //[DataRow(_oneShotCmdName)]
-        //[DataRow(_loopCmdName)]
-        //public void CommandCanExecute_MacroTextAndDevice_True(string cmdName)
-        //{
-        //    //-- arrange
-        //    SetupEnabledDeviceTextMacro();
-
-        //    //-- act
-
-        //    //-- assert
-        //    Assert.IsTrue(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should be enabled.");
-        //}
-
-        //[TestMethod]
-        //[DataRow(_oneShotCmdName)]
-        //[DataRow(_loopCmdName)]
-        //public void CommandCanExecute_NotOpenDevice_False(string cmdName)
-        //{
-        //    //-- arrange
-        //    SetupEnabledDeviceTextMacro();
-
-        //    //-- act
-        //    SetDeviceTextMacroState(DeviceTextMacroState.NotOpenDevice);
-
-        //    //-- assert
-        //    Assert.IsFalse(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should not be enabled.");
-        //}
-
-        [TestMethod]
-        [DataRow(_oneShotCmdName)]
-        [DataRow(_loopCmdName)]
-        public void CommandCanExecute_NoMacroText_False(string cmdName)
-        {
-            ////-- arrange
-            //SetupEnabledDeviceTextMacro();
-
-            //throw new NotImplementedException();
-            ////-- act
-            ////_deviceTextMacroVwMdl.Instructions = new Devices.IO.Macros.DeviceTextMacro();
-
-            ////-- assert
-            //Assert.IsFalse(GetRelayCommand(cmdName).CanExecute(null), $"'{cmdName}' command should not be enabled.");
-        }
-
-
 
 
     }

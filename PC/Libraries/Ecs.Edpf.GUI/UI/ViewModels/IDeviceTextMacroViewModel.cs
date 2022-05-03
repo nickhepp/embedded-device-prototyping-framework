@@ -31,6 +31,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         /// </summary>
         bool MacroTextEnabled { get; }
 
+        /// <summary>
+        /// The percent complete of the macro (0 to 100).
+        /// </summary>
+        int PercentComplete { get; }
+
 
     }
 }
