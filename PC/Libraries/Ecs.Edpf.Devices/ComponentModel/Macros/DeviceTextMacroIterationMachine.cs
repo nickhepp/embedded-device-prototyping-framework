@@ -31,18 +31,20 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
             {
                 double ratio;
                 int iterationidx = _currentGroupingIdx % _timeGroupings.Count;
-                if (_currentGroupingIdx == 0)
-                {
-                    ratio = 0.0;
-                }
-                else if ((iterationidx == 0) && (_currentGroupingIdx > 0))
-                {
-                    ratio = 1.0;
-                }
-                else
-                {
-                    ratio = (double)iterationidx / _timeGroupings.Count;
-                }
+                //if (_currentGroupingIdx == 0)
+                //{
+                //    ratio = 0.0;
+                //}
+                //else if ((iterationidx == 0) && (_currentGroupingIdx > 0))
+                //{
+                //    ratio = 1.0;
+                //}
+                //else
+                //{
+                //    ratio = (double)iterationidx / _timeGroupings.Count;
+                //}
+
+                ratio = ((double)(iterationidx + 1)) / _timeGroupings.Count;
 
                 return ratio;
             }
@@ -112,14 +114,43 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
             List<TimeGrouping> timeGroupings = new List<TimeGrouping>();
             while ((_currentGroupingIdx < totalIterations) && !Completed)
             {
-                if ((ExecutionType == MacroExecutionType.OneShot) && (_currentGroupingIdx >= _timeGroupings.Count))
+                if (ExecutionType == MacroExecutionType.OneShot)
                 {
-                    Completed = true;
+                    if (_currentGroupingIdx >= _timeGroupings.Count)
+                    {
+                        Completed = true;
+                    }
+                    else
+                    {
+                        timeGroupings.Add(GetTimeGroupingByIndex(_currentGroupingIdx));
+                        _currentGroupingIdx++;
+                    }
                 }
-                else
+                else //if (ExecutionType == MacroExecutionType.Loop)
                 {
-                    timeGroupings.Add(GetTimeGroupingByIndex(_currentGroupingIdx));
-                    _currentGroupingIdx++;
+
+                    if (_timeGroupings.Count == 1)
+                    {
+                        // if we only have 1 time grouping then we simply add that group
+                        timeGroupings.Add(_timeGroupings[0]);
+                        // and act like we have caught up
+                        _currentGroupingIdx = totalIterations;
+                    }
+                    else
+                    {
+                        int wholeIterations = (totalIterations - _currentGroupingIdx) / _timeGroupings.Count;
+                        if (wholeIterations > 0)
+                        {
+                            // jump the iterations far ahead, skip the entire groups 
+                            _currentGroupingIdx = _currentGroupingIdx + (wholeIterations * _timeGroupings.Count);
+                        }
+                        else
+                        {
+                            // add the remaining partials
+                            timeGroupings.Add(GetTimeGroupingByIndex(_currentGroupingIdx));
+                            _currentGroupingIdx++;
+                        }
+                    }
                 }
 
             }

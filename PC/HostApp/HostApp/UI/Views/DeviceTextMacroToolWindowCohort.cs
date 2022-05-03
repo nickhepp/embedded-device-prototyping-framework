@@ -27,9 +27,9 @@ namespace HostApp.UI.Views
 
         public IViewModel ViewModel => _deviceTextMacroViewModel;
 
-        public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/5";
+        public string RoadmapIssueUrl => null;
 
-        public ToolState State => ToolState.InProgress;
+        public ToolState State => ToolState.Active;
 
         public DeviceTextMacroToolWindowCohort()
         {
@@ -40,9 +40,7 @@ namespace HostApp.UI.Views
                 deviceTextMacroView.Enabled = true;
                 deviceTextMacroView.DeviceTextMacroViewModel = _deviceTextMacroViewModel;
                 ToolWindow toolWindow = new ToolWindow();
-
-                NotImplementedView notImplementedView = new NotImplementedView(deviceTextMacroView, RoadmapIssueUrl);
-                toolWindow.Initialize(notImplementedView, this.Name);
+                toolWindow.Initialize(deviceTextMacroView, this.Name);
                 IntPtr repeatIconPtr = HostApp.Properties.Resources.repeat.GetHicon();
                 Icon repeatIcon = Icon.FromHandle(repeatIconPtr);
                 toolWindow.Icon = repeatIcon;

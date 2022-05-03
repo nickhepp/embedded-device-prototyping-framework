@@ -182,7 +182,6 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._loadDemoScriptTsb.Name = "_loadDemoScriptTsb";
             this._loadDemoScriptTsb.Size = new System.Drawing.Size(146, 36);
             this._loadDemoScriptTsb.Text = "Load Demo Script...";
-            this._loadDemoScriptTsb.Click += new System.EventHandler(this.LoadDemoScriptTsb_Click);
             // 
             // DeviceTextMacroView
             // 

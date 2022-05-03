@@ -23,28 +23,29 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros.Instructions
         {
             //-- arrange
             // group 0
-            string grp0Idx0DevText = "0-0";
+            const string grp0Idx0DevText = "0-0";
+            const double grp0Delay = InstructionCollection.MinimumTimeGroupingOffsetInSeconds;
             DeviceTextInstruction grp0Idx0DevTextInstr = new DeviceTextInstruction(grp0Idx0DevText);
-            string grp0Idx1DevText = "0-1";
+            const string grp0Idx1DevText = "0-1";
             DeviceTextInstruction grp0Idx1DevTextInstr = new DeviceTextInstruction(grp0Idx1DevText);
             CommentInstruction grp0Idx2CmtInstr = new CommentInstruction("0-2");
 
             // group 1
-            double grp1Idx0Delay = 0.500;
+            const double grp1Idx0Delay = 0.500;
             DelayInstruction grp1Idx0DelayInstr = new DelayInstruction(grp1Idx0Delay);
-            string grp1Idx1DevText = "1-1";
+            const string grp1Idx1DevText = "1-1";
             DeviceTextInstruction grp1Idx1DevTextInstr = new DeviceTextInstruction(grp1Idx1DevText);
             string grp1Idx2DevText = "1-2";
             DeviceTextInstruction grp1Idx2DevTextInstr = new DeviceTextInstruction(grp1Idx2DevText);
             CommentInstruction grp1Idx3CmtInstr = new CommentInstruction("1-3");
 
             // group 2
-            double grp2Idx0Delay = 0.700;
+            const double grp2Idx0Delay = 0.700;
             DelayInstruction grp2Idx0DelayInstr = new DelayInstruction(grp2Idx0Delay);
             CommentInstruction grp2Idx1CmtInstr = new CommentInstruction("2-1");
-            string grp2Idx2DevText = "2-2";
+            const string grp2Idx2DevText = "2-2";
             DeviceTextInstruction grp2Idx2DevTextInstr = new DeviceTextInstruction(grp2Idx2DevText);
-            string grp2Idx3DevText = "2-3";
+            const string grp2Idx3DevText = "2-3";
             DeviceTextInstruction grp2Idx3DevTextInstr = new DeviceTextInstruction(grp2Idx3DevText);
 
             InstructionCollection instructionCollection = new InstructionCollection(
@@ -67,9 +68,9 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros.Instructions
                 Assert.AreEqual(expected: 2, grouping.DeviceTextInstructions.Count, "Did not find the expected amount of DeviceTextInstructions in each grouping.");
             }
 
-            Assert.AreEqual(expected: 0.0, groupings[0].TimeOffsetInSeconds, "Grouping 0 did not have the correct time offest.");
-            Assert.AreEqual(expected: grp1Idx0Delay, groupings[1].TimeOffsetInSeconds, "Grouping 1 did not have the correct time offest.");
-            Assert.AreEqual(expected: grp1Idx0Delay + grp2Idx0Delay, groupings[2].TimeOffsetInSeconds, "Grouping 2 did not have the correct time offest.");
+            Assert.AreEqual(expected: grp0Delay, groupings[0].TimeOffsetInSeconds, "Grouping 0 did not have the correct time offest.");
+            Assert.AreEqual(expected: grp0Delay + grp1Idx0Delay, groupings[1].TimeOffsetInSeconds, "Grouping 1 did not have the correct time offest.");
+            Assert.AreEqual(expected: grp0Delay + grp1Idx0Delay + grp2Idx0Delay, groupings[2].TimeOffsetInSeconds, "Grouping 2 did not have the correct time offest.");
 
             List<(int grpIdx, int itemIdx, DeviceTextInstruction devTxtInstr)> mappings = new List<(int grpIdx, int itemIdx, DeviceTextInstruction devTxtInstr)>
             {
@@ -80,7 +81,7 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros.Instructions
 
             foreach ((int grpIdx, int itemIdx, DeviceTextInstruction devTxtInstr) mapping in mappings)
             {
-                Assert.ReferenceEquals(groupings[mapping.grpIdx].DeviceTextInstructions[mapping.itemIdx], mapping.devTxtInstr);
+                Assert.IsTrue(ReferenceEquals(groupings[mapping.grpIdx].DeviceTextInstructions[mapping.itemIdx], mapping.devTxtInstr));
             }
             
         }

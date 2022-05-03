@@ -81,7 +81,67 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
         }
 
         [TestMethod]
-        public void GetNextDeviceTextLine_Loops_DoesntComplete()
+        public void GetNextTimeGroupings_LongDelay_CorrectOnesNext()
+        {
+            //-- arrange
+            InstructionCollection instructions = GetQuadInstructionCollection();
+            List<TimeGrouping> srcGroupings = instructions.GetTimeGroupings().ToList();
+
+            double totalIterationTime = instructions.GetTotalTimeDuration();
+
+            DateTime startTime = DateTime.Now;
+            _stubDateTimeProvider.SetCurrentDateTime(startTime);
+            _devTextMacroIterMachine = new DeviceTextMacroIterationMachine(instructions, MacroExecutionType.Loop, _stubDateTimeProvider);
+
+            // find the delay for the first two groups, set that delay, get the groups
+            double twoGroupsDelayInSeconds = firstDelay + secondDelay + thirdDelay + (fourthDelay / 2.0);
+            _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds(twoGroupsDelayInSeconds * 1000));
+            List<TimeGrouping> timeGroupings = _devTextMacroIterMachine.GetNextTimeGroupings();
+            Assert.AreEqual(expected: 2, actual: timeGroupings.Count);
+            Assert.IsTrue(object.ReferenceEquals(timeGroupings[0], srcGroupings[0]));
+            Assert.IsTrue(object.ReferenceEquals(timeGroupings[1], srcGroupings[1]));
+
+            // with this amount of delay by itself we should get the last two groups.
+            double lastTwoGroupsDelayInSeconds = totalIterationTime + (firstDelay / 2);
+            // but we want to test many total iterations of delay
+            lastTwoGroupsDelayInSeconds += 10 * totalIterationTime;
+            _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds(lastTwoGroupsDelayInSeconds * 1000));
+            timeGroupings = _devTextMacroIterMachine.GetNextTimeGroupings();
+            Assert.AreEqual(expected: 2, actual: timeGroupings.Count);
+            Assert.IsTrue(object.ReferenceEquals(timeGroupings[0], srcGroupings[2]));
+            Assert.IsTrue(object.ReferenceEquals(timeGroupings[1], srcGroupings[3]));
+        }
+
+
+        [TestMethod]
+        public void GetNextTimeGroupings_LongDelayOneGrouping_GetsGroup()
+        {
+            //-- arrange
+            InstructionCollection instructions = new InstructionCollection(
+                new List<Instruction>
+                {
+                    new DeviceTextInstruction(line31)
+                });
+
+            DateTime startTime = DateTime.Now;
+            _stubDateTimeProvider.SetCurrentDateTime(startTime);
+
+            _devTextMacroIterMachine = new DeviceTextMacroIterationMachine(instructions, MacroExecutionType.Loop, _stubDateTimeProvider);
+
+            double delayInMilliseconds = 1000 * InstructionCollection.MinimumTimeGroupingOffsetInSeconds * 50;
+            _stubDateTimeProvider.SetCurrentDateTime(startTime.AddMilliseconds(delayInMilliseconds));
+
+            //-- act
+            List<TimeGrouping> groupings = _devTextMacroIterMachine.GetNextTimeGroupings();
+
+            //-- assert
+            Assert.AreEqual(expected: 1, actual: groupings.Count);
+        }
+
+
+
+        [TestMethod]
+        public void GetNextTimeGroupings_Loops_DoesntComplete()
         {
             //-- arrange
             InstructionCollection instructions = GetQuadInstructionCollection();
@@ -146,7 +206,7 @@ namespace Ecs.Edpf.Devices.Test.ComponentModel.Macros
 
 
         [TestMethod]
-        public void GetNextDeviceTextLine_NonLoop_Completes()
+        public void GetNextTimeGroupings_NonLoop_Completes()
         {
             //-- arrange
             InstructionCollection instructions = GetQuadInstructionCollection();

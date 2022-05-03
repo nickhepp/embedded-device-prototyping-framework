@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Ecs.Edpf.GUI.UI.Views
 {
-    public partial class DeviceTextMacroView : UserControl
+    public partial class DeviceTextMacroView : UserControl, IRelayCommandExceptionHandler
     {
 
         private IDeviceTextMacroViewModel _deviceTextMacroViewModel;
@@ -53,6 +53,10 @@ namespace Ecs.Edpf.GUI.UI.Views
             _loopBtn.ImageList.ColorDepth = ColorDepth.Depth32Bit;
             _loopBtn.ImageList.ImageSize = new Size(50, 50);
             _loopBtn.Image = _loopBtn.ImageList.Images[0];
+
+            // set the progress bar min and max
+            _progressTspgbr.ProgressBar.Minimum = Ecs.Edpf.GUI.UI.ViewModels.DeviceTextMacroViewModel.MinPercentCompete;
+            _progressTspgbr.ProgressBar.Maximum = Ecs.Edpf.GUI.UI.ViewModels.DeviceTextMacroViewModel.MaxPercentCompete;
         }
 
         private void UpdateDeviceTextMacroViewModel()
@@ -64,34 +68,37 @@ namespace Ecs.Edpf.GUI.UI.Views
             else
             {
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_oneShotBtn, _deviceTextMacroViewModel.OneShotCommand, GetInstructionCollectionInitArgs));
+                    new RelayCommandHandler(_oneShotBtn, _deviceTextMacroViewModel.OneShotCommand, relayCommandExHandler: this, getCommandArgHandler: GetInstructionCollectionInitArgs));
 
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_loopBtn, _deviceTextMacroViewModel.LoopCommand, GetInstructionCollectionInitArgs));
+                    new RelayCommandHandler(_loopBtn, _deviceTextMacroViewModel.LoopCommand, relayCommandExHandler: this, getCommandArgHandler: GetInstructionCollectionInitArgs));
 
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_stopBtn, _deviceTextMacroViewModel.StopCommand));
+                    new RelayCommandHandler(_stopBtn, _deviceTextMacroViewModel.StopCommand, relayCommandExHandler: this));
 
                 _scriptRtb.DataBindings.Add(new Binding(nameof(RichTextBox.Enabled), _deviceTextMacroViewModel, nameof(IDeviceTextMacroViewModel.MacroTextEnabled)));
+
+                SetProgressBar();
 
                 _deviceTextMacroViewModel.PropertyChanged += DeviceTextMacroViewModel_PropertyChanged;
 
             }
         }
 
+        private void SetProgressBar()
+        {
+            _progressTspgbr.ProgressBar.Value = _deviceTextMacroViewModel.PercentComplete;
+        }
+
+
         private void DeviceTextMacroViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            //if (e.PropertyName == nameof(IDeviceTextMacroViewModel.MacroTextEnabled))
-            //{
-            //    // not sure why this is needed
-            //    _scriptRtb.Enabled = _deviceTextMacroViewModel.MacroTextEnabled;
-            //}
+            if (e.PropertyName == nameof(IDeviceTextMacroViewModel.PercentComplete))
+            {
+                SetProgressBar();
+            }
         }
 
-        private void LoadDemoScriptTsb_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private InstructionCollectionInitArgs GetInstructionCollectionInitArgs()
         {
@@ -103,21 +110,10 @@ namespace Ecs.Edpf.GUI.UI.Views
             return initArgs;
         }
 
-
-        //private void _loopBtn_Click(object sender, EventArgs e)
-        //{
-        //    _deviceTextMacroViewModel.LoopCommand.Execute(initArgs);
-        //}
-
-        //private void _oneShotBtn_Click(object sender, EventArgs e)
-        //{
-        //    List<string> lines = _scriptRtb.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
-        //    InstructionCollectionInitArgs initArgs = new InstructionCollectionInitArgs
-        //    {
-        //        InstructionsLines = lines
-        //    };
-        //    _deviceTextMacroViewModel.OneShotCommand.Execute(initArgs);
-        //}
+        public void HandleException(Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
 
     }
 }
