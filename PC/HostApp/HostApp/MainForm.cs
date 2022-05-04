@@ -30,9 +30,10 @@ namespace HostApp
         private ISettingsManager _settingsManager;
         private ISettingsResourceStore _settingsResourceStore;
         private DockPanelSettingsResource _dockPanelSettingsResource;
-        private WeifenLuo.WinFormsUI.Docking.DockPanel _dockPanel;
+        private DockPanel _dockPanel;
         private IHostAppMainViewModel _hostAppMainViewModel;
         private List<ToolWindow> _toolWindows;
+        private List<IToolWindowCohort> _toolWindowCohorts;
         private bool _showSplash;
         private SplashScreen _splashScreen;
         private IWarningMessageBoxService _warningMessageBoxService;
@@ -43,16 +44,52 @@ namespace HostApp
 
             _warningMessageBoxService = new WarningMessageBoxService();
             this.Load += MainForm_Load;
-            this.FormClosing += MainFormFormClosing;   
+            this.FormClosing += MainFormFormClosing;  
+            
             this.Text = $"{this.Text} V{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
         }
 
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            List<ICloseCancelable> closeCancelables = _toolWindowCohorts.Where(twc => twc.ViewModel is ICloseCancelable).ToList().ConvertAll(twc => (ICloseCancelable)twc.ViewModel);
+            List<string> cancelReasons = closeCancelables.Select(cc => cc.GetCancelCloseReason()).Where(cancelReason => cancelReason != null).ToList();
+            if (cancelReasons.Count > 0)
+            {
+                e.Cancel = true;
+                MessageBox.Show(text: string.Join(Environment.NewLine, cancelReasons), caption: "Close Canceled", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                // intitiate the start of closing
+                List<IWaitForCompletable> completables = _toolWindowCohorts.Where(twc => twc.ViewModel is IWaitForCompletable).ToList().ConvertAll(twc => (IWaitForCompletable)twc.ViewModel);
+                foreach (IWaitForCompletable completable in completables)
+                {
+                    completable.BeginCompletion();
+                }
+
+                // wait for the closing actions to complete
+                foreach (IWaitForCompletable completable in completables)
+                {
+                    completable.WaitForCompletion();
+                }
+
+                // when attempting the above, the lines below still created issues
+                //IDeviceViewModel deviceViewModel = _toolWindowCohorts.Where(twc => twc.ViewModel is IDeviceViewModel).Select(twc => (IDeviceViewModel)twc.ViewModel).FirstOrDefault();
+                //if (deviceViewModel != null && deviceViewModel.Device != null && deviceViewModel.Device.IsOpen)
+                //{
+                //    deviceViewModel.Device.Close();
+                //}
+            }
+
+            base.OnFormClosing(e);
+        }
+
+
         private void MainFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            //_dockPanel.SaveAsXml()
 
 
-            //string filePath = _recentFrmSettingsLst.Save();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -75,9 +112,10 @@ namespace HostApp
 
             deviceProviderRegistry.SynchronizeRegistry();
 
+            _toolWindowCohorts = toolWindowCohortFactory.GetToolWindowCohorts();
             Dictionary<string, IToolWindowCohort> dockContents = new Dictionary<string, IToolWindowCohort>(); 
             _toolWindows = new List<ToolWindow>();
-            foreach (IToolWindowCohort toolWindowCohort in toolWindowCohortFactory.GetToolWindowCohorts())
+            foreach (IToolWindowCohort toolWindowCohort in _toolWindowCohorts)
             {
                 ToolStripMenuItem tsm = new ToolStripMenuItem(toolWindowCohort.Name);
                 ToolWindow toolWindow = toolWindowCohort.GetToolWindow();

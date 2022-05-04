@@ -54,7 +54,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._mainTlp.Controls.Add(this._scriptRtb, 0, 0);
             this._mainTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainTlp.Location = new System.Drawing.Point(0, 39);
-            this._mainTlp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._mainTlp.Margin = new System.Windows.Forms.Padding(2);
             this._mainTlp.Name = "_mainTlp";
             this._mainTlp.RowCount = 2;
             this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -78,7 +78,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._buttonsTlp.Controls.Add(this._stopBtn, 5, 0);
             this._buttonsTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._buttonsTlp.Location = new System.Drawing.Point(2, 267);
-            this._buttonsTlp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._buttonsTlp.Margin = new System.Windows.Forms.Padding(2);
             this._buttonsTlp.Name = "_buttonsTlp";
             this._buttonsTlp.RowCount = 1;
             this._buttonsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -91,7 +91,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._oneShotBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this._oneShotBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.repeat_one_64x64;
             this._oneShotBtn.Location = new System.Drawing.Point(217, 2);
-            this._oneShotBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._oneShotBtn.Margin = new System.Windows.Forms.Padding(2);
             this._oneShotBtn.Name = "_oneShotBtn";
             this._oneShotBtn.Size = new System.Drawing.Size(78, 73);
             this._oneShotBtn.TabIndex = 0;
@@ -105,7 +105,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._loopBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this._loopBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.repeat_64x64;
             this._loopBtn.Location = new System.Drawing.Point(68, 2);
-            this._loopBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._loopBtn.Margin = new System.Windows.Forms.Padding(2);
             this._loopBtn.Name = "_loopBtn";
             this._loopBtn.Size = new System.Drawing.Size(78, 73);
             this._loopBtn.TabIndex = 1;
@@ -119,7 +119,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._stopBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this._stopBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.pause;
             this._stopBtn.Location = new System.Drawing.Point(366, 2);
-            this._stopBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._stopBtn.Margin = new System.Windows.Forms.Padding(2);
             this._stopBtn.Name = "_stopBtn";
             this._stopBtn.Size = new System.Drawing.Size(78, 73);
             this._stopBtn.TabIndex = 2;
@@ -131,7 +131,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             // 
             this._scriptRtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this._scriptRtb.Location = new System.Drawing.Point(2, 2);
-            this._scriptRtb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._scriptRtb.Margin = new System.Windows.Forms.Padding(2);
             this._scriptRtb.Name = "_scriptRtb";
             this._scriptRtb.Size = new System.Drawing.Size(514, 261);
             this._scriptRtb.TabIndex = 3;
@@ -147,7 +147,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._loadDemoScriptTsb});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.Size = new System.Drawing.Size(518, 39);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
@@ -159,6 +159,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._uploadScriptTsb.Name = "_uploadScriptTsb";
             this._uploadScriptTsb.Size = new System.Drawing.Size(123, 36);
             this._uploadScriptTsb.Text = "Upload Script...";
+            this._uploadScriptTsb.Visible = false;
             // 
             // _downloadScriptTsb
             // 
@@ -167,6 +168,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._downloadScriptTsb.Name = "_downloadScriptTsb";
             this._downloadScriptTsb.Size = new System.Drawing.Size(139, 36);
             this._downloadScriptTsb.Text = "Download Script...";
+            this._downloadScriptTsb.Visible = false;
             // 
             // _progressTspgbr
             // 
@@ -182,6 +184,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._loadDemoScriptTsb.Name = "_loadDemoScriptTsb";
             this._loadDemoScriptTsb.Size = new System.Drawing.Size(146, 36);
             this._loadDemoScriptTsb.Text = "Load Demo Script...";
+            this._loadDemoScriptTsb.Visible = false;
             // 
             // DeviceTextMacroView
             // 
@@ -189,7 +192,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this._mainTlp);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DeviceTextMacroView";
             this.Size = new System.Drawing.Size(518, 385);
             this._mainTlp.ResumeLayout(false);

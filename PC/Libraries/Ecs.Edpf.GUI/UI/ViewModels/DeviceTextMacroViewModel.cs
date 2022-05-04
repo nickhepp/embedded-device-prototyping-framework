@@ -6,10 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Ecs.Edpf.Devices.ComponentModel;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
-    public class DeviceTextMacroViewModel : BaseDeviceViewModel, ISettingsResource, IDeviceTextMacroViewModel
+    public class DeviceTextMacroViewModel : BaseDeviceViewModel, ISettingsResource, IDeviceTextMacroViewModel, ICloseCancelable //IWaitForCompletable
     {
 
         private IDeviceTextMacroBgWorkerFactory _deviceTextMacroBgWorkerFactory;
@@ -19,6 +20,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private IDeviceTextMacroStateMachine _deviceTextMacroStateMachine;
 
         private IInstructionCollectionFactory _instructionCollectionFactory;
+
+        private IDateTimeProvider _dateTimeProvider;
 
         public string ResourceName => "DeviceTextMacro";
 
@@ -67,7 +70,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         public DeviceTextMacroViewModel(
             IDeviceTextMacroStateMachine deviceTextMacroStateMachine,
             IDeviceTextMacroBgWorkerFactory deviceTextMacroBgWorkerFactory,
-            IInstructionCollectionFactory instructionCollectionFactory) :
+            IInstructionCollectionFactory instructionCollectionFactory,
+            IDateTimeProvider dateTimeProvider) :
             base(deviceTextMacroStateMachine)
         {
             _loopCommand = new RelayCommand(
@@ -89,6 +93,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
             _instructionCollectionFactory = instructionCollectionFactory;
 
+            _dateTimeProvider = dateTimeProvider;
+
             // set the initial state
             DeviceTextMacroStateMachine_DeviceTextMacroStateChanged(null, new EventArgs());
 
@@ -108,7 +114,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         {
             _macroBgWorker.CancelAsync();
         }
-
+        
         private bool StopCommandCanExecute(object obj)
         {
             return ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.LoopingMacro) || 
@@ -154,7 +160,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private void MacroBgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             _deviceTextMacroStateMachine.SendDeviceTextMacroSignal(DeviceTextMacroSignal.MacroStop);
+            _macroBgWorker.ProgressChanged -= MacroBgWorker_ProgressChanged;
+            _macroBgWorker.RunWorkerCompleted -= MacroBgWorker_RunWorkerCompleted;
             _macroBgWorker.Dispose();
+
+            _macroBgWorker = null;
             PercentComplete = 0;
         }
 
@@ -162,8 +172,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         {
             if (e.UserState is DeviceTextMacroProgressChanged devTxtMacroProgressChanged)
             {
-                if (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.LoopingMacro ||
-                    _deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OneShottingMacro)
+                if ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.LoopingMacro ||
+                    _deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OneShottingMacro) &&
+                    DeviceState == Devices.ComponentModel.DeviceState.OpenedDevice)
                 {
                     IEnumerable<DeviceTextInstruction> devTextInstructions = devTxtMacroProgressChanged.TimeGroupings.SelectMany(tGrpng => tGrpng.DeviceTextInstructions);
                     foreach (DeviceTextInstruction deviceTextInstruction in devTextInstructions)
@@ -243,6 +254,37 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _stopCommand.RaiseCommandCanExecuteChanged(this);
         }
 
- 
+        // I think the code below worked just fine, but it ended up not being sufficient to stop exceptions
+        //private const double MaxCompletionDurationSeconds = 5.0;
+        //private DateTime? _endComplete = null;
+        //public void BeginCompletion()
+        //{
+        //    if (StopCommandCanExecute(null))
+        //    {
+        //        StopCommandExecute(null);
+        //        _endComplete = _dateTimeProvider.GetCurrentDateTime().AddSeconds(MaxCompletionDurationSeconds);
+        //    }
+        //}
+
+        //public void WaitForCompletion()
+        //{
+        //    if (_endComplete.HasValue)
+        //    {
+        //        while (!_macroBgWorker.CancellationAcknowledge && (_endComplete.Value > _dateTimeProvider.GetCurrentDateTime()))
+        //        {
+        //            System.Threading.Thread.Sleep(100);
+        //        }
+        //    }
+        //}
+
+        public string GetCancelCloseReason()
+        {
+            string cancelReason = null;
+            if (StopCommandCanExecute(null))
+            {
+                cancelReason = "The application cannot be closed while a macro is executing. Please stop the execution of the macro.";
+            }
+            return cancelReason;
+        }
     }
 }
