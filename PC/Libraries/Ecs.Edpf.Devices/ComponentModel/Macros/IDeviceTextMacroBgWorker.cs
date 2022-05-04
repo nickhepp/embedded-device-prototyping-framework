@@ -14,6 +14,8 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros
 
         event RunWorkerCompletedEventHandler RunWorkerCompleted;
 
+        bool CancellationAcknowledge { get; }
+
         void RunWorkerAsync();
 
         void CancelAsync();

@@ -87,7 +87,10 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         private void SetProgressBar()
         {
-            _progressTspgbr.ProgressBar.Value = _deviceTextMacroViewModel.PercentComplete;
+            if (_progressTspgbr.ProgressBar != null)
+            {
+                _progressTspgbr.ProgressBar.Value = _deviceTextMacroViewModel.PercentComplete;
+            }
         }
 
 
