@@ -1,23 +1,17 @@
-﻿using Ecs.Edpf.Devices;
-using Ecs.Edpf.Devices.IO.Cmds;
+﻿using Ecs.Edpf.Devices.IO.Cmds;
 using Ecs.Edpf.Devices.IO.Params;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels
 {
-
-    /// <summary>
-    /// This view model represents one device command (command name with optional arguments) that can be sent to the device.
-    /// </summary>
-    public class DeviceCommandViewModel : BaseViewModel, IDeviceCommandViewModel
+    public abstract class BaseDeviceCommandViewModel : BaseViewModel
     {
-        private IDevice _device;
+
         private IDeviceCommand _deviceCommand;
+        protected IDeviceCommand DeviceCommand => _deviceCommand;
 
         private PropertyDescriptorCollection _pdColl;
 
@@ -25,9 +19,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         public bool IsValid => _deviceCommand.IsValid;
 
-        public DeviceCommandViewModel(IDevice device, IDeviceCommand deviceCommand)
+        public BaseDeviceCommandViewModel(IDeviceCommand deviceCommand)
         {
-            _device = device;
             _deviceCommand = deviceCommand;
             _deviceCommand.PropertyChanged += DeviceCommandPropertyChanged;
 
@@ -50,6 +43,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _pdColl = new PropertyDescriptorCollection(pdDescs.ToArray());
         }
 
+
         private void DeviceCommandPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(IDeviceCommand.IsValid))
@@ -61,11 +55,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         public override PropertyDescriptorCollection GetProperties()
         {
             return _pdColl;
-        }
-
-        public void Execute()
-        {
-            _device.ExecuteCommand(_deviceCommand);
         }
 
         internal class CommandMethodNamePropertyDescriptor : PropertyDescriptor
@@ -86,7 +75,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
             private string _methodName;
 
-            public CommandMethodNamePropertyDescriptor(string methodName) : base(name:"MethodName", GetAttributes())
+            public CommandMethodNamePropertyDescriptor(string methodName) : base(name: "MethodName", GetAttributes())
             {
                 _methodName = methodName;
             }
@@ -171,8 +160,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
 
         }
-
-
 
     }
 }

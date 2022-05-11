@@ -36,6 +36,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         /// </summary>
         int PercentComplete { get; }
 
+        // Whether adding command text should be enabled.
+        bool AddCommandTextEnabled { get; }
+
 
     }
 }
