@@ -11,7 +11,7 @@
     <Compile Update="UI\Views\ChartingView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UI\Views\LoggingView.cs">
+    <Compile Update="UI\Views\LoggerView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\Views\SettingsView.cs">

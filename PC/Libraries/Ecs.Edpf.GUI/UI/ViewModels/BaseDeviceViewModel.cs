@@ -46,7 +46,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
 
         private IDeviceProvider _deviceProvider;
-        public IDeviceProvider DeviceProvider
+        public virtual IDeviceProvider DeviceProvider
         {
             get
             {

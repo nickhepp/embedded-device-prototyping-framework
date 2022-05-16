@@ -5,15 +5,30 @@ using System.Text;
 
 namespace Ecs.Edpf.Devices.Logging
 {
-    public class LoggerFactory
+    public class LoggerFactory : ILoggerFactory
     {
 
+        private FileLoggerSettings _fileLoggerSettings;
 
-        public ILogger GetFileLogger(FileLoggerSettings fileLoggerSettings)
+        public LoggerFactory(FileLoggerSettings fileLoggerSettings)
+        {
+            _fileLoggerSettings = fileLoggerSettings;
+        }
+
+        public ILogger GetLogger()
         {
             Serilog.ILogger logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.File("logfile.log", rollingInterval: RollingInterval.Day)
+                .WriteTo.File(
+                        path: _fileLoggerSettings.Path,
+                        outputTemplate: _fileLoggerSettings.OutputTemplate,
+                        fileSizeLimitBytes: _fileLoggerSettings.FileSizeLimitBytes,
+                        buffered: _fileLoggerSettings.Buffered,
+                        flushToDiskInterval: _fileLoggerSettings.FlushToDiskInterval,
+                        rollingInterval: _fileLoggerSettings.RollingInterval,
+                        rollOnFileSizeLimit: _fileLoggerSettings.RollOnFileSizeLimit,
+                        retainedFileCountLimit: _fileLoggerSettings.RetainedFileCountLimit,
+                        retainedFileTimeLimit: _fileLoggerSettings.RetainedFileTimeLimit)
                 .CreateLogger();
 
             return new FileLogger(logger);

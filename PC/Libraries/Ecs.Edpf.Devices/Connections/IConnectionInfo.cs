@@ -6,5 +6,9 @@ namespace Ecs.Edpf.Devices.Connections
 {
     public interface IConnectionInfo
     {
+
+        string ConnectionName { get; }
+
+        string ConnectionType { get; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.Devices.Connections;
 using Ecs.Edpf.Devices.IO.Cmds;
+using Ecs.Edpf.Devices.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,7 @@ namespace Ecs.Edpf.Devices
 
         ReadOnlyCollection<IDeviceCommand> DeviceCommands { get; } 
 
+        ILogger DeviceLogger { get; set; }
 
         int CommandTimeout { get; set; }
 

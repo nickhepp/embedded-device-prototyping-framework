@@ -18,8 +18,6 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
 
         private Lazy<IEnumerable<TimeGrouping>> _timeGroupings;
 
-        private Lazy<double> _totalTimeDuration;
-
         public InstructionCollection(IEnumerable<Instruction> instructions)
         {
             _instructions = instructions.ToList();

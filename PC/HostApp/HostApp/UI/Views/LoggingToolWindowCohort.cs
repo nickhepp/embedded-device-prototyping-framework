@@ -1,6 +1,8 @@
 ﻿using Ecs.Edpf.Devices.ComponentModel;
+using Ecs.Edpf.Devices.Logging;
 using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.Logger;
 using Ecs.Edpf.GUI.UI.Views;
 using System;
 using System.Collections.Generic;
@@ -23,10 +25,10 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
+        private ILoggerSettingsViewModel _loggerSettingsViewModel;
+        private ILoggerViewModel _loggerViewModel; 
 
-        private IConsoleViewModel _consoleViewModel = new ConsoleViewModel(new DeviceStateMachine());
-        
-        public IViewModel ViewModel => _consoleViewModel;
+        public IViewModel ViewModel => _loggerViewModel;
 
         public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/3";
 
@@ -34,20 +36,19 @@ namespace HostApp.UI.Views
 
         public LoggingToolWindowCohort()
         {
+
+            _loggerSettingsViewModel = new LoggerSettingsViewModel();
+            ILoggerFactory loggerFactory = new LoggerFactory(new FileLoggerSettings());
+            ILogLifeCycleManager logLifeCycleManager = new LogLifeCycleManager(loggerFactory);
+            _loggerViewModel = new LoggerViewModel(new DeviceStateMachine(), _loggerSettingsViewModel, logLifeCycleManager);
+
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
-                LoggingView loggingView = new LoggingView
-                {
-                    //ConsoleViewModel = _consoleViewModel
-                };
-                //consoleView.ShowConsoleHeader = false;
-                loggingView.Enabled = false;
-
+                LoggerView loggerView = new LoggerView();
+                loggerView.Enabled = true;
+                loggerView.LoggerViewModel = _loggerViewModel;
                 ToolWindow toolWindow = new ToolWindow();
-                toolWindow.DockAreas |= WeifenLuo.WinFormsUI.Docking.DockAreas.Document;
-                //toolWindow.Initialize(loggingView, this.Name);
-                toolWindow.Initialize(new NotImplementedView(RoadmapIssueUrl), this.Name);
-
+                toolWindow.Initialize(loggerView, this.Name);
                 IntPtr loggingIconPtr = HostApp.Properties.Resources.clipboard_list.GetHicon();
                 Icon loggingIcon = Icon.FromHandle(loggingIconPtr);
                 toolWindow.Icon = loggingIcon;

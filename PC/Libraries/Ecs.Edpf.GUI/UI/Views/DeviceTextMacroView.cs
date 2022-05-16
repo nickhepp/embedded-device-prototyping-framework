@@ -61,11 +61,9 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         private void UpdateDeviceTextMacroViewModel()
         {
-            if (_deviceTextMacroViewModel == null)
-            {
-                _relayCmdHandlers.Clear();
-            }
-            else
+            _relayCmdHandlers.Clear();
+
+            if (_deviceTextMacroViewModel != null)
             {
                 _relayCmdHandlers.Add(
                     new RelayCommandHandler(_oneShotBtn, _deviceTextMacroViewModel.OneShotCommand, relayCommandExHandler: this, getCommandArgHandler: GetInstructionCollectionInitArgs));
@@ -123,7 +121,7 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         public void HandleException(Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            RelayCommandExceptionHandlerUtility.HandleException(ex);
         }
 
         private void _tsbAddCommand_Click(object sender, EventArgs e)

@@ -8,15 +8,25 @@ namespace Ecs.Edpf.Devices.Logging
     {
 
         private Serilog.ILogger _serilogLogger;
+        private IDisposable _disposableLogger;
 
         public FileLogger(Serilog.ILogger serilogLogger)
         {
             _serilogLogger = serilogLogger;
+            _disposableLogger = serilogLogger as IDisposable;
         }
 
         public void LogInformation(string messageTemplate)
         {
             _serilogLogger.Information(messageTemplate);
+        }
+
+        public void Dispose()
+        {
+            if (_disposableLogger != null)
+            {
+                _disposableLogger.Dispose();
+            }
         }
 
     }

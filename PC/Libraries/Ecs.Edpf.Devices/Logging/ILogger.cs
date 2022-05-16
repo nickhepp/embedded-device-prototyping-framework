@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ecs.Edpf.Devices.Logging
 {
-    public interface ILogger
+    public interface ILogger : IDisposable
     {
 
         void LogInformation(string messageTemplate);

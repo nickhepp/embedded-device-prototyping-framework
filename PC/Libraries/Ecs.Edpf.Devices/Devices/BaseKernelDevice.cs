@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.Devices.Connections;
 using Ecs.Edpf.Devices.IO.Cmds;
+using Ecs.Edpf.Devices.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -69,7 +70,7 @@ namespace Ecs.Edpf.Devices
             }
         }
 
-
+        public ILogger DeviceLogger { get; set; }
 
         private IConnectionFactory _deviceConnectionFactory;
 
@@ -301,6 +302,11 @@ namespace Ecs.Edpf.Devices
             if (!string.IsNullOrEmpty(response))
             {
                 DeviceOutputBuffer.Add(response);
+            }
+            if (DeviceLogger != null)
+            {
+                string devLogStr = $"{ConnectionInfo.ConnectionType}-[{ConnectionInfo.ConnectionName}]:{response}";
+                DeviceLogger.LogInformation(devLogStr);
             }
             return response;
         }
