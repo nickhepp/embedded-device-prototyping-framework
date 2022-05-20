@@ -25,7 +25,6 @@ namespace HostApp.UI.Views
 
         private Lazy<ToolWindow> _toolWindow;
 
-        private ILoggerSettingsViewModel _loggerSettingsViewModel;
         private ILoggerViewModel _loggerViewModel; 
 
         public IViewModel ViewModel => _loggerViewModel;
@@ -36,11 +35,10 @@ namespace HostApp.UI.Views
 
         public LoggingToolWindowCohort()
         {
-
-            _loggerSettingsViewModel = new LoggerSettingsViewModel();
-            ILoggerFactory loggerFactory = new LoggerFactory(new FileLoggerSettings());
+            LoggerSettingsViewModel loggerSettingsViewModel = new LoggerSettingsViewModel();
+            ILoggerFactory loggerFactory = new LoggerFactory(loggerSettingsViewModel);
             ILogLifeCycleManager logLifeCycleManager = new LogLifeCycleManager(loggerFactory);
-            _loggerViewModel = new LoggerViewModel(new DeviceStateMachine(), _loggerSettingsViewModel, logLifeCycleManager);
+            _loggerViewModel = new LoggerViewModel(new DeviceStateMachine(), loggerSettingsViewModel, logLifeCycleManager);
 
             _toolWindow = new Lazy<ToolWindow>(() =>
             {

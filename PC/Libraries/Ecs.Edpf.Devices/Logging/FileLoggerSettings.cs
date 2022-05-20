@@ -125,6 +125,12 @@ namespace Ecs.Edpf.Devices.Logging
             }
         }
 
+        public FileLoggerSettings()
+        {
+
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaiseNotifyPropertyChanged([CallerMemberName] string propName = null)

@@ -286,10 +286,35 @@ namespace Ecs.Edpf.Devices
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
+        private const string DeviceInteractionStartToken = "-->";
+        private const string DeviceInteractionEndToken = "<--";
+
+        private string GetDeviceDescription()
+        {
+            return $"{ConnectionInfo.ConnectionType}-[{ConnectionInfo.ConnectionName}]";
+        }
+
+        private void LogDeviceCommandText(string cmdText)
+        {
+            if (DeviceLogger != null)
+            {
+                string devLogStr = $"{GetDeviceDescription()}: device request{Environment.NewLine}{DeviceInteractionStartToken}{Environment.NewLine}{cmdText}{Environment.NewLine}{DeviceInteractionEndToken}";
+                DeviceLogger.LogInformation(devLogStr);
+            }
+        }
+
+        private void LogDeviceResponse(string response)
+        {
+            if (DeviceLogger != null)
+            {
+                string devLogStr = $"{GetDeviceDescription()}: device response{Environment.NewLine}{DeviceInteractionStartToken}{Environment.NewLine}{response}{Environment.NewLine}{DeviceInteractionEndToken}";
+                DeviceLogger.LogInformation(devLogStr);
+            }
+        }
  
         public string Write(string cmdText)
         {
@@ -298,15 +323,12 @@ namespace Ecs.Edpf.Devices
                 throw new Exception("Cannot write to an opened device.");
             }
             _deviceInputBuffer.Add(cmdText);
+            LogDeviceCommandText(cmdText);
             string response = InternalWriteLine(cmdText);
+            LogDeviceResponse(response);
             if (!string.IsNullOrEmpty(response))
             {
                 DeviceOutputBuffer.Add(response);
-            }
-            if (DeviceLogger != null)
-            {
-                string devLogStr = $"{ConnectionInfo.ConnectionType}-[{ConnectionInfo.ConnectionName}]:{response}";
-                DeviceLogger.LogInformation(devLogStr);
             }
             return response;
         }

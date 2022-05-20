@@ -58,19 +58,22 @@ namespace Ecs.Edpf.Devices.Logging
             }
         }
 
-
         private void DeviceProvider_DeviceCreated(object sender, EventArgs e)
         {
             _device = _deviceProvider.Device;
+            if (_logger == null)
+            {
+                _logger = _loggerFactory.GetLogger();
+            }
             _device.DeviceLogger = _logger;
             _device.DeviceClosed += DeviceClosed;
             _deviceDesc = $"{_device.ConnectionInfo.ConnectionType}-[{_device.ConnectionInfo.ConnectionName}]";
-            _logger.LogInformation($"Device created: {_deviceDesc}");
+            _logger.LogInformation($"{_deviceDesc}: device created");
         }
 
         private void DeviceClosed(object sender, EventArgs e)
         {
-            _logger.LogInformation($"Device closed: {_deviceDesc}");
+            _logger.LogInformation($"{_deviceDesc}: device closed");
             _device.DeviceLogger = null;
         }
 
