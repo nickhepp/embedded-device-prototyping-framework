@@ -61,11 +61,9 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         private void UpdateDeviceTextMacroViewModel()
         {
-            if (_deviceTextMacroViewModel == null)
-            {
-                _relayCmdHandlers.Clear();
-            }
-            else
+            _relayCmdHandlers.Clear();
+
+            if (_deviceTextMacroViewModel != null)
             {
                 _relayCmdHandlers.Add(
                     new RelayCommandHandler(_oneShotBtn, _deviceTextMacroViewModel.OneShotCommand, relayCommandExHandler: this, getCommandArgHandler: GetInstructionCollectionInitArgs));
@@ -79,6 +77,7 @@ namespace Ecs.Edpf.GUI.UI.Views
                 _scriptRtb.DataBindings.Add(new Binding(nameof(RichTextBox.Enabled), _deviceTextMacroViewModel, nameof(IDeviceTextMacroViewModel.MacroTextEnabled)));
 
                 SetProgressBar();
+                SetTsbAddCommandEnabled();
 
                 _deviceTextMacroViewModel.PropertyChanged += DeviceTextMacroViewModel_PropertyChanged;
 
@@ -93,6 +92,10 @@ namespace Ecs.Edpf.GUI.UI.Views
             }
         }
 
+        private void SetTsbAddCommandEnabled()
+        {
+            _tsbAddCommand.Enabled = (_deviceTextMacroViewModel != null) && _deviceTextMacroViewModel.AddCommandTextEnabled;
+        }
 
         private void DeviceTextMacroViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -100,8 +103,11 @@ namespace Ecs.Edpf.GUI.UI.Views
             {
                 SetProgressBar();
             }
+            else if (e.PropertyName == nameof(IDeviceTextMacroViewModel.AddCommandTextEnabled))
+            {
+                SetTsbAddCommandEnabled();
+            }
         }
-
 
         private InstructionCollectionInitArgs GetInstructionCollectionInitArgs()
         {
@@ -115,8 +121,16 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         public void HandleException(Exception ex)
         {
-            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            RelayCommandExceptionHandlerUtility.HandleException(ex);
         }
 
+        private void _tsbAddCommand_Click(object sender, EventArgs e)
+        {
+            
+            AddDeviceCommandsToMacroView addDeviceCommandsToMacroView = new AddDeviceCommandsToMacroView
+            {
+                ViewModel = new AddDeviceCommandsToMacroViewModel(_deviceTextMacroViewModel.Device)
+            };
+        }
     }
 }

@@ -35,6 +35,16 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private RelayCommand _oneShotCommand;
         public IRelayCommand OneShotCommand => _oneShotCommand;
 
+        private bool _addCommandTextEnabled = false;
+        public bool AddCommandTextEnabled
+        {
+            get => _addCommandTextEnabled;
+            private set
+            {
+                _addCommandTextEnabled = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
 
         private bool _macroTextEnabled;
         public bool MacroTextEnabled
@@ -108,6 +118,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             _oneShotCommand.RaiseCommandCanExecuteChanged();
 
             MacroTextEnabled = ((_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice) || (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.NotOpenDevice));
+            AddCommandTextEnabled = (_deviceTextMacroStateMachine.DeviceTextMacroState == DeviceTextMacroState.OpenedDevice);
         }
 
         private void StopCommandExecute(object obj)

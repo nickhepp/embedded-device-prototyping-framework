@@ -35,7 +35,7 @@ namespace Ecs.Edpf.Devices.Devices
             }
         }
 
-        public IDevice Device => _selectedDeviceFactory.Device;
+        public IDevice Device => _selectedDeviceFactory?.Device;
 
         public event EventHandler DeviceCreated;
 

@@ -30,6 +30,10 @@ namespace Ecs.Edpf.Connections.Serial
 
         public string DevicePort { get; set; } = System.IO.Ports.SerialPort.GetPortNames().FirstOrDefault();
 
+        public string ConnectionName => DevicePort;
+
+        public string ConnectionType => "Serial";
+
         public override string ToString()
         {
             return $"{nameof(DeviceBaudRate)}: {DeviceBaudRate}, {nameof(DevicePort)}: {DevicePort}";

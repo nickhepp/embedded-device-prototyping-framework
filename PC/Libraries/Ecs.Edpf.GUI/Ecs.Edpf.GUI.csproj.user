@@ -5,10 +5,13 @@
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="UI\Views\AddDeviceCommandsToMacroView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\Views\ChartingView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UI\Views\LoggingView.cs">
+    <Compile Update="UI\Views\LoggerView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\Views\SettingsView.cs">

@@ -37,6 +37,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             this._stopBtn = new System.Windows.Forms.Button();
             this._scriptRtb = new System.Windows.Forms.RichTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this._tsbAddCommand = new System.Windows.Forms.ToolStripButton();
             this._uploadScriptTsb = new System.Windows.Forms.ToolStripButton();
             this._downloadScriptTsb = new System.Windows.Forms.ToolStripButton();
             this._progressTspgbr = new System.Windows.Forms.ToolStripProgressBar();
@@ -141,6 +142,7 @@ namespace Ecs.Edpf.GUI.UI.Views
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._tsbAddCommand,
             this._uploadScriptTsb,
             this._downloadScriptTsb,
             this._progressTspgbr,
@@ -152,21 +154,32 @@ namespace Ecs.Edpf.GUI.UI.Views
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // _tsbAddCommand
+            // 
+            this._tsbAddCommand.Image = global::Ecs.Edpf.GUI.Properties.Resources.function;
+            this._tsbAddCommand.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._tsbAddCommand.Name = "_tsbAddCommand";
+            this._tsbAddCommand.Size = new System.Drawing.Size(134, 36);
+            this._tsbAddCommand.Text = "Add Command...";
+            this._tsbAddCommand.Click += new System.EventHandler(this._tsbAddCommand_Click);
+            // 
             // _uploadScriptTsb
             // 
+            this._uploadScriptTsb.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._uploadScriptTsb.Image = ((System.Drawing.Image)(resources.GetObject("_uploadScriptTsb.Image")));
             this._uploadScriptTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._uploadScriptTsb.Name = "_uploadScriptTsb";
-            this._uploadScriptTsb.Size = new System.Drawing.Size(123, 36);
+            this._uploadScriptTsb.Size = new System.Drawing.Size(36, 36);
             this._uploadScriptTsb.Text = "Upload Script...";
             this._uploadScriptTsb.Visible = false;
             // 
             // _downloadScriptTsb
             // 
+            this._downloadScriptTsb.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._downloadScriptTsb.Image = ((System.Drawing.Image)(resources.GetObject("_downloadScriptTsb.Image")));
             this._downloadScriptTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._downloadScriptTsb.Name = "_downloadScriptTsb";
-            this._downloadScriptTsb.Size = new System.Drawing.Size(139, 36);
+            this._downloadScriptTsb.Size = new System.Drawing.Size(36, 36);
             this._downloadScriptTsb.Text = "Download Script...";
             this._downloadScriptTsb.Visible = false;
             // 
@@ -179,10 +192,11 @@ namespace Ecs.Edpf.GUI.UI.Views
             // 
             // _loadDemoScriptTsb
             // 
+            this._loadDemoScriptTsb.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this._loadDemoScriptTsb.Image = global::Ecs.Edpf.GUI.Properties.Resources.reset_96x96;
             this._loadDemoScriptTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._loadDemoScriptTsb.Name = "_loadDemoScriptTsb";
-            this._loadDemoScriptTsb.Size = new System.Drawing.Size(146, 36);
+            this._loadDemoScriptTsb.Size = new System.Drawing.Size(36, 36);
             this._loadDemoScriptTsb.Text = "Load Demo Script...";
             this._loadDemoScriptTsb.Visible = false;
             // 
@@ -217,5 +231,6 @@ namespace Ecs.Edpf.GUI.UI.Views
         private System.Windows.Forms.RichTextBox _scriptRtb;
         private System.Windows.Forms.ToolStripProgressBar _progressTspgbr;
         private System.Windows.Forms.ToolStripButton _loadDemoScriptTsb;
+        private System.Windows.Forms.ToolStripButton _tsbAddCommand;
     }
 }
