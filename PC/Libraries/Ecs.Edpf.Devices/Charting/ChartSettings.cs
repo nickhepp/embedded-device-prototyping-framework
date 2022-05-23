@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.Devices.Charting
 {
+
+
+
     public class ChartSettings : INotifyPropertyChanged
     {
 

@@ -4,9 +4,15 @@ namespace Ecs.Edpf.GUI.Settings
 {
     public interface ISettingsResourceStore
     {
-        Dictionary<string, ISettingsResource> SettingsResources { get; set; }
+
+        void Open();
 
         void AddSettingsResource(ISettingsResource resource);
+
+        void AddSettingsResources(IEnumerable<ISettingsResource> settingsResources);
+
+        void Save();
+
 
     }
 }

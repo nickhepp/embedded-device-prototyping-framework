@@ -26,6 +26,8 @@ namespace Ecs.Edpf.GUI.Settings
         /// The settings to apply.
         /// </summary>
         void ApplySettings(Dictionary<string, string> settings);
+
+
         void ApplyDefaultSettings();
     }
 }

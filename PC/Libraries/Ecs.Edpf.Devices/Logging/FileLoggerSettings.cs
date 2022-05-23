@@ -1,15 +1,14 @@
-﻿using Serilog;
+﻿using Ecs.Edpf.Devices.ComponentModel;
+using Serilog;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace Ecs.Edpf.Devices.Logging
 {
     public class FileLoggerSettings : INotifyPropertyChanged
     {
-        private string _path = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "EDPF", "Logs", "device.log");
+        private string _path;
         [Description("Path to the file.")]
         public string Path
         {

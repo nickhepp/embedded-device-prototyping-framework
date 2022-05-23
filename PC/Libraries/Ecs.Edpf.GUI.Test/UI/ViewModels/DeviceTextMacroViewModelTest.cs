@@ -7,6 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
 using Ecs.Edpf.Devices.ComponentModel.Macros.Instructions;
+using Ecs.Edpf.Devices.Test.ComponentModel;
+using Ecs.Edpf.Devices.ComponentModel;
 
 namespace Ecs.Edpf.GUI.Test.UI.ViewModels
 {
@@ -16,6 +18,7 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
         private Mock<IDeviceTextMacroStateMachine> _mockDevTxtMacroStateMachine;
         private Mock<IDeviceTextMacroBgWorkerFactory> _mockDevTxtMacroBgWorkerFactory;
         private Mock<IInstructionCollectionFactory> _mockInstructionCollectionFactory;
+        private IDateTimeProvider _dateTimeProvider;
 
         private DeviceTextMacroViewModel _deviceTextMacroVwMdl;
 
@@ -30,7 +33,9 @@ namespace Ecs.Edpf.GUI.Test.UI.ViewModels
             _mockDevTxtMacroBgWorkerFactory = new Mock<IDeviceTextMacroBgWorkerFactory>();
             _mockInstructionCollectionFactory = new Mock<IInstructionCollectionFactory>();
 
-            _deviceTextMacroVwMdl = new DeviceTextMacroViewModel(_mockDevTxtMacroStateMachine.Object, _mockDevTxtMacroBgWorkerFactory.Object, _mockInstructionCollectionFactory.Object);
+            _dateTimeProvider = new StubDateTimeProvider();
+
+            _deviceTextMacroVwMdl = new DeviceTextMacroViewModel(_mockDevTxtMacroStateMachine.Object, _mockDevTxtMacroBgWorkerFactory.Object, _mockInstructionCollectionFactory.Object, _dateTimeProvider);
             _mockDevice = new MockDevice();
         }
 
