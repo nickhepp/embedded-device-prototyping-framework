@@ -15,96 +15,39 @@ namespace HostApp.UI.Settings
     public class SettingsManager : ISettingsManager
     {
 
+        ///// <summary>
+        ///// The recent files for settings.
+        ///// </summary>
+        //private IRecentSettingsListFactory _recentSettingsListFactory;
 
-        private IFile _file ;
+        //public SettingsManager(IRecentSettingsListFactory recentSettingsListFactory)
+        //{
+        //    _recentSettingsListFactory = recentSettingsListFactory;
+        //}
 
-
-
-        /// <summary>
-        /// The recent files for settings.
-        /// </summary>
-        private IRecentSettingsListFactory _recentSettingsListFactory;
-
-        public SettingsManager(IRecentSettingsListFactory recentSettingsListFactory, IFile file)
-        {
-            _recentSettingsListFactory = recentSettingsListFactory;
-            _file = file;
-        }
+        //public void ApplyCurrentSettings(ISettingsResourceStore settingsResourceStore)
+        //{
+        //    Settings settings = _recentSettingsListFactory.GetRecentSettingsResourceStoresList().GetCurrentSettings();
 
 
+        //    foreach (string resourceName in settingsResourceStore.SettingsResources.Keys)
+        //    {
+        //        if (settings.ResourceSettingsPayloads.ContainsKey(resourceName))
+        //        {
+        //            settingsResourceStore.SettingsResources[resourceName].ApplySettings(settings.ResourceSettingsPayloads[resourceName].Settings);
+        //        }
+        //        else
+        //        {
+        //            settingsResourceStore.SettingsResources[resourceName].ApplyDefaultSettings();
+        //        }
+        //    }
 
+        //}
 
-
-
-        private static DirectoryInfo GetSaveFoldersDirectory()
-        {
-            string lclSaveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            lclSaveDir = Path.Combine(lclSaveDir, "ecs", "EdpfSettings");
-            DirectoryInfo dirInfo = new DirectoryInfo(lclSaveDir);
-            if (!dirInfo.Exists)
-            {
-                dirInfo.Create();
-            }
-
-            return dirInfo;
-        }
-
-
-
-        public void ApplyCurrentSettings(ISettingsResourceStore settingsResourceStore)
-        {
-            Settings settings = _recentSettingsListFactory.GetRecentSettingsResourceStoresList().GetCurrentSettings();
-
-
-            foreach (string resourceName in settingsResourceStore.SettingsResources.Keys)
-            {
-                if (settings.ResourceSettingsPayloads.ContainsKey(resourceName))
-                {
-                    settingsResourceStore.SettingsResources[resourceName].ApplySettings(settings.ResourceSettingsPayloads[resourceName].Settings);
-                }
-                else
-                {
-                    settingsResourceStore.SettingsResources[resourceName].ApplyDefaultSettings();
-                }
-            }
-
-        }
-
-
-        public void SaveCurrentSettings(ISettingsResourceStore settingsResourceStore)
-        {
-
-            DirectoryInfo dirInfo = GetSaveFoldersDirectory();
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                Filter = "Settings *.xml|*.xml",
-                InitialDirectory = dirInfo.FullName
-            };
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                //using (MemoryStream memStream = new MemoryStream())
-                //{
-
-                //    dockPanel.SaveAsXml(memStream, Encoding.UTF8);
-                //    memStream.GetBuffer()
-
-
-                //    Encoding.Hex
-
-
-                //}
-
-            }
-
-
-        }
-
-
-
-
-
+        //public void SaveCurrentSettings(ISettingsResourceStore settingsResourceStore)
+        //{
+        //    settingsResourceStore.Save();
+        //}
 
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.Logger
 {
-    public class LoggerSettingsViewModel : FileLoggerSettings, ILoggerSettingsViewModel
+    public class LoggerSettingsViewModel : DeviceFileLoggerSettings, ILoggerSettingsViewModel
     {
 
     }

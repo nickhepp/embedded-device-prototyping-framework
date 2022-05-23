@@ -10,10 +10,10 @@ namespace HostApp.UI.Settings
 
 
 
-        void ApplyCurrentSettings(ISettingsResourceStore settingsResourceStore);
+        //void ApplyCurrentSettings(ISettingsResourceStore settingsResourceStore);
 
 
-        void SaveCurrentSettings(ISettingsResourceStore settingsResourceStore);
+        //void SaveCurrentSettings(ISettingsResourceStore settingsResourceStore);
 
 
 

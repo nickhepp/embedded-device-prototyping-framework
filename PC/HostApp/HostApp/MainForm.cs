@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Ecs.Edpf.Devices.IO.File;
+using Ecs.Edpf.Devices.Logging;
+using Ecs.Edpf.GUI.Logger;
 using Ecs.Edpf.GUI.Settings;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using HostApp.ComponentModel;
@@ -27,7 +29,7 @@ namespace HostApp
 {
     public partial class MainForm : Form
     {
-        private ISettingsManager _settingsManager;
+        //private ISettingsManager _settingsManager;
         private ISettingsResourceStore _settingsResourceStore;
         private DockPanelSettingsResource _dockPanelSettingsResource;
         private DockPanel _dockPanel;
@@ -37,6 +39,7 @@ namespace HostApp
         private bool _showSplash;
         private SplashScreen _splashScreen;
         private IWarningMessageBoxService _warningMessageBoxService;
+        private ILogger _logger;
 
         public MainForm()
         {
@@ -80,6 +83,8 @@ namespace HostApp
                 //{
                 //    deviceViewModel.Device.Close();
                 //}
+
+                _settingsResourceStore.Save();
             }
 
             base.OnFormClosing(e);
@@ -133,11 +138,18 @@ namespace HostApp
 
             IKernel container = GetConfiguredContainer();
 
-            _settingsResourceStore = new SettingsResourceStore();
+            LoggerFactory loggerFactory = new LoggerFactory(new AppFileLoggerSettings());
+            _logger = loggerFactory.GetLogger();
+            _settingsResourceStore = new SettingsResourceStore(_logger, new PersistedSettingsFactory(_logger, new DirectoryManager(), new FileManager()));
             _settingsResourceStore.AddSettingsResource(_dockPanelSettingsResource);
 
-            _settingsManager = container.Get<ISettingsManager>();
-            _settingsManager.ApplyCurrentSettings(_settingsResourceStore);
+            List<ISettingsResource> settingsRscs = _toolWindowCohorts.Where(twc => twc.ViewModel is ISettingsResource).ToList().ConvertAll(twc => (ISettingsResource)twc.ViewModel);
+            _settingsResourceStore.AddSettingsResources(settingsRscs);
+
+            _settingsResourceStore.Open();
+
+            //_settingsManager = container.Get<ISettingsManager>();
+            //_settingsManager.ApplyCurrentSettings(_settingsResourceStore);
 
             SetSplashScreen(toolWindowCohortFactory.GetToolWindowCohorts());
 

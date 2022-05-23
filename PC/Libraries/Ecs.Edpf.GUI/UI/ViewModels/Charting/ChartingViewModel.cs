@@ -1,6 +1,7 @@
 ﻿using Ecs.Edpf.Devices;
 using Ecs.Edpf.Devices.Charting;
 using Ecs.Edpf.Devices.ComponentModel;
+using Ecs.Edpf.GUI.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,6 +43,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
             }
         }
 
+        public string ResourceName => "Charting";
+
         public ChartingViewModel(IChartSampleCollector chartSampleCollector,
             IChartingExpressionFilter chartingExpressionFilter,
             IChartProvider chartProvider,
@@ -52,21 +55,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
             ChartingExpressionFilter = chartingExpressionFilter;
             SettingsViewModel = new ChartingViewSettingsViewModel(chartProvider, chartSettings);
             _chartSettings = chartSettings;
-            //_chartSettings.PropertyChanged += ChartSettings_PropertyChanged;
             ChartSampleCollector.ChartSamplesCollected += ChartSampleCollector_ChartSamplesCollected;
-            //_chartSampleCollector.PropertyChanged += ChartSampleCollector_PropertyChanged;
         }
-
-
-
-
-
 
         private void ChartSampleCollector_ChartSamplesCollected(object sender, Dictionary<string, ChartSample> e)
         {
-
-
-
             if (ChartSamplesCollected != null)
             {
                 ChartSamplesCollected(this, e);
@@ -104,7 +97,37 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
             }
         }
 
+        private const string MaxDisplaySampleCountSettingsName = "ChartingSettings.MaxDisplaySampleCount";
+        private const string ExpressionSettingsName = "ChartSettings.Expression";
 
+        public Dictionary<string, string> GetSettings()
+        {
+            Dictionary<string, string> settings = new Dictionary<string, string>
+            {
+                { MaxDisplaySampleCountSettingsName, _chartSettings.MaxDisplaySampleCount.ToString() },
+                { ExpressionSettingsName, _chartSettings.Expression },
+            };
+
+            return settings;
+        }
+
+        public void ApplySettings(Dictionary<string, string> settings)
+        {
+            uint? maxSampleDisplayCount = SettingsExtractor.GetUIntSettingByName(settings, MaxDisplaySampleCountSettingsName);
+            if (maxSampleDisplayCount.HasValue)
+            {
+                _chartSettings.MaxDisplaySampleCount = maxSampleDisplayCount.Value;
+            }
+            if (settings.ContainsKey(ExpressionSettingsName))
+            {
+                _chartSettings.Expression = settings[ExpressionSettingsName];
+            }
+            
+        }
+
+        public void ApplyDefaultSettings()
+        {
+        }
 
     }
 }
