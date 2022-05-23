@@ -11,7 +11,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace HostApp.UI.Settings
 {
-    public class DockPanelSettingsResource : ISettingsResource
+    public class DockPanelSettingsResource //: ISettingsResource
     {
 
         private DeserializeDockContent _deserializeDockContent;

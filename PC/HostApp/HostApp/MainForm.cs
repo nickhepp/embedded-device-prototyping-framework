@@ -141,7 +141,8 @@ namespace HostApp
             LoggerFactory loggerFactory = new LoggerFactory(new AppFileLoggerSettings());
             _logger = loggerFactory.GetLogger();
             _settingsResourceStore = new SettingsResourceStore(_logger, new PersistedSettingsFactory(_logger, new DirectoryManager(), new FileManager()));
-            _settingsResourceStore.AddSettingsResource(_dockPanelSettingsResource);
+            //_settingsResourceStore.AddSettingsResource(_dockPanelSettingsResource);
+            _dockPanelSettingsResource.ApplyDefaultSettings();
 
             List<ISettingsResource> settingsRscs = _toolWindowCohorts.Where(twc => twc.ViewModel is ISettingsResource).ToList().ConvertAll(twc => (ISettingsResource)twc.ViewModel);
             _settingsResourceStore.AddSettingsResources(settingsRscs);
