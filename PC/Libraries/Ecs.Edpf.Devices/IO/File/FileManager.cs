@@ -18,6 +18,10 @@ namespace Ecs.Edpf.Devices.IO.File
             return new EdpfFile();
         }
 
+        public string ReadAllText(string path)
+        {
+            return System.IO.File.ReadAllText(path);
+        }
 
     }
 }

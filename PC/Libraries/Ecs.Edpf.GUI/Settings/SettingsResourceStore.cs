@@ -78,31 +78,42 @@ namespace Ecs.Edpf.GUI.Settings
 
         public void Open()
         {
+
+            PersistedSettings persistedSttings = null;
             try
             {
-                PersistedSettings persistedSttngs = _persistedSettingsFactory.GetPersistedSettings();
-                foreach (SettingsGroup sg in persistedSttngs.SettingsGroups)
+                persistedSttings = _persistedSettingsFactory.GetPersistedSettings();
+
+                foreach (ISettingsResource settingsRsrc in SettingsResources.Values)
                 {
-                    try
+                    SettingsGroup settingsGroup = null;
+                    
+                        
+                    settingsGroup = persistedSttings.SettingsGroups.FirstOrDefault(s => string.Equals(s.ResourceName, settingsRsrc.ResourceName));
+                    if (settingsGroup != null)
                     {
-                        if (SettingsResources.TryGetValue(sg.ResourceName, out ISettingsResource resource))
+                        try
                         {
-                            resource.ApplySettings(sg.Settings);
+                            settingsRsrc.ApplySettings(settingsGroup.Settings);
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            resource.ApplyDefaultSettings();
-                            _logger.LogWarning($"Did not find resource with name '{sg.ResourceName}'.");
+                            _logger.LogException($"Error applying settings for resource '{settingsRsrc.ResourceName}'.", ex);
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        _logger.LogException(ex);
+                        try
+                        {
+                            _logger.LogWarning($"Did not find resource with name '{settingsRsrc.ResourceName}'.  Applying default settings.");
+                            settingsRsrc.ApplyDefaultSettings();
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogException($"Error applying default settings to resource '{settingsRsrc.ResourceName}'.", ex);
+                        }
                     }
-
-
                 }
-
             }
             catch (Exception ex)
             {
