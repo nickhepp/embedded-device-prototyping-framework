@@ -54,10 +54,30 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
         }
 
+        protected abstract string GetResourceName();
+
+        [Browsable(false)]
+        public string ResourceName => GetResourceName();
 
 
 
+        protected abstract Dictionary<string, string> InternalGetSettings();
+        public Dictionary<string, string> GetSettings()
+        {
+            return InternalGetSettings();
+        }
 
-        
+        protected abstract void InternalApplySettings(Dictionary<string, string> settings);
+        public void ApplySettings(Dictionary<string, string> settings)
+        {
+            InternalApplySettings(settings);
+        }
+
+        protected abstract void InternalApplyDefaultSettings();
+        public void ApplyDefaultSettings()
+        {
+            InternalApplyDefaultSettings();
+        }
+
     }
 }

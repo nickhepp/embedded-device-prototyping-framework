@@ -1,4 +1,5 @@
 ﻿using Ecs.Edpf.Devices.ComponentModel;
+using Ecs.Edpf.Devices.Connections.Serial;
 using Ecs.Edpf.Devices.Devices;
 using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels;
@@ -40,7 +41,7 @@ namespace HostApp.UI.Views
 
             List<IConnectionViewModel> connectionViewModels = new List<IConnectionViewModel>
             {
-                new SerialPortConnectionViewModel(deviceStateMachine),
+                new SerialPortConnectionViewModel(deviceStateMachine, new SerialPortFactory()),
                 //new FakeConnectionViewModel(deviceStateMachine),
             };
             CompositeDeviceProvider compositeDeviceProvider = new CompositeDeviceProvider(connectionViewModels.Select(connViewMdl => connViewMdl.GetDeviceFactory()));
