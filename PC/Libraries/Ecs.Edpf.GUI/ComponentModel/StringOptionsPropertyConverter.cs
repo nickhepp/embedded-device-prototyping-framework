@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ecs.Edpf.Devices.ComponentModel;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -24,10 +26,7 @@ namespace Ecs.Edpf.GUI.ComponentModel
 
         protected abstract List<string> GetOptions();
 
-
-        public override
-            System.ComponentModel.TypeConverter.StandardValuesCollection
-            GetStandardValues(ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
             List<string> strCollection = GetOptions();
             return new StandardValuesCollection(strCollection);
