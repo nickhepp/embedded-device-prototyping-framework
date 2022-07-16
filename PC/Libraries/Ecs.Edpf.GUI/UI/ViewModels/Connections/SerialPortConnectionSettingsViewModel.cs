@@ -33,6 +33,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             set
             {
                 _serialPortConnectionInfo.DevicePort = value;
+                ClearSelectedComPortFromExcludedComPorts();
             }
         }
 
@@ -50,7 +51,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
             set 
             { 
-                _excludedComPorts = value; 
+                _excludedComPorts = value;
+                ClearSelectedComPortFromExcludedComPorts();
             }
         }
 
@@ -63,6 +65,17 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
             _serialPortConnectionInfo = serialPortConnectionInfo;
             _serialPortFactory = serialPortFactory;
+        }
+
+        private void ClearSelectedComPortFromExcludedComPorts()
+        {
+            if (_excludedComPorts != null)
+            {
+                if (_excludedComPorts.Any(testVal => testVal == _serialPortConnectionInfo.DevicePort))
+                {
+                    _serialPortConnectionInfo.DevicePort = null;
+                }
+            }
         }
 
         public List<string> GetFilteredOptions()
