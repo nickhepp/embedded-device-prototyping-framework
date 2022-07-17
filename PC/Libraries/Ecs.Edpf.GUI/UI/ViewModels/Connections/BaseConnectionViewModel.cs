@@ -112,12 +112,26 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 
         public abstract IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel { get; }
 
+        private string _openFailedErrorMessage;
+        public string OpenFailedErrorMessage
+        {
+            get
+            {
+                return _openFailedErrorMessage;
+            }
+            private set
+            {
+                _openFailedErrorMessage = value;
+                RaiseNotifyPropertyChanged();
+            }
+        }
+
         public BaseConnectionViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
             OpenCommand = new RelayCommand(param => this.OpenButtonEnabled, OpenCommandHandler);
             CloseCommand = new RelayCommand(param => this.CloseButtonEnabled, CloseCommandHandler);
             _deviceFactory = GetDeviceFactory();
-
+            //DeviceProvider = _deviceFactory;
         }
 
         public abstract IDeviceFactory GetDeviceFactory();
@@ -126,7 +140,15 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         {
             _deviceFactory.CreateDevice();
             Device = _deviceFactory.Device;
-            Device.Open();
+            try
+            {
+                Device.Open();
+            }
+            catch (Exception ex)
+            {
+                OpenFailedErrorMessage = ex.Message;
+                Device.SafeClose();
+            }
         }
 
         private void CloseCommandHandler(object obj)

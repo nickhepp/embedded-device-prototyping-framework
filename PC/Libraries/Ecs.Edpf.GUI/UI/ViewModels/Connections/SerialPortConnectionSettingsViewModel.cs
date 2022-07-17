@@ -90,7 +90,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
 
         protected override Dictionary<string, string> InternalGetSettings()
         {
-
             Dictionary<string, string> settings = new Dictionary<string, string>
             {
                 { nameof(ComPort), ComPort },

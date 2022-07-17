@@ -23,5 +23,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
 
         bool Enabled { get; set; }
 
+        string OpenFailedErrorMessage { get; }
+
     }
 }

@@ -67,14 +67,27 @@ namespace Ecs.Edpf.Devices.Logging
             }
             _device.DeviceLogger = _logger;
             _device.DeviceClosed += DeviceClosed;
+            _device.DeviceSafeClosed += DeviceSafeClosed;
             _deviceDesc = $"{_device.ConnectionInfo.ConnectionType}-[{_device.ConnectionInfo.ConnectionName}]";
             _logger.LogInformation($"{_deviceDesc}: device created");
+        }
+
+        private void InternalDeviceClosed()
+        {
+            // here comes the common operations for a device being closed
+            _device.DeviceLogger = null;
         }
 
         private void DeviceClosed(object sender, EventArgs e)
         {
             _logger.LogInformation($"{_deviceDesc}: device closed");
-            _device.DeviceLogger = null;
+            InternalDeviceClosed();
+        }
+
+        private void DeviceSafeClosed(object sender, EventArgs e)
+        {
+            _logger.LogInformation($"{_deviceDesc}: device safe closed");
+            InternalDeviceClosed();
         }
 
     }

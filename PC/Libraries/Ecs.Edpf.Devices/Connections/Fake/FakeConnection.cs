@@ -38,6 +38,11 @@ namespace Ecs.Edpf.Devices.Connections.Fake
         {
         }
 
+        public void SafeClose()
+        {
+
+        }
+
         public void Dispose()
         {
         }

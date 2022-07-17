@@ -32,6 +32,8 @@ namespace Ecs.Edpf.Devices
 
         void Close();
 
+        void SafeClose();
+
         string Write(string cmdText);
 
         /// <summary>
@@ -54,6 +56,8 @@ namespace Ecs.Edpf.Devices
         /// Event that is raised when the device is closed.
         /// </summary>
         event EventHandler DeviceClosed;
+
+        event EventHandler DeviceSafeClosed;
 
         void AddDeviceCommands(List<IDeviceCommand> builtCommands);
 

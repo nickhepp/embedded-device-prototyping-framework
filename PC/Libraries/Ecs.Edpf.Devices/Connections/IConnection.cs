@@ -26,6 +26,7 @@ namespace Ecs.Edpf.Devices.Connections
         /// </summary>
         void Close();
 
+        void SafeClose();
 
         string ReadNextChunk(int maxReadSize);
 

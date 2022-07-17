@@ -25,6 +25,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
                 {
                     _deviceStateMachine.SendSignal(DeviceSignal.DeviceAssigned);
                     _device.DeviceClosed += DeviceClosed;
+                    _device.DeviceSafeClosed += DeviceSafeClosed;
                     _device.DeviceOpened += DeviceOpened;
                 }
                 else
@@ -99,6 +100,12 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
         private void DeviceClosed(object sender, EventArgs e)
         {
             _deviceStateMachine.SendSignal(DeviceSignal.DeviceClosed);
+            Device = null;
+        }
+
+        private void DeviceSafeClosed(object sender, EventArgs e)
+        {
+            _deviceStateMachine.SendSignal(DeviceSignal.DeviceSafeClosed);
             Device = null;
         }
 

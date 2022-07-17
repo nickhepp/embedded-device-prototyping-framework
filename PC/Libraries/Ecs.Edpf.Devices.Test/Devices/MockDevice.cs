@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.Devices;
 using Moq;
+using Moq.Language.Flow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,17 @@ namespace Ecs.Edpf.Devices.Test.Devices
     public class MockDevice : Mock<IDevice>
     {
 
-        public MockDevice()
+        public MockDevice(bool useDefaultSetupOpen = true)
         {
-            Setup(device => device.Open()).Returns(() => true).Callback(() =>
+            if (useDefaultSetupOpen)
+            {
+                Setup(device => device.Open()).Returns(() => true).Callback(() =>
                 {
                     SetupGet(device => device.IsOpen).Returns(true);
                     Raise(device => device.DeviceOpened += null, new EventArgs());
                 }
-            );
+                );
+            }
             Setup(device => device.Close()).Callback(() => 
                 {
                     SetupGet(device => device.IsOpen).Returns(false);
