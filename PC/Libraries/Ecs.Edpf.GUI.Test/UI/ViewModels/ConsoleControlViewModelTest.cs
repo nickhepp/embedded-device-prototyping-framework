@@ -23,7 +23,7 @@ namespace UnitTestProject.UI.ViewModels.Controls
             {
                 DeviceProvider = _fakeDeviceProvider
             };
-            _fakeDeviceProvider.InitDevice();
+            _fakeDeviceProvider.CreateDevice();
         }
 
         [TestMethod]

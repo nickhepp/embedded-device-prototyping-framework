@@ -55,7 +55,7 @@ namespace Ecs.Edpf.Devices.ComponentModel
                     break;
 
                 case DeviceState.OpenedDevice:
-                    if (signal == DeviceSignal.DeviceClosed)
+                    if (signal == DeviceSignal.DeviceClosed || signal == DeviceSignal.DeviceSafeClosed)
                     {
                         DeviceState = DeviceState.AssignedDevice;
                     }
@@ -77,6 +77,10 @@ namespace Ecs.Edpf.Devices.ComponentModel
                     else if (signal == DeviceSignal.DeviceOpened)
                     {
                         DeviceState = DeviceState.OpenedDevice;
+                    }
+                    else if (signal == DeviceSignal.DeviceSafeClosed)
+                    {
+                        // no changes here
                     }
                     else
                     {

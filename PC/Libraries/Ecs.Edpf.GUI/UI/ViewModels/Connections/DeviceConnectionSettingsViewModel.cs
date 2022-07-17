@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.Devices;
 using Ecs.Edpf.GUI.ComponentModel;
+using Ecs.Edpf.GUI.Settings;
 using Ecs.Edpf.GUI.UI.ViewModels;
 using System;
 using System.CodeDom;
@@ -17,7 +18,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
     /// <summary>
     /// This is a settings object that can be plugged into a propertygrid.
     /// </summary>
-    public abstract class DeviceConnectionSettingsViewModel : BaseViewModel, IDeviceConnectionSettingsViewModel
+    public abstract class DeviceConnectionSettingsViewModel : BaseViewModel, IDeviceConnectionSettingsViewModel, ISettingsResource
     {
 
         private const string ClosedConnection = "Closed";

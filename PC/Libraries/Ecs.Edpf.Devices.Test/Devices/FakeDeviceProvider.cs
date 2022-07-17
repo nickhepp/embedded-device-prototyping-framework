@@ -19,19 +19,22 @@ namespace Ecs.Edpf.Devices.Test.Devices
 
         public MockDevice MockDevice => _mockDevice;
 
-        public void InitDevice()
+        public void InitDevice(MockDevice mockDevice)
         {
-            _mockDevice = new MockDevice();
+            _mockDevice = mockDevice;
+        }
+
+        public void CreateDevice()
+        {
+            if (_mockDevice == null)
+            {
+                _mockDevice = new MockDevice();
+            }
             Device = _mockDevice.Object;
             if (DeviceCreated != null)
             {
                 DeviceCreated(this, new EventArgs());
             }
-        }
-
-        public void CreateDevice()
-        {
-            InitDevice();
         }
 
         #region IDeviceProvider

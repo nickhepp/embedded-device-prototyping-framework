@@ -37,10 +37,21 @@ namespace Ecs.Edpf.Devices.Connections.Serial
             _connection.Close();
         }
 
+        public void SafeClose()
+        {
+            if (_connection != null)
+            {
+                Close();
+            }
+        }
+
         public void Dispose()
         {
-            _connection.Dispose();
-            _connection = null;
+            if (_connection != null)
+            {
+                _connection.Dispose();
+                _connection = null;
+            }
         }
 
         public void Open(IConnectionInfo connectionInfo)

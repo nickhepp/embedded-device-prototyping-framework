@@ -12,5 +12,6 @@ namespace Ecs.Edpf.Devices.ComponentModel
         DeviceCleared,
         DeviceOpened,
         DeviceClosed,
+        DeviceSafeClosed,
     }
 }

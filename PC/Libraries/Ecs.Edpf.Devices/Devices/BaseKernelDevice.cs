@@ -145,19 +145,6 @@ namespace Ecs.Edpf.Devices
             return (returnLine, gotCmdRespLineEnding);
         }
 
-
-
-        protected void InternalClose()
-        {
-            if (_connection == null)
-            {
-                throw new Exception($"The connection is not open.");
-            }
-            _connection.Close();
-            _connection.Dispose();
-            _connection = null;
-        }
-
         protected virtual string InternalExecuteCommand(string cmdName)
         {
             return Write($"{Constants.CommandNamePrefix}{cmdName}{Constants.CommandNameEnding}");
@@ -274,10 +261,29 @@ namespace Ecs.Edpf.Devices
                 throw new Exception("Device is not open.");
             }
             _connection.Close();
+            _connection.Dispose();
+            _connection = null;
+
             IsOpen = false;
             if (DeviceClosed != null)
             {
                 DeviceClosed(this, new EventArgs());
+            }
+        }
+
+        public void SafeClose()
+        {
+            _connection.SafeClose();
+            _connection.Dispose();
+            _connection = null;
+
+            IsOpen = false;
+            if (DeviceSafeClosed != null)
+            {
+                if (DeviceSafeClosed != null)
+                {
+                    DeviceSafeClosed(this, new EventArgs());
+                }
             }
         }
 
@@ -361,6 +367,8 @@ namespace Ecs.Edpf.Devices
         public event EventHandler DeviceOpened;
 
         public event EventHandler DeviceClosed;
+
+        public event EventHandler DeviceSafeClosed;
 
     }
 }

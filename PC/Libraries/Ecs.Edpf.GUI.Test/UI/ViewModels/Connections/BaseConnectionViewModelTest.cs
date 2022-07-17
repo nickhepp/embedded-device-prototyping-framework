@@ -14,25 +14,24 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         
         private TestConnectionViewModel _testConnVwMdl;
 
-        private FakeDeviceProvider _fakeDeviceProvider;
-
         private class TestConnectionViewModel : BaseConnectionViewModel
         {
 
-            private IDeviceFactory _deviceFactory;
+            private FakeDeviceProvider _fakeDeviceProvider;
+            public FakeDeviceProvider FakeDeviceProvider => _fakeDeviceProvider;   
 
             public override System.Drawing.Image ViewImage => null;
 
             public override IDeviceConnectionSettingsViewModel DeviceConnectionSettingsViewModel => throw new NotImplementedException();
 
-            public TestConnectionViewModel(IDeviceStateMachine deviceStateMachine, IDeviceFactory deviceFactory) : base(deviceStateMachine)
+            public TestConnectionViewModel(IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
             {
-                _deviceFactory = deviceFactory;
             }
 
             public override IDeviceFactory GetDeviceFactory()
             {
-                return _deviceFactory;
+                _fakeDeviceProvider = new FakeDeviceProvider();
+                return _fakeDeviceProvider;
             }
 
         }
@@ -40,11 +39,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         [TestInitialize]
         public void InitializeTest()
         {
-            _fakeDeviceProvider = new FakeDeviceProvider();
-            _testConnVwMdl = new TestConnectionViewModel(_mockDeviceStateMachine.Object, _fakeDeviceProvider)
-            {
-                DeviceProvider = _fakeDeviceProvider
-            };
+            _testConnVwMdl = new TestConnectionViewModel(_mockDeviceStateMachine.Object);
+            //_testConnVwMdl.DeviceProvider = _testConnVwMdl.FakeDeviceProvider;
         }
    
 
@@ -81,7 +77,24 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         }
 
 
+        [TestMethod]
+        public void OpenCommandExecuted_DeviceOpenFails_ErrorMessageReflected()
+        {
+            // arrange
+            string openExceptionMessage = "This exception was thrown during device opening.";
 
+            _mockDeviceStateMachine.SetupGetDeviceStateRaiseChanged(DeviceState.AssignedDevice);
+
+            MockDevice mockDevice = new MockDevice(useDefaultSetupOpen: false);
+            mockDevice.Setup(device => device.Open()).Throws(new Exception(openExceptionMessage));
+            _testConnVwMdl.FakeDeviceProvider.InitDevice(mockDevice);
+
+            // act
+            _testConnVwMdl.OpenCommand.Execute(null);
+
+            // assert
+            Assert.AreEqual(expected: openExceptionMessage, actual: _testConnVwMdl.OpenFailedErrorMessage);
+        }
 
     }
 }
