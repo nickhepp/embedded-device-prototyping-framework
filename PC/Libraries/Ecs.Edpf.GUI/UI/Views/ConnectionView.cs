@@ -50,8 +50,34 @@ namespace Ecs.Edpf.GUI.UI.Views
 
             DataBindings.Clear();
             DataBindings.Add(new Binding(nameof(Control.Enabled), _connectionViewModel, nameof(IConnectionViewModel.Enabled)));
+        
+            if (_connectionViewModel != null)
+            {
+                _connectionViewModel.PropertyChanged += ConnectionViewModelPropertyChanged;
+            }
+            UpdateErrorWarningLabel();
         }
- 
+
+        private void UpdateErrorWarningLabel()
+        {
+            if (_connectionViewModel == null)
+            {
+                _errMessageTssl.Text = "";
+            }
+            else
+            {
+                _errMessageTssl.Text = _connectionViewModel.OpenFailedErrorMessage;
+            }
+        }
+
+        private void ConnectionViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(IConnectionViewModel.OpenFailedErrorMessage))
+            {
+                UpdateErrorWarningLabel();
+            }
+        }
+
         private void OpenBtn_Click(object sender, EventArgs e)
         {
             _connectionViewModel.OpenCommand.Execute(null);

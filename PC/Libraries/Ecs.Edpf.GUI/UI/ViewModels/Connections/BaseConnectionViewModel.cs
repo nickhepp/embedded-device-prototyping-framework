@@ -143,6 +143,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             try
             {
                 Device.Open();
+                OpenFailedErrorMessage = "";
             }
             catch (Exception ex)
             {
