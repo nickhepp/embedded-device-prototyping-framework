@@ -70,6 +70,10 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
 
+    - name: Restore NuGet
+      uses: nuget/setup-nuget@v1
+      run: nuget restore PC\HostApp\HostApp.sln
+
     - name: Build app for release
       run: msbuild PC\HostApp\HostApp.sln -t:rebuild -verbosity:diag -property:Configuration=Release
 
