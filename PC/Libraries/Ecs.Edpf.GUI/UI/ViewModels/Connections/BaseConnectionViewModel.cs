@@ -131,7 +131,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
             OpenCommand = new RelayCommand(param => this.OpenButtonEnabled, OpenCommandHandler);
             CloseCommand = new RelayCommand(param => this.CloseButtonEnabled, CloseCommandHandler);
             _deviceFactory = GetDeviceFactory();
-            //DeviceProvider = _deviceFactory;
         }
 
         public abstract IDeviceFactory GetDeviceFactory();
