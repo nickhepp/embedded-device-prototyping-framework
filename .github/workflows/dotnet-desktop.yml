@@ -67,19 +67,27 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build app for release
+      run: msbuild PC\HostApp\HostApp.sln -t:rebuild -verbosity:diag -property:Configuration=Release
+
+
+
     # Install the .NET Core workload
-    - name: Install .NET V4.8
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 4.8.x
+    #- name: Install .NET V4.8
+    #  uses: actions/setup-dotnet@v2
+    #  with:
+    #    dotnet-version: 4.8.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+    #- name: Setup MSBuild.exe
+    #  uses: microsoft/setup-msbuild@v1.0.2
 
     # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: dotnet test
+    #- name: Execute unit tests
+    #  run: dotnet test
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     #- name: Restore the application
