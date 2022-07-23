@@ -40,7 +40,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Connections
         public void InitializeTest()
         {
             _testConnVwMdl = new TestConnectionViewModel(_mockDeviceStateMachine.Object);
-            //_testConnVwMdl.DeviceProvider = _testConnVwMdl.FakeDeviceProvider;
         }
    
 
