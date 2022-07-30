@@ -36,7 +36,7 @@
 # For a complete CI/CD sample to get started with GitHub Action workflows for Desktop Applications,
 # refer to https://github.com/microsoft/github-actions-for-desktop-apps
 
-name: EDPF Build & Execute Unit Test
+name: EDPF Build #& Execute Unit Test (note that unit tests arent working yet)
 
 on:
   push:
