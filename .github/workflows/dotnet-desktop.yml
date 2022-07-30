@@ -79,7 +79,8 @@ jobs:
     - name: Build app in ${{ matrix.configuration }}
       run: msbuild PC\HostApp\HostApp.sln -t:rebuild -verbosity:normal -property:Configuration=${{ matrix.configuration }}
 
-
+    - name: Run unit tests
+      run: dotnet test PC\HostApp\HostApp.sln
 
     # Install the .NET Core workload
     #- name: Install .NET V4.8
