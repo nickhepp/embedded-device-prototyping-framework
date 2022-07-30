@@ -80,7 +80,7 @@ jobs:
       run: msbuild PC\HostApp\HostApp.sln -t:rebuild -verbosity:normal -property:Configuration=${{ matrix.configuration }}
 
     - name: Run unit tests
-      run: dotnet test PC\HostApp\HostApp.sln
+      run: dotnet test PC\HostApp\HostApp.sln --framework net48
 
     # Install the .NET Core workload
     #- name: Install .NET V4.8
