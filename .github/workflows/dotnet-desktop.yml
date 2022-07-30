@@ -76,8 +76,8 @@ jobs:
     - name: Restore NuGet Execute      
       run: nuget restore PC\HostApp\HostApp.sln
 
-    - name: Build app
-      run: msbuild PC\HostApp\HostApp.sln -t:rebuild -verbosity:normal -property:Configuration=$(configuration)
+    - name: Build app in ${{ configuration }}
+      run: msbuild PC\HostApp\HostApp.sln -t:rebuild -verbosity:normal -property:Configuration=${{ configuration }}
 
 
 
