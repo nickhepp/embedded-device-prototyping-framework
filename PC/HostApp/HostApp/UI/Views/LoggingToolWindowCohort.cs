@@ -29,9 +29,9 @@ namespace HostApp.UI.Views
 
         public IViewModel ViewModel => _loggerViewModel;
 
-        public string RoadmapIssueUrl => "https://github.com/nickhepp/embedded-device-prototyping-framework/issues/3";
+        public string RoadmapIssueUrl => null;
 
-        public ToolState State => ToolState.Roadmap;
+        public ToolState State => ToolState.Active;
 
         public LoggingToolWindowCohort()
         {
