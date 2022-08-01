@@ -135,6 +135,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels
             }
             else if (DeviceState == DeviceState.OpenedDevice)
             {
+                Device.Flush();
                 string cmds = Device.GetRegisteredCommands();
                 List<string> cmdList = cmds.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 cmdList = cmdList.Where(testCmd => !testCmd.StartsWith(Constants.CommandNamePrefix) &&
