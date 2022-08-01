@@ -34,6 +34,8 @@ namespace Ecs.Edpf.Devices
 
         void SafeClose();
 
+        void Flush();
+
         string Write(string cmdText);
 
         /// <summary>

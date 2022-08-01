@@ -322,6 +322,11 @@ namespace Ecs.Edpf.Devices
             }
         }
  
+        public void Flush()
+        {
+            Write("");
+        }
+
         public string Write(string cmdText)
         {
             if (!IsOpen)
