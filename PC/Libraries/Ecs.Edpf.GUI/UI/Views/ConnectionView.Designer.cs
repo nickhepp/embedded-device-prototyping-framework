@@ -113,8 +113,9 @@
             // 
             // _errMessageTssl
             // 
+            this._errMessageTssl.Image = global::Ecs.Edpf.GUI.Properties.Resources.StatusWarning_16x16;
             this._errMessageTssl.Name = "_errMessageTssl";
-            this._errMessageTssl.Size = new System.Drawing.Size(165, 32);
+            this._errMessageTssl.Size = new System.Drawing.Size(197, 32);
             this._errMessageTssl.Text = "Error Message";
             // 
             // ConnectionView

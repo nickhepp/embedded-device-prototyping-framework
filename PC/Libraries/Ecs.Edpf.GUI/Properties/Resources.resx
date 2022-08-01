@@ -121,6 +121,9 @@
   <data name="reset_96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reset_96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="StatusWarning_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StatusWarning_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="repeat_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\repeat_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -154,10 +157,13 @@
   <data name="baseline_cable_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\baseline_cable_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="function" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\function.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="function" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\function.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="StatusWarning_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StatusWarning_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

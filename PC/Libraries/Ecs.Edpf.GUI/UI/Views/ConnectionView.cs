@@ -60,13 +60,15 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         private void UpdateErrorWarningLabel()
         {
-            if (_connectionViewModel == null)
+            if (_connectionViewModel == null || string.IsNullOrEmpty(_connectionViewModel.OpenFailedErrorMessage))
             {
                 _errMessageTssl.Text = "";
+                _errMessageTssl.Visible = false;
             }
             else
             {
                 _errMessageTssl.Text = _connectionViewModel.OpenFailedErrorMessage;
+                _errMessageTssl.Visible = true;
             }
         }
 
