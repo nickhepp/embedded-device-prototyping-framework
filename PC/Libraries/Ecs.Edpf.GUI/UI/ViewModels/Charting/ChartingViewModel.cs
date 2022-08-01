@@ -99,13 +99,14 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
 
         private const string MaxDisplaySampleCountSettingsName = "ChartingSettings.MaxDisplaySampleCount";
         private const string ExpressionSettingsName = "ChartSettings.Expression";
-
+        private const string ShowSettingsName = "ChartSettings.ShowSettings";
         public Dictionary<string, string> GetSettings()
         {
             Dictionary<string, string> settings = new Dictionary<string, string>
             {
                 { MaxDisplaySampleCountSettingsName, _chartSettings.MaxDisplaySampleCount.ToString() },
                 { ExpressionSettingsName, _chartSettings.Expression },
+                { ShowSettingsName, ShowSettings.ToString() },
             };
 
             return settings;
@@ -122,7 +123,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.Charting
             {
                 _chartSettings.Expression = settings[ExpressionSettingsName];
             }
-            
+            SettingsExtractor.ApplyBoolSettingByName(settings, 
+                ShowSettingsName, 
+                val => ShowSettings = val);
         }
 
         public void ApplyDefaultSettings()
