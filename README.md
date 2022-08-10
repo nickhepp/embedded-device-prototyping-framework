@@ -10,11 +10,17 @@ Embedded Device Prototyping Framework (EDPF) is an embedded device rapid prototy
 
 ---
 ## Table of Contents (this doc)
-
 * [Project Philosophy](#id-proj-philosophy)
 * [Main Features](#id-main-features)
   * [Firmware for Rapid Prototyping](#id-firwmare-rapid)
   * [Host Machine Software for Rapid Prototyping](#id-software-rapid)
+  * [Host Machine Software Tools](#id-hostapp-tools)
+     * [Charting](#id-tool-charting)
+     * [Console](#id-tool-console)
+     * [Device Commands](#id-tool-devicecommands)
+     * [Connections](#id-tool-connections)
+     * [Macros](#id-tool-macros)
+     * [Logging](#id-tool-logging)
 
 ---
 ## Other Important ReadMe's
@@ -62,6 +68,46 @@ The software on the host machine configures itself to facilitate the functionali
   margin-left: auto;
   margin-right: auto; 
   /*width: 70%;*/'/>
+  
+  
+<a id='id-hostapp-tools' />  
+
+### Host Machine Software Tools
+
+The host machine software has a number tools that can be used for operating with the device.  Let's do a run down on the tools.
+
+<a id='id-tool-charting' />
+
+#### Charting
+Some notes about [Charting](./tool-charting.md)
+
+<a id='id-tool-console' />
+
+#### Console
+Some notes about [Console](./tool-console.md)
+  
+<a id='id-tool-devicecommands' />
+
+#### Device Commands
+Some notes about [Device Commands](./tool-devicecommands.md)
+
+<a id='id-tool-connections' />
+
+#### Connections
+Some notes about [Connections](./tool-connections.md)
+ 
+<a id='id-tool-macros' />
+
+#### Macros
+Some notes about [Macros](./tool-macros.md)
+
+<a id='id-tool-logging' />
+
+#### Logging
+Some notes about [Logging](./tool-logging.md)
+  
+
+  
   
 <!--  
 TODO: list UI tools with animations
