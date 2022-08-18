@@ -1,4 +1,4 @@
-# Connections Tool
+# <img src='PC/HostApp/HostApp/Resources/baseline_cable_black.png' style="width:60px;"/> Connections
+Establish connections to devices over multiple connection options.
 
-## Insert Icon
-## Insert GIF
+## TODO: Insert GIF

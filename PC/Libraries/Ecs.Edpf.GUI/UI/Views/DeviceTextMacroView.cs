@@ -74,7 +74,7 @@ namespace Ecs.Edpf.GUI.UI.Views
                 _relayCmdHandlers.Add(
                     new RelayCommandHandler(_stopBtn, _deviceTextMacroViewModel.StopCommand, relayCommandExHandler: this));
 
-                _scriptRtb.DataBindings.Add(new Binding(nameof(RichTextBox.Enabled), _deviceTextMacroViewModel, nameof(IDeviceTextMacroViewModel.MacroTextEnabled)));
+                _macroTxt.DataBindings.Add(new Binding(nameof(TextBox.Enabled), _deviceTextMacroViewModel, nameof(IDeviceTextMacroViewModel.MacroTextEnabled)));
 
                 SetProgressBar();
                 SetTsbAddCommandEnabled();
@@ -94,7 +94,7 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         private void SetTsbAddCommandEnabled()
         {
-            _tsbAddCommand.Enabled = (_deviceTextMacroViewModel != null) && _deviceTextMacroViewModel.AddCommandTextEnabled;
+            _addCommandTsb.Enabled = (_deviceTextMacroViewModel != null) && _deviceTextMacroViewModel.AddCommandTextEnabled;
         }
 
         private void DeviceTextMacroViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -111,7 +111,7 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         private InstructionCollectionInitArgs GetInstructionCollectionInitArgs()
         {
-            List<string> lines = _scriptRtb.Text.Split(new[] { "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> lines = _macroTxt.Text.Split(new[] { "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
             InstructionCollectionInitArgs initArgs = new InstructionCollectionInitArgs
             {
                 InstructionsLines = lines
@@ -132,5 +132,21 @@ namespace Ecs.Edpf.GUI.UI.Views
                 ViewModel = new AddDeviceCommandsToMacroViewModel(_deviceTextMacroViewModel.Device)
             };
         }
+
+        private void _addSleepTsb_Click(object sender, EventArgs e)
+        {
+            string lineToAdd;
+            if (_macroTxt.TextLength == 0)
+            {
+                lineToAdd = DelayInstruction.GetDelayInstruction(milliSecs: 1000) + "\r\n";
+            }
+            else
+            {
+                lineToAdd = "\r\n" + DelayInstruction.GetDelayInstruction(milliSecs: 1000) + "\r\n";
+            }
+
+            _macroTxt.Text += lineToAdd;
+        }
+
     }
 }

@@ -135,7 +135,7 @@
             this._executeScriptTsb.Image = ((System.Drawing.Image)(resources.GetObject("_executeScriptTsb.Image")));
             this._executeScriptTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._executeScriptTsb.Name = "_executeScriptTsb";
-            this._executeScriptTsb.Size = new System.Drawing.Size(215, 36);
+            this._executeScriptTsb.Size = new System.Drawing.Size(214, 36);
             this._executeScriptTsb.Text = "Execute Script...";
             this._executeScriptTsb.Click += new System.EventHandler(this._executeScriptTsb_Click);
             // 

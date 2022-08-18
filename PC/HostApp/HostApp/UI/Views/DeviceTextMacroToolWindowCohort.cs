@@ -17,8 +17,8 @@ namespace HostApp.UI.Views
     {
         public string Name => "Macros";
 
-        public string Description => "Record and playback multiple operations to send to the device. Supports both " +
-            "oneshot and looping macros on a timer.";
+        public string Description => "Send multiple operations to the device with optional time delays in between." +
+            " Supports both oneshot and looping macros on a timer.";
 
         public Bitmap Image => HostApp.Properties.Resources.repeat;
 

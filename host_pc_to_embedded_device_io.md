@@ -3,7 +3,7 @@
 
 ### State Diagrams
 
-As mentioned above, the host software application is the master, and the embedded device is the slave.  The embedded device will not output data or change configuration unless the host application commands it.  The embedded device operates much like a command line terminal found in many operating systems.  The device waits for a collection of characters followed by a carriage return and inspects the input characters for known commands and optional arguments.  
+The host software application is the master, and the embedded device is the slave.  The embedded device will not output data or change configuration unless the host application commands it.  The embedded device operates much like a command line terminal found in many operating systems.  The device waits for a collection of characters followed by a carriage return and inspects the input characters for known commands and optional arguments.  
 
 Let's take a look at how this works.
 

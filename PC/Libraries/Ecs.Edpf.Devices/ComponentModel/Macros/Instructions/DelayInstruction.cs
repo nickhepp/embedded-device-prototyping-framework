@@ -8,6 +8,10 @@ namespace Ecs.Edpf.Devices.ComponentModel.Macros.Instructions
 {
     public class DelayInstruction : Instruction
     {
+        public static string GetDelayInstruction(int milliSecs)
+        {
+            return $"{DelayPrefices.First()} {milliSecs}{MillisecsDelayTimeUnit}";
+        }
 
         public static readonly string[] DelayPrefices = new string[] { "--sleep", "-- sleep"};
 
