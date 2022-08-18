@@ -14,16 +14,16 @@ Embedded Device Prototyping Framework (EDPF) is an embedded device rapid prototy
 * [Main Features](#id-main-features)
   * [Firmware for Rapid Prototyping](#id-firwmare-rapid)
   * [Host Machine Software for Rapid Prototyping](#id-software-rapid)
-  * [Host Machine Software Tools](#id-hostapp-tools)
-     * [Charting](#id-tool-charting)
-     * [Console](#id-tool-console)
-     * [Device Commands](#id-tool-devicecommands)
-     * [Connections](#id-tool-connections)
-     * [Macros](#id-tool-macros)
-     * [Logging](#id-tool-logging)
+* [Host Machine Software Tools](#id-hostapp-tools)
+   * [Charting](#id-tool-charting)
+   * [Console](#id-tool-console)
+   * [Device Commands](#id-tool-devicecommands)
+   * [Connections](#id-tool-connections)
+   * [Macros](#id-tool-macros)
+   * [Logging](#id-tool-logging)
 
 ---
-## Other Important ReadMe's
+## Other Important ReadMe's (not this doc)
 
 :link: [Getting Started](./getting_started.md)
 
@@ -31,7 +31,11 @@ Embedded Device Prototyping Framework (EDPF) is an embedded device rapid prototy
 
 :link: [Host PC to Embedded Device IO](./host_pc_to_embedded_device_io.md)
 
-:link: [How to create custom commands](./how_to_create_custom_commands.md)
+:link: [What are Commands?](./device_commands.md#id-what-are-commands)
+
+:link: [How to create custom commands](./device_commands.md#id-create-custom-commands)
+
+
 
 ---
 <a id='id-proj-philosophy' />
@@ -56,7 +60,7 @@ The EDPF provides a powerful combination of [Embedded Firmware](#id-firwmare-rap
 
 * <img src='Resources/Media/graphics/handshake.svg' style="width:30px;"/> Handshaking to establish a connection
 * <img src='Resources/Media/graphics/connect-plugged.svg' style="width:30px;"/> Easy IO between the device and the host application
-  * <img src='Resources/Media/graphics/function.svg' style="width:30px;"/> Commands and parameters make it easy for the device to accept data from the host application software and invoke firmware functionality 
+* <img src='Resources/Media/graphics/function.svg' style="width:30px;"/> Commands and parameters make it easy for the device to accept data from the host application software and invoke firmware functionality 
 
 <a id='id-software-rapid' />
 
@@ -69,76 +73,40 @@ The software on the host machine configures itself to facilitate the functionali
   margin-right: auto; 
   /*width: 70%;*/'/>
   
-  
+---
+
 <a id='id-hostapp-tools' />  
 
-### Host Machine Software Tools
+## Host Machine Software Tools
 
 The host machine software has a number tools that can be used for operating with the device.  Let's do a run down on the tools.
 
 <a id='id-tool-charting' />
 
-#### Charting
-Some notes about [Charting](./tool-charting.md)
+### <img src='PC/HostApp/HostApp/Resources/charts.png' style="width:30px;"/> Charting Tool
+Charts the flow of device data. Read more about the [Charting Tool](./tool-charting.md).
 
 <a id='id-tool-console' />
 
-#### Console
-Some notes about [Console](./tool-console.md)
+### <img src='PC/HostApp/HostApp/Resources/cmd_icon.png' style="width:30px;" />  Console Tool
+The EDPF software makes the device act like a server that provides a terminal interface.  Read more about the [Console Tool](./tool-console.md).
   
 <a id='id-tool-devicecommands' />
 
-#### Device Commands
-Some notes about [Device Commands](./tool-devicecommands.md)
+### <img src='PC/HostApp/HostApp/Resources/function.png' style="width:30px;" /> Device Commands Tool
+Send arguments and execution instructions, much like a software program calls methods. The host application queries the attached device to learn of its capabilities and automatically creates UI elements to easily interact with device functionality. Read more about the [Device Commands Tool](./tool-devicecommands.md).
 
 <a id='id-tool-connections' />
 
-#### Connections
-Some notes about [Connections](./tool-connections.md)
+### <img src='PC/HostApp/HostApp/Resources/baseline_cable_black.png' style="width:30px;"/> Connections Tool
+Establish connections to devices over multiple connection options.  Read more about the [Connections Tool](./tool-connections.md).
  
 <a id='id-tool-macros' />
 
-#### Macros
-Some notes about [Macros](./tool-macros.md)
+### <img src='PC/HostApp/HostApp/Resources/repeat.png' style="width:30px;"/> Macros Tool
+Send multiple operations to the device with optional time delays in between. Supports both oneshot and looping macros on a timer. Read more about the [Macros Tool](./tool-macros.md).
 
 <a id='id-tool-logging' />
 
-#### Logging
-Some notes about [Logging](./tool-logging.md)
-  
-
-  
-  
-<!--  
-TODO: list UI tools with animations
-
-
-----
-
-# STUFF TO RELOCATE OR DELETE
-
-
-* Easy IO 
-
-* Host App (PC) Prototyping UI (.NET WinForms)
-  * Easily extendable for custom functionality
-  * Multiple interfaces to the embedded device
-    * Terminal style command line interface
-    * Common UI elements (buttons and numeric inputs) for executing multiple step communication tasks with the device
-  * Built in logging
-
-* Host Device library (.NET)
-  
-  * Provides core IO methods which handle establishing connection, sending instructions, receiving acknowledgements, and return data payloads 
-
-* Command line driven communication protocol (protocol runs over RS232)
-  * Easily extendable for custom functionality
-  * Intuitive, human readable IO
-
-* Firmware kernel (Arduino and other compatible devices)
-  * Easily extendable for custom functionality
-  * Handles routing command line IO to device subroutines along with parameters
-  -->
-
-
-
+### <img src='PC/HostApp/HostApp/Resources/clipboard-list.png' style="width:30px;"/> Logging Tool
+Interact with the device as if it were a server that provides a terminal interface. The device responds with easy to understand text in a 'human readable' format. Read more about the [Logging Tool](./tool-logging.md).
