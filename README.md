@@ -5,6 +5,8 @@
   
 <!--TODO: add gifs of host tools, link to host section below-->
 # Embedded Device Prototyping Framework
+##  Less boilerplate coding, more productive prototyping, faster project completion
+
 Embedded Device Prototyping Framework (EDPF) is an embedded device rapid prototyping framework. A lot of time and effort can be spent simply establishing communication back and forth from a host PC to an embedded device uPC.  This framework establishes a base infrastructure that removes much of that plumbing work off the backs of developers/designers/hobbyists/etc.  This design has been used in numerous applications for both commercial and hobbyist purposes.  Please make use of it yourself if it can lighten your load, help you complete your task, and get to what matters in your device -- completing your design.
 
 
@@ -94,7 +96,7 @@ The EDPF software makes the device act like a server that provides a terminal in
 <a id='id-tool-devicecommands' />
 
 ### <img src='PC/HostApp/HostApp/Resources/function.png' style="width:30px;" /> Device Commands Tool
-Send arguments and execution instructions, much like a software program calls methods. The host application queries the attached device to learn of its capabilities and automatically creates UI elements to easily interact with device functionality. Read more about the [Device Commands Tool](./tool-devicecommands.md).
+Send data and execute instructions, much like a software program calls methods. The host application queries the attached device to learn of its capabilities and automatically creates UI elements to easily interact with device functionality. Read more about the [Device Commands Tool](./tool-devicecommands.md).
 
 <a id='id-tool-connections' />
 
