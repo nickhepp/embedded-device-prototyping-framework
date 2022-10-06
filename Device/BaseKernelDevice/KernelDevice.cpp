@@ -387,6 +387,63 @@ void show_highlights_command(Command* cmd)
 }
 #endif  // INCLUDE_SHOW_HIGHLIGHTS_COMMAND
 
+#if INCLUDE_COLOR_COMMANDS
+
+#define RED_COLOR_PARAM_NAME    "red"
+#define GREEN_COLOR_PARAM_NAME  "green"
+#define BLUE_COLOR_PARAM_NAME   "blue"
+
+#define RED_ADDRESS       (0x00)
+#define GREEN_ADDRESS     (0x01)
+#define BLUE_ADDRESS      (0x02)
+
+
+// TODO: make the back and forth get + set
+
+Command getColorsCommand;
+void get_colors_command(Command* cmd)
+{
+    Serial.print(F(RED_COLOR_PARAM_NAME));
+    Serial.print(F("="));
+    Serial.print(EEPROM.read(RED_ADDRESS), DEC);
+    Serial.print(F(", "));
+
+    Serial.print(F(GREEN_COLOR_PARAM_NAME));
+    Serial.print(F("="));
+    Serial.print(EEPROM.read(GREEN_ADDRESS), DEC);
+    Serial.print(F(", "));
+    
+    Serial.print(F(BLUE_COLOR_PARAM_NAME));
+    Serial.print(F("="));
+    Serial.print(EEPROM.read(BLUE_ADDRESS), DEC);
+}
+
+Command setColorsCommand;
+void set_colors_command(Command* cmd)
+{
+    uint8_t red_val;
+    if (cmd->getUInt8Parameter(RED_COLOR_PARAM_NAME, &red_val))
+    {
+        EEPROM.write(RED_ADDRESS, red_val);
+    }
+    
+    uint8_t green_val;
+    if (cmd->getUInt8Parameter(GREEN_COLOR_PARAM_NAME, &green_val))
+    {
+        EEPROM.write(GREEN_ADDRESS, green_val);
+    }
+
+    uint8_t blue_val;
+    if (cmd->getUInt8Parameter(BLUE_COLOR_PARAM_NAME, &blue_val))
+    {
+        EEPROM.write(BLUE_ADDRESS, blue_val);
+    }
+
+    Serial.println(F("written colors"));
+}
+
+#endif // INCLUDE_COLOR_COMMANDS
+
 #if INCLUDE_CHARTING_VALUES_COMMAND
 const int16_t TRIANGLE_WAVE_VAL = 1000;
 const int16_t MIN_TRIANGLE_WAVE_VAL = -1000;
@@ -559,7 +616,17 @@ void KernelDevice::init()
 // create a simple command that matches the example found above, and keep the one command with all the type options
 // as a seperate compile in example
 
+#if INCLUDE_COLOR_COMMANDS
+  getColorsCommand.initCommand("get_colors", cmd_params, get_colors_command);
+  registerCommand(&getColorsCommand);
 
+  setColorsCommand.initCommand("set_colors", cmd_params, set_colors_command);
+  setColorsCommand.addUInt8Parameter(RED_COLOR_PARAM_NAME);
+  setColorsCommand.addUInt8Parameter(GREEN_COLOR_PARAM_NAME);
+  setColorsCommand.addUInt8Parameter(BLUE_COLOR_PARAM_NAME);
+  registerCommand(&setColorsCommand);
+  
+#endif  // INCLUDE_COLOR_COMMANDS
 
 #if INCLUDE_CHARTING_VALUES_COMMAND
     chartingCommand.initCommand("charting_values", cmd_params, charting_values_command);
