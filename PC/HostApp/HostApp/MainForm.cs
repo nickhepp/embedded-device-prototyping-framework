@@ -233,5 +233,18 @@ namespace HostApp
                 _warningMessageBoxService.ShowWarningMessageBox(ex.Message, "!!Error visiting project bugs!!");
             }
         }
+
+        private void _visitECDotComTsm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(HostAppConstants.ElectronicComputingDotComUrl);
+            }
+            catch (Exception)
+            {
+                // do nothing here, the app will work fine even if we cant
+                // load the website
+            }
+        }
     }
 }

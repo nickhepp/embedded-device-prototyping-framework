@@ -55,7 +55,7 @@ namespace HostApp.UI.Views
         {
             try
             {
-                Process.Start("https://electroniccomputing.com/");
+                Process.Start(HostAppConstants.ElectronicComputingDotComUrl);
             }
             catch (Exception)
             {
