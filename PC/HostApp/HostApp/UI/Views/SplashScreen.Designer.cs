@@ -31,8 +31,10 @@
             this._mainTlp = new System.Windows.Forms.TableLayoutPanel();
             this._logoPbx = new System.Windows.Forms.PictureBox();
             this._toolsTlp = new System.Windows.Forms.TableLayoutPanel();
+            this._ecsLogoPbx = new System.Windows.Forms.PictureBox();
             this._mainTlp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._logoPbx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._ecsLogoPbx)).BeginInit();
             this.SuspendLayout();
             // 
             // _mainTlp
@@ -42,6 +44,7 @@
             this._mainTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this._mainTlp.Controls.Add(this._logoPbx, 0, 0);
             this._mainTlp.Controls.Add(this._toolsTlp, 1, 0);
+            this._mainTlp.Controls.Add(this._ecsLogoPbx, 0, 1);
             this._mainTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainTlp.Location = new System.Drawing.Point(0, 0);
             this._mainTlp.Name = "_mainTlp";
@@ -78,6 +81,19 @@
             this._toolsTlp.Size = new System.Drawing.Size(596, 665);
             this._toolsTlp.TabIndex = 1;
             // 
+            // _ecsLogoPbx
+            // 
+            this._ecsLogoPbx.BackColor = System.Drawing.Color.White;
+            this._ecsLogoPbx.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._ecsLogoPbx.Image = global::HostApp.Properties.Resources.edpf_splash_screen_logo;
+            this._ecsLogoPbx.Location = new System.Drawing.Point(3, 574);
+            this._ecsLogoPbx.Name = "_ecsLogoPbx";
+            this._ecsLogoPbx.Size = new System.Drawing.Size(595, 94);
+            this._ecsLogoPbx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._ecsLogoPbx.TabIndex = 2;
+            this._ecsLogoPbx.TabStop = false;
+            this._ecsLogoPbx.Click += new System.EventHandler(this._ecsLogoPbx_Click);
+            // 
             // SplashScreen
             // 
             this.BackgroundImage = global::HostApp.Properties.Resources.logo;
@@ -94,6 +110,7 @@
             this.TopMost = true;
             this._mainTlp.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._logoPbx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._ecsLogoPbx)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -103,5 +120,6 @@
         private System.Windows.Forms.TableLayoutPanel _mainTlp;
         private System.Windows.Forms.PictureBox _logoPbx;
         private System.Windows.Forms.TableLayoutPanel _toolsTlp;
+        private System.Windows.Forms.PictureBox _ecsLogoPbx;
     }
 }

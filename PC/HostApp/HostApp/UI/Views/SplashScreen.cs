@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Ecs.Edpf.Devices.ComponentModel;
@@ -49,5 +51,17 @@ namespace HostApp.UI.Views
 
         }
 
+        private void _ecsLogoPbx_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                Process.Start("https://electroniccomputing.com/");
+            }
+            catch (Exception)
+            {
+                // do nothing here, the app will work fine even if we cant
+                // load the website
+            }
+        }
     }
 }
