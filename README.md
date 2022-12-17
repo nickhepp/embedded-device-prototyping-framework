@@ -40,17 +40,17 @@ Embedded Device Prototyping Framework (EDPF) is an embedded device rapid prototy
 
 
 ---
-<a id='id-proj-philosophy' />
+<a id='id-proj-philosophy'></a>
 
 ## <img src='Resources/Media/graphics/book-open.svg' style="width:40px;"/> Project Philosophy
 * Low code through reduced boilerplate - EDPF strives to reduce the code needed to create new functionality in both firmware and software
 * Open source with examples of common functionality
 * Easily extendable for custom applications
 
-<a id='id-firwmare-rapid' />
+<a id='id-firwmare-rapid'></a>
 
 ---
-<a id='id-main-features' />
+<a id='id-main-features'></a>
 
 ## What are its main features?
 
@@ -64,7 +64,7 @@ The EDPF provides a powerful combination of [Embedded Firmware](#id-firwmare-rap
 * <img src='Resources/Media/graphics/connect-plugged.svg' style="width:30px;"/> Easy IO between the device and the host application
 * <img src='Resources/Media/graphics/function.svg' style="width:30px;"/> Commands and parameters make it easy for the device to accept data from the host application software and invoke firmware functionality 
 
-<a id='id-software-rapid' />
+<a id='id-software-rapid'></a>
 
 ### <img src='Resources/Media/graphics/laptop-code.svg' style="width:35px;"/> Host Machine Software for Rapid Prototyping
 
@@ -77,38 +77,38 @@ The software on the host machine configures itself to facilitate the functionali
   
 ---
 
-<a id='id-hostapp-tools' />  
+<a id='id-hostapp-tools'></a>  
 
 ## Host Machine Software Tools
 
 The host machine software has a number tools that can be used for operating with the device.  Let's do a run down on the tools.
 
-<a id='id-tool-charting' />
+<a id='id-tool-charting'></a>
 
 ### <img src='PC/HostApp/HostApp/Resources/charts.png' style="width:30px;"/> Charting Tool
 Charts the flow of device data. Read more about the [Charting Tool](./tool-charting.md).
 
-<a id='id-tool-console' />
+<a id='id-tool-console'></a>
 
 ### <img src='PC/HostApp/HostApp/Resources/cmd_icon.png' style="width:30px;" />  Console Tool
 The EDPF software makes the device act like a server that provides a terminal interface.  Read more about the [Console Tool](./tool-console.md).
   
-<a id='id-tool-devicecommands' />
+<a id='id-tool-devicecommands'></a>
 
 ### <img src='PC/HostApp/HostApp/Resources/function.png' style="width:30px;" /> Device Commands Tool
 Send data and execute instructions, much like a software program calls methods. The host application queries the attached device to learn of its capabilities and automatically creates UI elements to easily interact with device functionality. Read more about the [Device Commands Tool](./tool-devicecommands.md).
 
-<a id='id-tool-connections' />
+<a id='id-tool-connections'></a>
 
 ### <img src='PC/HostApp/HostApp/Resources/baseline_cable_black.png' style="width:30px;"/> Connections Tool
 Establish connections to devices over multiple connection options.  Read more about the [Connections Tool](./tool-connections.md).
  
-<a id='id-tool-macros' />
+<a id='id-tool-macros'></a>
 
 ### <img src='PC/HostApp/HostApp/Resources/repeat.png' style="width:30px;"/> Macros Tool
 Send multiple operations to the device with optional time delays in between. Supports both oneshot and looping macros on a timer. Read more about the [Macros Tool](./tool-macros.md).
 
-<a id='id-tool-logging' />
+<a id='id-tool-logging'></a>
 
 ### <img src='PC/HostApp/HostApp/Resources/clipboard-list.png' style="width:30px;"/> Logging Tool
 Interact with the device as if it were a server that provides a terminal interface. The device responds with easy to understand text in a 'human readable' format. Read more about the [Logging Tool](./tool-logging.md).
