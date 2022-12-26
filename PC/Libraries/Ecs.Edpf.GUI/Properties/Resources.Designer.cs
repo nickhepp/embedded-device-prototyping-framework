@@ -73,9 +73,39 @@ namespace Ecs.Edpf.GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap circle_check_green_black {
+            get {
+                object obj = ResourceManager.GetObject("circle-check_green_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap circle_xmark_red_x_64x64 {
+            get {
+                object obj = ResourceManager.GetObject("circle-xmark_red_x_64x64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cmd_icon {
             get {
                 object obj = ResourceManager.GetObject("cmd_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap database_plus {
+            get {
+                object obj = ResourceManager.GetObject("database_plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,6 +223,16 @@ namespace Ecs.Edpf.GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap sliders_v_square_64x64 {
+            get {
+                object obj = ResourceManager.GetObject("sliders-v-square_64x64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap snooze_64x64 {
             get {
                 object obj = ResourceManager.GetObject("snooze_64x64", resourceCulture);
@@ -216,6 +256,16 @@ namespace Ecs.Edpf.GUI.Properties {
         internal static System.Drawing.Bitmap StatusWarning_64x64 {
             get {
                 object obj = ResourceManager.GetObject("StatusWarning_64x64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trash_xmark_64x64 {
+            get {
+                object obj = ResourceManager.GetObject("trash-xmark_64x64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

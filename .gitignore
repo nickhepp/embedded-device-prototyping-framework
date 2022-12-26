@@ -59,3 +59,6 @@ PC/Libraries/Ecs.Edpf.Devices/obj/*
 PC/HostApp/HostApp/ToRemove/*
 PC/HostApp/_ToDelete/*
 PC/Libraries/Ecs.Edpf.GUI/ToRemove/*
+/PC/Libraries/Ecs.Edpf.Data/bin/Debug/netstandard2.0
+/PC/Libraries/Ecs.Edpf.Data/obj/Debug/netstandard2.0
+/PC/Libraries/Ecs.Edpf.Data/obj

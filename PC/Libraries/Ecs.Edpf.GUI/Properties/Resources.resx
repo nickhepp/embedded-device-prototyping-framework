@@ -124,11 +124,17 @@
   <data name="reset_96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reset_96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="StatusWarning_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StatusWarning_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="repeat_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\repeat_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="locked_96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\locked_96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="trash-xmark_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trash-xmark_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="unlocked_96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\unlocked_96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,8 +148,14 @@
   <data name="repeat_one_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\repeat_one_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="circle-check_green_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\circle-check_green_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="database_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\database_plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="circle-xmark_red_x_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\circle-xmark_red_x_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="repeat_one1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\repeat_one1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,10 +175,13 @@
   <data name="function" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\function.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="StatusWarning_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StatusWarning_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="snooze_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\snooze_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sliders-v-square_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sliders-v-square_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

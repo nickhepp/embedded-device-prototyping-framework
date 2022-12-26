@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostApp.Test", "HostApp.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{ED25A0B2-ECAB-4722-BF63-7234B550CEB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecs.Edpf.Data", "..\Libraries\Ecs.Edpf.Data\Ecs.Edpf.Data.csproj", "{7CDDED67-5082-4F6A-B1EA-59E920E4BFE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{A477D26F-A257-437B-AA8C-251CF5C578FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A477D26F-A257-437B-AA8C-251CF5C578FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A477D26F-A257-437B-AA8C-251CF5C578FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CDDED67-5082-4F6A-B1EA-59E920E4BFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CDDED67-5082-4F6A-B1EA-59E920E4BFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CDDED67-5082-4F6A-B1EA-59E920E4BFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CDDED67-5082-4F6A-B1EA-59E920E4BFE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{E0BDE557-CD54-46EB-A86C-3020DB569A27} = {3604330D-DCB4-4F63-B8A9-B96306576130}
 		{A477D26F-A257-437B-AA8C-251CF5C578FA} = {BF3EE795-43B1-4E82-B360-62B3B3132A5D}
 		{ED25A0B2-ECAB-4722-BF63-7234B550CEB9} = {2B990F88-C4F1-4C53-9B9C-C1FDE2860166}
+		{7CDDED67-5082-4F6A-B1EA-59E920E4BFE2} = {99FAF70B-8D02-4368-8E5D-0F8B1D2A5047}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1EFAB852-2DE0-44EF-A2D9-91459B41E638}

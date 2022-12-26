@@ -31,6 +31,7 @@ namespace HostApp.UI.Views
                     new ChartingToolWindowCohort(),
                     new DeviceTextMacroToolWindowCohort(),
                     new LoggingToolWindowCohort(),
+                    new DataStorageToolWindowCohort(),
                };
 
 

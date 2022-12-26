@@ -50,25 +50,25 @@
             this._mainTlp.Controls.Add(this._deviceHistoryRtb, 0, 0);
             this._mainTlp.Controls.Add(this._consoleInputTlp, 0, 1);
             this._mainTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._mainTlp.Location = new System.Drawing.Point(0, 42);
+            this._mainTlp.Location = new System.Drawing.Point(0, 50);
             this._mainTlp.Name = "_mainTlp";
             this._mainTlp.RowCount = 2;
             this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this._mainTlp.Size = new System.Drawing.Size(1015, 632);
+            this._mainTlp.Size = new System.Drawing.Size(1015, 624);
             this._mainTlp.TabIndex = 1;
             // 
             // _deviceHistoryRtb
             // 
             this._deviceHistoryRtb.BackColor = System.Drawing.Color.Black;
             this._deviceHistoryRtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._deviceHistoryRtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F);
+            this._deviceHistoryRtb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.85F);
             this._deviceHistoryRtb.ForeColor = System.Drawing.Color.White;
             this._deviceHistoryRtb.Location = new System.Drawing.Point(3, 3);
             this._deviceHistoryRtb.Name = "_deviceHistoryRtb";
             this._deviceHistoryRtb.ReadOnly = true;
-            this._deviceHistoryRtb.Size = new System.Drawing.Size(1009, 561);
+            this._deviceHistoryRtb.Size = new System.Drawing.Size(1009, 553);
             this._deviceHistoryRtb.TabIndex = 1;
             this._deviceHistoryRtb.Text = "$ This is test text";
             // 
@@ -82,7 +82,7 @@
             this._consoleInputTlp.Controls.Add(this._inputLbl, 0, 0);
             this._consoleInputTlp.Controls.Add(this._previousCommandsPnl, 2, 0);
             this._consoleInputTlp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._consoleInputTlp.Location = new System.Drawing.Point(3, 570);
+            this._consoleInputTlp.Location = new System.Drawing.Point(3, 562);
             this._consoleInputTlp.Name = "_consoleInputTlp";
             this._consoleInputTlp.RowCount = 1;
             this._consoleInputTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -126,7 +126,7 @@
             this._executeScriptTsb});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1015, 42);
+            this.toolStrip1.Size = new System.Drawing.Size(1015, 50);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -135,7 +135,7 @@
             this._executeScriptTsb.Image = ((System.Drawing.Image)(resources.GetObject("_executeScriptTsb.Image")));
             this._executeScriptTsb.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._executeScriptTsb.Name = "_executeScriptTsb";
-            this._executeScriptTsb.Size = new System.Drawing.Size(214, 36);
+            this._executeScriptTsb.Size = new System.Drawing.Size(214, 44);
             this._executeScriptTsb.Text = "Execute Script...";
             this._executeScriptTsb.Click += new System.EventHandler(this._executeScriptTsb_Click);
             // 

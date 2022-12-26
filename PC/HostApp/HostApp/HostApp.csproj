@@ -40,6 +40,7 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Ecs.Edpf.Data\Ecs.Edpf.Data.csproj" />
     <ProjectReference Include="..\..\Libraries\Ecs.Edpf.Devices\Ecs.Edpf.Devices.csproj" />
     <ProjectReference Include="..\..\Libraries\Ecs.Edpf.GUI\Ecs.Edpf.GUI.csproj" />
   </ItemGroup>
