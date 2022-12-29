@@ -15,29 +15,32 @@ namespace Ecs.Edpf.Data.DataStreams
 
         public const string ValueSeparatorToken = ":";
 
-        public const string SeriesAndChartNameBeginToken = "{";
+        public const string SeriesNameBeginToken = "{";
 
-        public const string SeriesAndChartNameEndToken = "}";
+        public const string SeriesNameEndToken = "}";
 
         public const char ValuesSeparatorToken = ',';
 
-        //public const string SeriesChartNameSeparatorToken = "|";
 
-        private Lazy<Dictionary<string, string>> _chartSeriesToChartNames;
+        public List<string> ValueNames { get; private set; }
 
         private string _valuesPrefix;
-
-        private string _expression;
-
-        public event EventHandler ExpressionChanged;
-
-        public string Expression
+        public string ValuesPrefix
         {
             get
             {
-                return _expression;
+                return _valuesPrefix;
+            }
+            private set
+            {
+                _valuesPrefix = value;
+                _valuesPrefixWithSpace = value + " ";
             }
         }
+
+        private string _valuesPrefixWithSpace;
+
+        public string Expression { get; private set; }
 
         public DataStreamExpressionFilter(string expression)
         {
@@ -46,48 +49,85 @@ namespace Ecs.Edpf.Data.DataStreams
 
             int valSepLocation = expression.IndexOf(ValueSeparatorToken);
             if (valSepLocation == -1)
+            {
                 throw new ArgumentException(UnexpectedExpressionFormatErrorMessage);
+            }
 
             string valuesExpression = expression.Substring(valSepLocation + 1);
+            ValuesPrefix = expression.Substring(0, valSepLocation);
+            if (ValuesPrefix.Length == 0)
+            {
+                throw new ArgumentException(UnexpectedExpressionFormatErrorMessage);
+            }
 
             List<string> valueParts = valuesExpression.
                 Split(new char[] { ValuesSeparatorToken }, StringSplitOptions.None).
                 ToList().
-                ConvertAll(valPart => valPart.Trim())
+                ConvertAll(valPart => valPart.Trim());
 
-        //public const string ValueSeparatorToken = ":";
-        //public const string SeriesAndChartNameBeginToken = "{";
-        //public const string SeriesAndChartNameEndToken = "}";
-        //public const string ValuesSeparatorToken = ",";
-
-        _expression = expression;
-        }
-
-
-
-
-        private void InitializeGetters()
-        {
-            _chartValuesPrefix = new Lazy<string>(() =>
+            if (
+                    (valueParts.Count == 0) ||
+                    valueParts.Any(valuePart => !valuePart.StartsWith(SeriesNameBeginToken)) ||
+                    valueParts.Any(valuePart => !valuePart.EndsWith(SeriesNameEndToken))
+                )
             {
-                if (string.IsNullOrEmpty(Expression))
-                {
-                    throw new Exception(UnexpectedExpressionFormatErrorMessage);
-                }
+                throw new ArgumentException(UnexpectedExpressionFormatErrorMessage);
+            }
 
-                List<string> splitVals = Expression.Split(new string[] { ValueSeparatorToken }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                if (splitVals.Count != 2)
-                {
-                    throw new Exception(UnexpectedExpressionFormatErrorMessage);
-                }
+            List<string> tempValNames = valueParts.ConvertAll(valuePart => valuePart.Substring(1, valuePart.Length - 2));
+            if (
+                    tempValNames.Any(tempValName => tempValName.Any(c => !char.IsLetterOrDigit(c))) ||
+                    tempValNames.Any(tempValName => !char.IsLetter(tempValName.First()))
+                )
+            {
+                throw new ArgumentException(UnexpectedExpressionFormatErrorMessage);
+            }
 
-                return splitVals[0];
-            });
+            if (tempValNames.Distinct(StringComparer.OrdinalIgnoreCase).Count() != tempValNames.Count)
+            {
+                throw new ArgumentException(UnexpectedExpressionFormatErrorMessage);
+            }
 
+            ValueNames = tempValNames;
+            Expression = expression;
         }
 
+        public LineResultsSet GetResults(string deviceDataLine)
+        {
+            LineResultsSet resultsSet = null;
 
+            if ((deviceDataLine != null) && deviceDataLine.StartsWith(_valuesPrefixWithSpace))
+            {
+                List<string> potentialValStrs =
+                    deviceDataLine.Substring(_valuesPrefixWithSpace.Length).
+                    Split(',').
+                    ToList().
+                    ConvertAll(potentialVal => potentialVal.Trim());
+                if (potentialValStrs.Count == ValueNames.Count)
+                {
+                    List<LineResult> lineResults = new List<LineResult>();
+                    for (int k = 0; k < potentialValStrs.Count; k++)
+                    {
+                        if (double.TryParse(potentialValStrs[k], out double val))
+                        {
+                            lineResults.Add(new LineResult { Value = val, ValueName = ValueNames[k] });
+                        }
+                        else
+                        {
+                            // not everything was good data -- bail out now
+                            k = potentialValStrs.Count;
+                        }
+                    }
 
+                    if (lineResults.Count == potentialValStrs.Count)
+                    {
+                        resultsSet = new LineResultsSet { Results = lineResults };
+                    }
+                }
+            }
 
+            return resultsSet;
+        }
+ 
     }
 }
