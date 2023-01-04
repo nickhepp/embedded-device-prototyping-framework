@@ -13,9 +13,11 @@ namespace Ecs.Edpf.GUI.Logger
 
         public AppFileLoggerSettings()
         {
-            Path = System.IO.Path.Combine(BaseDirectoryProvider.GetEdpfBaseDirectory(), "Logs", "apps.log");
+            Path = System.IO.Path.Combine(
+                BaseDirectoryProvider.GetEdpfBaseDirectory(), 
+                GuiLoggerConstants.LogsDirectoryName, 
+                "apps.log");
         }
-
 
     }
 }

@@ -16,7 +16,6 @@ namespace Ecs.Edpf.Data.Test
         [TestInitialize]
         public void InitializeTest()
         {
-            //_dataStreamExpressionFilter = new DataStreamExpressionFilter();
         }
 
 

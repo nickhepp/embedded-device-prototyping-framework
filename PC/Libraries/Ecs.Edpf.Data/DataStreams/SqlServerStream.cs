@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ecs.Edpf.Data
+namespace Ecs.Edpf.Data.DataStreams
 {
-    public class DataStreamSettings
+    internal class SqlServerStream
     {
     }
 }

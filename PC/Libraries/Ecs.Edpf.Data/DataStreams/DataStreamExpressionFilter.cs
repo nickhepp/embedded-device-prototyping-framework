@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ecs.Edpf.Data.DataStreams
 {
-    public class DataStreamExpressionFilter
+    public class DataStreamExpressionFilter : IDataStreamExpressionFilter
     {
 
 
@@ -128,6 +128,6 @@ namespace Ecs.Edpf.Data.DataStreams
 
             return resultsSet;
         }
- 
+
     }
 }

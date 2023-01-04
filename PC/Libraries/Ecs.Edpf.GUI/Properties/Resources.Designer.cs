@@ -113,6 +113,16 @@ namespace Ecs.Edpf.GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap database_plus_64x64 {
+            get {
+                object obj = ResourceManager.GetObject("database_plus_64x64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap function {
             get {
                 object obj = ResourceManager.GetObject("function", resourceCulture);
@@ -266,6 +276,16 @@ namespace Ecs.Edpf.GUI.Properties {
         internal static System.Drawing.Bitmap trash_xmark_64x64 {
             get {
                 object obj = ResourceManager.GetObject("trash-xmark_64x64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trash_xmark_64x641 {
+            get {
+                object obj = ResourceManager.GetObject("trash-xmark_64x641", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -13,7 +13,17 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
     public interface IDataStorageViewModel : IDeviceViewModel, IDeviceProviderListener
     {
 
+        int StreamsPausedCount { get; }
+
+        int StreamsRunningCount { get; }
+
         ICommand AddDataStreamCommand { get; }
+
+        ICommand RemoveDataStreamsCommand { get; }
+
+        ICommand RecordAllStreamsCommand { get; }
+
+        ICommand PauseAllStreamsCommand { get; }
 
         BindingList<IDataStorageStreamViewModel> StreamViewModels { get; }
 

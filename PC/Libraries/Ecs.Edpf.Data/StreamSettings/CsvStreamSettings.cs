@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.Data.StreamSettings
 {
-    public class CsvStreamSettings :StreamSettings
+    public class CsvStreamSettings :DataStreamSettings
     {
         public override string TypeName => StreamSettingsConstants.CsvStreamSettingsTypeName;
     }

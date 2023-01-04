@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using System.Windows.Input;
+using Ecs.Edpf.Data;
+using Ecs.Edpf.Data.DataStreams;
 using Ecs.Edpf.Devices.IO.File;
 using Ecs.Edpf.Devices.Logging;
 using Ecs.Edpf.GUI.Logger;
@@ -137,7 +135,6 @@ namespace HostApp
             _dockPanelSettingsResource = new DockPanelSettingsResource(_dockPanel, dockContents, toolWindowCohortFactory);
 
             IKernel container = GetConfiguredContainer();
-
             LoggerFactory loggerFactory = new LoggerFactory(new AppFileLoggerSettings());
             _logger = loggerFactory.GetLogger();
             _settingsResourceStore = new SettingsResourceStore(_logger, new PersistedSettingsFactory(_logger, new DirectoryManager(), new FileManager()));
@@ -184,7 +181,6 @@ namespace HostApp
         {
             if (_showSplash)
             {
-
                 var centerXMain = (this.Location.X + this.Width) / 2.0;
                 var LocationXSplash = Math.Max(0, centerXMain - (_splashScreen.Width / 2.0));
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModels
 {
     public abstract class BaseDataStorageStreamViewModel<TStreamSettings> : IDataStorageStreamViewModel
-        where TStreamSettings : StreamSettings
+        where TStreamSettings : DataStreamSettings
     {
 
         public TStreamSettings StreamSettings { get; private set; }

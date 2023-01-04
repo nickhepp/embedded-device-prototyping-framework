@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.Data.StreamSettings
 {
-    public class SqlServerStreamSettings : StreamSettings
+    public class SqlServerStreamSettings : DataStreamSettings
     {
         public override string TypeName => StreamSettingsConstants.SqlServerStreamSettingsTypeName;
 
