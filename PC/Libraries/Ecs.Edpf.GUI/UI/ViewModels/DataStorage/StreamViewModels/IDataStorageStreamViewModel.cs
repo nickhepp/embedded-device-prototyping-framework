@@ -11,7 +11,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModels
     public interface IDataStorageStreamViewModel : INotifyPropertyChanged
     {
 
-
+        string DataStreamName { get; }
 
         string SuccessCountMessage { get; }
 
