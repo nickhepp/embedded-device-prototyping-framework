@@ -51,7 +51,7 @@
             this._shareTsm});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1370, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1370, 48);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -61,7 +61,7 @@
             this._exitTsm});
             this._fileTsm.Image = global::HostApp.Properties.Resources.file;
             this._fileTsm.Name = "_fileTsm";
-            this._fileTsm.Size = new System.Drawing.Size(103, 38);
+            this._fileTsm.Size = new System.Drawing.Size(103, 40);
             this._fileTsm.Text = "File";
             // 
             // _exitTsm
@@ -75,7 +75,7 @@
             // 
             this._toolsTsm.Image = global::HostApp.Properties.Resources.construction;
             this._toolsTsm.Name = "_toolsTsm";
-            this._toolsTsm.Size = new System.Drawing.Size(121, 38);
+            this._toolsTsm.Size = new System.Drawing.Size(121, 40);
             this._toolsTsm.Text = "Tools";
             // 
             // _shareTsm
@@ -86,7 +86,7 @@
             this._visitECDotComTsm});
             this._shareTsm.Image = global::HostApp.Properties.Resources.share_alt;
             this._shareTsm.Name = "_shareTsm";
-            this._shareTsm.Size = new System.Drawing.Size(126, 38);
+            this._shareTsm.Size = new System.Drawing.Size(126, 40);
             this._shareTsm.Text = "Share";
             // 
             // _shareAnIdeaTsm
@@ -116,9 +116,9 @@
             // _mainPnl
             // 
             this._mainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._mainPnl.Location = new System.Drawing.Point(0, 42);
+            this._mainPnl.Location = new System.Drawing.Point(0, 48);
             this._mainPnl.Name = "_mainPnl";
-            this._mainPnl.Size = new System.Drawing.Size(1370, 707);
+            this._mainPnl.Size = new System.Drawing.Size(1370, 701);
             this._mainPnl.TabIndex = 1;
             // 
             // MainForm

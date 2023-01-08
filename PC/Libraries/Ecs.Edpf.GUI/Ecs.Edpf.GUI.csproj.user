@@ -17,6 +17,9 @@
     <Compile Update="UI\Views\DataStorageView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\Views\DataStorage\AddDataStorageStreamView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Views\LoggerView.cs">
       <SubType>UserControl</SubType>
     </Compile>

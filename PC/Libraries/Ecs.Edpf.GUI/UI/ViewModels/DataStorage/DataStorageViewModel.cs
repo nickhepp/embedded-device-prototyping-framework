@@ -51,16 +51,16 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
         }
 
         private RelayCommand _addDataStreamCommand;
-        public ICommand AddDataStreamCommand => _addDataStreamCommand;
+        public IRelayCommand AddDataStreamCommand => _addDataStreamCommand;
 
         private RelayCommand _removeDataStreamsCommand;
-        public ICommand RemoveDataStreamsCommand => _removeDataStreamsCommand;
+        public IRelayCommand RemoveDataStreamsCommand => _removeDataStreamsCommand;
         
         private RelayCommand _recordAllStreamsCommand;
-        public ICommand RecordAllStreamsCommand => _recordAllStreamsCommand;
+        public IRelayCommand RecordAllStreamsCommand => _recordAllStreamsCommand;
 
         private RelayCommand _pauseAllStreamsCommand;
-        public ICommand PauseAllStreamsCommand => _pauseAllStreamsCommand;
+        public IRelayCommand PauseAllStreamsCommand => _pauseAllStreamsCommand;
 
         public DataStorageViewModel(ILogger logger, IDeviceStateMachine deviceStateMachine) : base(deviceStateMachine)
         {
@@ -83,6 +83,27 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
                 execute: PauseAllStreamsCommandExecute);
 
             _logger = logger;
+
+            StreamViewModels.ListChanged += StreamViewModels_ListChanged;
+        }
+
+        private void StreamViewModels_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if ((e.ListChangedType == ListChangedType.ItemAdded) || 
+                (e.ListChangedType == ListChangedType.ItemDeleted) ||
+                (
+                    e.ListChangedType == ListChangedType.ItemChanged &&
+                    e.PropertyDescriptor.Name == nameof(IDataStorageStreamViewModel.State)
+                )
+            )
+            {
+                StreamsRunningCount = StreamViewModels.Count(svm => svm.State == StreamState.Running);
+                StreamsPausedCount = StreamViewModels.Count(svm => svm.State == StreamState.Paused);
+
+                _removeDataStreamsCommand.RaiseCommandCanExecuteChanged();
+                _pauseAllStreamsCommand.RaiseCommandCanExecuteChanged();
+                _recordAllStreamsCommand.RaiseCommandCanExecuteChanged();
+            }
         }
 
         // ---------- AddDataStreamCommand
@@ -94,9 +115,13 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
 
         private void AddDataStreamCommandExecute(object args)
         {
-            if (args.GetType() is IDataStorageStreamViewModelGenerator viewModelGenerator)
+            if (args is IDataStorageStreamViewModelGenerator viewModelGenerator)
             {
                 IDataStorageStreamViewModel streamViewModel = viewModelGenerator.GetDataStorageStreamViewModel(_logger);
+                if (StreamViewModels.Any(existingStrmVwMdl => existingStrmVwMdl.DataStreamName == streamViewModel.DataStreamName))
+                {
+                    throw new ArgumentException($"Stream with name '{streamViewModel.DataStreamName}' already exists.");
+                }
                 StreamViewModels.Add(streamViewModel);
             }
             else
@@ -108,20 +133,20 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
         // ---------- RemoveDataStreamsCommand
         private bool RemoveDataStreamsCommandCanExecute(object args)
         {
-            return true;
-            // TODO: test this is only TRUE when streams exist
-
+            return (StreamViewModels.Count > 0);
         }
         private void RemoveDataStreamsCommandExecute(object args)
         {
-            // TODO: unit test removes streams
-
+            if (args is IEnumerable<IDataStorageStreamViewModel> strmVwMdls)
+            {
+                strmVwMdls.ToList().ForEach(strmVwMdl => StreamViewModels.Remove(strmVwMdl));
+            }
         }
 
         // ---------- RecordAllStreamsCommand
         private bool RecordAllStreamsCommandCanExecute(object args)
         {
-            return true;
+            return (StreamViewModels.Count > 0);
         }
 
         private void RecordAllStreamsCommandExecute(object args)
@@ -133,7 +158,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
         // ---------- PauseAllStreamsCommand
         private bool PauseAllStreamsCommandCanExecute(object args)
         {
-            return true;
+            return (StreamViewModels.Count > 0);
         }
 
         private void PauseAllStreamsCommandExecute(object args)
@@ -144,8 +169,5 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
             
         // TODO: unit test cant add stream with the same name -- throws exception instead
 
-
-
-
-        }
     }
+}

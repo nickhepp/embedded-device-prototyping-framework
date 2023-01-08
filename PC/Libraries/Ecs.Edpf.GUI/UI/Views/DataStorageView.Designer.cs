@@ -30,10 +30,11 @@
         {
             this._strmPanelsTlp = new System.Windows.Forms.TableLayoutPanel();
             this._btnsTlp = new System.Windows.Forms.TableLayoutPanel();
-            this._recordPauseAllBtn = new System.Windows.Forms.Button();
             this._addStreamBtn = new System.Windows.Forms.Button();
+            this._recordAllBtn = new System.Windows.Forms.Button();
             this._removeStreamsBtn = new System.Windows.Forms.Button();
             this._streamsFlp = new System.Windows.Forms.FlowLayoutPanel();
+            this._pauseAllBtn = new System.Windows.Forms.Button();
             this._strmPanelsTlp.SuspendLayout();
             this._btnsTlp.SuspendLayout();
             this.SuspendLayout();
@@ -56,45 +57,33 @@
             // 
             // _btnsTlp
             // 
-            this._btnsTlp.ColumnCount = 5;
-            this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this._btnsTlp.ColumnCount = 7;
+            this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this._btnsTlp.Controls.Add(this._addStreamBtn, 2, 0);
-            this._btnsTlp.Controls.Add(this._recordPauseAllBtn, 0, 0);
-            this._btnsTlp.Controls.Add(this._removeStreamsBtn, 4, 0);
+            this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this._btnsTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this._btnsTlp.Controls.Add(this._pauseAllBtn, 2, 0);
+            this._btnsTlp.Controls.Add(this._addStreamBtn, 4, 0);
+            this._btnsTlp.Controls.Add(this._recordAllBtn, 0, 0);
+            this._btnsTlp.Controls.Add(this._removeStreamsBtn, 6, 0);
             this._btnsTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._btnsTlp.Location = new System.Drawing.Point(3, 666);
             this._btnsTlp.Name = "_btnsTlp";
             this._btnsTlp.RowCount = 1;
             this._btnsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._btnsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 119F));
             this._btnsTlp.Size = new System.Drawing.Size(1467, 154);
             this._btnsTlp.TabIndex = 0;
-            // 
-            // _recordPauseAllBtn
-            // 
-            this._recordPauseAllBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._recordPauseAllBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.record_64x64;
-            this._recordPauseAllBtn.Location = new System.Drawing.Point(3, 3);
-            this._recordPauseAllBtn.Name = "_recordPauseAllBtn";
-            this._recordPauseAllBtn.Size = new System.Drawing.Size(469, 148);
-            this._recordPauseAllBtn.TabIndex = 1;
-            this._recordPauseAllBtn.Text = "Record All";
-            this._recordPauseAllBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this._recordPauseAllBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this._recordPauseAllBtn.UseVisualStyleBackColor = true;
-            this._recordPauseAllBtn.Click += new System.EventHandler(this._recordPauseAllBtn_Click);
             // 
             // _addStreamBtn
             // 
             this._addStreamBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this._addStreamBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.database_plus_64x64;
-            this._addStreamBtn.Location = new System.Drawing.Point(498, 3);
+            this._addStreamBtn.Location = new System.Drawing.Point(745, 3);
             this._addStreamBtn.Name = "_addStreamBtn";
-            this._addStreamBtn.Size = new System.Drawing.Size(469, 148);
+            this._addStreamBtn.Size = new System.Drawing.Size(345, 148);
             this._addStreamBtn.TabIndex = 0;
             this._addStreamBtn.Text = "Add Stream...";
             this._addStreamBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -102,14 +91,28 @@
             this._addStreamBtn.UseVisualStyleBackColor = true;
             this._addStreamBtn.Click += new System.EventHandler(this._addStreamBtn_Click);
             // 
+            // _recordAllBtn
+            // 
+            this._recordAllBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._recordAllBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.record_64x64;
+            this._recordAllBtn.Location = new System.Drawing.Point(3, 3);
+            this._recordAllBtn.Name = "_recordAllBtn";
+            this._recordAllBtn.Size = new System.Drawing.Size(345, 148);
+            this._recordAllBtn.TabIndex = 1;
+            this._recordAllBtn.Text = "Record All";
+            this._recordAllBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this._recordAllBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this._recordAllBtn.UseVisualStyleBackColor = true;
+            this._recordAllBtn.Click += new System.EventHandler(this._recordAllBtn_Click);
+            // 
             // _removeStreamsBtn
             // 
             this._removeStreamsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this._removeStreamsBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this._removeStreamsBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.trash_xmark_64x64;
-            this._removeStreamsBtn.Location = new System.Drawing.Point(993, 3);
+            this._removeStreamsBtn.Location = new System.Drawing.Point(1116, 3);
             this._removeStreamsBtn.Name = "_removeStreamsBtn";
-            this._removeStreamsBtn.Size = new System.Drawing.Size(471, 148);
+            this._removeStreamsBtn.Size = new System.Drawing.Size(348, 148);
             this._removeStreamsBtn.TabIndex = 2;
             this._removeStreamsBtn.Text = "Remove Streams...";
             this._removeStreamsBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -124,6 +127,20 @@
             this._streamsFlp.Name = "_streamsFlp";
             this._streamsFlp.Size = new System.Drawing.Size(1467, 657);
             this._streamsFlp.TabIndex = 1;
+            // 
+            // _pauseAllBtn
+            // 
+            this._pauseAllBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._pauseAllBtn.Image = global::Ecs.Edpf.GUI.Properties.Resources.pause;
+            this._pauseAllBtn.Location = new System.Drawing.Point(374, 3);
+            this._pauseAllBtn.Name = "_pauseAllBtn";
+            this._pauseAllBtn.Size = new System.Drawing.Size(345, 148);
+            this._pauseAllBtn.TabIndex = 3;
+            this._pauseAllBtn.Text = "Pause All";
+            this._pauseAllBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this._pauseAllBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this._pauseAllBtn.UseVisualStyleBackColor = true;
+            this._pauseAllBtn.Click += new System.EventHandler(this._pauseAllBtn_Click);
             // 
             // DataStorageView
             // 
@@ -142,8 +159,9 @@
         private System.Windows.Forms.TableLayoutPanel _strmPanelsTlp;
         private System.Windows.Forms.Button _addStreamBtn;
         private System.Windows.Forms.TableLayoutPanel _btnsTlp;
-        private System.Windows.Forms.Button _recordPauseAllBtn;
+        private System.Windows.Forms.Button _recordAllBtn;
         private System.Windows.Forms.Button _removeStreamsBtn;
         private System.Windows.Forms.FlowLayoutPanel _streamsFlp;
+        private System.Windows.Forms.Button _pauseAllBtn;
     }
 }

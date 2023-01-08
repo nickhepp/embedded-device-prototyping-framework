@@ -60,7 +60,4 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\Views\DataStorage\" />
-  </ItemGroup>
 </Project>

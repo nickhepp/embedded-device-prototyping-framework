@@ -23,11 +23,16 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModels
 
         public BindingList<DataStorageStreamLineResult> Results => throw new NotImplementedException();
 
+        public string DataStreamName => throw new NotImplementedException();
+
+        public StreamState State { get; private set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public BaseDataStorageStreamViewModel(TStreamSettings streamSettings)
         {
             StreamSettings = streamSettings;
+            State = StreamState.Paused;
         }
 
 

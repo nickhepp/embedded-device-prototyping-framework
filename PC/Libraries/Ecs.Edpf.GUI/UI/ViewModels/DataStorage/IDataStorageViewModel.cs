@@ -1,4 +1,5 @@
 ﻿using Ecs.Edpf.Devices.Devices;
+using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,13 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
 
         int StreamsRunningCount { get; }
 
-        ICommand AddDataStreamCommand { get; }
+        IRelayCommand AddDataStreamCommand { get; }
 
-        ICommand RemoveDataStreamsCommand { get; }
+        IRelayCommand RemoveDataStreamsCommand { get; }
 
-        ICommand RecordAllStreamsCommand { get; }
+        IRelayCommand RecordAllStreamsCommand { get; }
 
-        ICommand PauseAllStreamsCommand { get; }
+        IRelayCommand PauseAllStreamsCommand { get; }
 
         BindingList<IDataStorageStreamViewModel> StreamViewModels { get; }
 

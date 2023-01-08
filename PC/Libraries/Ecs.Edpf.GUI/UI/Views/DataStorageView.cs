@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Ecs.Edpf.GUI.UI.Views
 {
-    public partial class DataStorageView : UserControl
+    public partial class DataStorageView : UserControl, IRelayCommandExceptionHandler
     {
 
         private IDataStorageViewModel _dataStorageViewModel;
@@ -43,22 +43,46 @@ namespace Ecs.Edpf.GUI.UI.Views
             if (_dataStorageViewModel != null)
             {
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_oneShotBtn, _deviceTextMacroViewModel.OneShotCommand, relayCommandExHandler: this, getCommandArgHandler: GetInstructionCollectionInitArgs));
+                    new RelayCommandHandler(_addStreamBtn, 
+                    _dataStorageViewModel.AddDataStreamCommand, 
+                    relayCommandExHandler: this, 
+                    getCommandArgHandler: GetAddDataStreamCommandArgs));
             
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_loopBtn, _deviceTextMacroViewModel.LoopCommand, relayCommandExHandler: this, getCommandArgHandler: GetInstructionCollectionInitArgs));
+                    new RelayCommandHandler(_removeStreamsBtn, 
+                    _dataStorageViewModel.RemoveDataStreamsCommand, 
+                    relayCommandExHandler: this, 
+                    getCommandArgHandler: GetRemoveDataStreamsCommandArgs));
             
                 _relayCmdHandlers.Add(
-                    new RelayCommandHandler(_stopBtn, _deviceTextMacroViewModel.StopCommand, relayCommandExHandler: this));
-            
-                _macroTxt.DataBindings.Add(new Binding(nameof(TextBox.Enabled), _deviceTextMacroViewModel, nameof(IDeviceTextMacroViewModel.MacroTextEnabled)));
-            
-                SetProgressBar();
-                SetTsbAddCommandEnabled();
+                    new RelayCommandHandler(_recordAllBtn, 
+                    _dataStorageViewModel.RecordAllStreamsCommand, 
+                    relayCommandExHandler: this));
+
+                _relayCmdHandlers.Add(
+                    new RelayCommandHandler(_pauseAllBtn,
+                    _dataStorageViewModel.PauseAllStreamsCommand,
+                    relayCommandExHandler: this));
+
+
+                //_macroTxt.DataBindings.Add(new Binding(nameof(TextBox.Enabled), _deviceTextMacroViewModel, nameof(IDeviceTextMacroViewModel.MacroTextEnabled)));
+
+                //SetProgressBar();
+                //SetTsbAddCommandEnabled();
 
                 _dataStorageViewModel.PropertyChanged += DataStorageViewModel_PropertyChanged;
             
             }
+        }
+
+        private object GetAddDataStreamCommandArgs()
+        {
+            return new object();
+        }
+
+        private object GetRemoveDataStreamsCommandArgs()
+        {
+            return new object();
         }
 
         private void DataStorageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -71,12 +95,22 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         }
 
-        private void _recordPauseAllBtn_Click(object sender, EventArgs e)
+        private void _recordAllBtn_Click(object sender, EventArgs e)
         {
 
         }
 
         private void _removeStreamsBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void HandleException(Exception ex)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void _pauseAllBtn_Click(object sender, EventArgs e)
         {
 
         }

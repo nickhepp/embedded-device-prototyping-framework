@@ -15,7 +15,10 @@ namespace Ecs.Edpf.GUI.ComponentModel
         private Func<object> _getCommandArgHandler;
         private IRelayCommandExceptionHandler _relayCommandExHandler;
 
-        public RelayCommandHandler(Button button, IRelayCommand relayCommand, IRelayCommandExceptionHandler relayCommandExHandler, Func<object> getCommandArgHandler = null)
+        public RelayCommandHandler(Button button, 
+            IRelayCommand relayCommand, 
+            IRelayCommandExceptionHandler relayCommandExHandler, 
+            Func<object> getCommandArgHandler = null)
         {
             _button = button;
             _relayCommand = relayCommand;

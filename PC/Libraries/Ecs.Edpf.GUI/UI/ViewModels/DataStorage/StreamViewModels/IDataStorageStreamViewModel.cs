@@ -17,12 +17,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModels
 
         string FailCountMessage { get; }
 
+        StreamState State { get; }
 
         IRelayCommand RecordPauseCommand { get; }
 
-
         BindingList<DataStorageStreamLineResult> Results { get; }
-
 
 
     }
