@@ -9,6 +9,15 @@
 
 Embedded Device Prototyping Framework (EDPF) is an embedded device rapid prototyping framework. A lot of time and effort can be spent simply establishing communication back and forth from a host PC to an embedded device uPC.  This framework establishes a base infrastructure that removes much of that plumbing work off the backs of developers/designers/hobbyists/etc.  This design has been used in numerous applications for both commercial and hobbyist purposes.  Please make use of it yourself if it can lighten your load, help you complete your task, and get to what matters in your device -- completing your design.
 
+## Video Overview
+If you would like to watch a video overview of this project, 
+<a href="https://www.youtube.com/watch?v=P5Ys7X5QqWg?t=519">please follow this link
+<img src='Resources/Media/graphics/overview-video.jpg' style='display: block;
+  margin-left: auto;
+  margin-right: auto; width:400px
+  /*width: 70%;*/'/></a>
+
+Slides for the [presentation can be found here](https://electroniccomputing.com/slides#edpf_overview).
 
 ---
 ## Table of Contents (this doc)
