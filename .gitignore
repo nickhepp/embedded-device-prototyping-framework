@@ -59,3 +59,4 @@ PC/Libraries/Ecs.Edpf.Devices/obj/*
 PC/HostApp/HostApp/ToRemove/*
 PC/HostApp/_ToDelete/*
 PC/Libraries/Ecs.Edpf.GUI/ToRemove/*
+/Device/BaseKernelDevice/UpgradeLog.htm
