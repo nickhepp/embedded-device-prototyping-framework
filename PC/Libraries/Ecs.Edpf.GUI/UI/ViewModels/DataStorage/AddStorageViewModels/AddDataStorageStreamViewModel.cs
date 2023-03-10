@@ -11,17 +11,17 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
     {
         private readonly IChildAddDataStorageStreamViewModelFactory _childStreamVwMdlFactory;
 
-        private List<string> _streamTypes;
-        public IEnumerable<string> StreamTypes
+        private IEnumerable<IChildAddDataStorageStreamViewModel> _streamTypes;
+        public IEnumerable<IChildAddDataStorageStreamViewModel> StreamTypes
         {
             get { return _streamTypes; }
         }
 
-        private string _selectedStreamType;
+        private IChildAddDataStorageStreamViewModel _selectedStreamType;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string SelectedStreamType 
+        public IChildAddDataStorageStreamViewModel SelectedStreamType 
         { 
             get
             {
@@ -39,7 +39,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
         {
             _childStreamVwMdlFactory = childStreamVwMdlFactory;
 
-            _streamTypes = _childStreamVwMdlFactory.GetStreamsTypes().ToList();
+            _streamTypes = _childStreamVwMdlFactory.GetChildAddDataStorageStreamTypes();
+
+            //_streamTypes = _childStreamVwMdlFactory.GetChildAddDataStorageStreamTypes().ToList();
             _selectedStreamType = _streamTypes.First();
 
         }

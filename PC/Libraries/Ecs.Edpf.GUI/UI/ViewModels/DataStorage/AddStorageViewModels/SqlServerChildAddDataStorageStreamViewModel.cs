@@ -8,13 +8,14 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
     public class SqlServerChildAddDataStorageStreamViewModel : BaseChildAddDataStorageStreamViewModel
     {
-        public override object ChildDataStorageStreamSettings => throw new NotImplementedException();
-    
-        public SqlServerChildAddDataStorageStreamViewModel()
-        {
 
-        }
+        private SqlServerDataStorageStreamSettings _storageStreamSettings = new SqlServerDataStorageStreamSettings();
+        public override object ChildDataStorageStreamSettings => _storageStreamSettings;
 
+        public override string TypeName => SqlServerTypeName;
 
+        public const string SqlServerTypeName = "MS SQL Server";
+
+        
     }
 }

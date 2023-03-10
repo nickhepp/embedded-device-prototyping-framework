@@ -30,10 +30,10 @@
         {
             this._mainTlp = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this._buttonsTlp = new System.Windows.Forms.TableLayoutPanel();
             this._okBtn = new System.Windows.Forms.Button();
             this._cancelBtn = new System.Windows.Forms.Button();
+            this._comboBoxPnl = new System.Windows.Forms.Panel();
             this._mainTlp.SuspendLayout();
             this._buttonsTlp.SuspendLayout();
             this.SuspendLayout();
@@ -43,8 +43,8 @@
             this._mainTlp.ColumnCount = 1;
             this._mainTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._mainTlp.Controls.Add(this.label1, 0, 0);
-            this._mainTlp.Controls.Add(this.comboBox1, 0, 1);
             this._mainTlp.Controls.Add(this._buttonsTlp, 0, 3);
+            this._mainTlp.Controls.Add(this._comboBoxPnl, 0, 1);
             this._mainTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainTlp.Location = new System.Drawing.Point(0, 0);
             this._mainTlp.Name = "_mainTlp";
@@ -66,15 +66,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Stream Type:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 68);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(1055, 33);
-            this.comboBox1.TabIndex = 1;
             // 
             // _buttonsTlp
             // 
@@ -113,6 +104,14 @@
             this._cancelBtn.Text = "Cancel";
             this._cancelBtn.UseVisualStyleBackColor = true;
             // 
+            // _comboBoxPnl
+            // 
+            this._comboBoxPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._comboBoxPnl.Location = new System.Drawing.Point(3, 68);
+            this._comboBoxPnl.Name = "_comboBoxPnl";
+            this._comboBoxPnl.Size = new System.Drawing.Size(1055, 61);
+            this._comboBoxPnl.TabIndex = 3;
+            // 
             // AddDataStorageStreamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -132,9 +131,9 @@
 
         private System.Windows.Forms.TableLayoutPanel _mainTlp;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TableLayoutPanel _buttonsTlp;
         private System.Windows.Forms.Button _okBtn;
         private System.Windows.Forms.Button _cancelBtn;
+        private System.Windows.Forms.Panel _comboBoxPnl;
     }
 }

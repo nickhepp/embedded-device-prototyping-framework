@@ -1,5 +1,6 @@
 ﻿using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels.DataStorage;
+using Ecs.Edpf.GUI.UI.Views.DataStorage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -77,6 +78,16 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         private object GetAddDataStreamCommandArgs()
         {
+
+            //AddDataStorageStreamViewModel(
+            //IChildAddDataStorageStreamViewModelFactory childStreamVwMdlFactory)
+            //IChildAddDataStorageStreamViewModelFactory childStreamVwMdlFactory = 
+            AddDataStorageStreamView addStreamView = new AddDataStorageStreamView();
+            if (addStreamView.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+
             return new object();
         }
 

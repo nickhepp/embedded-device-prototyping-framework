@@ -11,9 +11,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
     public interface IAddDataStorageStreamViewModel : INotifyPropertyChanged
     {
 
-        string SelectedStreamType { get; set; }
+        IChildAddDataStorageStreamViewModel SelectedStreamType { get; set; }
 
-        IEnumerable<string> StreamTypes { get; }
+        IEnumerable<IChildAddDataStorageStreamViewModel> StreamTypes { get; }
 
 
     }

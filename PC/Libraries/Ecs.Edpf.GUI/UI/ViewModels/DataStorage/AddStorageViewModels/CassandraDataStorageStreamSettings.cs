@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public interface IChildAddDataStorageStreamViewModel
+    public class CassandraDataStorageStreamSettings
     {
-
-        object ChildDataStorageStreamSettings { get; }
-
-        string TypeName { get; }
-
     }
 }

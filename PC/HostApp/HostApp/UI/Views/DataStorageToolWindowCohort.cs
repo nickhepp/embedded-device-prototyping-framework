@@ -59,11 +59,10 @@ namespace HostApp.UI.Views
             _dataStorageViewModel = new DataStorageViewModel(
                     logger,
                     new DeviceStateMachine());
+            _dataStorageView.DataStorageViewModel = _dataStorageViewModel;
 #else
             _dataStorageView = new NotImplementedView(_roadmapIssueUrl);
 #endif
-
-
             _toolWindow = new Lazy<ToolWindow>(() =>
             {
                 ToolWindow toolWindow = new ToolWindow();

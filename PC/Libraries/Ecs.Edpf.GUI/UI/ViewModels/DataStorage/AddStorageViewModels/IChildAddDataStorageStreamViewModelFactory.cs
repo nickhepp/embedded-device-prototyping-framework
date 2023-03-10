@@ -9,7 +9,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
     public interface IChildAddDataStorageStreamViewModelFactory
     {
 
-        IEnumerable<string> GetStreamsTypes();
+        /// <summary>
+        /// Returns descriptors of child add data storage stream view models.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<IChildAddDataStorageStreamViewModel> GetChildAddDataStorageStreamTypes();
 
 
 
