@@ -1,5 +1,7 @@
 ﻿using Ecs.Edpf.GUI.ComponentModel;
 using Ecs.Edpf.GUI.UI.ViewModels.DataStorage;
+using Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels;
+using Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModelGenerators;
 using Ecs.Edpf.GUI.UI.Views.DataStorage;
 using System;
 using System.Collections.Generic;
@@ -78,17 +80,17 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         private object GetAddDataStreamCommandArgs()
         {
-
-            //AddDataStorageStreamViewModel(
-            //IChildAddDataStorageStreamViewModelFactory childStreamVwMdlFactory)
-            //IChildAddDataStorageStreamViewModelFactory childStreamVwMdlFactory = 
             AddDataStorageStreamView addStreamView = new AddDataStorageStreamView();
+            addStreamView.AddDataStorageStreamViewModel = new AddDataStorageStreamViewModel(new ChildAddDataStorageStreamViewModelFactory());
+            IDataStorageStreamViewModelGenerator streamViewModelGenerator = null;
             if (addStreamView.ShowDialog() == DialogResult.OK)
             {
+                IChildDataStorageStreamSettings settings = addStreamView.AddDataStorageStreamViewModel.SelectedStreamType.ChildDataStorageStreamSettings;
 
+                streamViewModelGenerator = new DataStorageStreamViewModelGenerator(settings);
             }
 
-            return new object();
+            return streamViewModelGenerator;
         }
 
         private object GetRemoveDataStreamsCommandArgs()
@@ -118,7 +120,7 @@ namespace Ecs.Edpf.GUI.UI.Views
 
         public void HandleException(Exception ex)
         {
-            throw new NotImplementedException();
+            RelayCommandExceptionHandlerUtility.HandleException(ex);
         }
 
         private void _pauseAllBtn_Click(object sender, EventArgs e)

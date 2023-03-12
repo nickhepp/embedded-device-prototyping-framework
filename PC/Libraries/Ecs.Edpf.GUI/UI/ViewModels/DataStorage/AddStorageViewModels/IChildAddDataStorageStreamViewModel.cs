@@ -9,9 +9,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
     public interface IChildAddDataStorageStreamViewModel
     {
 
-        object ChildDataStorageStreamSettings { get; }
+        IChildDataStorageStreamSettings ChildDataStorageStreamSettings { get; }
 
         string TypeName { get; }
+
+        IChildAddDataStorageStreamViewModel ThisValue { get; }
 
     }
 }

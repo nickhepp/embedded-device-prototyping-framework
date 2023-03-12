@@ -12,8 +12,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
         public const string XmlTypeName = "XML";
 
         private XmlDataStorageStreamSettings _storageStreamSettings = new XmlDataStorageStreamSettings();
-        public override object ChildDataStorageStreamSettings => _storageStreamSettings;
+        public override IChildDataStorageStreamSettings ChildDataStorageStreamSettings => _storageStreamSettings;
 
         public override string TypeName => XmlTypeName;
+
     }
 }

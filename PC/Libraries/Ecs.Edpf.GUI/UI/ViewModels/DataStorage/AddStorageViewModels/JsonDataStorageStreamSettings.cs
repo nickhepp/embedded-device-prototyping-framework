@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public class JsonDataStorageStreamSettings
+    public class JsonDataStorageStreamSettings : BaseChildDataStorageStreamSettings
     {
+        public override string TypeName => JsonChildAddDataStorageStreamViewModel.JsonTypeName;
     }
 }

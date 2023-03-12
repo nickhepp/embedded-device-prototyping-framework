@@ -10,15 +10,19 @@ namespace Ecs.Edpf.GUI.Controls
 {
     public class DataBindingComboBox : ComboBox
     {
+
+        
         public DataBindingComboBox()
         {
-            
+            // only allow selection of items in the list
+            DropDownStyle = ComboBoxStyle.DropDownList;
         }
+
         public void BindToList<T>(DataBoundBindingList<T> bindingList)
         {
-            this.DataSource = bindingList;
-            this.DisplayMember = bindingList.DisplayMember;
-            this.ValueMember = bindingList.ValueMember;
+            DataSource = bindingList;
+            DisplayMember = bindingList.DisplayMember;
+            ValueMember = bindingList.ValueMember;
         }
 
 

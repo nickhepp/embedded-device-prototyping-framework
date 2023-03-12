@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public class MongoDBDataStorageStreamSettings : BaseChildDataStorageStreamSettings
+    public interface IChildDataStorageStreamSettings
     {
-        public override string TypeName => MongoDBChildAddDataStorageStreamViewModel.MongoDBTypeName;
-    
+
+        string TypeName { get; }
+
+        string StreamName { get; set; }
+
     }
 }

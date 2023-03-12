@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public class XmlDataStorageStreamSettings
+    public class XmlDataStorageStreamSettings : BaseChildDataStorageStreamSettings
     {
+        public override string TypeName => XmlChildAddDataStorageStreamViewModel.XmlTypeName;
+    
     }
 }

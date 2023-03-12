@@ -115,18 +115,21 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage
 
         private void AddDataStreamCommandExecute(object args)
         {
-            if (args is IDataStorageStreamViewModelGenerator viewModelGenerator)
+            if (args != null)
             {
-                IDataStorageStreamViewModel streamViewModel = viewModelGenerator.GetDataStorageStreamViewModel(_logger);
-                if (StreamViewModels.Any(existingStrmVwMdl => existingStrmVwMdl.DataStreamName == streamViewModel.DataStreamName))
+                if (args is IDataStorageStreamViewModelGenerator viewModelGenerator)
                 {
-                    throw new ArgumentException($"Stream with name '{streamViewModel.DataStreamName}' already exists.");
+                    IDataStorageStreamViewModel streamViewModel = viewModelGenerator.GetDataStorageStreamViewModel(_logger);
+                    if (StreamViewModels.Any(existingStrmVwMdl => existingStrmVwMdl.DataStreamName == streamViewModel.DataStreamName))
+                    {
+                        throw new ArgumentException($"Stream with name '{streamViewModel.DataStreamName}' already exists.");
+                    }
+                    StreamViewModels.Add(streamViewModel);
                 }
-                StreamViewModels.Add(streamViewModel);
-            }
-            else
-            {
-                throw new ArgumentException(AddDataStreamCommandExecute_NotCorrectTypeMessage);
+                else
+                {
+                    throw new ArgumentException(AddDataStreamCommandExecute_NotCorrectTypeMessage);
+                }
             }
         }
 

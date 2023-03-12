@@ -12,7 +12,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
         public const string CassandraTypeName = "Cassandra";
 
         private CassandraDataStorageStreamSettings _storageStreamSettings = new CassandraDataStorageStreamSettings();
-        public override object ChildDataStorageStreamSettings => _storageStreamSettings;
+        public override IChildDataStorageStreamSettings ChildDataStorageStreamSettings => _storageStreamSettings;
 
         public override string TypeName => CassandraTypeName;
 

@@ -34,6 +34,8 @@
             this._okBtn = new System.Windows.Forms.Button();
             this._cancelBtn = new System.Windows.Forms.Button();
             this._comboBoxPnl = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this._settingsPpg = new System.Windows.Forms.PropertyGrid();
             this._mainTlp.SuspendLayout();
             this._buttonsTlp.SuspendLayout();
             this.SuspendLayout();
@@ -43,14 +45,17 @@
             this._mainTlp.ColumnCount = 1;
             this._mainTlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._mainTlp.Controls.Add(this.label1, 0, 0);
-            this._mainTlp.Controls.Add(this._buttonsTlp, 0, 3);
+            this._mainTlp.Controls.Add(this._buttonsTlp, 0, 4);
             this._mainTlp.Controls.Add(this._comboBoxPnl, 0, 1);
+            this._mainTlp.Controls.Add(this.label2, 0, 2);
+            this._mainTlp.Controls.Add(this._settingsPpg, 0, 3);
             this._mainTlp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainTlp.Location = new System.Drawing.Point(0, 0);
             this._mainTlp.Name = "_mainTlp";
-            this._mainTlp.RowCount = 4;
+            this._mainTlp.RowCount = 5;
             this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
+            this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this._mainTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this._mainTlp.Size = new System.Drawing.Size(1061, 780);
@@ -80,12 +85,13 @@
             this._buttonsTlp.Name = "_buttonsTlp";
             this._buttonsTlp.RowCount = 1;
             this._buttonsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._buttonsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this._buttonsTlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79F));
             this._buttonsTlp.Size = new System.Drawing.Size(1055, 79);
             this._buttonsTlp.TabIndex = 2;
             // 
             // _okBtn
             // 
+            this._okBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
             this._okBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this._okBtn.Location = new System.Drawing.Point(3, 3);
             this._okBtn.Name = "_okBtn";
@@ -96,6 +102,7 @@
             // 
             // _cancelBtn
             // 
+            this._cancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this._cancelBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this._cancelBtn.Location = new System.Drawing.Point(535, 3);
             this._cancelBtn.Name = "_cancelBtn";
@@ -111,6 +118,25 @@
             this._comboBoxPnl.Name = "_comboBoxPnl";
             this._comboBoxPnl.Size = new System.Drawing.Size(1055, 61);
             this._comboBoxPnl.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 160);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 25);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Settings";
+            // 
+            // _settingsPpg
+            // 
+            this._settingsPpg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._settingsPpg.Location = new System.Drawing.Point(3, 188);
+            this._settingsPpg.Name = "_settingsPpg";
+            this._settingsPpg.Size = new System.Drawing.Size(1055, 504);
+            this._settingsPpg.TabIndex = 5;
+            this._settingsPpg.ToolbarVisible = false;
             // 
             // AddDataStorageStreamView
             // 
@@ -135,5 +161,7 @@
         private System.Windows.Forms.Button _okBtn;
         private System.Windows.Forms.Button _cancelBtn;
         private System.Windows.Forms.Panel _comboBoxPnl;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PropertyGrid _settingsPpg;
     }
 }

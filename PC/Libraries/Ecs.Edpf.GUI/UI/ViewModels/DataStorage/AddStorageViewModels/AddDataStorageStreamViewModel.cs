@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,20 +31,25 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
             set
             {
                 _selectedStreamType = value;
+                RaiseNotifyPropertyChanged();
             } 
         }
-    
     
         public AddDataStorageStreamViewModel(
             IChildAddDataStorageStreamViewModelFactory childStreamVwMdlFactory)
         {
             _childStreamVwMdlFactory = childStreamVwMdlFactory;
-
             _streamTypes = _childStreamVwMdlFactory.GetChildAddDataStorageStreamTypes();
-
-            //_streamTypes = _childStreamVwMdlFactory.GetChildAddDataStorageStreamTypes().ToList();
             _selectedStreamType = _streamTypes.First();
-
         }
+
+        private void RaiseNotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
     }
 }

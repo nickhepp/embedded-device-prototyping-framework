@@ -10,12 +10,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
     {
 
         private JsonDataStorageStreamSettings _storageStreamSettings = new JsonDataStorageStreamSettings();
-        public override object ChildDataStorageStreamSettings => _storageStreamSettings;
+        public override IChildDataStorageStreamSettings ChildDataStorageStreamSettings => _storageStreamSettings;
 
         public override string TypeName => JsonTypeName;
 
         public const string JsonTypeName = "JSON";
-
 
 
     }

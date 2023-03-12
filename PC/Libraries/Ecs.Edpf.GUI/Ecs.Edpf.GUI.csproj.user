@@ -5,6 +5,9 @@
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Controls\DataBindingComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="UI\Views\AddDeviceCommandsToMacroView.cs">
       <SubType>UserControl</SubType>
     </Compile>

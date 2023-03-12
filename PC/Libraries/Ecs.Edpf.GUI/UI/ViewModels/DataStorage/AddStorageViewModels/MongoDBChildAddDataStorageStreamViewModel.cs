@@ -13,7 +13,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
         public const string MongoDBTypeName = "MongoDB";
 
         private MongoDBDataStorageStreamSettings _storageStreamSettings = new MongoDBDataStorageStreamSettings();
-        public override object ChildDataStorageStreamSettings => _storageStreamSettings;
+        public override IChildDataStorageStreamSettings ChildDataStorageStreamSettings => _storageStreamSettings;
 
         public override string TypeName => MongoDBTypeName;
 

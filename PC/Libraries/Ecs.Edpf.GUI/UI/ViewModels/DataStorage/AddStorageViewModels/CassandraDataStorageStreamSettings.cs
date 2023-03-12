@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public class CassandraDataStorageStreamSettings
+    public class CassandraDataStorageStreamSettings : BaseChildDataStorageStreamSettings
     {
+        public override string TypeName => CassandraChildAddDataStorageStreamViewModel.CassandraTypeName;
+    
+        // TODO: settings
+
     }
+
 }

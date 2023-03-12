@@ -10,7 +10,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
     {
 
         private SqlServerDataStorageStreamSettings _storageStreamSettings = new SqlServerDataStorageStreamSettings();
-        public override object ChildDataStorageStreamSettings => _storageStreamSettings;
+        public override IChildDataStorageStreamSettings ChildDataStorageStreamSettings => _storageStreamSettings;
 
         public override string TypeName => SqlServerTypeName;
 

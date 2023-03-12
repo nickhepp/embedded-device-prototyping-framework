@@ -12,7 +12,7 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
         public const string CsvTypeName = "CSV";
 
         private CsvDataStorageStreamSettings _csvDataStorageStreamSettings = new CsvDataStorageStreamSettings();
-        public override object ChildDataStorageStreamSettings => _csvDataStorageStreamSettings;
+        public override IChildDataStorageStreamSettings ChildDataStorageStreamSettings => _csvDataStorageStreamSettings;
 
         public override string TypeName => CsvTypeName;
 
