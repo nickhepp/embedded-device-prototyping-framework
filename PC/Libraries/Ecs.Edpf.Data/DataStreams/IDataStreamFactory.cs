@@ -1,5 +1,5 @@
 ﻿using Ecs.Edpf.Data.StreamSettings;
-
+using Ecs.Edpf.Devices.Logging;
 
 namespace Ecs.Edpf.Data
 {
@@ -15,7 +15,7 @@ namespace Ecs.Edpf.Data
         /// </summary>
         /// <param name="streamSettings"></param>
         /// <returns></returns>
-        IDataStream CreateStream(DataStreamSettings streamSettings);
+        IDataStream CreateStream(DataStreamSettings streamSettings, ILogger logger);
 
     }
 }

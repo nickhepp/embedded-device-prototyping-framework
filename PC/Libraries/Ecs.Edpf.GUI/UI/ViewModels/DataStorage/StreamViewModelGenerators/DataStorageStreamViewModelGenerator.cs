@@ -14,6 +14,13 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModelGenerators
 
         private IChildDataStorageStreamSettings _settings;
 
+        // CassandraDataStorageStreamSettings
+        // CsvDataStorageStreamSettings
+        // JsonDataStorageStreamSettings
+        // MongoDBDataStorageStreamSettings
+        // SqlServerDataStorageStreamSettings
+        // XmlDataStorageStreamSettings
+
         public DataStorageStreamViewModelGenerator(IChildDataStorageStreamSettings settings)
         {
             _settings = settings;
@@ -21,7 +28,6 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModelGenerators
 
         public IDataStorageStreamViewModel GetDataStorageStreamViewModel(ILogger logger)
         {
-            //throw new NotImplementedException();
             return null;
         }
     }

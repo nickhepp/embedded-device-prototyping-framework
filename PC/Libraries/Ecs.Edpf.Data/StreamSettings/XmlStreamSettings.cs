@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.Data.StreamSettings
 {
-    public class XmlStreamSettings : DataStreamSettings
+    public class XmlStreamSettings : BaseFileStreamSettings
     {
         public override string TypeName => StreamSettingsConstants.XmlStreamSettingsTypeName;
 

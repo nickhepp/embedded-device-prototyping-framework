@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModels
 {
@@ -29,11 +30,30 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.StreamViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private IRelayCommand _initializeDataSourceCommand;
+        public IRelayCommand InitializeDataSourceCommand => _initializeDataSourceCommand;
+
+
         public BaseDataStorageStreamViewModel(TStreamSettings streamSettings)
         {
             StreamSettings = streamSettings;
             State = StreamState.Paused;
+            _initializeDataSourceCommand = new RelayCommand(InitializeDataSourceCommandCanExecute, InitializeDataSourceCommandExecute);
+
         }
+
+
+        private bool InitializeDataSourceCommandCanExecute(object arg)
+        {
+            return false;
+        }
+
+        private void InitializeDataSourceCommandExecute(object arg)
+        {
+
+        }
+
+
 
 
     }

@@ -13,7 +13,9 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
         {
             List<IChildAddDataStorageStreamViewModel> childAddDataStorageStreamViewModels = new List<IChildAddDataStorageStreamViewModel>
             {
+#if INCLUDE_CASSANDRA
                 new CassandraChildAddDataStorageStreamViewModel(),
+#endif
                 new CsvChildAddDataStorageStreamViewModel(),
                 new JsonChildAddDataStorageStreamViewModel(),
                 new MongoDBChildAddDataStorageStreamViewModel(),

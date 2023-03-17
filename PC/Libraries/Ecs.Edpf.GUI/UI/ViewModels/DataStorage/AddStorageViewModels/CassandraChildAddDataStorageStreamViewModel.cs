@@ -1,4 +1,9 @@
-﻿using System;
+﻿#if INCLUDE_CASSANDRA
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,3 +25,5 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 
     }
 }
+
+#endif

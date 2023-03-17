@@ -11,5 +11,7 @@ namespace Ecs.Edpf.Data.DataStreams
 
         public double Value { get; set; }
 
+        public DataStreamValueType ValueType { get; set; }
+
     }
 }

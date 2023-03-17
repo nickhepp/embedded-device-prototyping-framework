@@ -10,5 +10,9 @@ namespace Ecs.Edpf.Data.StreamSettings
     {
         public override string TypeName => StreamSettingsConstants.SqlServerStreamSettingsTypeName;
 
+        public string SchemaName { get; set; }
+
+        public string TableName { get; set; }
+
     }
 }

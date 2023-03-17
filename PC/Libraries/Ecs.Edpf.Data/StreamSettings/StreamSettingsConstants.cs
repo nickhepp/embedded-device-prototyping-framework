@@ -12,6 +12,8 @@ namespace Ecs.Edpf.Data.StreamSettings
 
         public const string JsonStreamSettingsTypeName = "JSON";
 
+        public const string MongoDBSettingsTypeName = "MongoDB";
+
         public const string XmlStreamSettingsTypeName = "XML";
 
         public const string SqlServerStreamSettingsTypeName = "SQL Server";

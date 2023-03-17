@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ecs.Edpf.Data.DataStreams;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,12 @@ namespace Ecs.Edpf.Data.StreamSettings
         /// The expression of the stream's filter.
         /// </summary>
         public string Expression { get; set; }
+
+        /// <summary>
+        /// The values that come across in one line.
+        /// </summary>
+        public LineResultsSet Values { get; set; } = new LineResultsSet();
+
 
     }
 }

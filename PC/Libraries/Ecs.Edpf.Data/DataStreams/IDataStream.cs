@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ecs.Edpf.Data
 {
-    public interface IDataStream
+    public interface IDataStream : IDisposable
     {
 
         //string LineFilter

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Ecs.Edpf.Data.DataStreams
 {
-    public abstract class DataStream : INotifyPropertyChanged
+    public abstract class DataStream : IDataStream, INotifyPropertyChanged
     {
         private readonly IDataStreamExpressionFilter _filter;
         private readonly ILogger _logger;
@@ -40,6 +40,8 @@ namespace Ecs.Edpf.Data.DataStreams
             }
         }
 
+        private bool _initialized = false;
+
         public DataStream(IDataStreamExpressionFilter filter, ILogger logger)
         {
             _filter = filter;
@@ -47,6 +49,8 @@ namespace Ecs.Edpf.Data.DataStreams
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected abstract void InitializeDataStream();
 
         protected abstract void InternalProcessDeviceTextLine(LineResultsSet resultsSet);
 
@@ -58,6 +62,12 @@ namespace Ecs.Edpf.Data.DataStreams
             {
                 try
                 {
+                    if (!_initialized)
+                    {
+                        InitializeDataStream();
+                        _initialized = true;
+                    }
+
                     InternalProcessDeviceTextLine(resultsSet);
                     ResultsProcessed++;
                 }
@@ -78,7 +88,12 @@ namespace Ecs.Edpf.Data.DataStreams
             }
         }
 
+        protected abstract void DisposeDataStream();
 
+        public void Dispose()
+        {
+            DisposeDataStream();
+        }
 
     }
 }
