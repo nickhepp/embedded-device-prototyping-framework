@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public class MongoDBDataStorageStreamSettings : BaseChildDataStorageStreamSettings<MongoDBStreamSettings>
+    public class MongoDBDataStorageStreamSettings : BaseChildDataStorageStreamSettingsViewModel<MongoDBStreamSettings>
     {
-        public override string TypeName => MongoDBChildAddDataStorageStreamViewModel.MongoDBTypeName;
+        public override string TypeName => StreamSettingsConstants.MongoDBSettingsTypeName;
     
     }
 }

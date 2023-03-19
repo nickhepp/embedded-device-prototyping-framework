@@ -3,10 +3,8 @@
 namespace Ecs.Edpf.Data.DataStreams
 {
     
-    public class LineResultsSet
+    public class LineResultsSet : List<LineResult>
     {
-
-        public List<LineResult> Results { get; set; } = new List<LineResult>();
 
     }
 

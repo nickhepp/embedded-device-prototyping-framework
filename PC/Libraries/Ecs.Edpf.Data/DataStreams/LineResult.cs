@@ -9,7 +9,7 @@ namespace Ecs.Edpf.Data.DataStreams
 
         public string ValueName { get; set; }
 
-        public double Value { get; set; }
+        public object Value { get; set; }
 
         public DataStreamValueType ValueType { get; set; }
 

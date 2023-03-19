@@ -27,7 +27,7 @@ namespace Ecs.Edpf.Data.StreamSettings
         /// <summary>
         /// The values that come across in one line.
         /// </summary>
-        public LineResultsSet Values { get; set; } = new LineResultsSet();
+        public LineValueDescriptionSet Values { get; set; } = new LineValueDescriptionSet();
 
 
     }

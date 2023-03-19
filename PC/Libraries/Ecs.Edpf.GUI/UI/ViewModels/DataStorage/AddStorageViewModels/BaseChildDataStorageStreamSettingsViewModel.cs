@@ -1,11 +1,14 @@
 ﻿using Ecs.Edpf.Data.DataStreams;
 using Ecs.Edpf.Data.StreamSettings;
+using Ecs.Edpf.GUI.ComponentModel;
 using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Drawing.Design;
 using System.Runtime.CompilerServices;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public abstract class BaseChildDataStorageStreamSettings<TDataStreamSettings> : 
+    public abstract class BaseChildDataStorageStreamSettingsViewModel<TDataStreamSettings> : 
         IChildDataStorageStreamSettings, 
         INotifyPropertyChanged
         where TDataStreamSettings : DataStreamSettings, new()
@@ -16,6 +19,8 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
         public const string ValueTypesCategory = "\t\t\tValue Types";
 
         private TDataStreamSettings _streamSettings = new TDataStreamSettings();
+        protected TDataStreamSettings StreamSettings => _streamSettings;
+
 
         [Category(TypeCategory)]
         [DisplayName("Type")]
@@ -38,10 +43,11 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
                 _streamSettings.Name = value;
                 RaiseNotifyPropertyChanged();
             }
-        } 
+        }
 
         [Category(ValueTypesCategory)]
         [DisplayName("Value Types")]
+        [TypeConverter(typeof(LineResultsSetTypeConverter))]
         public LineResultsSet Values
         {
             get

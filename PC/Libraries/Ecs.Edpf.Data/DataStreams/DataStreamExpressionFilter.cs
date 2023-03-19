@@ -10,7 +10,7 @@ namespace Ecs.Edpf.Data.DataStreams
 
 
         public const string UnexpectedExpressionFormatErrorMessage = "Unexpected Expression format.  Simple Expression strings are of the following format: " +
-            "'value_prefix:{series-1},{series-2},{series-n}'";
+            "'value_prefix:{value-1},{value-2},{value-n}'";
 
 
         public const string ValueSeparatorToken = ":";
@@ -105,12 +105,12 @@ namespace Ecs.Edpf.Data.DataStreams
                     ConvertAll(potentialVal => potentialVal.Trim());
                 if (potentialValStrs.Count == ValueNames.Count)
                 {
-                    List<LineResult> lineResults = new List<LineResult>();
+                    LineResultsSet lineResultsSet = new LineResultsSet();
                     for (int k = 0; k < potentialValStrs.Count; k++)
                     {
                         if (double.TryParse(potentialValStrs[k], out double val))
                         {
-                            lineResults.Add(new LineResult { Value = val, ValueName = ValueNames[k] });
+                            resultsSet.Add(new LineResult { Value = val, ValueName = ValueNames[k] });
                         }
                         else
                         {
@@ -119,9 +119,9 @@ namespace Ecs.Edpf.Data.DataStreams
                         }
                     }
 
-                    if (lineResults.Count == potentialValStrs.Count)
+                    if (lineResultsSet.Count == potentialValStrs.Count)
                     {
-                        resultsSet = new LineResultsSet { Results = lineResults };
+                        resultsSet = lineResultsSet;
                     }
                 }
             }

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public class SqlServerDataStorageStreamSettings : BaseChildDataStorageStreamSettings<SqlServerStreamSettings>
+    public class SqlServerDataStorageStreamSettings : BaseChildDataStorageStreamSettingsViewModel<SqlServerStreamSettings>
     {
-    
-        public override string TypeName => SqlServerChildAddDataStorageStreamViewModel.SqlServerTypeName;
+
+        public override string TypeName => StreamSettingsConstants.SqlServerStreamSettingsTypeName;
     
     }
 }

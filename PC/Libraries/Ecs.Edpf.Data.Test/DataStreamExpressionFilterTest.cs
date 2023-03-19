@@ -99,17 +99,17 @@ namespace Ecs.Edpf.Data.Test
 
             Assert.AreEqual(
                 expected: 2,
-                actual: resultsSet.Results.Count,
+                actual: resultsSet.Count,
                 message: "Should get back two results.");
 
-            LineResult val1Result = resultsSet.Results.FirstOrDefault(result => result.ValueName == "val1");
+            LineResult val1Result = resultsSet.FirstOrDefault(result => result.ValueName == "val1");
             Assert.IsNotNull(val1Result, "'val1' should be retrievable by name.");
-            Assert.AreEqual(expected: 12, actual: val1Result.Value, delta: 0.01,
+            Assert.AreEqual(expected: 12, actual: (float)val1Result.Value, delta: 0.01,
                 "'val1' was not the expected value.");
 
-            LineResult val2Result = resultsSet.Results.FirstOrDefault(result => result.ValueName == "val2");
+            LineResult val2Result = resultsSet.FirstOrDefault(result => result.ValueName == "val2");
             Assert.IsNotNull(val2Result, "'val2' should be retrievable by name.");
-            Assert.AreEqual(expected: 34, actual: val2Result.Value, delta: 0.01,
+            Assert.AreEqual(expected: 34, actual: (float)val2Result.Value, delta: 0.01,
                 "'val2' was not the expected value.");
         }
 

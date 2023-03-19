@@ -8,6 +8,7 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System.Design" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Windows.Forms.DataVisualization.Design" />
   </ItemGroup>

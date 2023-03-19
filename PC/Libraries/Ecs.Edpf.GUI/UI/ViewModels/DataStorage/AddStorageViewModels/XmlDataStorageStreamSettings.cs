@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
 {
-    public class XmlDataStorageStreamSettings : BaseChildDataStorageStreamSettings<XmlStreamSettings>
+    public class XmlDataStorageStreamSettings : BaseChildDataStorageStreamSettingsViewModel<XmlStreamSettings>
     {
-        public override string TypeName => XmlChildAddDataStorageStreamViewModel.XmlTypeName;
+        public override string TypeName => StreamSettingsConstants.XmlStreamSettingsTypeName;
     
     }
 }

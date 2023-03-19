@@ -17,10 +17,10 @@ namespace Ecs.Edpf.GUI.UI.ViewModels.DataStorage.AddStorageViewModels
                 new CassandraChildAddDataStorageStreamViewModel(),
 #endif
                 new CsvChildAddDataStorageStreamViewModel(),
-                new JsonChildAddDataStorageStreamViewModel(),
-                new MongoDBChildAddDataStorageStreamViewModel(),
-                new SqlServerChildAddDataStorageStreamViewModel(),
-                new XmlChildAddDataStorageStreamViewModel(),
+                //new JsonChildAddDataStorageStreamViewModel(),
+                //new MongoDBChildAddDataStorageStreamViewModel(),
+                //new SqlServerChildAddDataStorageStreamViewModel(),
+                //new XmlChildAddDataStorageStreamViewModel(),
             };
 
             return childAddDataStorageStreamViewModels;

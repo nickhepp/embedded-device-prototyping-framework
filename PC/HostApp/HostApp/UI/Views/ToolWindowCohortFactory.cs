@@ -71,8 +71,14 @@ namespace HostApp.UI.Views
                 Select(cohort => cohort as ChartingToolWindowCohort).ToList();
             foreach (ChartingToolWindowCohort chartingCohort in chartingCohorts)
             {
-                //chartingCohort.GetToolWindow().Show(prevConsoleCohort.GetToolWindow().Pane);
                 chartingCohort.GetToolWindow().Show(dockPanel, DockState.Document);
+            }
+
+            List<DataStorageToolWindowCohort> dataStorageToolWindowCohorts = _cohorts.Where(cohort => cohort.GetType() == typeof(DataStorageToolWindowCohort)).
+                Select(_cohorts => _cohorts as DataStorageToolWindowCohort).ToList();
+            foreach (DataStorageToolWindowCohort dataStorageToolWindowCohort in dataStorageToolWindowCohorts)
+            {
+                dataStorageToolWindowCohort.GetToolWindow().Show(dockPanel, DockState.Document);
             }
 
             // console windows start off as documents
