@@ -60,3 +60,6 @@ PC/HostApp/HostApp/ToRemove/*
 PC/HostApp/_ToDelete/*
 PC/Libraries/Ecs.Edpf.GUI/ToRemove/*
 /Device/BaseKernelDevice/UpgradeLog.htm
+/PC/Libraries/Ecs.Edpf.Data/bin/Debug/netstandard2.0
+/PC/Libraries/Ecs.Edpf.Data/obj
+/PC/Libraries/Ecs.Edpf.Data.Test/obj
